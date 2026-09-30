@@ -1,12 +1,12 @@
 "use client";
 import Fuse from "fuse.js";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { chapters, juz, juzSpan, chapter, readHref, surahUrl, type Chapter } from "@/lib/quran";
-import { useOffline, useQuran } from "@/lib/quran-store";
-import { Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
+import { useEffect, useMemo, useState } from "react";
+import { chapters, juz, juzSpan, chapter, loadSurah, readHref, surahUrl, type Chapter, type Verse } from "@/lib/quran";
+import { toggleMark, useOffline, useQuran } from "@/lib/quran-store";
+import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
 
-type Tab = "chapter" | "juz";
+type Tab = "chapter" | "juz" | "bookmarks";
 
 /** Chapter and Juz tabs with search. Used on the Quran page and inside the surah picker sheet. */
 export function ChapterList({ onPick }: { onPick?: () => void }) {
@@ -57,7 +57,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
   return (
     <div>
       <div className="flex rounded-full border border-line p-1" role="tablist" aria-label="Browse by">
-        {(["juz", "chapter"] as Tab[]).map((t) => (
+        {(["juz", "chapter", "bookmarks"] as Tab[]).map((t) => (
           <button
             key={t}
             role="tab"
@@ -65,11 +65,13 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
             onClick={() => setTab(t)}
             className={`min-h-11 flex-1 rounded-full text-[1rem] font-semibold transition-colors ${tab === t ? "bg-accent text-accent-ink" : ""}`}
           >
-            {t === "juz" ? "Juz" : "Chapter"}
+            {t === "juz" ? "Juz" : t === "chapter" ? "Chapter" : `Bookmarks${q.marks.length ? ` (${q.marks.length})` : ""}`}
           </button>
         ))}
       </div>
 
+      {tab === "bookmarks" ? <Bookmarks onPick={onPick} /> : (
+      <>
       <label className="relative mt-3 block">
         <span className="sr-only">Search surahs</span>
         <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft" />
@@ -114,6 +116,67 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
           ))}
         </ul>
       )}
+      </>
+      )}
     </div>
+  );
+}
+
+
+/** Saved verses, newest first. The text is read from this device's own copy of each surah. */
+function Bookmarks({ onPick }: { onPick?: () => void }) {
+  const q = useQuran();
+  const [text, setText] = useState<Record<number, Verse[]>>({});
+  const items = useMemo(
+    () => [...q.marks].reverse().map((k) => { const [s, v] = k.split(":").map(Number); return { key: k, s, v }; }).filter((x) => x.s >= 1 && x.s <= 114),
+    [q.marks],
+  );
+  const wanted = useMemo(() => [...new Set(items.map((i) => i.s))].sort().join(","), [items]);
+
+  useEffect(() => {
+    let live = true;
+    wanted.split(",").filter(Boolean).map(Number).forEach((n) => {
+      loadSurah(n).then((v) => live && setText((t) => (t[n] ? t : { ...t, [n]: v }))).catch(() => {});
+    });
+    return () => { live = false; };
+  }, [wanted]);
+
+  if (!items.length)
+    return (
+      <div className="mt-6 rounded-[28px] border border-line p-6 text-center">
+        <Bookmark size={28} className="mx-auto text-ink-soft" />
+        <p className="display mt-2 text-[1.3rem]">No bookmarks yet</p>
+        <p className="mt-1 text-ink-soft">Tap the bookmark at the top of a verse to keep it here. Bookmarks stay on this device.</p>
+      </div>
+    );
+
+  return (
+    <ul className="mt-4 grid gap-2.5">
+      {items.map(({ key, s, v }) => {
+        const verse = text[s]?.[v - 1];
+        return (
+          <li key={key} className="flex items-stretch rounded-[20px] border border-line">
+            <Link href={readHref(s, v)} onClick={onPick} className="grid min-h-[4.5rem] flex-1 gap-1 px-4 py-3 no-underline">
+              <span className="display text-[1.2rem] leading-tight">{chapter(s).name} <span className="tabular text-ink-soft">{s}:{v}</span></span>
+              {verse ? (
+                <>
+                  <span lang="ar" dir="rtl" className="truncate text-right font-[family-name:var(--font-arabic)] text-[1.3rem] leading-[1.8]">{verse.ar.trim()}</span>
+                  <span className="line-clamp-2 text-[0.92rem] text-ink-soft">{verse.en}</span>
+                </>
+              ) : (
+                <span className="text-[0.92rem] text-ink-soft">Loading…</span>
+              )}
+            </Link>
+            <button
+              onClick={() => toggleMark(s, v)}
+              aria-label={`Remove bookmark from ${chapter(s).name} ${s}:${v}`}
+              className="grid min-w-14 place-items-center rounded-r-[20px] text-accent"
+            >
+              <Bookmark size={24} filled />
+            </button>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
