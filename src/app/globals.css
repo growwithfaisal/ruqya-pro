@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   RuqyaPro: the day is the interface.
+   Four sky states (dawn, day, dusk, night) set by device local time.
+   Each state is one set of tokens; nothing else in the app knows the hour.
+   ------------------------------------------------------------------ */
+
+:root,
+:root[data-sky="day"] {
+  --sky-top: oklch(0.9 0.06 225);
+  --sky-bottom: oklch(0.975 0.022 200);
+  --ink: oklch(0.25 0.055 235);
+  --ink-soft: oklch(0.4 0.05 235);
+  --accent: oklch(0.42 0.11 175);
+  --accent-ink: oklch(0.985 0.01 175);
+  --card: oklch(0.995 0.006 210);
+  --card-ink: oklch(0.24 0.05 235);
+  --card-soft: oklch(0.42 0.045 235);
+  --line: oklch(0.25 0.055 235 / 0.16);
+  --lattice: oklch(0.25 0.055 235 / 0.09);
+  --orb: oklch(0.97 0.09 95);
+  --orb-glow: oklch(0.9 0.12 90 / 0.55);
+  --haze-a: oklch(0.85 0.09 215 / 0.55);
+  --haze-b: oklch(0.93 0.07 95 / 0.45);
+  --draft: oklch(0.5 0.14 55);
+  color-scheme: light;
+}
+
+:root[data-sky="dawn"] {
+  --sky-top: oklch(0.83 0.08 290);
+  --sky-bottom: oklch(0.945 0.05 45);
+  --ink: oklch(0.24 0.07 295);
+  --ink-soft: oklch(0.4 0.07 295);
+  --accent: oklch(0.44 0.15 15);
+  --accent-ink: oklch(0.985 0.01 30);
+  --card: oklch(0.99 0.012 50);
+  --card-ink: oklch(0.24 0.06 295);
+  --card-soft: oklch(0.42 0.06 295);
+  --line: oklch(0.24 0.07 295 / 0.17);
+  --lattice: oklch(0.24 0.07 295 / 0.1);
+  --orb: oklch(0.95 0.11 70);
+  --orb-glow: oklch(0.85 0.14 40 / 0.6);
+  --haze-a: oklch(0.8 0.11 330 / 0.5);
+  --haze-b: oklch(0.9 0.1 70 / 0.55);
+  --draft: oklch(0.48 0.14 45);
+  color-scheme: light;
+}
+
+:root[data-sky="dusk"] {
+  --sky-top: oklch(0.3 0.09 320);
+  --sky-bottom: oklch(0.46 0.12 30);
+  --ink: oklch(0.975 0.02 75);
+  --ink-soft: oklch(0.92 0.04 70);
+  --accent: oklch(0.86 0.13 80);
+  --accent-ink: oklch(0.25 0.06 320);
+  --card: oklch(0.24 0.07 320);
+  --card-ink: oklch(0.97 0.02 75);
+  --card-soft: oklch(0.86 0.04 70);
+  --line: oklch(0.975 0.02 75 / 0.22);
+  --lattice: oklch(0.975 0.02 75 / 0.11);
+  --orb: oklch(0.9 0.13 60);
+  --orb-glow: oklch(0.75 0.17 40 / 0.6);
+  --haze-a: oklch(0.55 0.17 350 / 0.5);
+  --haze-b: oklch(0.7 0.16 50 / 0.45);
+  --draft: oklch(0.88 0.12 80);
+  color-scheme: dark;
+}
+
+:root[data-sky="night"] {
+  --sky-top: oklch(0.16 0.05 270);
+  --sky-bottom: oklch(0.25 0.06 250);
+  --ink: oklch(0.96 0.014 250);
+  --ink-soft: oklch(0.85 0.03 250);
+  --accent: oklch(0.86 0.09 195);
+  --accent-ink: oklch(0.2 0.05 250);
+  --card: oklch(0.21 0.05 262);
+  --card-ink: oklch(0.96 0.014 250);
+  --card-soft: oklch(0.82 0.03 250);
+  --line: oklch(0.96 0.014 250 / 0.2);
+  --lattice: oklch(0.96 0.014 250 / 0.1);
+  --orb: oklch(0.95 0.03 95);
+  --orb-glow: oklch(0.85 0.06 230 / 0.4);
+  --haze-a: oklch(0.42 0.13 275 / 0.5);
+  --haze-b: oklch(0.45 0.09 215 / 0.35);
+  --draft: oklch(0.88 0.12 80);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-card: var(--card);
+  --color-card-ink: var(--card-ink);
+  --color-card-soft: var(--card-soft);
+  --color-line: var(--line);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-ui);
+  --font-arabic: var(--font-arabic);
+}
+
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --arabic-scale: 1;
+  --gutter: 16px;
+}
+
+html {
+  background: var(--sky-bottom);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom) 70%) fixed;
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  transition: background-color 0.6s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+[data-sky="dusk"] :focus-visible,
+[data-sky="night"] :focus-visible {
+  outline-color: var(--ink);
+}
+
+a {
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.arabic {
+  font-family: var(--font-arabic), "Amiri", serif;
+  direction: rtl;
+  text-align: center;
+  line-height: 2.15;
+  font-size: calc(1.9rem * var(--arabic-scale));
+  font-feature-settings: "liga" 1, "calt" 1;
+  text-wrap: pretty;
+  /* Sacred text renders instantly and steadily. Never animate it. */
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- Living background ---------------- */
+
+.sky-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sky-haze {
+  position: absolute;
+  width: 90vmax;
+  height: 90vmax;
+  border-radius: 50%;
+  filter: blur(40px);
+  will-change: transform;
+}
+.sky-haze.a {
+  left: -30vmax;
+  top: -25vmax;
+  background: radial-gradient(closest-side, var(--haze-a), transparent);
+  animation: drift-a 90s ease-in-out infinite alternate;
+}
+.sky-haze.b {
+  right: -35vmax;
+  bottom: -30vmax;
+  background: radial-gradient(closest-side, var(--haze-b), transparent);
+  animation: drift-b 120s ease-in-out infinite alternate;
+}
+
+/* Eight-fold star lattice (two squares turned 45deg per tile). Abstract only. */
+.sky-lattice {
+  position: absolute;
+  inset: -80px;
+  background-color: var(--lattice);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96' fill='none' stroke='black' stroke-width='1.2'%3E%3Cpath d='M48 6 L58.5 30.5 L84 24 L67.5 48 L84 72 L58.5 65.5 L48 90 L37.5 65.5 L12 72 L28.5 48 L12 24 L37.5 30.5 Z'/%3E%3Cpath d='M0 0 L12 24 M96 0 L84 24 M0 96 L12 72 M96 96 L84 72'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96' fill='none' stroke='black' stroke-width='1.2'%3E%3Cpath d='M48 6 L58.5 30.5 L84 24 L67.5 48 L84 72 L58.5 65.5 L48 90 L37.5 65.5 L12 72 L28.5 48 L12 24 L37.5 30.5 Z'/%3E%3Cpath d='M0 0 L12 24 M96 0 L84 24 M0 96 L12 72 M96 96 L84 72'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/svg%3E");
+  -webkit-mask-size: 96px 96px;
+  mask-size: 96px 96px;
+  animation: lattice-drift 240s linear infinite;
+  will-change: transform;
+}
+.sky-lattice-fade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 70% at 50% 0%, transparent 25%, var(--sky-bottom) 100%);
+  opacity: 0.85;
+}
+
+@keyframes drift-a { to { transform: translate3d(14vmax, 10vmax, 0) scale(1.08); } }
+@keyframes drift-b { to { transform: translate3d(-12vmax, -8vmax, 0) scale(1.1); } }
+@keyframes lattice-drift { to { transform: translate3d(96px, 96px, 0); } }
+
+/* Drawer (citation slide-over) */
+@keyframes sheet-in-x { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes sheet-out-x { to { transform: translateX(100%); } }
+@keyframes sheet-in-y { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes sheet-out-y { to { transform: translateY(100%); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-out { to { opacity: 0; } }
+
+.drawer-overlay[data-state="open"] { animation: fade-in 0.35s var(--ease-out); }
+.drawer-overlay[data-state="closed"] { animation: fade-out 0.25s var(--ease-out); }
+.drawer-panel[data-state="open"] { animation: sheet-in-y 0.5s var(--ease-out); }
+.drawer-panel[data-state="closed"] { animation: sheet-out-y 0.3s var(--ease-out) forwards; }
+@media (min-width: 768px) {
+  .drawer-panel[data-state="open"] { animation: sheet-in-x 0.5s var(--ease-out); }
+  .drawer-panel[data-state="closed"] { animation: sheet-out-x 0.3s var(--ease-out) forwards; }
+}
+
+/* Entrance: composed once, content visible by default */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.8s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
+
+/* Scrollbars carry the palette */
+* { scrollbar-width: thin; scrollbar-color: color-mix(in oklch, var(--ink) 30%, transparent) transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-haze, .sky-lattice, .rise,
+  .drawer-overlay, .drawer-panel { animation: none !important; }
+  body { transition: none; }
+}
+
+.arabic-sm { font-size: calc(1.55rem * var(--arabic-scale)); line-height: 2.1; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

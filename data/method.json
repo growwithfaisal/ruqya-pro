@@ -1,0 +1,20 @@
+[
+  {
+    "label": "Sahih al-Bukhari",
+    "ref": "5748",
+    "chapter": "Medicine",
+    "note": "Blowing into the palms and wiping the body",
+    "english": "Narrated `Aisha:Whenever Allah's Messenger (ﷺ) went to bed, he used to recite Surat-al-Ikhlas, Surat-al-Falaq and Surat-an- Nas and then blow on his palms and pass them over his face and those parts of his body that his hands could reach. And when he fell ill, he used to order me to do like that for him",
+    "takhrij_url": "https://sunnah.com/bukhari:5748",
+    "provenance": "fawazahmed0/hadith-api eng-bukhari #5748"
+  },
+  {
+    "label": "Sahih Muslim",
+    "ref": "2202",
+    "chapter": "The Book of Greetings",
+    "note": "Placing a hand on the place of pain",
+    "english": "Uthman b. Abu al-'As Al-Thaqafi reported that he made a complaint of pain to Allah's Messenger (ﷺ) that he felt in his body at the time he had become Muslim. Thereupon Allah's Messenger (ﷺ) said:Place your hand at the place where you feel pain in your body and say Bismillah (in the name of Allah) three times and seven times A'udhu billahi wa qudratihi min sharri ma ajidu wa uhadhiru (I seek refuge with Allah and with His Power from the evil that I find and that I fear)",
+    "takhrij_url": "https://sunnah.com/muslim:2202",
+    "provenance": "fawazahmed0/hadith-api eng-muslim #5737"
+  }
+]

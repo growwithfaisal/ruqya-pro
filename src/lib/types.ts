@@ -1,0 +1,49 @@
+export type Grade = "Sahih" | "Hasan" | "Qur'an";
+
+export type Intent =
+  | "daily-protection"
+  | "pain"
+  | "evil-eye"
+  | "learning";
+
+export type TimeTag = "morning" | "evening" | "bedtime";
+
+/**
+ * core: the swipe deck. ayat-list: passages from the owner's ruqyah ayat list.
+ * verse: single verses named in the owner's dua collection. Both of the latter live on Self-Ruqyah.
+ */
+export type Collection = "core" | "ayat-list" | "verse";
+
+export interface EntrySource {
+  book: string;
+  ref: string;
+  chapter: string;
+}
+
+export interface Entry {
+  id: string;
+  slug: string;
+  collection: Collection;
+  title: string;
+  category: Intent[];
+  times: TimeTag[];
+  /** Arabic exactly as sourced. Lines are joined with \n. */
+  arabic: string;
+  transliteration: string;
+  translation: string;
+  /** Plain-language practice note, faithful to the cited source. */
+  practice: string;
+  repeat: string;
+  source: EntrySource;
+  /** Supporting citation for the practice (e.g. hadith that commends a Quranic passage). */
+  support: EntrySource[];
+  grade: Grade | "";
+  grader: string;
+  exegesis: { work: string; note: string };
+  takhrij_url: string;
+  /** Where each text field came from. */
+  provenance: Record<string, string>;
+  verified: boolean;
+  verified_by: string;
+  verified_on: string;
+}
