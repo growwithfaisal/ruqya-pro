@@ -106,7 +106,7 @@ const norm = (s: string) =>
 
 /* ---------- Definitions ---------- */
 type Def = {
-  id: string; slug: string; title: string; category: Intent[]; times: TimeTag[]; collection?: Collection;
+  id: string; slug: string; title: string; category: Intent[]; times: TimeTag[]; collection?: Collection; verseByVerse?: boolean;
   practice: string; repeat?: string;
   build: () => Promise<{
     arabic: string; transliteration: string; translation: string;
@@ -141,11 +141,11 @@ const SELECTION_TITLED = (img: string) => `Selection, title and count: as given 
 
 function quranDef(o: {
   id: string; slug: string; title: string; name: string; chapter: number; from: number; to: number;
-  category: Intent[]; times: TimeTag[]; practice: string; repeat?: string; collection?: Collection; selection?: string;
+  category: Intent[]; times: TimeTag[]; practice: string; repeat?: string; collection?: Collection; selection?: string; verseByVerse?: boolean;
   support?: { col: string; label: string; internal: number }[];
 }): Def {
   return {
-    id: o.id, slug: o.slug, title: o.title, category: o.category, times: o.times, practice: o.practice, repeat: o.repeat, collection: o.collection,
+    id: o.id, slug: o.slug, title: o.title, category: o.category, times: o.times, practice: o.practice, repeat: o.repeat, collection: o.collection, verseByVerse: o.verseByVerse,
     build: async () => {
       const q = await quranRange(o.chapter, o.from, o.to);
       const support: EntrySource[] = [];
@@ -177,7 +177,7 @@ const DEFS: Def[] = [
   quranDef({ id: "dua-001", slug: "al-fatiha", title: "Al-Fatiha", name: "Al-Fatiha", chapter: 1, from: 1, to: 7, category: ["learning", "pain", "daily-protection"], times: [], practice: "Recited in full. The hadith that reports Al-Fatiha as a ruqyah is not yet attached to this entry." }),
   quranDef({ id: "dua-002", slug: "ayat-al-kursi", title: "Ayat al-Kursi", name: "Al-Baqarah", chapter: 2, from: 255, to: 255, category: ["daily-protection", "learning"], times: ["bedtime"], practice: "Recite before sleeping.", support: [{ col: "bukhari", label: "Sahih al-Bukhari", internal: 2311 }] }),
   quranDef({ id: "dua-003", slug: "last-two-ayat-al-baqarah", title: "The last two ayat of Al-Baqarah", name: "Al-Baqarah", chapter: 2, from: 285, to: 286, category: ["daily-protection", "learning"], times: ["bedtime", "evening"], practice: "Recite at night.", support: [{ col: "bukhari", label: "Sahih al-Bukhari", internal: 5009 }, { col: "muslim", label: "Sahih Muslim", internal: 1880 }] }),
-  quranDef({ id: "dua-041", slug: "al-mulk", title: "Surah Al-Mulk", name: "Al-Mulk", chapter: 67, from: 1, to: 30, category: ["daily-protection", "learning"], times: ["bedtime"], practice: "Jabir reported that the Prophet would not sleep until he had recited it (with Surah As-Sajdah).", support: [{ col: "tirmidhi", label: "Jami' at-Tirmidhi", internal: 3404 }, { col: "tirmidhi", label: "Jami' at-Tirmidhi", internal: 2891 }, { col: "abudawud", label: "Sunan Abi Dawud", internal: 1400 }] }),
+  quranDef({ id: "dua-041", slug: "al-mulk", title: "Surah Al-Mulk", name: "Al-Mulk", chapter: 67, from: 1, to: 30, verseByVerse: true, category: ["daily-protection", "learning"], times: ["bedtime"], practice: "Jabir reported that the Prophet would not sleep until he had recited it (with Surah As-Sajdah).", support: [{ col: "tirmidhi", label: "Jami' at-Tirmidhi", internal: 3404 }, { col: "tirmidhi", label: "Jami' at-Tirmidhi", internal: 2891 }, { col: "abudawud", label: "Sunan Abi Dawud", internal: 1400 }] }),
   quranDef({ id: "dua-004", slug: "al-ikhlas", title: "Al-Ikhlas", name: "Al-Ikhlas", chapter: 112, from: 1, to: 4, category: ["daily-protection", "pain", "learning"], times: ["morning", "evening", "bedtime"], practice: "Recite with Al-Falaq and An-Nas, blow gently into the cupped palms, then wipe over the face and as much of the body as the hands can reach.", support: [{ col: "bukhari", label: "Sahih al-Bukhari", internal: 5748 }] }),
   quranDef({ id: "dua-005", slug: "al-falaq", title: "Al-Falaq", name: "Al-Falaq", chapter: 113, from: 1, to: 5, category: ["daily-protection", "evil-eye", "pain", "learning"], times: ["morning", "evening", "bedtime"], practice: "Recite with Al-Ikhlas and An-Nas, blow gently into the cupped palms, then wipe over the face and as much of the body as the hands can reach.", support: [{ col: "bukhari", label: "Sahih al-Bukhari", internal: 5748 }] }),
   quranDef({ id: "dua-006", slug: "an-nas", title: "An-Nas", name: "An-Nas", chapter: 114, from: 1, to: 6, category: ["daily-protection", "evil-eye", "pain", "learning"], times: ["morning", "evening", "bedtime"], practice: "Recite with Al-Ikhlas and Al-Falaq, blow gently into the cupped palms, then wipe over the face and as much of the body as the hands can reach.", support: [{ col: "bukhari", label: "Sahih al-Bukhari", internal: 5748 }] }),
@@ -417,7 +417,7 @@ for (const d of DEFS) {
   const b = await d.build();
   const p = priorById.get(d.id);
   out.push({
-    id: d.id, slug: d.slug, collection: d.collection ?? "core", title: d.title, category: d.category, times: d.times,
+    id: d.id, slug: d.slug, collection: d.collection ?? "core", ...(d.verseByVerse ? { verseByVerse: true } : {}), title: d.title, category: d.category, times: d.times,
     arabic: b.arabic, transliteration: b.transliteration, translation: b.translation,
     practice: d.practice, repeat: d.repeat ?? "",
     source: b.source, support: b.support ?? [],

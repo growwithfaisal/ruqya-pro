@@ -137,6 +137,7 @@
     "id": "dua-041",
     "slug": "al-mulk",
     "collection": "core",
+    "verseByVerse": true,
     "title": "Surah Al-Mulk",
     "category": [
       "daily-protection",

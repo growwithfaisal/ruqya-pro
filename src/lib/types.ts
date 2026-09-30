@@ -24,6 +24,8 @@ export interface Entry {
   id: string;
   slug: string;
   collection: Collection;
+  /** Read one verse at a time inside a daily routine (long Qur'an passages such as Surah Al-Mulk). */
+  verseByVerse?: boolean;
   title: string;
   category: Intent[];
   times: TimeTag[];
