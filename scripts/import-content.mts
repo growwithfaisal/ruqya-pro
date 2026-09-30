@@ -259,7 +259,7 @@ const DEFS: Def[] = [
     },
   },
   {
-    id: "dua-011", slug: "before-sleep", title: "When going to bed", category: ["daily-protection"], times: ["bedtime"],
+    id: "dua-011", slug: "before-sleep", title: "When going to bed", category: ["daily-protection"], times: [], // owner removed it from the bedtime routine; still in the deck under Daily protection
     practice: "Said when about to sleep.",
     build: async () => {
       const h = await hadith("bukhari", 6324);
