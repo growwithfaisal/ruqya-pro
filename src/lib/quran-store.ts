@@ -141,6 +141,12 @@ export function markSeen(surah: number, verse: number): boolean {
   return false;
 }
 
+/** How many different verses of a surah have been on screen today. */
+export function seenCount(surah: number): number {
+  const s = state().seen;
+  return s.date === localDate() ? s.keys.filter((k) => k.startsWith(`${surah}:`)).length : 0;
+}
+
 export function toggleMark(surah: number, verse: number) {
   const key = `${surah}:${verse}`;
   const marks = state().marks;

@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { arcProgress, decimalHour, setForHour, skyForHour, SKY_LABEL, type Sky } from "@/lib/sky";
+import { arcProgress, decimalHour, isFriday, setForHour, skyForHour, SKY_LABEL, type Sky } from "@/lib/sky";
 import { doneKey, useDone } from "@/lib/progress";
 import { chapter, readHref } from "@/lib/quran";
 import { useQuran } from "@/lib/quran-store";
 import { SETS } from "@/lib/entries";
 import type { TimeTag } from "@/lib/types";
-import { Chevron } from "./Glyphs";
+import { Check, Chevron } from "./Glyphs";
 
 const LINE: Record<Sky, string> = {
   dawn: "Begin the day with remembrance.",
@@ -44,13 +44,15 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const { body, t } = arcProgress(shown);
   const [x, y] = at(t);
   const set: TimeTag = setForHour(shown);
-  // Friday by the device's own calendar. ?day=friday previews it.
-  const friday = !!now && (now.getDay() === 5 || (typeof location !== "undefined" && new URLSearchParams(location.search).get("day") === "friday"));
+  const friday = !!now && isFriday(now);
   const kahf = chapter(18);
   const kahfAt = quran.last?.surah === 18 ? quran.last.verse : 1;
+  const kahfSeen = quran.seen.keys.filter((k) => k.startsWith("18:")).length;
+  const kahfDone = kahfSeen >= kahf.verses;
   const ids = setIds[set];
   const count = ids.filter((i) => done.has(doneKey(set, i))).length;
   const total = ids.length;
+  const setDone = total > 0 && count >= total;
   const R = 26, CIRC = 2 * Math.PI * R;
 
   return (
@@ -86,6 +88,9 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
             href={`/recitations?set=${set}`}
             className="group mt-7 flex min-h-[4.5rem] items-center gap-4 rounded-[28px] bg-accent px-5 py-3 text-accent-ink no-underline transition-transform duration-200 active:scale-[0.98]"
           >
+            {setDone ? (
+              <span className="grid size-[60px] shrink-0 place-items-center rounded-full bg-accent-ink text-accent" aria-hidden><Check size={30} /></span>
+            ) : (
             <svg width="60" height="60" viewBox="0 0 60 60" aria-hidden className="shrink-0">
               <circle cx="30" cy="30" r={R} fill="none" stroke="currentColor" strokeOpacity="0.28" strokeWidth="4" />
               <circle
@@ -97,24 +102,30 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
               />
               <text x="30" y="35" textAnchor="middle" fontSize="15" fontWeight="600" fill="currentColor" className="tabular">{count}/{total}</text>
             </svg>
+            )}
             <span className="grid flex-1">
-              <span className="text-[1.1rem] font-semibold">{SETS[set]}</span>
-              <span className="text-[0.92rem] opacity-90 tabular">{count} of {total} adhkar today</span>
+              <span className="text-[1.1rem] font-semibold leading-snug">{setDone ? `${SETS[set]} complete` : SETS[set]}</span>
+              <span className="text-[0.92rem] opacity-90 tabular">{setDone ? `All ${total} recited today` : `${count} of ${total} adhkar today`}</span>
             </span>
             <Chevron className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           {friday && (
             <Link
-              href={readHref(18, kahfAt)}
-              className="group mt-3 flex min-h-[4.5rem] items-center gap-4 rounded-[28px] border-2 border-[var(--accent)] px-5 py-3 no-underline transition-transform duration-200 active:scale-[0.98]"
+              href={readHref(18, kahfDone ? 1 : kahfAt)}
+              className={`group mt-3 flex min-h-[4.5rem] items-center gap-4 rounded-[28px] px-5 py-3 no-underline transition-transform duration-200 active:scale-[0.98] ${kahfDone ? "bg-accent text-accent-ink" : "border-2 border-[var(--accent)]"}`}
             >
+              {kahfDone && <span className="grid size-[44px] shrink-0 place-items-center rounded-full bg-accent-ink text-accent" aria-hidden><Check size={24} /></span>}
               <span className="grid flex-1">
-                <span className="text-[1.1rem] font-semibold">Friday recitation</span>
-                <span className="text-[0.92rem] text-ink-soft">
-                  Surah {kahf.name} · <span className="tabular">{kahf.verses}</span> verses{kahfAt > 1 ? ` · resume at ${kahfAt}` : ""}
+                <span className="text-[1.1rem] font-semibold leading-snug">{kahfDone ? "Friday recitation complete" : "Friday recitation"}</span>
+                <span className={`text-[0.92rem] ${kahfDone ? "opacity-90" : "text-ink-soft"}`}>
+                  {kahfDone ? (
+                    <>Surah {kahf.name} read today</>
+                  ) : (
+                    <>Surah {kahf.name} · <span className="tabular">{kahfSeen > 0 ? `${kahfSeen} of ${kahf.verses} read today` : `${kahf.verses} verses`}</span>{kahfAt > 1 && kahfSeen === 0 ? ` · resume at ${kahfAt}` : ""}</>
+                  )}
                 </span>
               </span>
-              <Chevron className="text-accent transition-transform duration-300 group-hover:translate-x-1" />
+              <Chevron className={`transition-transform duration-300 group-hover:translate-x-1 ${kahfDone ? "" : "text-accent"}`} />
             </Link>
           )}
           {quran.last && (

@@ -4,7 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import { TAJWEED, bismillah, chapter, juzOf, loadSurah, readHref, safeSurah, safeVerse, surahUrl, type Verse } from "@/lib/quran";
-import { markSeen, setLast, setPrefs, toggleMark, useOffline, useQuran } from "@/lib/quran-store";
+import { markSeen, seenCount, setLast, setPrefs, toggleMark, useOffline, useQuran } from "@/lib/quran-store";
+import { isFriday } from "@/lib/sky";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { ChapterList } from "./ChapterList";
 import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
@@ -53,7 +54,12 @@ export function QuranReader() {
 
     const save = window.setTimeout(() => setLast(surah, n), 500);
     const dwell = window.setTimeout(() => {
-      if (document.visibilityState === "visible" && markSeen(surah, n)) flash("Today counted");
+      if (document.visibilityState !== "visible") return;
+      const before = seenCount(18);
+      const tipped = markSeen(surah, n);
+      // Reading all of Al-Kahf on a Friday completes the Friday recitation on Home.
+      if (surah === 18 && isFriday() && before < chapter(18).verses && seenCount(18) >= chapter(18).verses) flash("Friday recitation complete");
+      else if (tipped) flash("Today counted");
     }, 1200);
     return () => { clearTimeout(save); clearTimeout(dwell); };
   }, [verses, surah, n]);

@@ -69,8 +69,13 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
     if (!e) return;
     markDone(doneKey(set, e.id));
     setDir(1);
-    if (i >= entries.length - 1) setFinished(true);
-    else setI(i + 1);
+    // The routine is complete the moment every card is recited, whatever order they were done in.
+    const allDone = entries.every((x) => x.id === e.id || done.has(doneKey(set, x.id)));
+    if (allDone) { setFinished(true); return; }
+    // Otherwise go on to the next open card, wrapping round to the first one left.
+    const after = entries.findIndex((x, k) => k > i && !done.has(doneKey(set, x.id)));
+    const first = entries.findIndex((x) => x.id !== e.id && !done.has(doneKey(set, x.id)));
+    setI(after >= 0 ? after : first >= 0 ? first : i);
   };
 
   const share = async () => {
@@ -104,13 +109,22 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   if (!entries.length) return <p className="mt-24 text-center text-ink-soft">Nothing in this routine yet.</p>;
 
   if (finished) {
+    const open = entries.filter((x) => !done.has(doneKey(set, x.id)));
     return (
       <div className="mx-auto grid min-h-[calc(100dvh-8rem)] max-w-2xl place-content-center gap-5 px-6 text-center">
-        <p className="display text-[clamp(2rem,7vw,2.8rem)] leading-tight">{SETS[set]} complete.</p>
-        <p className="text-ink-soft">{entries.length} of {entries.length} recited today. Kept on this device only.</p>
+        <p className="display text-[clamp(2rem,7vw,2.8rem)] leading-tight">{open.length === 0 ? `${SETS[set]} complete.` : "That was the last card."}</p>
+        <p className="text-ink-soft">
+          {open.length === 0
+            ? `${entries.length} of ${entries.length} recited today. Kept on this device only.`
+            : `${entries.length - open.length} of ${entries.length} recited today. ${open.length} ${open.length === 1 ? "card is" : "cards are"} still open.`}
+        </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <button onClick={() => { clear(entries.map((x) => doneKey(set, x.id))); setFinished(false); setDir(-1); setI(0); }} className="min-h-12 rounded-full border border-line px-5">Start again</button>
-          <Link href="/" className="grid min-h-12 place-items-center rounded-full bg-accent px-6 font-semibold text-accent-ink no-underline">Home</Link>
+          {open.length > 0 ? (
+            <button onClick={() => { setFinished(false); setDir(-1); setI(entries.findIndex((x) => !done.has(doneKey(set, x.id)))); }} className="min-h-12 rounded-full bg-accent px-6 font-semibold text-accent-ink">Open the first one</button>
+          ) : (
+            <button onClick={() => { clear(entries.map((x) => doneKey(set, x.id))); setFinished(false); setDir(-1); setI(0); }} className="min-h-12 rounded-full border border-line px-5">Start again</button>
+          )}
+          <Link href="/" className="grid min-h-12 place-items-center rounded-full border border-line px-6 no-underline">Home</Link>
         </div>
       </div>
     );

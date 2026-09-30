@@ -31,3 +31,9 @@ export function arcProgress(h: number) {
 
 /** Status-bar colour for each sky (the top of its gradient). Kept in step with the boot script in layout.tsx. */
 export const THEME_COLOR: Record<Sky, string> = { dawn: "#c6bff8", day: "#b4e7fc", dusk: "#411c49", night: "#060b22" };
+
+/** Friday by the device's own calendar. `?day=friday` in the address previews it. */
+export function isFriday(d: Date = new Date()) {
+  if (typeof location !== "undefined" && new URLSearchParams(location.search).get("day") === "friday") return true;
+  return d.getDay() === 5;
+}
