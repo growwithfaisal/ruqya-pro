@@ -143,7 +143,7 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 - Tajweed colours are painted over letter clusters of the exact Arabic; one lightness per sky (`--tjl`) keeps them readable on light and dark cards. Verse picker is a 5-column grid; the current verse is filled and verses read today carry a dot.
 
 ### Daily routine reader
-- Morning, evening and bedtime sets open in the same frame as the Qur'an reader: "Routine · N left" above a `--card` surface with the card list button, the title and `3/7`, and a recited tick; the Arabic (tajweed colours where the card is a run of Qur'an verses), then share, citation badge and `Aa`. Transliteration is large under the card, then the translation, the repeat count and the source. The bottom bar is previous, "I'm Done" (marks the card and moves on) and next; finishing the last card shows "complete" with Start again and Home. Browsing by intent keeps the swipe deck.
+- Morning, evening and bedtime sets open in the same frame as the Qur'an reader: "Routine · N left" above a `--card` surface with the card list button, the title and `3/7`, and a recited tick; the Arabic (tajweed colours where the card is a run of Qur'an verses), then share, citation badge and `Aa`. Transliteration is large under the card, then the translation, the repeat count and the source. The bottom bar is previous, "I'm Done" and next. Next (or a swipe) recites the card you leave; "I'm Done" recites the current card if it is finished and returns to Home, where the routine box shows its progress or "complete". Browsing by intent keeps the swipe deck.
 
 ### Chips
 - Filter pills, 44px tall, filled ink when selected, hairline when not.

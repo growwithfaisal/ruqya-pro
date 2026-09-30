@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import type { Entry, TimeTag } from "@/lib/types";
@@ -34,7 +35,8 @@ const refOf = (e: Entry) => {
 /** A daily set (morning, evening, bedtime) read one card at a time, in the same frame as the Qur'an reader. */
 export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[] }) {
   const reduce = useReducedMotion();
-  const { done, markDone, clear } = useDone();
+  const router = useRouter();
+  const { done, markDone } = useDone();
   const q = useQuran();
   const dragged = useRef(false);
 
@@ -83,7 +85,6 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   }, [ready, done, entries, set]);
 
   const [dir, setDir] = useState(1);
-  const [finished, setFinished] = useState(false);
   const [panel, setPanel] = useState<Panel>(null);
   const [note, setNote] = useState("");
   const [tg, setTg] = useState<[number, number, number][] | null>(null);
@@ -101,27 +102,24 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
     window.setTimeout(() => setNote((t) => (t === text ? "" : t)), 2500);
   };
 
+  // A card counts as recited once the reader has been through all of it: a whole card, or the last verse of a long one.
+  const finishedCard = !!cur && (!cur.verse || (cur.vi ?? 0) >= (cur.vCount ?? 1) - 1);
+
   const go = useCallback(
     (d: 1 | -1) => {
       setDir(d);
-      setFinished(false);
+      // Moving on from a finished card marks it recited, so finishing a routine needs no extra tap.
+      if (d === 1 && finishedCard && cur) markDone(doneKey(set, cur.entry.id));
       const k = Math.max(0, Math.min(steps.length - 1, i + d));
       if (steps[k]) setPos({ id: steps[k].entry.id, vi: steps[k].vi ?? 0 });
     },
-    [steps, i],
+    [steps, i, finishedCard, cur, markDone, set],
   );
 
+  // "I'm Done" ends the session: it recites this card if it is finished, then returns to Home.
   const finish = () => {
-    if (!e || !cur) return;
-    setDir(1);
-    // Mid-surah: "I'm Done" just moves to the next verse. The card counts as recited on its last verse.
-    if (cur.verse && (cur.vi ?? 0) < (cur.vCount ?? 1) - 1) { at(i + 1); return; }
-    markDone(doneKey(set, e.id));
-    // The routine is complete the moment every card is recited, whatever order they were done in.
-    if (entries.every((x) => x.id === e.id || !open(x))) { setFinished(true); return; }
-    // Otherwise go on to the next open card, wrapping round to the first one left.
-    const next = entries.find((x, k) => k > cur.entryIndex && open(x)) ?? entries.find((x) => x.id !== e.id && open(x));
-    if (next) setPos({ id: next.id, vi: 0 });
+    if (finishedCard && e) markDone(doneKey(set, e.id));
+    router.push("/");
   };
 
   const share = async () => {
@@ -153,28 +151,6 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   const isDone = e ? done.has(doneKey(set, e.id)) : false;
 
   if (!entries.length || !cur || !e) return <p className="mt-24 text-center text-ink-soft">Nothing in this routine yet.</p>;
-
-  if (finished) {
-    const still = entries.filter(open);
-    return (
-      <div className="mx-auto grid min-h-[calc(100dvh-8rem)] max-w-2xl place-content-center gap-5 px-6 text-center">
-        <p className="display text-[clamp(2rem,7vw,2.8rem)] leading-tight">{still.length === 0 ? `${SETS[set]} complete.` : "That was the last card."}</p>
-        <p className="text-ink-soft">
-          {still.length === 0
-            ? `${entries.length} of ${entries.length} recited today. Kept on this device only.`
-            : `${entries.length - still.length} of ${entries.length} recited today. ${still.length} ${still.length === 1 ? "card is" : "cards are"} still open.`}
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          {still.length > 0 ? (
-            <button onClick={() => { setFinished(false); setDir(-1); setPos({ id: still[0].id, vi: 0 }); }} className="min-h-12 rounded-full bg-accent px-6 font-semibold text-accent-ink">Open the first one</button>
-          ) : (
-            <button onClick={() => { clear(entries.map((x) => doneKey(set, x.id))); setFinished(false); setDir(-1); setPos({ id: entries[0].id, vi: 0 }); }} className="min-h-12 rounded-full border border-line px-5">Start again</button>
-          )}
-          <Link href="/" className="grid min-h-12 place-items-center rounded-full border border-line px-6 no-underline">Home</Link>
-        </div>
-      </div>
-    );
-  }
 
   const verse = cur.verse;
   const ch = cur.surah ? chapter(cur.surah) : null;
