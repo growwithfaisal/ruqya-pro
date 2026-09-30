@@ -37,3 +37,11 @@ Hadith are cited by the book-wide number that sunnah.com uses (`arabicnumber` in
 - **Abu Dawud 5090 (dua-033, dua-040):** `fitrahive/dua-dhikr` morning-dhikr, first three requests only; its Arabic matches the Abu Dawud text after normalisation.
 - **Pain dua (dua-008) and children's refuge (dua-009):** the translators' transliteration inside the English hadith text.
 - **Jibril ruqyah (dua-007), Seeking refuge in Allah's might (dua-031), At a time of distress (dua-032):** no cited repo carries these. The Latin transliteration printed on the owner's images (IMG_2025, IMG_2026, IMG_2029) was used, read by eye. The owner should check it against the images.
+
+## The Qur'an reader (`/quran`)
+
+- **Arabic:** Quran.com API v4 `quran/verses/uthmani`, stored exactly as returned, retrieved 2026-09-30. **Translation:** Saheeh International, Quran.com resource 20. **Transliteration:** Quran.com resource 57 (Tanzil scheme). **Chapter names, verse counts, juz ranges:** Quran.com `chapters` and `juzs` (the API lists every juz twice; duplicates are dropped).
+- **Second-source check:** every one of the 6,236 verses was compared, letters only (diacritics and hamza carriers ignored), with the King Fahd Complex Uthmani Hafs text in `fawazahmed0/quran-api` (commit `47ca096b0976443ba2eab2e45cdf0fb4096a2610`, Unlicense). All verses agree. Diacritics are not compared because the two sources encode them differently.
+- **Files:** `public/quran-data/v1/{1..114}.json` and `data/quran/chapters.json`, built by `scripts/import-quran.mts` and checked by `scripts/validate-quran.mts` on every build.
+- **Still to confirm before wide release:** the reuse terms of the Quran.com API and the Tanzil-derived text (attribution is shown in the reader).
+- **Data on the reader's device only:** last place, reading days, verses seen today, bookmarks, saved surahs and display choices, under `rp:v1:quran:*` in local storage; saved surahs in Cache Storage `rp-quran-v1`.

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { arcProgress, decimalHour, setForHour, skyForHour, SKY_LABEL, type Sky } from "@/lib/sky";
 import { useDone } from "@/lib/progress";
+import { chapter, readHref } from "@/lib/quran";
+import { useQuran } from "@/lib/quran-store";
 import { SETS } from "@/lib/entries";
 import type { TimeTag } from "@/lib/types";
 import { Chevron } from "./Glyphs";
@@ -24,6 +26,7 @@ const at = (t: number) => [
 export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const [now, setNow] = useState<Date | null>(null);
   const { done } = useDone();
+  const quran = useQuran();
 
   useEffect(() => {
     const tick = () => setNow(new Date());
@@ -96,6 +99,12 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
             </span>
             <Chevron className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
+          {quran.last && (
+            <Link href={readHref(quran.last.surah, quran.last.verse)} className="mt-3 flex min-h-14 items-center justify-between rounded-full border border-line px-5 no-underline">
+              <span>Continue reading <span className="font-semibold">{chapter(quran.last.surah).name}</span></span>
+              <span className="text-ink-soft tabular">{quran.last.surah}:{quran.last.verse}</span>
+            </Link>
+          )}
         </div>
       </div>
     </section>

@@ -9,7 +9,9 @@
     "lint": "eslint",
     "import:content": "tsx scripts/import-content.mts",
     "validate": "tsx scripts/validate-content.mts",
-    "prebuild": "npm run validate"
+    "prebuild": "npm run validate && npm run validate:quran",
+    "import:quran": "tsx scripts/import-quran.mts",
+    "validate:quran": "tsx scripts/validate-quran.mts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",

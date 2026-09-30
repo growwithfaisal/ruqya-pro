@@ -6,6 +6,7 @@ import type { Entry, Intent, TimeTag } from "@/lib/types";
 import { INTENTS, SETS } from "@/lib/entries";
 import { useDone } from "@/lib/progress";
 import { CitationBadge, DraftNotice, GradeBadge } from "./CitationBadge";
+import { ArabicSizeControl } from "./ArabicSizeControl";
 import { Check, Chevron } from "./Glyphs";
 
 type Filter = { intent: Intent | "all"; set: TimeTag | "" };
@@ -19,7 +20,6 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
   const [flipped, setFlipped] = useState(false);
-  const [scale, setScale] = useState(1);
   const dragged = useRef(false);
   const root = useRef<HTMLDivElement>(null);
 
@@ -33,10 +33,6 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
   const complete = list.length > 0 && list.every((e) => done.has(e.id));
   const atEnd = index >= list.length;
   const current = list[index];
-
-  useEffect(() => {
-    try { setScale(parseFloat(localStorage.getItem("rp:arabic") || "1") || 1); } catch {}
-  }, []);
 
   const applyFilter = (f: Filter) => {
     setFilter(f);
@@ -56,13 +52,6 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
     },
     [list.length],
   );
-
-  const size = (delta: number) => {
-    const n = Math.max(0.8, Math.min(1.8, +(scale + delta).toFixed(2)));
-    setScale(n);
-    document.documentElement.style.setProperty("--arabic-scale", String(n));
-    try { localStorage.setItem("rp:arabic", String(n)); } catch {}
-  };
 
   const onKey = (e: React.KeyboardEvent) => {
     if (e.target instanceof HTMLElement && e.target.closest("button, a, input")) return;
@@ -108,10 +97,7 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
               {atEnd ? "Set complete" : `${index + 1} of ${list.length}`}
               <span className="ml-3">{list.filter((e) => done.has(e.id)).length} recited today</span>
             </p>
-            <div className="flex items-center gap-1" role="group" aria-label="Arabic size">
-              <button className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-[0.85rem]" onClick={() => size(-0.1)} aria-label="Smaller Arabic">A−</button>
-              <button className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-[1.15rem]" onClick={() => size(0.1)} aria-label="Larger Arabic">A+</button>
-            </div>
+            <ArabicSizeControl />
           </div>
 
           <div

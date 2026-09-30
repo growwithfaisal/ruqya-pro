@@ -7,6 +7,7 @@ import { Wordmark } from "./Glyphs";
 
 const NAV = [
   { href: "/", label: "Home" },
+  { href: "/quran", label: "Qur'an" },
   { href: "/self-ruqyah", label: "Self-Ruqyah" },
   { href: "/recitations", label: "Recitations" },
   { href: "/sources", label: "Sources" },

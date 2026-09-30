@@ -133,6 +133,14 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 ### Citation badge and drawer
 - Pill with grade and reference. Opens a bottom sheet on mobile and a 30rem right panel from 768px: Arabic, grade, grader, book, reference, chapter, exegetical note, link to `/sources#id`.
 
+### Streak pill, week row, calendar
+- **Pill:** hairline capsule, 56px tall; calendar button, then an accent book badge and the month count in the display face (`4/30`), with the current streak beside it. The count springs once when it changes (skipped under reduced motion).
+- **Week row:** Monday to Sunday capsule of seven 40px circles; read days fill with the accent and a check, today carries a ring.
+- **Calendar sheet:** the shared slide-over with a month grid; read days filled, today ringed, then current streak, best streak and days this month.
+
+### Reader
+- Verse by verse: number/bookmark chip, Arabic right-aligned at the reader's size, optional transliteration and translation. A floating dock at the bottom (surah, verse n/N, Aa) sits above the home indicator; surah, verse and settings open as sheets. Verse picker is a 5-column grid; the current verse is filled and verses read today carry a dot.
+
 ### Chips
 - Filter pills, 44px tall, filled ink when selected, hairline when not.
 

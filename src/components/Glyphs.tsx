@@ -39,3 +39,40 @@ export const Wordmark = ({ className, size = 26 }: P) => (
     <path d="M12.00 2.40 L14.81 5.21 L18.79 5.21 L18.79 9.19 L21.60 12.00 L18.79 14.81 L18.79 18.79 L14.81 18.79 L12.00 21.60 L9.19 18.79 L5.21 18.79 L5.21 14.81 L2.40 12.00 L5.21 9.19 L5.21 5.21 L9.19 5.21 Z" />
   </svg>
 );
+
+export const Calendar = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
+    <path d="M8 3v4M16 3v4M3.5 10h17" />
+    <path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01" strokeWidth="2" />
+  </svg>
+);
+export const Book = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5z" />
+    <path d="M12 6.5v13" />
+  </svg>
+);
+export const CloudDown = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4.75 4.75 0 0 1-.5 9.5" />
+    <path d="M12 11.5v7M9 15.75l3 3 3-3" />
+  </svg>
+);
+export const CloudCheck = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4.75 4.75 0 0 1-.5 9.5" />
+    <path d="M9 14.5l2.25 2.25L15.5 12.5" />
+  </svg>
+);
+export const Search = ({ className, size = 20 }: P) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="M16 16l4 4" />
+  </svg>
+);
+export const Bookmark = ({ className, size = 18, filled = false }: P & { filled?: boolean }) => (
+  <svg {...base(size)} className={className} fill={filled ? "currentColor" : "none"}>
+    <path d="M6.5 4h11v16.5L12 16.5l-5.5 4z" />
+  </svg>
+);

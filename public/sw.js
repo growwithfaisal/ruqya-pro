@@ -5,6 +5,9 @@
 const BUILD = new URL(self.location.href).searchParams.get("v") || "dev";
 const PAGES = `rp-pages-${BUILD}`;
 const ASSETS = `rp-assets-${BUILD}`;
+// Saved Qur'an surahs. NOT tied to the build id, so a deploy never wipes what a reader saved.
+// Bump together with DATA_VERSION in src/lib/quran.ts if the Qur'an files ever change.
+const QURAN = "rp-quran-v1";
 
 self.addEventListener("install", () => self.skipWaiting());
 
@@ -12,7 +15,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
-      await Promise.all(keys.filter((k) => k.startsWith("rp-") && k !== PAGES && k !== ASSETS).map((k) => caches.delete(k)));
+      await Promise.all(keys.filter((k) => k.startsWith("rp-") && k !== PAGES && k !== ASSETS && k !== QURAN).map((k) => caches.delete(k)));
       await self.clients.claim();
     })(),
   );
@@ -23,6 +26,14 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+
+  // Saved surahs are served from the device first; anything not saved goes to the network as usual.
+  if (url.pathname.startsWith("/quran-data/")) {
+    event.respondWith(
+      caches.open(QURAN).then(async (cache) => (await cache.match(req)) || fetch(req)),
+    );
+    return;
+  }
 
   if (url.pathname.startsWith("/_next/static/") || url.pathname.startsWith("/icons/")) {
     event.respondWith(
@@ -50,7 +61,11 @@ self.addEventListener("fetch", (event) => {
       .catch(async () => {
         const hit = await caches.match(req);
         if (hit) return hit;
-        if (req.mode === "navigate") return (await caches.match("/")) || Response.error();
+        if (req.mode === "navigate") {
+          // The reader is one page for every surah (/quran/read?s=..), so any visited copy will do.
+          const shell = await caches.match(req, { ignoreSearch: true });
+          return shell || (await caches.match("/")) || Response.error();
+        }
         return Response.error();
       }),
   );

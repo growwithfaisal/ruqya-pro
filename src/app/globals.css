@@ -268,3 +268,6 @@ footer { padding-bottom: env(safe-area-inset-bottom); }
   /* No browser chrome: keep text from being selected by accident while swiping. */
   .arabic { -webkit-touch-callout: none; }
 }
+
+/* Long-form reading: verse text runs from the right edge, like a page of the mushaf. */
+.arabic-read { text-align: right; }

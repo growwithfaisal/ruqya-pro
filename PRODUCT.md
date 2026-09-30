@@ -31,7 +31,9 @@ Transparent sourcing. Every dua shows a citation badge that opens a drawer with 
 
 ## Capabilities and Constraints
 
-- Nav: Home | Self-Ruqyah | Recitations | Sources | Search. Red Flags and Wellness are paused by the owner and will be added back on request (the earlier placeholder pages are in git history).
+- Nav: Home | Qur'an | Self-Ruqyah | Recitations | Sources | Search. Red Flags and Wellness are paused by the owner and will be added back on request (the earlier placeholder pages are in git history).
+- Qur'an reader: all 114 surahs verse by verse (Arabic, optional transliteration and Saheeh International translation), Chapter/Juz browsing with search, verse picker, resume where you stopped, bookmarks, a daily reading streak (a day counts after 10 verses; the pill shows days read this month out of 30), and per-surah offline saving.
+- **Standing rules for every feature:** user data stays on the user's own device (no accounts, no servers); the app is used as a home-screen web app, so it must work standalone and offline where sensible; every deploy must reach people who already installed it (network-first pages, build-id service worker, saved content in its own persistent cache).
 - Editorial invariant enforced by build: a published entry needs `verified: true`, a source, and grade Sahih or Hasan. `scripts/validate-content.ts` runs in the build.
 - Never generate or alter Arabic, transliteration or gradings from model memory; never normalise Quranic Arabic; missing values go to `MISSING.md` and the entry stays unpublished.
 - No images of living beings; no talismans, "energy", or occult language.
