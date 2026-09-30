@@ -39,10 +39,18 @@ export function useDone() {
     }
     write([...cur]);
   }, []);
+  /** Sets a card as recited today; never un-ticks one. */
+  const markDone = useCallback((id: string) => {
+    const cur = new Set<string>(JSON.parse(read()));
+    if (cur.has(id)) return;
+    cur.add(id);
+    try { navigator.vibrate?.(12); } catch {}
+    write([...cur]);
+  }, []);
   const clear = useCallback((ids: string[]) => {
     const cur = new Set<string>(JSON.parse(read()));
     ids.forEach((i) => cur.delete(i));
     write([...cur]);
   }, []);
-  return { done, toggle, clear };
+  return { done, toggle, markDone, clear };
 }

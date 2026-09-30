@@ -75,3 +75,30 @@ export function juzSpan(j: Juz) {
   const b = j.ranges[j.ranges.length - 1];
   return `${chapter(a.surah).name} ${a.surah}:${a.from} to ${chapter(b.surah).name} ${b.surah}:${b.to}`;
 }
+
+/**
+ * Tajweed colour ranges for a recitation entry that is a run of Qur'an verses (for example 2:285-286).
+ * Returns null unless the entry's Arabic is exactly those verses joined by single spaces, so a colour is
+ * never applied to text that is not the Qur'an text itself.
+ */
+export async function tajweedForEntry(
+  arabic: string,
+  refs: { book: string; ref: string }[],
+): Promise<[number, number, number][] | null> {
+  for (const r of refs) {
+    const m = r.book === "The Qur'an" ? /^(\d+):(\d+)(?:-(\d+))?$/.exec(r.ref) : null;
+    if (!m) continue;
+    const s = Number(m[1]), from = Number(m[2]), to = Number(m[3] ?? m[2]);
+    const all = await loadSurah(s);
+    const slice = all.slice(from - 1, to);
+    if (slice.map((v) => v.ar).join(" ") !== arabic) continue;
+    const out: [number, number, number][] = [];
+    let off = 0;
+    for (const v of slice) {
+      for (const [a, b, c] of v.tg ?? []) out.push([off + a, off + b, c]);
+      off += v.ar.length + 1;
+    }
+    return out;
+  }
+  return null;
+}

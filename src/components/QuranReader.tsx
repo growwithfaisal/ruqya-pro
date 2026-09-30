@@ -8,6 +8,7 @@ import { markSeen, setLast, setPrefs, toggleMark, useOffline, useQuran } from "@
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { ChapterList } from "./ChapterList";
 import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
+import { Coloured } from "./Coloured";
 import { Sheet } from "./Sheet";
 
 type Panel = null | "surah" | "verse" | "settings";
@@ -232,22 +233,6 @@ export function QuranReader() {
       <SettingsSheet open={panel === "settings"} onOpenChange={(o) => setPanel(o ? "settings" : null)} surah={surah} />
     </div>
   );
-}
-
-/** The exact Arabic, cut into runs; runs inside a range get a colour class. No letter is added, removed or changed. */
-function Coloured({ ar, ranges, lead }: { ar: string; ranges: [number, number, number][]; lead: number }) {
-  const out: React.ReactNode[] = [];
-  let at = 0;
-  ranges.forEach(([from, to, cls], i) => {
-    const a = Math.max(0, from - lead);
-    const b = Math.max(0, to - lead);
-    if (b <= at) return;
-    if (a > at) out.push(ar.slice(at, a));
-    out.push(<span key={i} className={`tj-${TAJWEED[cls][0]}`}>{ar.slice(Math.max(a, at), b)}</span>);
-    at = b;
-  });
-  if (at < ar.length) out.push(ar.slice(at));
-  return <>{out}</>;
 }
 
 function VerseSheet({

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Deck } from "@/components/Deck";
+import { RoutineReader } from "@/components/RoutineReader";
 import { deckEntries } from "@/lib/entries";
 import type { Intent, TimeTag } from "@/lib/types";
 
@@ -13,9 +14,20 @@ export default async function Recitations({ searchParams }: PageProps<"/recitati
   const sp = await searchParams;
   const intent = String(sp.intent ?? "");
   const set = String(sp.set ?? "");
+
+  // A daily routine opens in the one-card reader; browsing by intent keeps the swipe deck.
+  if (SET_IDS.includes(set)) {
+    const tag = set as TimeTag;
+    return (
+      <Suspense>
+        <RoutineReader set={tag} entries={deckEntries.filter((e) => e.times.includes(tag))} />
+      </Suspense>
+    );
+  }
+
   const initial = {
     intent: (INTENT_IDS.includes(intent) ? intent : "all") as Intent | "all",
-    set: (SET_IDS.includes(set) ? set : "") as TimeTag | "",
+    set: "" as TimeTag | "",
   };
   return (
     <>
