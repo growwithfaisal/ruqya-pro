@@ -5,6 +5,7 @@ import { SkyBackdrop } from "@/components/SkyBackdrop";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PwaRegister } from "@/components/PwaRegister";
+import { SkyClock } from "@/components/SkyClock";
 
 const display = Hedvig_Letters_Serif({ variable: "--font-display", subsets: ["latin"], weight: "400" });
 const ui = Schibsted_Grotesk({ variable: "--font-ui", subsets: ["latin"] });
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main" className="flex-1">{children}</main>
         <Footer />
         <PwaRegister />
+        <SkyClock />
       </body>
     </html>
   );

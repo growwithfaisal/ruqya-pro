@@ -28,3 +28,6 @@ export function arcProgress(h: number) {
   const n = h >= 19 ? h - 19 : h + 5;
   return { body: "moon" as const, t: n / 10 };
 }
+
+/** Status-bar colour for each sky (the top of its gradient). Kept in step with the boot script in layout.tsx. */
+export const THEME_COLOR: Record<Sky, string> = { dawn: "#c6bff8", day: "#b4e7fc", dusk: "#411c49", night: "#060b22" };
