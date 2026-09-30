@@ -44,6 +44,10 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const { body, t } = arcProgress(shown);
   const [x, y] = at(t);
   const set: TimeTag = setForHour(shown);
+  // Friday by the device's own calendar. ?day=friday previews it.
+  const friday = !!now && (now.getDay() === 5 || (typeof location !== "undefined" && new URLSearchParams(location.search).get("day") === "friday"));
+  const kahf = chapter(18);
+  const kahfAt = quran.last?.surah === 18 ? quran.last.verse : 1;
   const ids = setIds[set];
   const count = ids.filter((i) => done.has(doneKey(set, i))).length;
   const total = ids.length;
@@ -99,6 +103,20 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
             </span>
             <Chevron className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
+          {friday && (
+            <Link
+              href={readHref(18, kahfAt)}
+              className="group mt-3 flex min-h-[4.5rem] items-center gap-4 rounded-[28px] border-2 border-[var(--accent)] px-5 py-3 no-underline transition-transform duration-200 active:scale-[0.98]"
+            >
+              <span className="grid flex-1">
+                <span className="text-[1.1rem] font-semibold">Friday recitation</span>
+                <span className="text-[0.92rem] text-ink-soft">
+                  Surah {kahf.name} · <span className="tabular">{kahf.verses}</span> verses{kahfAt > 1 ? ` · resume at ${kahfAt}` : ""}
+                </span>
+              </span>
+              <Chevron className="text-accent transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          )}
           {quran.last && (
             <Link href={readHref(quran.last.surah, quran.last.verse)} className="mt-3 flex min-h-14 items-center justify-between rounded-full border border-line px-5 no-underline">
               <span>Continue reading <span className="font-semibold">{chapter(quran.last.surah).name}</span></span>
