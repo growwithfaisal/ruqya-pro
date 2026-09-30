@@ -31,7 +31,7 @@ Transparent sourcing. Every dua shows a citation badge that opens a drawer with 
 
 ## Capabilities and Constraints
 
-- Nav: Home | Self-Ruqyah | Recitations | Red Flags | Wellness | Sources | Search.
+- Nav: Home | Self-Ruqyah | Recitations | Sources | Search. Red Flags and Wellness are paused by the owner and will be added back on request (the earlier placeholder pages are in git history).
 - Editorial invariant enforced by build: a published entry needs `verified: true`, a source, and grade Sahih or Hasan. `scripts/validate-content.ts` runs in the build.
 - Never generate or alter Arabic, transliteration or gradings from model memory; never normalise Quranic Arabic; missing values go to `MISSING.md` and the entry stays unpublished.
 - No images of living beings; no talismans, "energy", or occult language.

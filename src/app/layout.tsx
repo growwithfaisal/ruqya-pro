@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   icons: { icon: [{ url: "/icons/192", sizes: "192x192", type: "image/png" }], apple: [{ url: "/icons/180", sizes: "180x180", type: "image/png" }] },
   title: { default: "RuqyaPro", template: "%s · RuqyaPro" },
   description:
-    "A calm guide to authentic ruqyah: recitations with a source you can open, red flags for scammers, and wellness alongside medical care.",
+    "A calm guide to authentic ruqyah: recitations with a source you can open, on every card.",
 };
 
 export const viewport: Viewport = {

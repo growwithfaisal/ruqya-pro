@@ -9,8 +9,6 @@ const NAV = [
   { href: "/", label: "Home" },
   { href: "/self-ruqyah", label: "Self-Ruqyah" },
   { href: "/recitations", label: "Recitations" },
-  { href: "/red-flags", label: "Red Flags" },
-  { href: "/wellness", label: "Wellness" },
   { href: "/sources", label: "Sources" },
   { href: "/search", label: "Search" },
 ];

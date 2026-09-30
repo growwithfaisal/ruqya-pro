@@ -9,7 +9,6 @@ export function Footer() {
         <nav aria-label="Footer" className="flex flex-wrap items-start gap-x-6 gap-y-2 text-[0.95rem] md:justify-end">
           <Link href="/sources" className="underline">Sources</Link>
           <Link href="/search" className="underline">Search</Link>
-          <Link href="/red-flags" className="underline">Red flags</Link>
         </nav>
       </div>
     </footer>
