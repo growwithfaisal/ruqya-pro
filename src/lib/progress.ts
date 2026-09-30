@@ -26,7 +26,14 @@ function write(ids: string[]) {
   window.dispatchEvent(new Event(EVENT));
 }
 
-/** Today's completed recitations, kept only in this browser. */
+/**
+ * Today's completed routine cards, kept only in this browser.
+ * Keys are "set:entry" (for example "bedtime:dua-004"), so morning, evening and bedtime never share progress,
+ * and nothing here touches the Qur'an reader's record.
+ */
+export const doneKey = (set: string, id: string) => `${set}:${id}`;
+
+
 export function useDone() {
   const snap = useSyncExternalStore(subscribe, read, () => "[]");
   const done = new Set<string>(JSON.parse(snap));

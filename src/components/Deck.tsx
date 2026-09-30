@@ -4,10 +4,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import type { Entry, Intent, TimeTag } from "@/lib/types";
 import { INTENTS, SETS } from "@/lib/entries";
-import { useDone } from "@/lib/progress";
 import { CitationBadge, DraftNotice, GradeBadge } from "./CitationBadge";
 import { ArabicSizeControl } from "./ArabicSizeControl";
-import { Check, Chevron } from "./Glyphs";
+import { Chevron } from "./Glyphs";
 
 type Filter = { intent: Intent | "all"; set: TimeTag | "" };
 
@@ -15,7 +14,6 @@ const SWIPE = 90;
 
 export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }) {
   const reduce = useReducedMotion();
-  const { done, toggle, clear } = useDone();
   const [filter, setFilter] = useState<Filter>(initial);
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
@@ -30,7 +28,6 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
       ),
     [entries, filter],
   );
-  const complete = list.length > 0 && list.every((e) => done.has(e.id));
   const atEnd = index >= list.length;
   const current = list[index];
 
@@ -95,7 +92,6 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
           <div className="mt-5 flex items-center justify-between text-[0.92rem] text-ink-soft">
             <p aria-live="polite" className="tabular">
               {atEnd ? "Set complete" : `${index + 1} of ${list.length}`}
-              <span className="ml-3">{list.filter((e) => done.has(e.id)).length} recited today</span>
             </p>
             <ArabicSizeControl />
           </div>
@@ -136,14 +132,12 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
                   whileDrag={{ rotate: 0 }}
                 >
                   {atEnd ? (
-                    <EndCard complete={complete} onRestart={() => { clear(list.map((e) => e.id)); setIndex(0); setDir(-1); }} onBack={() => go(-1)} />
+                    <EndCard onRestart={() => { setIndex(0); setDir(-1); }} onBack={() => go(-1)} />
                   ) : (
                     <Card
                       entry={current}
                       flipped={flipped}
                       setFlipped={setFlipped}
-                      isDone={done.has(current.id)}
-                      onDone={() => toggle(current.id)}
                       dragged={dragged}
                       reduce={!!reduce}
                     />
@@ -165,9 +159,9 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
 }
 
 function Card({
-  entry, flipped, setFlipped, isDone, onDone, dragged, reduce,
+  entry, flipped, setFlipped, dragged, reduce,
 }: {
-  entry: Entry; flipped: boolean; setFlipped: (v: boolean) => void; isDone: boolean; onDone: () => void;
+  entry: Entry; flipped: boolean; setFlipped: (v: boolean) => void;
   dragged: React.RefObject<boolean>; reduce: boolean;
 }) {
   const lines = entry.arabic.split("\n");
@@ -217,15 +211,7 @@ function Card({
             <button onClick={() => setFlipped(true)} className="min-h-11 shrink-0 rounded-full px-3 text-[0.9rem] underline">Details</button>
           </div>
           <div className="flex gap-2">
-            <button
-              onClick={onDone}
-              aria-pressed={isDone}
-              className={`flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full font-semibold transition-colors active:scale-[0.98] ${isDone ? "bg-accent text-accent-ink" : "border border-line"}`}
-            >
-              {isDone && <Check />}
-              {isDone ? "Recited today" : "Mark as recited"}
-            </button>
-            <Link href={`/recitations/${entry.slug}`} className="flex min-h-12 shrink-0 items-center whitespace-nowrap rounded-full border border-line px-4 no-underline">Read in full</Link>
+            <Link href={`/recitations/${entry.slug}`} className="flex min-h-12 flex-1 items-center justify-center whitespace-nowrap rounded-full border border-line px-4 font-semibold no-underline">Read in full</Link>
           </div>
         </div>
       </div>
@@ -259,14 +245,13 @@ function Card({
   );
 }
 
-function EndCard({ complete, onRestart, onBack }: { complete: boolean; onRestart: () => void; onBack: () => void }) {
+function EndCard({ onRestart, onBack }: { onRestart: () => void; onBack: () => void }) {
   return (
     <div className="absolute inset-0 grid place-content-center gap-5 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] border border-line bg-card px-10 pt-24 text-center text-card-ink">
-      <h2 className="display text-[1.8rem] leading-tight">{complete ? "Set complete." : "End of the set."}</h2>
-      <p className="text-card-soft">{complete ? "Every card in this set is marked as recited today." : "Some cards are not marked as recited yet."}</p>
+      <h2 className="display text-[1.8rem] leading-tight">End of the set.</h2>
       <div className="flex justify-center gap-3">
         <button onClick={onBack} className="min-h-12 rounded-full border border-line px-5">Go back</button>
-        <button onClick={onRestart} className="min-h-12 rounded-full bg-accent px-5 font-semibold text-accent-ink">Start again</button>
+        <button onClick={onRestart} className="min-h-12 rounded-full bg-accent px-5 font-semibold text-accent-ink">Back to the start</button>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import type { Entry, TimeTag } from "@/lib/types";
 import { SETS, citation } from "@/lib/entries";
 import { tajweedForEntry } from "@/lib/quran";
 import { setPrefs, useQuran } from "@/lib/quran-store";
-import { useDone } from "@/lib/progress";
+import { doneKey, useDone } from "@/lib/progress";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { CitationBadge, DraftNotice } from "./CitationBadge";
 import { Coloured } from "./Coloured";
@@ -31,9 +31,9 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   useEffect(() => {
     if (!ready || placed.current) return;
     placed.current = true;
-    const firstOpen = entries.findIndex((x) => !done.has(x.id));
+    const firstOpen = entries.findIndex((x) => !done.has(doneKey(set, x.id)));
     if (firstOpen > 0) setI(firstOpen);
-  }, [ready, done, entries]);
+  }, [ready, done, entries, set]);
   const [dir, setDir] = useState(1);
   const [finished, setFinished] = useState(false);
   const [panel, setPanel] = useState<Panel>(null);
@@ -41,7 +41,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   const [tg, setTg] = useState<[number, number, number][] | null>(null);
 
   const e = entries[i];
-  const left = entries.filter((x) => !done.has(x.id)).length;
+  const left = entries.filter((x) => !done.has(doneKey(set, x.id))).length;
 
   // Tajweed colours, when this card is a run of Qur'an verses that the data can match exactly.
   useEffect(() => {
@@ -67,7 +67,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
 
   const finish = () => {
     if (!e) return;
-    markDone(e.id);
+    markDone(doneKey(set, e.id));
     setDir(1);
     if (i >= entries.length - 1) setFinished(true);
     else setI(i + 1);
@@ -99,7 +99,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
 
   const lines = useMemo(() => (e ? e.arabic.split("\n") : []), [e]);
   const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
-  const isDone = e ? done.has(e.id) : false;
+  const isDone = e ? done.has(doneKey(set, e.id)) : false;
 
   if (!entries.length) return <p className="mt-24 text-center text-ink-soft">Nothing in this routine yet.</p>;
 
@@ -109,7 +109,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
         <p className="display text-[clamp(2rem,7vw,2.8rem)] leading-tight">{SETS[set]} complete.</p>
         <p className="text-ink-soft">{entries.length} of {entries.length} recited today. Kept on this device only.</p>
         <div className="flex flex-wrap justify-center gap-3">
-          <button onClick={() => { clear(entries.map((x) => x.id)); setFinished(false); setDir(-1); setI(0); }} className="min-h-12 rounded-full border border-line px-5">Start again</button>
+          <button onClick={() => { clear(entries.map((x) => doneKey(set, x.id))); setFinished(false); setDir(-1); setI(0); }} className="min-h-12 rounded-full border border-line px-5">Start again</button>
           <Link href="/" className="grid min-h-12 place-items-center rounded-full bg-accent px-6 font-semibold text-accent-ink no-underline">Home</Link>
         </div>
       </div>
@@ -231,7 +231,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
               >
                 <span className="tabular w-6 text-card-soft">{k + 1}</span>
                 <span className="display flex-1 text-[1.15rem] leading-tight">{x.title}</span>
-                {done.has(x.id) && <span className="grid size-7 place-items-center rounded-full bg-accent text-accent-ink"><Check size={16} /></span>}
+                {done.has(doneKey(set, x.id)) && <span className="grid size-7 place-items-center rounded-full bg-accent text-accent-ink"><Check size={16} /></span>}
               </button>
             </li>
           ))}

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { arcProgress, decimalHour, setForHour, skyForHour, SKY_LABEL, type Sky } from "@/lib/sky";
-import { useDone } from "@/lib/progress";
+import { doneKey, useDone } from "@/lib/progress";
 import { chapter, readHref } from "@/lib/quran";
 import { useQuran } from "@/lib/quran-store";
 import { SETS } from "@/lib/entries";
@@ -45,7 +45,7 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const [x, y] = at(t);
   const set: TimeTag = setForHour(shown);
   const ids = setIds[set];
-  const count = ids.filter((i) => done.has(i)).length;
+  const count = ids.filter((i) => done.has(doneKey(set, i))).length;
   const total = ids.length;
   const R = 26, CIRC = 2 * Math.PI * R;
 
