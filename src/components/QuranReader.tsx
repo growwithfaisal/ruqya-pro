@@ -111,6 +111,19 @@ export function QuranReader() {
         <p lang="ar" dir="rtl" className="arabic mt-1 !text-[2.2rem]">{c.arabic}</p>
       </header>
 
+      <div className="mt-5 flex justify-center gap-2" role="group" aria-label="Show under each verse">
+        {([["translit", "Transliteration"], ["translation", "Translation"]] as const).map(([k, label]) => (
+          <button
+            key={k}
+            aria-pressed={q.prefs[k]}
+            onClick={() => setPrefs({ [k]: !q.prefs[k] })}
+            className={`min-h-11 rounded-full border px-4 text-[0.95rem] transition-colors ${q.prefs[k] ? "border-transparent bg-ink text-[var(--sky-bottom)]" : "border-line"}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
       {!verses && !failed && <p className="mt-16 text-center text-ink-soft" role="status">Opening {c.name}…</p>}
 
       {failed && (

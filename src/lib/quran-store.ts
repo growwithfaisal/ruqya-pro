@@ -38,7 +38,7 @@ export const addDays = (iso: string, n: number) => {
   return localDate(d);
 };
 
-const DEFAULT_PREFS: Prefs = { translit: false, translation: true };
+const DEFAULT_PREFS: Prefs = { translit: true, translation: true };
 
 function read(k: (typeof KEYS)[number]): string {
   try { return localStorage.getItem(P + k) ?? ""; } catch { return ""; }
