@@ -13,6 +13,7 @@ const API = "https://api.quran.com/api/v4";
 const TR_EN = 20; // Saheeh International
 const TR_LATIN = 57; // transliteration
 const SECOND = "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quranuthmanihaf.min.json"; // King Fahd Complex, Uthmani Hafs
+const DATA_VERSION = "v2"; // v2 adds the tajweed-coloured text (tj). Bump the service worker cache name in public/sw.js with it.
 const RETRIEVED = new Date().toISOString().slice(0, 10);
 
 const strip = (s: string) => s.replace(/<sup[^>]*>.*?<\/sup>/g, "").replace(/<[^>]+>/g, "").trim();
@@ -24,6 +25,58 @@ const rasm = (s: string) =>
     .replace(/[وؤ]/g, "و") // waw and waw-with-hamza
     .replace(/[ةه]/g, "ه")
     .replace(/[\s‌‍‎‏]/g, "");
+
+
+/* ---------- Tajweed alignment ---------- */
+export const TAJWEED = [
+  "ham_wasl", "slnt", "laam_shamsiyah", "madda_normal", "madda_permissible", "madda_necessary", "madda_obligatory",
+  "qalaqah", "ikhafa_shafawi", "ikhafa", "idgham_shafawi", "iqlab", "idgham_ghunnah", "idgham_wo_ghunnah", "ghunnah",
+];
+const isMark = (o: number) =>
+  (o >= 0x64b && o <= 0x65f) || o === 0x670 || o === 0x640 || o === 0x672 || (o >= 0x6d6 && o <= 0x6ed) || (o >= 0x8d3 && o <= 0x8ff);
+const SKIP = new Set([0x200c, 0x200d, 0x200e, 0x200f]);
+const FOLD: Record<number, number> = { 0x66e: 0x64a, 0x649: 0x64a, 0x626: 0x64a, 0x623: 0x627, 0x625: 0x627, 0x622: 0x627, 0x671: 0x627, 0x624: 0x648, 0x629: 0x647, 0x6cc: 0x64a };
+interface Cluster { base: string; start: number; end: number }
+function clusters(s: string): Cluster[] {
+  const out: Cluster[] = [];
+  for (let i = 0; i < s.length; i++) {
+    const o = s.charCodeAt(i);
+    if (SKIP.has(o)) continue;
+    if (o === 0x20) { if (out.length && out[out.length - 1].base !== " ") out.push({ base: " ", start: i, end: i + 1 }); continue; }
+    if (isMark(o)) { if (out.length && out[out.length - 1].base !== " ") out[out.length - 1].end = i + 1; continue; }
+    out.push({ base: String.fromCharCode(FOLD[o] ?? o), start: i, end: i + 1 });
+  }
+  while (out.length && out[out.length - 1].base === " ") out.pop();
+  return out;
+}
+/** [start, end, class index] ranges over `ar`, or null when the tagged text does not line up with it. */
+function alignTajweed(ar: string, tagged: string): [number, number, number][] | null {
+  const src = tagged.replace(/\s*<span class=end>[^<]*<\/span>\s*$/, "");
+  let text = "";
+  const spans: { s: number; e: number; cls: number }[] = [];
+  for (const m of src.matchAll(/<tajweed class=(\w+)>([\s\S]*?)<\/tajweed>|([^<]+)|<[^>]+>/g)) {
+    if (m[1]) {
+      const cls = TAJWEED.indexOf(m[1]);
+      if (cls < 0) return null;
+      spans.push({ s: text.length, e: text.length + m[2].length, cls });
+      text += m[2];
+    } else if (m[3]) text += m[3];
+  }
+  const ca = clusters(ar);
+  const cb = clusters(text);
+  if (ca.map((c) => c.base).join("") !== cb.map((c) => c.base).join("")) return null;
+  const out: [number, number, number][] = [];
+  for (const sp of spans) {
+    const hit = cb.map((c, i) => (c.start < sp.e && c.end > sp.s ? i : -1)).filter((i) => i >= 0);
+    if (!hit.length) continue;
+    const from = ca[hit[0]].start;
+    const to = ca[hit[hit.length - 1]].end;
+    const last = out[out.length - 1];
+    if (last && from < last[1]) continue; // never overlap
+    out.push([from, to, sp.cls]);
+  }
+  return out;
+}
 
 async function json<T>(url: string, tries = 4): Promise<T> {
   for (let i = 0; ; i++) {
@@ -62,20 +115,22 @@ const juz = [...juzMap.values()]
 const second = await json<{ quran: { chapter: number; verse: number; text: string }[] }>(SECOND);
 const secondByKey = new Map(second.quran.map((v) => [`${v.chapter}:${v.verse}`, v.text]));
 
-mkdirSync(join(ROOT, "public", "quran-data", "v1"), { recursive: true });
+mkdirSync(join(ROOT, "public", "quran-data", DATA_VERSION), { recursive: true });
 mkdirSync(join(ROOT, "data", "quran"), { recursive: true });
 
 const mismatches: string[] = [];
+const noColour: string[] = [];
 let total = 0;
 let bismillah = "";
 
 async function surah(c: Chapter) {
-  const [ar, en, tr] = await Promise.all([
+  const [ar, tj, en, tr] = await Promise.all([
     json<{ verses: { verse_key: string; text_uthmani: string }[] }>(`${API}/quran/verses/uthmani?chapter_number=${c.id}`),
+    json<{ verses: { verse_key: string; text_uthmani_tajweed: string }[] }>(`${API}/quran/verses/uthmani_tajweed?chapter_number=${c.id}`),
     json<{ translations: { text: string }[] }>(`${API}/quran/translations/${TR_EN}?chapter_number=${c.id}`),
     json<{ translations: { text: string }[] }>(`${API}/quran/translations/${TR_LATIN}?chapter_number=${c.id}`),
   ]);
-  if (ar.verses.length !== c.verses_count || en.translations.length !== c.verses_count || tr.translations.length !== c.verses_count)
+  if (tj.verses.length !== c.verses_count || ar.verses.length !== c.verses_count || en.translations.length !== c.verses_count || tr.translations.length !== c.verses_count)
     throw new Error(`surah ${c.id}: verse count mismatch (${ar.verses.length}/${en.translations.length}/${tr.translations.length} vs ${c.verses_count})`);
 
   const out = ar.verses.map((v, i) => {
@@ -83,11 +138,15 @@ async function surah(c: Chapter) {
     const other = secondByKey.get(v.verse_key);
     if (other === undefined) mismatches.push(`${v.verse_key}: missing in the second source`);
     else if (rasm(other) !== rasm(v.text_uthmani)) mismatches.push(`${v.verse_key}: letters differ from the second source`);
-    return { n, ar: v.text_uthmani, tr: strip(tr.translations[i].text), en: strip(en.translations[i].text) };
+    // Tajweed colours: the API's tagged text uses its own code points, so it is never shown. Its tags are only used
+    // to colour letter clusters of the exact Arabic above. Verses that cannot be aligned letter for letter get no colour.
+    const tg = alignTajweed(v.text_uthmani, tj.verses[i].text_uthmani_tajweed);
+    if (!tg) noColour.push(v.verse_key);
+    return { n, ar: v.text_uthmani, ...(tg && tg.length ? { tg } : {}), tr: strip(tr.translations[i].text), en: strip(en.translations[i].text) };
   });
   if (c.id === 1) bismillah = out[0].ar;
   total += out.length;
-  writeFileSync(join(ROOT, "public", "quran-data", "v1", `${c.id}.json`), JSON.stringify(out));
+  writeFileSync(join(ROOT, "public", "quran-data", DATA_VERSION, `${c.id}.json`), JSON.stringify(out));
   process.stdout.write(`${c.id} `);
 }
 
@@ -99,7 +158,7 @@ writeFileSync(
   join(ROOT, "data", "quran", "chapters.json"),
   JSON.stringify(
     {
-      source: { arabic: "Quran.com API v4 text_uthmani", translation: `Saheeh International (Quran.com resource ${TR_EN})`, transliteration: `Quran.com resource ${TR_LATIN}`, retrieved: RETRIEVED, dataVersion: "v1" },
+      source: { arabic: "Quran.com API v4 text_uthmani", translation: `Saheeh International (Quran.com resource ${TR_EN})`, transliteration: `Quran.com resource ${TR_LATIN}`, tajweed: "Quran.com API v4 uthmani_tajweed", retrieved: RETRIEVED, dataVersion: DATA_VERSION },
       bismillah,
       chapters: chapters.map((c) => ({
         id: c.id, name: c.name_simple, arabic: c.name_arabic, meaning: c.translated_name.name,
@@ -112,5 +171,5 @@ writeFileSync(
   ) + "\n",
 );
 
-console.log(`\nwrote ${chapters.length} surahs, ${total} verses`);
+console.log(`\nwrote ${chapters.length} surahs, ${total} verses; tajweed colours on ${total - noColour.length} verses, plain on ${noColour.length}`);
 console.log(mismatches.length ? `second-source differences (reported, not fixed): ${mismatches.length}\n` + mismatches.slice(0, 40).join("\n") : "second source agrees on every verse (letters only)");

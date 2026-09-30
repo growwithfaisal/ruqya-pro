@@ -7,7 +7,7 @@ const PAGES = `rp-pages-${BUILD}`;
 const ASSETS = `rp-assets-${BUILD}`;
 // Saved Qur'an surahs. NOT tied to the build id, so a deploy never wipes what a reader saved.
 // Bump together with DATA_VERSION in src/lib/quran.ts if the Qur'an files ever change.
-const QURAN = "rp-quran-v1";
+const QURAN = "rp-quran-v2";
 
 self.addEventListener("install", () => self.skipWaiting());
 

@@ -3,8 +3,9 @@
   "arabic": "Quran.com API v4 text_uthmani",
   "translation": "Saheeh International (Quran.com resource 20)",
   "transliteration": "Quran.com resource 57",
+  "tajweed": "Quran.com API v4 uthmani_tajweed",
   "retrieved": "2026-09-30",
-  "dataVersion": "v1"
+  "dataVersion": "v2"
  },
  "bismillah": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
  "chapters": [

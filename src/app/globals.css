@@ -271,3 +271,22 @@ footer { padding-bottom: env(safe-area-inset-bottom); }
 
 /* Long-form reading: verse text runs from the right edge, like a page of the mushaf. */
 .arabic-read { text-align: right; }
+
+/* ---------------- Tajweed colours ----------------
+   One lightness per sky keeps every colour readable on the card: darker on light cards, lighter on dark ones. */
+:root { --tjl: 0.5; }
+:root[data-sky="dusk"], :root[data-sky="night"] { --tjl: 0.8; }
+
+.tj-ham_wasl, .tj-slnt, .tj-laam_shamsiyah { color: var(--card-soft); }
+.tj-madda_normal { color: oklch(var(--tjl) 0.17 38); }
+.tj-madda_permissible { color: oklch(var(--tjl) 0.17 28); }
+.tj-madda_obligatory { color: oklch(var(--tjl) 0.2 22); }
+.tj-madda_necessary { color: oklch(var(--tjl) 0.22 15); }
+.tj-qalaqah { color: oklch(var(--tjl) 0.17 255); }
+.tj-ikhafa { color: oklch(var(--tjl) 0.14 65); }
+.tj-ikhafa_shafawi { color: oklch(var(--tjl) 0.14 85); }
+.tj-idgham_ghunnah { color: oklch(var(--tjl) 0.12 195); }
+.tj-idgham_shafawi { color: oklch(var(--tjl) 0.12 175); }
+.tj-idgham_wo_ghunnah { color: oklch(var(--tjl) 0.14 145); }
+.tj-iqlab { color: oklch(var(--tjl) 0.18 305); }
+.tj-ghunnah { color: oklch(var(--tjl) 0.19 350); }

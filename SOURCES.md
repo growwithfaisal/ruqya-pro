@@ -45,3 +45,9 @@ Hadith are cited by the book-wide number that sunnah.com uses (`arabicnumber` in
 - **Files:** `public/quran-data/v1/{1..114}.json` and `data/quran/chapters.json`, built by `scripts/import-quran.mts` and checked by `scripts/validate-quran.mts` on every build.
 - **Still to confirm before wide release:** the reuse terms of the Quran.com API and the Tanzil-derived text (attribution is shown in the reader).
 - **Data on the reader's device only:** last place, reading days, verses seen today, bookmarks, saved surahs and display choices, under `rp:v1:quran:*` in local storage; saved surahs in Cache Storage `rp-quran-v1`.
+
+## Tajweed colours
+
+- From Quran.com API v4 `uthmani_tajweed`. That text uses its own code points (for example U+0672 and U+066E) and one verse has a broken tag, so it is **never displayed**. Its tags are only used to colour letter clusters of the exact Arabic above, stored as ranges (`tg`) in `public/quran-data/v2/`. A verse is coloured only when its letters line up exactly with the plain text: 5,968 of 6,236 verses are coloured, 268 show in plain colour.
+- The colour legend names come from the source's class names; have a scholar check them before wide release.
+- Data version is now `v2` (path `/quran-data/v2/`, cache `rp-quran-v2`). Saved-surah records carry the version, so a bump starts clean.

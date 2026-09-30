@@ -139,7 +139,8 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 - **Calendar sheet:** the shared slide-over with a month grid; read days filled, today ringed, then current streak, best streak and days this month.
 
 ### Reader
-- Verse by verse: number/bookmark chip, Arabic right-aligned at the reader's size, optional transliteration and translation. A floating dock at the bottom (surah, verse n/N, Aa) sits above the home indicator; surah, verse and settings open as sheets. Verse picker is a 5-column grid; the current verse is filled and verses read today carry a dot.
+- One verse at a time, in a rounded `--card` surface: surah menu button, title (`65. At-Talaq`, `3/12`, tap for the verse grid), bookmark; the Arabic centred at the reader's size with optional tajweed colours; share and `Aa` (settings) at the foot. Transliteration (large) and translation sit on the sky below. A "Juz N, X verses left" line sits above. Swipe, arrow keys or the buttons move between verses; the bottom bar holds previous, "I'm Done" (accent) and next, above the home indicator.
+- Tajweed colours are painted over letter clusters of the exact Arabic; one lightness per sky (`--tjl`) keeps them readable on light and dark cards. Verse picker is a 5-column grid; the current verse is filled and verses read today carry a dot.
 
 ### Chips
 - Filter pills, 44px tall, filled ink when selected, hairline when not.

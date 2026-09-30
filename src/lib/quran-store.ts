@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useMemo, useSyncExternalStore } from "react";
-import { QURAN_CACHE, chapters } from "./quran";
+import { DATA_VERSION, QURAN_CACHE, chapters } from "./quran";
 
 /**
  * Everything a reader does stays in this browser. Keys are versioned so a future format can migrate them.
@@ -15,7 +15,7 @@ export const MONTH_GOAL = 30;
 
 export interface LastRead { surah: number; verse: number; at: number }
 export interface Seen { date: string; keys: string[] }
-export interface Prefs { translit: boolean; translation: boolean }
+export interface Prefs { translit: boolean; translation: boolean; tajweed: boolean }
 export interface QuranState {
   last: LastRead | null;
   days: string[];
@@ -38,7 +38,7 @@ export const addDays = (iso: string, n: number) => {
   return localDate(d);
 };
 
-const DEFAULT_PREFS: Prefs = { translit: true, translation: true };
+const DEFAULT_PREFS: Prefs = { translit: true, translation: true, tajweed: true };
 
 function read(k: (typeof KEYS)[number]): string {
   try { return localStorage.getItem(P + k) ?? ""; } catch { return ""; }
@@ -50,6 +50,13 @@ function write(k: (typeof KEYS)[number], v: unknown) {
 const parse = <T,>(s: string, fallback: T): T => {
   try { return s ? (JSON.parse(s) as T) : fallback; } catch { return fallback; }
 };
+
+/** Saved surahs are remembered with the data version they were saved under; a new data version starts empty. */
+function savedIds(raw: string): number[] {
+  const v = parse<{ v?: string; ids?: number[] } | number[]>(raw, []);
+  return !Array.isArray(v) && v.v === DATA_VERSION && Array.isArray(v.ids) ? v.ids : [];
+}
+const writeSaved = (ids: number[]) => write("offline", { v: DATA_VERSION, ids });
 
 const snapshot = () => KEYS.map(read).join("\u0001") + "\u0001" + localDate();
 function subscribe(cb: () => void) {
@@ -68,7 +75,7 @@ export function useQuran(): QuranState {
       days: parse<string[]>(parts[1], []),
       seen: seen.date === today ? seen : { date: today, keys: [] },
       marks: parse<string[]>(parts[3], []),
-      offline: parse<number[]>(parts[4], []),
+      offline: savedIds(parts[4]),
       prefs: { ...DEFAULT_PREFS, ...parse<Partial<Prefs>>(parts[5], {}) },
       today,
     };
@@ -109,7 +116,7 @@ const state = () => ({
   days: parse<string[]>(read("days"), []),
   seen: parse<Seen>(read("seen"), { date: "", keys: [] }),
   marks: parse<string[]>(read("marks"), []),
-  offline: parse<number[]>(read("offline"), []),
+  offline: savedIds(read("offline")),
   prefs: { ...DEFAULT_PREFS, ...parse<Partial<Prefs>>(read("prefs"), {}) },
 });
 
@@ -153,14 +160,14 @@ export function useOffline() {
     try {
       const cache = await caches.open(QURAN_CACHE);
       await Promise.all(ids.map((n) => cache.add(urlOf(n))));
-      write("offline", [...new Set([...state().offline, ...ids])].sort((a, b) => a - b));
+      writeSaved([...new Set([...state().offline, ...ids])].sort((a, b) => a - b));
       try { await navigator.storage?.persist?.(); } catch {}
       return true;
     } catch { return false; }
   }, []);
   const remove = useCallback(async (id: number, urlOf: (n: number) => string) => {
     try { const cache = await caches.open(QURAN_CACHE); await cache.delete(urlOf(id)); } catch {}
-    write("offline", state().offline.filter((n) => n !== id));
+    writeSaved(state().offline.filter((n) => n !== id));
   }, []);
   return { offline: new Set(offline), save, remove, total: chapters.length };
 }

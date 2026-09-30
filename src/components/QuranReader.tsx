@@ -1,131 +1,124 @@
 "use client";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { bismillah, chapter, loadSurah, readHref, safeSurah, safeVerse, surahUrl, type Verse } from "@/lib/quran";
+import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
+import { TAJWEED, bismillah, chapter, juzOf, loadSurah, readHref, safeSurah, safeVerse, surahUrl, type Verse } from "@/lib/quran";
 import { markSeen, setLast, setPrefs, toggleMark, useOffline, useQuran } from "@/lib/quran-store";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { ChapterList } from "./ChapterList";
-import { Bookmark, CloudCheck, CloudDown, Search } from "./Glyphs";
+import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
 import { Sheet } from "./Sheet";
 
 type Panel = null | "surah" | "verse" | "settings";
+const SWIPE = 80;
 
+/** One verse at a time. The plain Arabic is always what is shown; tajweed colours are painted over its letters. */
 export function QuranReader() {
   const params = useSearchParams();
+  const router = useRouter();
+  const reduce = useReducedMotion();
   const surah = safeSurah(params.get("s"));
-  const start = useRef(safeVerse(surah, params.get("v")));
   const c = chapter(surah);
   const q = useQuran();
 
   const [verses, setVerses] = useState<Verse[] | null>(null);
   const [failed, setFailed] = useState(false);
-  const [current, setCurrent] = useState(start.current);
-  const [panel, setPanel] = useState<Panel>(null);
-  const [counted, setCounted] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [n, setN] = useState(() => safeVerse(surah, params.get("v")));
+  const [dir, setDir] = useState(1);
+  const [panel, setPanel] = useState<Panel>(null);
+  const [note, setNote] = useState("");
+  const dragged = useRef(false);
 
-  // Load the surah (from this device's saved copy when there is one).
+  // Load the surah (from this device's saved copy when there is one) and start at the requested verse.
   useEffect(() => {
     let live = true;
     setVerses(null);
     setFailed(false);
+    setN(safeVerse(surah, params.get("v")));
     loadSurah(surah).then((v) => live && setVerses(v)).catch(() => live && setFailed(true));
     return () => { live = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [surah, attempt]);
 
-  // Land on the requested verse once the text is there.
+  // Keep the address, the saved place and today's count in step with the verse on screen.
   useEffect(() => {
     if (!verses) return;
-    start.current = safeVerse(surah, params.get("v"));
-    setCurrent(start.current);
-    requestAnimationFrame(() => {
-      if (start.current > 1) document.getElementById(`v-${start.current}`)?.scrollIntoView({ block: "start" });
-      else window.scrollTo({ top: 0 });
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [verses]);
+    const u = new URL(location.href);
+    u.searchParams.set("s", String(surah));
+    if (n > 1) u.searchParams.set("v", String(n)); else u.searchParams.delete("v");
+    history.replaceState(history.state, "", u);
 
-  // Track what is on screen: the top verse becomes "where you are", and 10 verses read in a day counts the day.
-  useEffect(() => {
-    if (!verses) return;
-    const visible = new Set<number>();
-    const timers = new Map<number, number>();
-    let saveTimer = 0;
+    const save = window.setTimeout(() => setLast(surah, n), 500);
+    const dwell = window.setTimeout(() => {
+      if (document.visibilityState === "visible" && markSeen(surah, n)) flash("Today counted");
+    }, 1200);
+    return () => { clearTimeout(save); clearTimeout(dwell); };
+  }, [verses, surah, n]);
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          const n = Number((e.target as HTMLElement).dataset.n);
-          const tall = e.rootBounds ? e.intersectionRect.height >= e.rootBounds.height * 0.5 : false;
-          const on = e.isIntersecting && (e.intersectionRatio >= 0.6 || tall);
-          if (on) {
-            visible.add(n);
-            if (!timers.has(n)) {
-              timers.set(n, window.setTimeout(() => {
-                if (document.visibilityState === "visible" && markSeen(surah, n)) {
-                  setCounted(true);
-                  window.setTimeout(() => setCounted(false), 3500);
-                }
-              }, 1000));
-            }
-          } else {
-            visible.delete(n);
-            const t = timers.get(n);
-            if (t) { clearTimeout(t); timers.delete(n); }
-          }
-        }
-        if (visible.size) {
-          const top = Math.min(...visible);
-          setCurrent(top);
-          clearTimeout(saveTimer);
-          saveTimer = window.setTimeout(() => setLast(surah, top), 700);
-        }
-      },
-      { threshold: [0, 0.6, 1] },
-    );
-    document.querySelectorAll<HTMLElement>("[data-n]").forEach((el) => io.observe(el));
-    return () => {
-      io.disconnect();
-      timers.forEach(clearTimeout);
-      clearTimeout(saveTimer);
-    };
-  }, [verses, surah]);
+  const flash = (text: string) => {
+    setNote(text);
+    window.setTimeout(() => setNote((t) => (t === text ? "" : t)), 3000);
+  };
 
-  const jump = useCallback((n: number) => {
+  const go = useCallback(
+    (d: 1 | -1) => {
+      const next = n + d;
+      setDir(d);
+      if (next >= 1 && next <= c.verses) setN(next);
+      else if (d > 0 && surah < 114) router.push(readHref(surah + 1));
+      else if (d < 0 && surah > 1) router.push(readHref(surah - 1, chapter(surah - 1).verses));
+    },
+    [n, c.verses, surah, router],
+  );
+
+  const jump = useCallback((to: number) => {
     setPanel(null);
-    setCurrent(n);
-    // Wait for the sheet to release focus and scroll lock before moving the page.
-    setTimeout(() => document.getElementById(`v-${n}`)?.scrollIntoView({ block: "start", behavior: "smooth" }), 120);
-  }, []);
+    setDir(to >= n ? 1 : -1);
+    setN(to);
+  }, [n]);
+
+  const done = () => {
+    markSeen(surah, n);
+    setLast(surah, n);
+    router.push("/quran");
+  };
+
+  const share = async () => {
+    const url = `${location.origin}${readHref(surah, n)}`;
+    const title = `${c.name} ${surah}:${n}`;
+    try {
+      if (navigator.share) await navigator.share({ title, url });
+      else { await navigator.clipboard.writeText(url); flash("Link copied"); }
+    } catch {}
+  };
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (panel || (e.target instanceof HTMLElement && e.target.closest("input, textarea"))) return;
+      if (e.key === "ArrowRight") go(1);
+      if (e.key === "ArrowLeft") go(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [go, panel]);
+
+  const onDragEnd = (_: unknown, info: PanInfo) => {
+    setTimeout(() => (dragged.current = false), 0);
+    if (info.offset.x < -SWIPE || info.velocity.x < -500) go(1);
+    else if (info.offset.x > SWIPE || info.velocity.x > 500) go(-1);
+  };
 
   const marks = useMemo(() => new Set(q.marks), [q.marks]);
   const seen = useMemo(() => new Set(q.seen.keys), [q.seen.keys]);
+  const v = verses?.[n - 1];
+  const marked = marks.has(`${surah}:${n}`);
+  const left = c.verses - n;
+  const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
 
   return (
-    <div className="mx-auto max-w-2xl px-4 pb-32 pt-8 md:px-8 md:pt-12">
-      <header className="text-center">
-        <p className="text-[0.95rem] text-ink-soft tabular">Surah {c.id} · {c.verses} verses · {c.place === "madinah" ? "Madinan" : "Makkan"}</p>
-        <h1 className="display mt-1 text-[clamp(2rem,7vw,3rem)] leading-tight">{c.name}</h1>
-        <p className="text-ink-soft">{c.meaning}</p>
-        <p lang="ar" dir="rtl" className="arabic mt-1 !text-[2.2rem]">{c.arabic}</p>
-      </header>
-
-      <div className="mt-5 flex justify-center gap-2" role="group" aria-label="Show under each verse">
-        {([["translit", "Transliteration"], ["translation", "Translation"]] as const).map(([k, label]) => (
-          <button
-            key={k}
-            aria-pressed={q.prefs[k]}
-            onClick={() => setPrefs({ [k]: !q.prefs[k] })}
-            className={`min-h-11 rounded-full border px-4 text-[0.95rem] transition-colors ${q.prefs[k] ? "border-transparent bg-ink text-[var(--sky-bottom)]" : "border-line"}`}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {!verses && !failed && <p className="mt-16 text-center text-ink-soft" role="status">Opening {c.name}…</p>}
-
+    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 md:px-8 md:pt-8">
       {failed && (
         <div className="mt-12 rounded-[28px] border border-line p-6 text-center" role="alert">
           <p className="display text-[1.4rem]">This surah is not on this device yet.</p>
@@ -137,72 +130,124 @@ export function QuranReader() {
         </div>
       )}
 
-      {verses && (
+      {!verses && !failed && <p className="mt-24 text-center text-ink-soft" role="status">Opening {c.name}…</p>}
+
+      {verses && v && (
         <>
-          {c.bismillahPre && <p lang="ar" dir="rtl" className="arabic mt-8 border-b border-line pb-6 !text-[2rem]">{bismillah}</p>}
-          <div className={c.bismillahPre ? "" : "mt-8 border-t border-line"}>
-            {verses.map((v) => (
-              <article key={v.n} id={`v-${v.n}`} data-n={v.n} className="scroll-mt-24 border-b border-line py-7">
-                <div className="mb-3 flex items-center justify-between">
-                  <button
-                    onClick={() => toggleMark(surah, v.n)}
-                    aria-pressed={marks.has(`${surah}:${v.n}`)}
-                    aria-label={`${marks.has(`${surah}:${v.n}`) ? "Remove bookmark from" : "Bookmark"} verse ${v.n}`}
-                    className={`flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-[0.95rem] tabular ${marks.has(`${surah}:${v.n}`) ? "border-[var(--accent)] text-accent" : "border-line text-ink-soft"}`}
-                  >
-                    <Bookmark filled={marks.has(`${surah}:${v.n}`)} /> {surah}:{v.n}
+          <p className="text-center text-[0.95rem] text-ink-soft tabular" aria-live="polite">
+            Juz {juzOf(surah, n)} · {left === 0 ? "last verse" : `${left} ${left === 1 ? "verse" : "verses"} left`}
+          </p>
+
+          <div className="relative mt-3">
+            <AnimatePresence initial={false} custom={dir} mode="popLayout">
+              <motion.section
+                key={`${surah}:${n}`}
+                custom={dir}
+                aria-label={`${c.name} verse ${n} of ${c.verses}`}
+                className="touch-pan-y rounded-[28px] border border-line bg-card text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]"
+                variants={{
+                  enter: (d: number) => ({ x: reduce ? 0 : d * 70, opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (d: number) => ({ x: reduce ? 0 : d * -90, opacity: 0, transition: { duration: reduce ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] } }),
+                }}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={spring}
+                drag="x"
+                dragDirectionLock
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.6}
+                onDragStart={() => (dragged.current = true)}
+                onDragEnd={onDragEnd}
+              >
+                <header className="grid grid-cols-[3rem_1fr_3rem] items-center gap-2 px-3 pt-4">
+                  <button onClick={() => setPanel("surah")} aria-label="Choose a surah" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden><path d="M4 7h16M4 12h16M4 17h10" /></svg>
                   </button>
-                  {seen.has(`${surah}:${v.n}`) && <span className="text-[0.85rem] text-ink-soft">Read today</span>}
+                  <button onClick={() => setPanel("verse")} aria-label={`Verse ${n} of ${c.verses}. Choose a verse`} className="min-h-12 rounded-2xl text-center">
+                    <span className="display block text-[1.3rem] leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
+                    <span className="block text-[0.95rem] text-card-soft tabular">{n}/{c.verses}</span>
+                  </button>
+                  <button
+                    onClick={() => toggleMark(surah, n)}
+                    aria-pressed={marked}
+                    aria-label={marked ? `Remove bookmark from verse ${n}` : `Bookmark verse ${n}`}
+                    className={`grid min-h-11 min-w-11 place-items-center rounded-full ${marked ? "text-accent" : "text-card-soft"}`}
+                  >
+                    <Bookmark size={24} filled={marked} />
+                  </button>
+                </header>
+
+                <div className="max-h-[46dvh] overflow-y-auto px-5 py-5">
+                  {n === 1 && c.bismillahPre && <p lang="ar" dir="rtl" className="arabic mb-2 border-b border-line pb-3 !text-[1.6rem] text-card-soft">{bismillah}</p>}
+                  <p lang="ar" dir="rtl" className="arabic arabic-read !text-center">
+                    {q.prefs.tajweed && v.tg ? <Coloured ar={v.ar.trim()} ranges={v.tg} lead={v.ar.length - v.ar.trimStart().length} /> : v.ar.trim()}
+                  </p>
                 </div>
-                <p lang="ar" dir="rtl" className="arabic arabic-read">{v.ar.trim()}</p>
-                {q.prefs.translit && <p className="mt-3 text-[1rem] italic leading-relaxed text-ink-soft">{v.tr}</p>}
-                {q.prefs.translation && <p className="mt-3 max-w-[65ch] text-[1.05rem] leading-relaxed">{v.en}</p>}
-              </article>
-            ))}
+
+                <footer className="flex items-center justify-between px-3 pb-3">
+                  <button onClick={share} aria-label={`Share verse ${n}`} className="grid min-h-11 min-w-11 place-items-center rounded-full bg-accent text-accent-ink">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M14 5l6 6-6 6M20 11H9a5 5 0 0 0-5 5v2" /></svg>
+                  </button>
+                  <span className="text-[0.85rem] text-card-soft">{seen.has(`${surah}:${n}`) ? "Read today" : ""}</span>
+                  <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-[1.05rem]">Aa</button>
+                </footer>
+              </motion.section>
+            </AnimatePresence>
           </div>
 
-          <nav aria-label="Next" className="mt-10 grid gap-3 text-center">
-            {c.id < 114 ? (
-              <Link href={readHref(c.id + 1)} className="grid min-h-16 place-items-center rounded-[28px] bg-accent px-5 font-semibold text-accent-ink no-underline">
-                Next: {chapter(c.id + 1).name}
-              </Link>
-            ) : (
-              <Link href="/quran" className="grid min-h-16 place-items-center rounded-[28px] bg-accent px-5 font-semibold text-accent-ink no-underline">You reached the end. All surahs</Link>
-            )}
-            {c.id > 1 && <Link href={readHref(c.id - 1)} className="min-h-11 content-center underline">Previous: {chapter(c.id - 1).name}</Link>}
-          </nav>
-          <p className="mt-10 text-center text-[0.85rem] text-ink-soft">
-            Arabic: Quran.com (Uthmani). Translation: Saheeh International. Transliteration: Quran.com. <Link href="/sources" className="underline">Sources</Link>
-          </p>
+          <div className="mt-6 text-center">
+            {q.prefs.translit && <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug">{v.tr}</p>}
+            {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-[1.02rem]" : "text-[1.2rem] text-ink"}`}>{v.en}</p>}
+          </div>
         </>
       )}
 
-      {counted && (
+      {note && (
         <p role="status" className="fixed inset-x-0 top-[calc(env(safe-area-inset-top)+4.5rem)] z-30 mx-auto w-fit rounded-full bg-accent px-4 py-2 text-[0.95rem] font-semibold text-accent-ink shadow-[0_8px_24px_-8px_rgb(0_0_0/0.4)]">
-          Today counted
+          {note}
         </p>
       )}
 
-      {/* Reader dock: thumb reach on phones, safe-area aware in the home-screen app. */}
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-20 flex justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-        <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-line bg-card p-1.5 text-card-ink shadow-[0_12px_32px_-12px_rgb(0_0_0/0.45)]">
-          <button onClick={() => setPanel("surah")} className="min-h-12 max-w-[9.5rem] truncate rounded-full px-4 font-semibold">{c.name}</button>
-          <span aria-hidden className="h-6 w-px bg-[var(--line)]" />
-          <button onClick={() => setPanel("verse")} className="min-h-12 rounded-full px-4 tabular" aria-label={`Verse ${current} of ${c.verses}. Choose a verse`}>
-            Verse {current}<span className="text-card-soft">/{c.verses}</span>
-          </button>
-          <span aria-hidden className="h-6 w-px bg-[var(--line)]" />
-          <button onClick={() => setPanel("settings")} className="min-h-12 rounded-full px-4 text-[1.05rem]" aria-label="Reading settings">Aa</button>
+      {/* Actions stay under the thumb and above the home indicator. */}
+      {verses && (
+        <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
+          <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
+            <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 place-items-center rounded-full border border-line bg-card text-card-ink disabled:opacity-40">
+              <Chevron className="rotate-180" size={24} />
+            </button>
+            <button onClick={done} className="min-h-14 rounded-full bg-accent text-[1.1rem] font-semibold text-accent-ink transition-transform active:scale-[0.98]">I&apos;m Done</button>
+            <button onClick={() => go(1)} disabled={n === c.verses && surah === 114} aria-label="Next verse" className="grid min-h-14 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
+              <Chevron size={24} />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       <Sheet open={panel === "surah"} onOpenChange={(o) => setPanel(o ? "surah" : null)} title="Choose a surah">
         <div className="pt-1"><ChapterList onPick={() => setPanel(null)} /></div>
       </Sheet>
-      <VerseSheet open={panel === "verse"} onOpenChange={(o) => setPanel(o ? "verse" : null)} surah={surah} count={c.verses} current={current} seen={seen} marks={marks} onPick={jump} />
+      <VerseSheet open={panel === "verse"} onOpenChange={(o) => setPanel(o ? "verse" : null)} surah={surah} count={c.verses} current={n} seen={seen} marks={marks} onPick={jump} />
       <SettingsSheet open={panel === "settings"} onOpenChange={(o) => setPanel(o ? "settings" : null)} surah={surah} />
     </div>
   );
+}
+
+/** The exact Arabic, cut into runs; runs inside a range get a colour class. No letter is added, removed or changed. */
+function Coloured({ ar, ranges, lead }: { ar: string; ranges: [number, number, number][]; lead: number }) {
+  const out: React.ReactNode[] = [];
+  let at = 0;
+  ranges.forEach(([from, to, cls], i) => {
+    const a = Math.max(0, from - lead);
+    const b = Math.max(0, to - lead);
+    if (b <= at) return;
+    if (a > at) out.push(ar.slice(at, a));
+    out.push(<span key={i} className={`tj-${TAJWEED[cls][0]}`}>{ar.slice(Math.max(a, at), b)}</span>);
+    at = b;
+  });
+  if (at < ar.length) out.push(ar.slice(at));
+  return <>{out}</>;
 }
 
 function VerseSheet({
@@ -255,8 +300,9 @@ function SettingsSheet({ open, onOpenChange, surah }: { open: boolean; onOpenCha
   );
   return (
     <Sheet open={open} onOpenChange={onOpenChange} title="Reading" description="Saved on this device only.">
-      <Row label="Translation (Saheeh International)" on={q.prefs.translation} set={(v) => setPrefs({ translation: v })} />
       <Row label="Transliteration" on={q.prefs.translit} set={(v) => setPrefs({ translit: v })} />
+      <Row label="Translation (Saheeh International)" on={q.prefs.translation} set={(v) => setPrefs({ translation: v })} />
+      <Row label="Tajweed colours" on={q.prefs.tajweed} set={(v) => setPrefs({ tajweed: v })} />
       <div className="flex min-h-16 items-center justify-between border-b border-line">
         <span>Arabic size</span>
         <ArabicSizeControl />
@@ -268,7 +314,21 @@ function SettingsSheet({ open, onOpenChange, surah }: { open: boolean; onOpenCha
       >
         {saved ? <CloudCheck /> : <CloudDown />} {saved ? "Saved offline. Remove" : "Save this surah for offline"}
       </button>
+
+      {q.prefs.tajweed && (
+        <section className="mt-7" aria-labelledby="tj-legend">
+          <h3 id="tj-legend" className="text-[0.95rem] font-semibold">Colours</h3>
+          <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[0.92rem]">
+            {TAJWEED.map(([cls, label]) => (
+              <li key={cls} className="flex items-center gap-2">
+                <span className={`tj-${cls} arabic !text-[1.3rem] !leading-none`} aria-hidden>ـــ</span>
+                <span>{label}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-[0.85rem] text-card-soft">Colours come from Quran.com&apos;s tajweed marking. A few verses show without colour where it could not be matched to the text exactly.</p>
+        </section>
+      )}
     </Sheet>
   );
 }
-

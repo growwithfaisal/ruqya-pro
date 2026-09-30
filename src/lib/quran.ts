@@ -5,7 +5,23 @@ export interface Chapter {
 }
 export interface JuzRange { surah: number; from: number; to: number }
 export interface Juz { n: number; ranges: JuzRange[] }
-export interface Verse { n: number; ar: string; tr: string; en: string }
+/** tg: [start, end, class index] colour ranges over `ar` (absent where the source could not be aligned letter for letter). */
+export interface Verse { n: number; ar: string; tg?: [number, number, number][]; tr: string; en: string }
+
+/** Order matches scripts/import-quran.mts. Names only; the colours live in globals.css. */
+export const TAJWEED = [
+  ["ham_wasl", "Hamzat wasl"], ["slnt", "Silent letter"], ["laam_shamsiyah", "Laam shamsiyah"],
+  ["madda_normal", "Madd, natural"], ["madda_permissible", "Madd, permissible"], ["madda_necessary", "Madd, necessary"],
+  ["madda_obligatory", "Madd, obligatory"], ["qalaqah", "Qalqalah"], ["ikhafa_shafawi", "Ikhfa shafawi"],
+  ["ikhafa", "Ikhfa"], ["idgham_shafawi", "Idgham shafawi"], ["iqlab", "Iqlab"],
+  ["idgham_ghunnah", "Idgham with ghunnah"], ["idgham_wo_ghunnah", "Idgham without ghunnah"], ["ghunnah", "Ghunnah"],
+] as const;
+
+/** The juz a verse falls in. */
+export function juzOf(surah: number, verse: number) {
+  for (const j of juz) if (j.ranges.some((r) => r.surah === surah && verse >= r.from && verse <= r.to)) return j.n;
+  return 1;
+}
 
 export const chapters = meta.chapters as Chapter[];
 export const juz = meta.juz as Juz[];
