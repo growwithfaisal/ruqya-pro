@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Wordmark } from "./Glyphs";
 
@@ -16,12 +17,24 @@ const NAV = [
 
 export function Header() {
   const path = usePathname();
+  const router = useRouter();
+  // A home-screen app has no browser back button, so offer one.
+  const [standalone, setStandalone] = useState(false);
+  useEffect(() => {
+    const nav = navigator as Navigator & { standalone?: boolean };
+    setStandalone(window.matchMedia("(display-mode: standalone)").matches || nav.standalone === true);
+  }, []);
   const active = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line" style={{ background: "var(--sky-top)" }}>
+    <header className="app-header sticky top-0 z-30 border-b border-line" style={{ background: "var(--sky-top)" }}>
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-8">
-        <Link href="/" className="flex items-center gap-2.5 no-underline" aria-label="RuqyaPro home">
+        {standalone && path !== "/" && (
+          <button onClick={() => router.back()} aria-label="Back" className="-ml-2 mr-1 grid min-h-11 min-w-11 place-items-center rounded-full">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+        )}
+        <Link href="/" className="mr-auto flex items-center gap-2.5 no-underline" aria-label="RuqyaPro home">
           <Wordmark className="text-accent" />
           <span className="display text-[1.35rem] leading-none">RuqyaPro</span>
         </Link>

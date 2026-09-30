@@ -36,6 +36,6 @@ export const Check = ({ className, size = 20 }: P) => (
 );
 export const Wordmark = ({ className, size = 26 }: P) => (
   <svg {...base(size)} className={className} strokeWidth={1.6}>
-    <path d="M12 2.5l2.6 6.3 6.6-1.6-4 5.3 4 5.3-6.6-1.6L12 21.5l-2.6-6.3-6.6 1.6 4-5.3-4-5.3 6.6 1.6z" />
+    <path d="M12.00 2.40 L14.81 5.21 L18.79 5.21 L18.79 9.19 L21.60 12.00 L18.79 14.81 L18.79 18.79 L14.81 18.79 L12.00 21.60 L9.19 18.79 L5.21 18.79 L5.21 14.81 L2.40 12.00 L5.21 9.19 L5.21 5.21 L9.19 5.21 Z" />
   </svg>
 );

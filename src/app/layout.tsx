@@ -4,12 +4,17 @@ import "./globals.css";
 import { SkyBackdrop } from "@/components/SkyBackdrop";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PwaRegister } from "@/components/PwaRegister";
 
 const display = Hedvig_Letters_Serif({ variable: "--font-display", subsets: ["latin"], weight: "400" });
 const ui = Schibsted_Grotesk({ variable: "--font-ui", subsets: ["latin"] });
 const arabic = Amiri({ variable: "--font-arabic", subsets: ["arabic", "latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
+  applicationName: "RuqyaPro",
+  appleWebApp: { capable: true, title: "RuqyaPro", statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
+  icons: { icon: [{ url: "/icons/192", sizes: "192x192", type: "image/png" }], apple: [{ url: "/icons/180", sizes: "180x180", type: "image/png" }] },
   title: { default: "RuqyaPro", template: "%s · RuqyaPro" },
   description:
     "A calm guide to authentic ruqyah: recitations with a source you can open, red flags for scammers, and wellness alongside medical care.",
@@ -18,10 +23,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#dfeef7" },
-    { media: "(prefers-color-scheme: dark)", color: "#141a36" },
-  ],
+  viewportFit: "cover", // let the sky run under the notch and home indicator when opened from the home screen
 };
 
 /**
@@ -33,6 +35,8 @@ var q=new URLSearchParams(location.search).get('sky');
 var d=new Date(),h=d.getHours()+d.getMinutes()/60;
 var s=(q&&/^(dawn|day|dusk|night)$/.test(q))?q:(h>=5&&h<8?'dawn':h>=8&&h<16.5?'day':h>=16.5&&h<19.5?'dusk':'night');
 document.documentElement.dataset.sky=s;
+var tc={dawn:'#c6bff8',day:'#b4e7fc',dusk:'#411c49',night:'#060b22'}[s];
+var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',tc);
 var a=parseFloat(localStorage.getItem('rp:arabic')||'1');
 if(a>=0.8&&a<=1.8)document.documentElement.style.setProperty('--arabic-scale',String(a));
 }catch(e){}})();`;
@@ -41,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" data-sky="day" suppressHydrationWarning className={`${display.variable} ${ui.variable} ${arabic.variable}`}>
       <head>
+        <meta name="theme-color" content="#b4e7fc" />
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
       <body className="flex flex-col">
@@ -56,6 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
+        <PwaRegister />
       </body>
     </html>
   );
