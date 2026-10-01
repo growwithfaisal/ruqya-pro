@@ -12,6 +12,7 @@ const NAV = [
   { href: "/recitations", label: "Recitations" },
   { href: "/sources", label: "Sources" },
   { href: "/search", label: "Search" },
+  { href: "/settings", label: "Settings" },
 ];
 
 export function Header() {

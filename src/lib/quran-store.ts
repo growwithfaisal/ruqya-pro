@@ -153,6 +153,15 @@ export function toggleMark(surah: number, verse: number) {
   write("marks", marks.includes(key) ? marks.filter((k) => k !== key) : [...marks, key]);
 }
 
+/** Record surahs as saved (after the offline download has put them in Cache Storage). */
+export function markSaved(ids: number[]) {
+  writeSaved([...new Set([...state().offline, ...ids])].sort((a, b) => a - b));
+}
+/** Forget every saved surah. */
+export function clearSaved() {
+  writeSaved([]);
+}
+
 export function setPrefs(p: Partial<Prefs>) {
   write("prefs", { ...state().prefs, ...p });
 }

@@ -8,6 +8,9 @@ const ASSETS = `rp-assets-${BUILD}`;
 // Saved Qur'an surahs. NOT tied to the build id, so a deploy never wipes what a reader saved.
 // Bump together with DATA_VERSION in src/lib/quran.ts if the Qur'an files ever change.
 const QURAN = "rp-quran-v5";
+// "Download everything" copy of the app (pages and assets), made from the Settings page. It is named by build, and the
+// page deletes the older ones once a fresh copy is complete, so a deploy never leaves a reader without an offline copy.
+const OFFLINE_PREFIX = "rp-offline-";
 
 self.addEventListener("install", () => self.skipWaiting());
 
@@ -15,7 +18,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
-      await Promise.all(keys.filter((k) => k.startsWith("rp-") && k !== PAGES && k !== ASSETS && k !== QURAN).map((k) => caches.delete(k)));
+      await Promise.all(keys.filter((k) => k.startsWith("rp-") && k !== PAGES && k !== ASSETS && k !== QURAN && !k.startsWith(OFFLINE_PREFIX)).map((k) => caches.delete(k)));
       await self.clients.claim();
     })(),
   );
@@ -37,13 +40,13 @@ self.addEventListener("fetch", (event) => {
 
   if (url.pathname.startsWith("/_next/static/") || url.pathname.startsWith("/icons/")) {
     event.respondWith(
-      caches.open(ASSETS).then(async (cache) => {
-        const hit = await cache.match(req);
+      (async () => {
+        const hit = await caches.match(req); // any cache: visited assets or the offline download
         if (hit) return hit;
         const res = await fetch(req);
-        if (res.ok) cache.put(req, res.clone());
+        if (res.ok) (await caches.open(ASSETS)).put(req, res.clone());
         return res;
-      }),
+      })(),
     );
     return;
   }
