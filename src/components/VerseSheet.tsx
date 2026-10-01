@@ -6,14 +6,17 @@ import { Sheet } from "./Sheet";
 
 /** Pick a verse number in a surah. Used by the reader and by the surah list ("start from verse..."). */
 export function VerseSheet({
-  open, onOpenChange, surah, count, current, seen, marks, onPick,
-}: { open: boolean; onOpenChange: (o: boolean) => void; surah: number; count: number; current: number; seen: Set<string>; marks: Set<string>; onPick: (n: number) => void }) {
+  open, onOpenChange, surah, count, current, seen, marks, onPick, resume,
+}: { resume?: number; open: boolean; onOpenChange: (o: boolean) => void; surah: number; count: number; current: number; seen: Set<string>; marks: Set<string>; onPick: (n: number) => void }) {
   const [term, setTerm] = useState("");
   const all = useMemo(() => Array.from({ length: count }, (_, i) => i + 1), [count]);
   const list = term.trim() ? all.filter((n) => String(n).includes(term.trim())) : all;
   return (
     <Sheet open={open} onOpenChange={(o) => { onOpenChange(o); if (!o) setTerm(""); }} title="Select verse" description={`${chapter(surah).name} has ${count} verses.`}>
-      <label className="relative mt-1 block">
+      {resume && (
+        <button onClick={() => onPick(resume)} className="btn btn-primary mt-1 w-full">Continue from verse {resume}</button>
+      )}
+      <label className={`relative block ${resume ? "mt-3" : "mt-1"}`}>
         <span className="sr-only">Search verse number</span>
         <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-card-soft" />
         <input inputMode="numeric" value={term} onChange={(e) => setTerm(e.target.value.replace(/\D/g, ""))} placeholder="Verse number" className="field pl-11 placeholder:text-card-soft" />

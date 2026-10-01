@@ -41,18 +41,16 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
     const saved = off.offline.has(c.id);
     return (
       <li key={c.id} className={`flex items-stretch rounded-[20px] border ${here ? "border-[var(--accent)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)]" : "border-line"}`}>
-        <Link href={readHref(c.id, here ? q.last!.verse : 1)} onClick={onPick} className="flex min-h-[4.5rem] flex-1 items-center gap-3 px-4 py-3 no-underline">
-          <span className="grid flex-1">
-            <span className="display text-title leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
-            <span className="text-meta text-ink-soft">{c.meaning}{here && q.last!.verse > 1 ? ` · resume at verse ${q.last!.verse}` : ""}</span>
-          </span>
-        </Link>
         <button
           onClick={() => setPick(c)}
-          aria-label={`${c.name}: choose which of its ${c.verses} verses to start from`}
-          className="my-2 mr-1 flex min-h-11 min-w-[7.6rem] shrink-0 items-center justify-between gap-1 self-center rounded-full border border-line px-3 text-meta text-ink-soft tabular"
+          aria-label={`${c.name}, ${c.verses} verses. Choose where to start`}
+          className="flex min-h-[4.5rem] flex-1 items-center gap-3 px-4 py-3 text-left"
         >
-          {c.verses} verses <Chevron size={14} className="rotate-90" />
+          <span className="grid flex-1">
+            <span className="display text-title leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
+            <span className="text-meta text-ink-soft">{c.meaning}{here && q.last!.verse > 1 ? ` · you were at verse ${q.last!.verse}` : ""}</span>
+          </span>
+          <span className="text-meta text-ink-soft tabular">{c.verses} verses</span>
         </button>
         <button
           onClick={() => toggleSave(c)}
@@ -74,6 +72,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
         surah={pick?.id ?? 1}
         count={pick?.verses ?? 7}
         current={pick && q.last?.surah === pick.id ? q.last.verse : 0}
+        resume={pick && q.last?.surah === pick.id && q.last.verse > 1 ? q.last.verse : undefined}
         seen={seen}
         marks={marks}
         onPick={(n) => { const id = pick!.id; setPick(null); onPick?.(); router.push(readHref(id, n)); }}
