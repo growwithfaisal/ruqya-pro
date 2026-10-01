@@ -109,7 +109,10 @@
 }
 
 html {
-  background: var(--sky-bottom);
+  /* iOS paints a solid status bar from this colour when a home-screen app was installed without the translucent bar
+     (every install made before the 1 Oct 2026 update, and any iOS that ignores it). It matches the header, so the bar
+     reads as part of the page instead of a different coloured strip. */
+  background: var(--sky-top);
   -webkit-text-size-adjust: 100%;
 }
 
