@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { PwaRegister } from "@/components/PwaRegister";
 import { SkyClock } from "@/components/SkyClock";
 import { OfflineSync } from "@/components/OfflineSync";
+import { SPLASH_SIZES } from "@/lib/splash";
 
 const display = Hedvig_Letters_Serif({ variable: "--font-display", subsets: ["latin"], weight: "400" });
 const ui = Schibsted_Grotesk({ variable: "--font-ui", subsets: ["latin"] });
@@ -14,7 +15,18 @@ const arabic = Amiri({ variable: "--font-arabic", subsets: ["arabic", "latin"], 
 
 export const metadata: Metadata = {
   applicationName: "RuqyaPro",
-  appleWebApp: { capable: true, title: "RuqyaPro", statusBarStyle: "black-translucent" },
+  appleWebApp: {
+    capable: true,
+    title: "RuqyaPro",
+    statusBarStyle: "black-translucent",
+    // Launch screens per device size, so the app opens on its own sky instead of a blank screen.
+    startupImage: SPLASH_SIZES.map((s) => ({
+      url: `/splash/${s.w}x${s.h}`,
+      media: `(device-width: ${s.dw}px) and (device-height: ${s.dh}px) and (-webkit-device-pixel-ratio: ${s.r}) and (orientation: portrait)`,
+    })),
+  },
+  // Next only writes the newer mobile-web-app-capable; iOS reads the apple- name to run edge to edge from the home screen.
+  other: { "apple-mobile-web-app-capable": "yes" },
   formatDetection: { telephone: false },
   icons: { icon: [{ url: "/icons/192", sizes: "192x192", type: "image/png" }], apple: [{ url: "/icons/180", sizes: "180x180", type: "image/png" }] },
   title: { default: "RuqyaPro", template: "%s · RuqyaPro" },
@@ -61,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           FORM: sky-clock, brief-pinned (owner's brief overrides the dealt roll; seed 1e482c8c was dealt an oscilloscope and set aside).
           FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
         */}
+        <div className="status-scrim" aria-hidden />
         <SkyBackdrop />
         <Header />
         <main id="main" className="flex-1">{children}</main>

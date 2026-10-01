@@ -9,7 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/?source=homescreen",
     scope: "/",
     display: "standalone",
-    orientation: "portrait",
+    display_override: ["standalone", "minimal-ui"],
+    orientation: "any", // tablets and landscape phones are laid out too
     background_color: "#b4e7fc",
     theme_color: "#b4e7fc",
     categories: ["lifestyle", "education"],
