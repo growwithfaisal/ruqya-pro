@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BackupPanel } from "@/components/BackupPanel";
+import { PrayerSettings } from "@/components/PrayerSettings";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { INTENTS, SETS, entries } from "@/lib/entries";
 
@@ -21,6 +22,9 @@ export default function Settings() {
       <h1 className="display text-[clamp(2rem,6vw,3rem)] leading-tight">Settings</h1>
       <div className="mt-8">
         <OfflinePanel pages={pages()} />
+      </div>
+      <div className="mt-12">
+        <PrayerSettings />
       </div>
       <div className="mt-12">
         <BackupPanel />

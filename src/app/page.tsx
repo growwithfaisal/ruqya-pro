@@ -1,4 +1,5 @@
 import { SkyHero } from "@/components/SkyHero";
+import { PrayerTimes } from "@/components/PrayerTimes";
 import { AyahOfTheDay } from "@/components/AyahOfTheDay";
 import { IntentList } from "@/components/IntentList";
 import { Disclaimer } from "@/components/Disclaimer";
@@ -13,6 +14,7 @@ export default function Home() {
     <>
       <SkyHero setIds={setIds} />
       <IntentList />
+      <PrayerTimes />
       <AyahOfTheDay />
       <section aria-label="Medical note" className="mx-auto max-w-2xl px-4 pt-10 md:px-8">
         <Disclaimer className="text-center" />

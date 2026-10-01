@@ -168,3 +168,7 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 - Don't introduce a fifth palette; a new mood is a new sky, not a new colour.
 
 Not canonized: the persistent bottom "Draft" notices and the placeholder pages are build scaffolding, not system rules.
+
+## Prayer times card (Home)
+
+Sits between the topic rows and the Ayah of the day, same width as the ayah card (`max-w-2xl`), `.glass` at the 28px radius. Content: current prayer in the display face with its time right-aligned in tabular figures, a 6px progress track in `--accent` (elapsed share of the gap to the next prayer), and one line of "Next in 2 h 14 min". No heading is drawn (an `sr-only` h2 names it). Before a location exists it shows one sentence about privacy and a full-width accent button. Updates every 20 s and on focus/visibility.
