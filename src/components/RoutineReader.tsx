@@ -9,7 +9,7 @@ import { bismillah, chapter, loadSurah, readHref, tajweedForEntry, type Verse } 
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { doneKey, useDone } from "@/lib/progress";
 import { ArabicSizeControl } from "./ArabicSizeControl";
-import { CitationBadge, DraftNotice } from "./CitationBadge";
+import { CitationBadge } from "./CitationBadge";
 import { Coloured } from "./Coloured";
 import { Translit } from "./Translit";
 import { Check, Chevron } from "./Glyphs";
@@ -242,7 +242,6 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
           </div>
         )}
         {e.practice && (!verse || cur.vi === 0) && <p className="mx-auto mt-4 max-w-[52ch] text-[0.95rem] text-ink-soft">{e.practice}</p>}
-        <DraftNotice entry={e} className="mx-auto mt-4 max-w-[52ch]" />
         <p className="mt-4 text-[0.9rem] text-ink-soft">
           <Link href={`/recitations/${e.slug}`} className="underline">Read in full</Link> · {citation(e)}
         </p>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { bySlug, citation, entries } from "@/lib/entries";
 import { Translit } from "@/components/Translit";
-import { CitationBadge, DraftNotice, GradeBadge } from "@/components/CitationBadge";
+import { CitationBadge, GradeBadge } from "@/components/CitationBadge";
 
 export function generateStaticParams() {
   return entries.map((e) => ({ slug: e.slug }));
@@ -31,7 +31,6 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
         <span className="text-accent"><GradeBadge entry={e} /></span>
         <CitationBadge entry={e} tone="sky" />
       </div>
-      <DraftNotice entry={e} className="mt-4" />
 
       <div className="mt-8 rounded-[28px] border border-line bg-card px-5 py-8 text-card-ink">
         {e.arabic.split("\n").map((l, k) => (

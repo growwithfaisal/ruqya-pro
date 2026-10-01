@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Entry } from "@/lib/types";
 import { Translit } from "./Translit";
-import { CitationBadge, DraftNotice } from "./CitationBadge";
+import { CitationBadge } from "./CitationBadge";
 import { Chevron } from "./Glyphs";
 
 /** One recitation as an expandable row: closed it is a title and a reference, open it is the full text. */
@@ -16,7 +16,6 @@ export function EntryDisclosure({ entry }: { entry: Entry }) {
         <Chevron className="shrink-0 text-ink-soft transition-transform duration-300 group-open:rotate-90" />
       </summary>
       <div className="pb-7">
-        <DraftNotice entry={entry} className="mb-4" />
         <div className="rounded-[28px] border border-line bg-card px-5 py-6 text-card-ink">
           {entry.arabic.split("\n").map((l, i) => (
             <p key={i} lang="ar" dir="rtl" className="arabic">{l.trim()}</p>

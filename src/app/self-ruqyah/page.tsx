@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import method from "../../../data/method.json";
-import { ayatList, entries, namedVerses, SHOW_DRAFTS } from "@/lib/entries";
+import { ayatList, entries, namedVerses } from "@/lib/entries";
 import { EntryDisclosure } from "@/components/EntryDisclosure";
 import { Disclaimer } from "@/components/Disclaimer";
 
@@ -36,12 +36,6 @@ export default function SelfRuqyah() {
             </li>
           ))}
         </ul>
-        {SHOW_DRAFTS && (
-          <p className="mt-6 max-w-[62ch] rounded-lg border border-dashed border-[var(--draft)] px-3 py-2 text-[0.9rem] text-[var(--draft)]">
-            Preview: preparation (wudu, tawbah, removing amulets), the step-through method and ruqyah for children are still to be written from
-            &quot;A Comprehensive Ruqyah Guide&quot;, which has not been supplied. Nothing was drafted from memory.
-          </p>
-        )}
       </section>
 
       {ayatList.length > 0 && (

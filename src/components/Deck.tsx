@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-
 import type { Entry, Intent, TimeTag } from "@/lib/types";
 import { INTENTS, SETS } from "@/lib/entries";
 import { Translit } from "./Translit";
-import { CitationBadge, DraftNotice, GradeBadge } from "./CitationBadge";
+import { CitationBadge, GradeBadge } from "./CitationBadge";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { Chevron } from "./Glyphs";
 
@@ -204,7 +204,6 @@ function Card({
           <div className="mt-4 text-center text-[1.02rem] leading-relaxed">
             {enLines.map((l, i) => <p key={i}>{l}</p>)}
           </div>
-          <div className="mt-4"><DraftNotice entry={entry} /></div>
         </div>
         <div className="grid gap-2 border-t border-line px-4 py-3">
           <div className="flex items-center justify-between gap-2">
@@ -232,7 +231,6 @@ function Card({
             </div>
             <div><dt className="text-[0.85rem] text-card-soft">Graded by</dt><dd>{entry.grader || "Not yet recorded"}</dd></div>
           </dl>
-          <div className="mt-4"><DraftNotice entry={entry} /></div>
         </div>
         <div className="grid gap-2 border-t border-line px-4 py-3">
           <div className="flex items-center justify-between gap-2">

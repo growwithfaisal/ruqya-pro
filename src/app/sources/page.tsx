@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { citation, entries, SHOW_DRAFTS } from "@/lib/entries";
-import { DraftNotice, GradeBadge } from "@/components/CitationBadge";
+import { GradeBadge } from "@/components/CitationBadge";
 
 export const metadata: Metadata = { title: "Sources" };
 
@@ -22,7 +22,6 @@ export default function Sources() {
               <h2 className="display text-[1.5rem] leading-tight">{e.title}</h2>
               <span className="text-accent"><GradeBadge entry={e} /></span>
             </div>
-            <DraftNotice entry={e} className="mt-3" />
             <dl className="mt-4 grid grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[0.95rem]">
               <dt className="text-ink-soft">Cited as</dt><dd>{citation(e)}</dd>
               <dt className="text-ink-soft">Chapter</dt><dd>{e.source.chapter || "Not yet recorded"}</dd>

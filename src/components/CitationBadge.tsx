@@ -13,15 +13,6 @@ export function GradeBadge({ entry }: { entry: Entry }) {
   );
 }
 
-export function DraftNotice({ entry, className = "" }: { entry: Entry; className?: string }) {
-  if (entry.verified) return null;
-  return (
-    <p className={`rounded-lg border border-dashed border-[var(--draft)] px-3 py-2 text-[0.85rem] text-[var(--draft)] ${className}`}>
-      Draft: awaiting owner verification. Not visible on the live site.
-    </p>
-  );
-}
-
 /** The citation badge. Click opens the slide-over; no page navigation. */
 export function CitationBadge({ entry, tone = "card" }: { entry: Entry; tone?: "card" | "sky" }) {
   return (
@@ -52,8 +43,6 @@ export function CitationBadge({ entry, tone = "card" }: { entry: Entry; tone?: "
           </div>
 
           <div className="overflow-y-auto px-6 pb-8">
-            <DraftNotice entry={entry} className="mb-5" />
-
             <section aria-labelledby={`arabic-${entry.id}`}>
               <h3 id={`arabic-${entry.id}`} className="sr-only">Arabic text</h3>
               <div className="rounded-2xl border border-line px-4 py-3">
