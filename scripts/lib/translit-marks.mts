@@ -78,7 +78,7 @@ const FATHA = 0x64e, DAMMA = 0x64f, KASRA = 0x650, FATHATAN = 0x64b, DAMMATAN = 
 const DAGGER = 0x670, MADDAH = 0x653, WASL = 0x671;
 const isMarkCp = (o: number) => (o >= 0x64b && o <= 0x65f) || o === 0x670 || (o >= 0x6d6 && o <= 0x6ed);
 
-interface VEvent { v: "a" | "i" | "u"; long: boolean; alif: boolean }
+interface VEvent { v: "a" | "i" | "u"; long: boolean; alif: boolean; wasl?: boolean; initial?: boolean }
 
 function arabicEvents(word: string): VEvent[] | null {
   // units: a letter and the marks that follow it
@@ -107,7 +107,7 @@ function arabicEvents(word: string): VEvent[] | null {
     const prev = ev[ev.length - 1];
     const prevUnit = units[k - 1];
     const own = vowelOf(marks);
-    if (o === WASL) { ev.push({ v: "a", long: false, alif: false }); continue; }
+    if (o === WASL) { ev.push({ v: "a", long: false, alif: false, wasl: true, initial: k === 0 }); continue; }
     if (o === 0x622) { ev.push({ v: "a", long: true, alif: true }); continue; } // آ
     const maddLetter = o === 0x627 || o === 0x648 || o === 0x64a || o === 0x649;
     if (maddLetter && !own && !marks.has(0x651) && !marks.has(0x652) && !marks.has(0x6e1)) {
@@ -206,4 +206,61 @@ export function underlineTranslit(ar: string, tr: string): [number, number][] {
     else merged.push([r[0], r[1]]);
   }
   return merged;
+}
+
+
+/* ---------- Silent letters ----------
+   Two kinds, both from the Arabic text itself: the hamzat wasl (the alif of "al-", "ibn" and so on), which is not said
+   when the word is joined to the one before it, and the lam of "al-" before a sun letter, which is never said (as-samawati).
+   The first word of a verse, and a word after a waqf sign, is said from its alif, so it is left plain. */
+const SUN = new Set(["ت", "ث", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ن"]);
+const WAQF = /[ۖ-ۜ]/;
+
+function silentLamAt(aw: string): boolean {
+  const chars = [...aw];
+  let k = chars.findIndex((c) => c === "ٱ");
+  if (k < 0) return false;
+  // ٱ then a bare ل (no vowel, no sukun) then a sun letter that carries a shadda
+  let j = k + 1;
+  while (j < chars.length && isMarkCp(CP(chars[j]))) j++;
+  if (chars[j] !== "ل") return false;
+  let m = j + 1, bare = true;
+  while (m < chars.length && isMarkCp(CP(chars[m]))) { if (CP(chars[m]) !== 0x640) bare = false; m++; }
+  if (!bare || !SUN.has(chars[m])) return false;
+  let n = m + 1, shadda = false;
+  while (n < chars.length && isMarkCp(CP(chars[n]))) { if (CP(chars[n]) === SHADDA) shadda = true; n++; }
+  return shadda;
+}
+
+/** [start, end) ranges over `tr` that are not said. Words that cannot be matched are left plain. */
+export function silentTranslit(ar: string, tr: string): [number, number][] {
+  const raw = ar.split(/\s+/).filter(Boolean);
+  const words: { text: string; connected: boolean }[] = [];
+  let stop = true;
+  for (const tok of raw) {
+    if ([...tok].some((c) => /[ء-يٱ]/.test(c))) {
+      words.push({ text: tok, connected: !stop });
+      stop = WAQF.test(tok);
+    } else stop = true; // a waqf sign standing alone
+  }
+  const lWords: { text: string; at: number }[] = [];
+  for (const m of tr.matchAll(/\S+/g)) lWords.push({ text: m[0], at: m.index! });
+  if (words.length !== lWords.length) return [];
+
+  const out: [number, number][] = [];
+  words.forEach((w, wi) => {
+    const { text, at } = lWords[wi];
+    const ev = arabicEvents(w.text);
+    if (ev?.length) {
+      const hit = matchVowels(ev, latinVowelChars(text));
+      if (hit) ev.forEach((e, k) => { if (e.wasl && (!e.initial || w.connected)) out.push([at + hit[k].start, at + hit[k].end]); });
+    }
+    if (silentLamAt(w.text)) {
+      // the Latin "l" that sits right before a doubled letter ("al" + "ss")
+      const toks = latinTokens(text);
+      const cand = toks.filter((t, i) => t.t === "l" && toks[i + 1] && toks[i + 2] && toks[i + 1].t === toks[i + 2].t && toks[i + 1].start === t.end);
+      if (cand.length === 1) out.push([at + cand[0].start, at + cand[0].end]);
+    }
+  });
+  return out.sort((a, b) => a[0] - b[0]);
 }

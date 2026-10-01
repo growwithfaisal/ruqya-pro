@@ -7,7 +7,7 @@
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { underlineTranslit } from "./lib/translit-marks.mjs";
+import { silentTranslit, underlineTranslit } from "./lib/translit-marks.mjs";
 
 const ROOT = join(import.meta.dirname, "..");
 const API = "https://api.quran.com/api/v4";
@@ -15,7 +15,7 @@ const TR_EN = 20; // Saheeh International
 // Transliteration: Tanzil's original text (word-spaced), as packaged by risan/quran-json 3.1.2. Quran.com's resource 57 joins words and drops letters.
 const TANZIL_TRANSLIT = "https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/quran_transliteration.json";
 const SECOND = "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quranuthmanihaf.min.json"; // King Fahd Complex, Uthmani Hafs
-const DATA_VERSION = "v4"; // v2 added tajweed colour ranges; v3 switched transliteration to Tanzil's word-spaced text; v4 adds underline ranges (tu) for letters with more than one sound. Bump the cache name in public/sw.js with it.
+const DATA_VERSION = "v5"; // v2 added tajweed colour ranges; v3 switched transliteration to Tanzil's word-spaced text; v4 added underline ranges (tu); v5 adds silent-letter ranges (ts). Bump the cache name in public/sw.js with it.
 const RETRIEVED = new Date().toISOString().slice(0, 10);
 
 const strip = (s: string) => s.replace(/<sup[^>]*>.*?<\/sup>/g, "").replace(/<[^>]+>/g, "").trim();
@@ -150,7 +150,8 @@ async function surah(c: Chapter) {
     if (!tg) noColour.push(v.verse_key);
     const trText = tr[i].transliteration.trim();
     const tu = underlineTranslit(v.text_uthmani, trText);
-    return { n, ar: v.text_uthmani, ...(tg && tg.length ? { tg } : {}), tr: trText, ...(tu.length ? { tu } : {}), en: strip(en.translations[i].text) };
+    const ts = silentTranslit(v.text_uthmani, trText);
+    return { n, ar: v.text_uthmani, ...(tg && tg.length ? { tg } : {}), tr: trText, ...(tu.length ? { tu } : {}), ...(ts.length ? { ts } : {}), en: strip(en.translations[i].text) };
   });
   if (c.id === 1) bismillah = out[0].ar;
   total += out.length;

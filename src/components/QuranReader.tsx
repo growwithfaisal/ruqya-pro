@@ -206,7 +206,7 @@ export function QuranReader() {
           </div>
 
           <div className="mt-6 text-center">
-            {q.prefs.translit && <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug"><Translit text={v.tr} marks={v.tu} /></p>}
+            {q.prefs.translit && <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug"><Translit text={v.tr} marks={v.tu} silent={v.ts} /></p>}
             {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-[1.02rem]" : "text-[1.2rem] text-ink"}`}>{v.en}</p>}
           </div>
         </>

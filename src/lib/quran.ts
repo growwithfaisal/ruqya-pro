@@ -6,7 +6,7 @@ export interface Chapter {
 export interface JuzRange { surah: number; from: number; to: number }
 export interface Juz { n: number; ranges: JuzRange[] }
 /** tg: [start, end, class index] colour ranges over `ar` (absent where the source could not be aligned letter for letter). */
-export interface Verse { n: number; ar: string; tg?: [number, number, number][]; tr: string; tu?: [number, number][]; en: string }
+export interface Verse { n: number; ar: string; tg?: [number, number, number][]; tr: string; tu?: [number, number][]; ts?: [number, number][]; en: string }
 /** tu: [start, end) ranges over `tr` for letters that can be said more than one way (th, h, s, d, t standing for a heavy Arabic letter). */
 
 /** Order matches scripts/import-quran.mts. Names only; the colours live in globals.css. */

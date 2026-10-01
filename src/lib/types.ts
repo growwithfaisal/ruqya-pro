@@ -34,6 +34,8 @@ export interface Entry {
   transliteration: string;
   /** [start, end) ranges over `transliteration` to underline (heavy-letter consonants and long vowels). Qur'an text only. */
   tu?: [number, number][];
+  /** [start, end) ranges over `transliteration` for letters that are not said (hamzat wasl when joined, the lam of al- before a sun letter). */
+  ts?: [number, number][];
   translation: string;
   /** Plain-language practice note, faithful to the cited source. */
   practice: string;

@@ -231,9 +231,9 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
         {e.repeat && <p className="mb-3"><span className="rounded-full border border-line px-3.5 py-1.5 text-[0.95rem]">{e.repeat}</span></p>}
         {q.prefs.translit && (
           verse
-            ? <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug"><Translit text={verse.tr} marks={verse.tu} /></p>
+            ? <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug"><Translit text={verse.tr} marks={verse.tu} silent={verse.ts} /></p>
             : e.transliteration
-              ? <div className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug">{e.transliteration.split("\n").map((l, k) => <p key={k}>{e.transliteration.includes("\n") ? l : <Translit text={l} marks={e.tu} />}</p>)}</div>
+              ? <div className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug">{e.transliteration.split("\n").map((l, k) => <p key={k}>{e.transliteration.includes("\n") ? l : <Translit text={l} marks={e.tu} silent={e.ts} />}</p>)}</div>
               : <p className="text-[0.95rem] text-[var(--draft)]">Transliteration pending a cited source.</p>
         )}
         {q.prefs.translation && (

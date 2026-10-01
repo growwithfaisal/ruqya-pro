@@ -6,7 +6,7 @@
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { underlineTranslit } from "./lib/translit-marks.mjs";
+import { silentTranslit, underlineTranslit } from "./lib/translit-marks.mjs";
 import type { Collection, Entry, EntrySource, Grade, Intent, TimeTag } from "../src/lib/types.ts";
 
 const ROOT = join(import.meta.dirname, "..");
@@ -38,6 +38,7 @@ async function quranRange(chapter: number, from: number, to: number) {
   const en: string[] = [];
   const tr: string[] = [];
   const tu: [number, number][] = [];
+  const ts: [number, number][] = [];
   let off = 0;
   for (let v = from; v <= to; v++) {
     const k = `${chapter}:${v}`;
@@ -47,12 +48,13 @@ async function quranRange(chapter: number, from: number, to: number) {
     const l = tz.find((x) => x.id === chapter)!.verses[v - 1];
     const trText = l.transliteration.trim();
     for (const [x, y] of underlineTranslit(a.verse.text_uthmani, trText)) tu.push([off + x, off + y]);
+    for (const [x, y] of silentTranslit(a.verse.text_uthmani, trText)) ts.push([off + x, off + y]);
     off += trText.length + 1;
     ar.push(a.verse.text_uthmani);
     en.push(strip(t.translations[0].text));
     tr.push(trText);
   }
-  return { arabic: ar.join(" "), translation: en.join(" "), transliteration: tr.join(" "), tu };
+  return { arabic: ar.join(" "), translation: en.join(" "), transliteration: tr.join(" "), tu, ts };
 }
 // Quran.com translation payloads carry <sup> footnote markers and tags.
 const strip = (s: string) => s.replace(/<sup[^>]*>.*?<\/sup>/g, "").replace(/<[^>]+>/g, "").trim();
@@ -117,7 +119,7 @@ type Def = {
   id: string; slug: string; title: string; category: Intent[]; times: TimeTag[]; collection?: Collection; verseByVerse?: boolean;
   practice: string; repeat?: string;
   build: () => Promise<{
-    arabic: string; transliteration: string; translation: string; tu?: [number, number][];
+    arabic: string; transliteration: string; translation: string; tu?: [number, number][]; ts?: [number, number][];
     source: EntrySource; support?: EntrySource[]; grade: Grade | ""; grader: string; takhrij: string;
     provenance: Record<string, string>;
     gaps?: string[];
@@ -426,7 +428,7 @@ for (const d of DEFS) {
   const p = priorById.get(d.id);
   out.push({
     id: d.id, slug: d.slug, collection: d.collection ?? "core", ...(d.verseByVerse ? { verseByVerse: true } : {}), title: d.title, category: d.category, times: d.times,
-    arabic: b.arabic, transliteration: b.transliteration, translation: b.translation, ...(b.tu?.length ? { tu: b.tu } : {}),
+    arabic: b.arabic, transliteration: b.transliteration, translation: b.translation, ...(b.tu?.length ? { tu: b.tu } : {}), ...(b.ts?.length ? { ts: b.ts } : {}),
     practice: d.practice, repeat: d.repeat ?? "",
     source: b.source, support: b.support ?? [],
     grade: b.grade, grader: b.grader,
