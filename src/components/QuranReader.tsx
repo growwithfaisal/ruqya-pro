@@ -10,6 +10,7 @@ import { ArabicSizeControl } from "./ArabicSizeControl";
 import { ChapterList } from "./ChapterList";
 import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
 import { Coloured } from "./Coloured";
+import { Translit } from "./Translit";
 import { Sheet } from "./Sheet";
 
 type Panel = null | "surah" | "verse" | "settings";
@@ -205,7 +206,7 @@ export function QuranReader() {
           </div>
 
           <div className="mt-6 text-center">
-            {q.prefs.translit && <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug">{v.tr}</p>}
+            {q.prefs.translit && <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug"><Translit text={v.tr} marks={v.tu} /></p>}
             {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-[1.02rem]" : "text-[1.2rem] text-ink"}`}>{v.en}</p>}
           </div>
         </>

@@ -14,7 +14,7 @@ let total = 0;
 for (const c of meta.chapters) {
   const file = join(ROOT, "public", "quran-data", meta.source.dataVersion, `${c.id}.json`);
   if (!existsSync(file)) { errors.push(`surah ${c.id}: file missing`); continue; }
-  const verses = JSON.parse(readFileSync(file, "utf8")) as { n: number; ar: string; tg?: [number, number, number][]; tr: string; en: string }[];
+  const verses = JSON.parse(readFileSync(file, "utf8")) as { n: number; ar: string; tg?: [number, number, number][]; tr: string; tu?: [number, number][]; en: string }[];
   total += verses.length;
   if (verses.length !== c.verses) errors.push(`surah ${c.id}: ${verses.length} verses, expected ${c.verses}`);
   verses.forEach((v, i) => {
@@ -24,6 +24,11 @@ for (const c of meta.chapters) {
     for (const [from, to, cls] of v.tg ?? []) {
       if (!(from >= edge && to > from && to <= v.ar.length && cls >= 0 && cls < 15)) errors.push(`surah ${c.id}:${v.n}: bad tajweed range ${from}-${to}`);
       edge = to;
+    }
+    let tuEdge = 0;
+    for (const [from, to] of v.tu ?? []) {
+      if (!(from >= tuEdge && to > from && to <= v.tr.length)) errors.push(`surah ${c.id}:${v.n}: bad underline range ${from}-${to}`);
+      tuEdge = to;
     }
     if (!v.en.trim()) errors.push(`surah ${c.id}:${v.n}: empty translation`);
     if (!v.tr.trim()) errors.push(`surah ${c.id}:${v.n}: empty transliteration`);
