@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { arcProgress, decimalHour, isFriday, setForHour, SKY_LABEL, type Sky } from "@/lib/sky";
 import { liveSky } from "@/lib/sky-live";
-import { usePrayerState } from "@/lib/prayer";
+import { prayerNow, usePrayerState } from "@/lib/prayer";
 import { doneKey, useDone } from "@/lib/progress";
 import { chapter, readHref } from "@/lib/quran";
 import { useQuran } from "@/lib/quran-store";
@@ -27,11 +27,13 @@ const at = (t: number) => [
 
 export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const [now, setNow] = useState<Date | null>(null);
+  const [previewSky, setPreviewSky] = useState<string | null>(null); // set after mount so the first render matches the server
   const { done } = useDone();
   const quran = useQuran();
 
   useEffect(() => {
     const tick = () => setNow(new Date());
+    setPreviewSky(new URLSearchParams(location.search).get("sky"));
     tick();
     const id = setInterval(tick, 60_000);
     return () => clearInterval(id);
@@ -40,7 +42,6 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const { place, prefs } = usePrayerState();
   const h = now ? decimalHour(now) : 9;
   // ?sky= previews a sky at a representative hour; otherwise the sun's place comes from the real sunrise and sunset when known.
-  const previewSky = typeof location !== "undefined" ? new URLSearchParams(location.search).get("sky") : null;
   const previewing = !!previewSky && previewSky in SKY_LABEL;
   const live = now ? liveSky(now, { place, prefs }) : null;
   const sky: Sky = previewing ? (previewSky as Sky) : live?.sky ?? "day";
@@ -53,11 +54,17 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const kahfAt = quran.last?.surah === 18 ? quran.last.verse : 1;
   const kahfSeen = quran.seen.keys.filter((k) => k.startsWith("18:")).length;
   const kahfDone = kahfSeen >= kahf.verses;
+  // The Waqi'ah reminder shows from Maghrib until Fajr: by the real prayer times when a place is saved, else from 18:30 to 05:00.
+  const pn = place && now && !previewing ? prayerNow(place, prefs, now) : null;
+  const afterMaghrib = previewing ? sky === "night" : pn ? pn.current.name === "Maghrib" || pn.current.name === "Isha" : !!now && (h >= 18.5 || h < 5);
+  const waqiah = chapter(56);
+  const waqiahAt = quran.last?.surah === 56 ? quran.last.verse : 1;
+  const waqiahSeen = quran.seen.keys.filter((k) => k.startsWith("56:")).length;
+  const waqiahDone = waqiahSeen >= waqiah.verses;
   const ids = setIds[set];
   const count = ids.filter((i) => done.has(doneKey(set, i))).length;
   const total = ids.length;
   const setDone = total > 0 && count >= total;
-  const R = 26, CIRC = 2 * Math.PI * R;
 
   return (
     <section aria-labelledby="hero-line" className="mx-auto max-w-5xl px-4 pt-8 md:px-8 md:pt-14">
@@ -95,17 +102,7 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
             {setDone ? (
               <span className="grid size-[60px] shrink-0 place-items-center rounded-full bg-accent-ink text-accent" aria-hidden><Check size={30} /></span>
             ) : (
-            <svg width="60" height="60" viewBox="0 0 60 60" aria-hidden className="shrink-0">
-              <circle cx="30" cy="30" r={R} fill="none" stroke="currentColor" strokeOpacity="0.28" strokeWidth="4" />
-              <circle
-                cx="30" cy="30" r={R} fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round"
-                strokeDasharray={CIRC}
-                strokeDashoffset={CIRC * (1 - (total ? count / total : 0))}
-                transform="rotate(-90 30 30)"
-                style={{ transition: "stroke-dashoffset 0.9s cubic-bezier(0.16,1,0.3,1)" }}
-              />
-              <text x="30" y="35" textAnchor="middle" fontSize="15" fontWeight="600" fill="currentColor" className="tabular">{count}/{total}</text>
-            </svg>
+            <Ring count={count} total={total} />
             )}
             <span className="grid flex-1">
               <span className="text-lead font-semibold leading-snug">{setDone ? `${SETS[set]} complete` : SETS[set]}</span>
@@ -132,6 +129,22 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
               <Chevron className={`transition-transform duration-300 group-hover:translate-x-1 ${kahfDone ? "" : "text-accent"}`} />
             </Link>
           )}
+          {afterMaghrib && (
+            <Link href={readHref(56, waqiahDone ? 1 : waqiahAt)} className="cta cta-solid group mt-3">
+              {waqiahDone ? (
+                <span className="grid size-[60px] shrink-0 place-items-center rounded-full bg-accent-ink text-accent" aria-hidden><Check size={30} /></span>
+              ) : (
+                <Ring count={waqiahSeen} total={waqiah.verses} />
+              )}
+              <span className="grid flex-1">
+                <span className="text-lead font-semibold leading-snug">{waqiahDone ? "Waqi\u2019ah reminder complete" : "Waqi\u2019ah reminder"}</span>
+                <span className="text-meta opacity-90 tabular">
+                  {waqiahDone ? `Surah ${waqiah.name} read today` : waqiahSeen > 0 ? `${waqiahSeen} of ${waqiah.verses} verses read` : `Surah ${waqiah.name} \u00b7 ${waqiah.verses} verses${waqiahAt > 1 ? ` \u00b7 resume at ${waqiahAt}` : ""}`}
+                </span>
+              </span>
+              <Chevron className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          )}
           {quran.last && (
             <Link href={readHref(quran.last.surah, quran.last.verse)} className="mt-3 flex min-h-14 items-center justify-between rounded-full border border-line px-5 no-underline">
               <span>Continue reading <span className="font-semibold">{chapter(quran.last.surah).name}</span></span>
@@ -141,5 +154,23 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
         </div>
       </div>
     </section>
+  );
+}
+
+/** The progress ring on the routine tiles: how many of the total are done. */
+function Ring({ count, total }: { count: number; total: number }) {
+  const R = 26, CIRC = 2 * Math.PI * R;
+  return (
+    <svg width="60" height="60" viewBox="0 0 60 60" aria-hidden className="shrink-0">
+      <circle cx="30" cy="30" r={R} fill="none" stroke="currentColor" strokeOpacity="0.28" strokeWidth="4" />
+      <circle
+        cx="30" cy="30" r={R} fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round"
+        strokeDasharray={CIRC}
+        strokeDashoffset={CIRC * (1 - (total ? Math.min(1, count / total) : 0))}
+        transform="rotate(-90 30 30)"
+        style={{ transition: "stroke-dashoffset 0.9s cubic-bezier(0.16,1,0.3,1)" }}
+      />
+      <text x="30" y="35" textAnchor="middle" fontSize={total > 20 ? 13 : 15} fontWeight="600" fill="currentColor" className="tabular">{count}/{total}</text>
+    </svg>
   );
 }

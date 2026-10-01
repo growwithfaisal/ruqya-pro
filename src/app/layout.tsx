@@ -63,7 +63,7 @@ if(t>=0.8&&t<=1.8)document.documentElement.style.setProperty('--translit-scale',
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-sky="day" suppressHydrationWarning className={`${display.variable} ${ui.variable} ${arabic.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${ui.variable} ${arabic.variable}`}>
       <head>
         <meta name="theme-color" content="#b4e7fc" />
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
