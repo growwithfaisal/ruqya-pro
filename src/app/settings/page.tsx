@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackupPanel } from "@/components/BackupPanel";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { INTENTS, SETS, entries } from "@/lib/entries";
 
@@ -21,6 +22,10 @@ export default function Settings() {
       <div className="mt-8">
         <OfflinePanel pages={pages()} />
       </div>
+      <div className="mt-12">
+        <BackupPanel />
+      </div>
+      <p className="mt-12 text-[0.92rem] text-ink-soft">Everything above is kept only on this device. Nothing is sent to a server.</p>
     </div>
   );
 }

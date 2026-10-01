@@ -135,7 +135,6 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
         </div>
       </section>
 
-      <p className="text-[0.92rem] text-ink-soft">Your place, reading days, bookmarks and settings are kept only on this device. Nothing is sent to a server.</p>
     </div>
   );
 }
