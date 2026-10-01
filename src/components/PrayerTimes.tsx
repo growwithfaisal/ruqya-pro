@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { daylight, nominalDaylight } from "@/lib/daylight";
 import { LocateError, clock, locate, prayerNow, refreshPlaceQuietly, until, usePrayerState } from "@/lib/prayer";
 
 const ERRORS: Record<LocateError, string> = {
@@ -36,46 +37,49 @@ export function PrayerTimes() {
   };
 
   const shell = "mx-auto max-w-5xl px-4 pt-14 md:px-8 md:pt-20";
-  const card = "glass rounded-[28px] border border-line px-5 py-5 text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]";
+  const card = "rounded-[28px] border border-white/25 px-5 py-5 shadow-[0_24px_48px_-24px_rgb(10_14_40/0.55)]";
 
   if (!ready || !now) {
     return (
       <section aria-label="Prayer times" className={shell}>
-        <div className="mx-auto max-w-2xl"><div className={`${card} min-h-[8.25rem]`} aria-hidden /></div>
+        <div className="mx-auto max-w-2xl"><div className={`${card} min-h-[8.25rem] glass`} aria-hidden /></div>
       </section>
     );
   }
 
   const t = place ? prayerNow(place, prefs, now) : null;
+  // The card's own sky: blends from the colour of the prayer now running to the next as the minutes pass.
+  const sky = t ? daylight(t.current.name, t.next.name, t.progress) : nominalDaylight(now);
+  const skin = { background: sky.background, color: sky.color };
 
   return (
     <section aria-labelledby="prayer-title" className={shell}>
       <div className="mx-auto max-w-2xl">
         <h2 id="prayer-title" className="sr-only">Prayer times</h2>
         {t ? (
-          <div className={card}>
+          <div className={card} style={skin}>
             <div className="flex items-baseline justify-between gap-4">
               <p className="display text-[clamp(2rem,8vw,2.75rem)] leading-none">{t.current.name}</p>
               <p className="tabular text-[clamp(1.35rem,5.5vw,1.75rem)] leading-none">{clock(t.current.at)}</p>
             </div>
-            <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-[color-mix(in_oklch,var(--card-ink)_14%,transparent)]" aria-hidden>
-              <div className="h-full rounded-full bg-accent transition-[width] duration-700" style={{ width: `${Math.round(t.progress * 100)}%` }} />
+            <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-[color-mix(in_oklch,currentColor_26%,transparent)]" aria-hidden>
+              <div className="h-full rounded-full bg-current transition-[width] duration-700" style={{ width: `${Math.round(t.progress * 100)}%` }} />
             </div>
-            <p className="mt-3 text-[1.02rem] text-card-soft">
-              {t.next.name} in <span className="tabular font-semibold text-card-ink">{until(t.next.at, now)}</span>
+            <p className="mt-3 text-[1.02rem]">
+              {t.next.name} in <span className="tabular font-semibold">{until(t.next.at, now)}</span>
             </p>
           </div>
         ) : (
-          <div className={card}>
+          <div className={card} style={skin}>
             <p className="display text-[1.5rem] leading-tight">Prayer times for where you are</p>
-            <p className="mt-1 text-[0.98rem] text-card-soft">
+            <p className="mt-1 text-[0.98rem]">
               Your location is used on this device to work out the times. It is never sent anywhere.
             </p>
             {error && <p role="alert" className="mt-3 text-[0.95rem]">{ERRORS[error]}</p>}
             <button
               onClick={find}
               disabled={busy}
-              className="mt-4 min-h-14 w-full rounded-full bg-accent px-6 text-[1.05rem] font-semibold text-accent-ink transition-transform active:scale-[0.98] disabled:opacity-60"
+              className="mt-4 min-h-14 w-full rounded-full bg-[#fdf8ee] px-6 text-[1.05rem] font-semibold text-[#0e1630] transition-transform active:scale-[0.98] disabled:opacity-60"
             >
               {busy ? "Finding you…" : error ? "Try again" : "Show prayer times"}
             </button>
