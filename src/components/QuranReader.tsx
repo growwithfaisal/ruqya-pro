@@ -54,32 +54,39 @@ export function QuranReader() {
     if (n > 1) u.searchParams.set("v", String(n)); else u.searchParams.delete("v");
     history.replaceState(history.state, "", u);
 
-    const save = window.setTimeout(() => setLast(surah, n), 500);
-    const dwell = window.setTimeout(() => {
-      if (document.visibilityState !== "visible") return;
-      const before = seenCount(18);
-      const tipped = markSeen(surah, n);
-      // Reading all of Al-Kahf on a Friday completes the Friday recitation on Home.
-      if (surah === 18 && isFriday() && before < chapter(18).verses && seenCount(18) >= chapter(18).verses) flash("Friday recitation complete");
-      else if (tipped) flash("Today counted");
-    }, 1200);
-    return () => { clearTimeout(save); clearTimeout(dwell); };
+    setLast(surah, n);
   }, [verses, surah, n]);
 
-  const flash = (text: string) => {
+  const flash = useCallback((text: string) => {
     setNote(text);
     window.setTimeout(() => setNote((t) => (t === text ? "" : t)), 3000);
+  }, []);
+
+  /**
+   * A verse is read the moment the reader moves on from it, or taps I'm Done on it: there is no waiting. Returns the line to
+   * flash when this verse completed Al-Kahf on a Friday or tipped today over the goal.
+   */
+  const markRead = (s: number, v: number) => {
+    const kahf = chapter(18).verses;
+    const before = seenCount(18);
+    const tipped = markSeen(s, v);
+    if (s === 18 && isFriday() && before < kahf && seenCount(18) >= kahf) return "Friday recitation complete";
+    return tipped ? "Today counted" : "";
   };
 
   const go = useCallback(
     (d: 1 | -1) => {
+      if (d === 1) {
+        const msg = markRead(surah, n);
+        if (msg) flash(msg);
+      }
       const next = n + d;
       setDir(d);
       if (next >= 1 && next <= c.verses) setN(next);
       else if (d > 0 && surah < 114) router.push(readHref(surah + 1));
       else if (d < 0 && surah > 1) router.push(readHref(surah - 1, chapter(surah - 1).verses));
     },
-    [n, c.verses, surah, router],
+    [n, c.verses, surah, router, flash],
   );
 
   const jump = useCallback((to: number) => {
@@ -89,7 +96,7 @@ export function QuranReader() {
   }, [n]);
 
   const done = () => {
-    markSeen(surah, n);
+    markRead(surah, n);
     setLast(surah, n);
     router.push("/quran");
   };
