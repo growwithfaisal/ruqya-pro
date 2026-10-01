@@ -62,9 +62,10 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const waqiahSeen = quran.seen.keys.filter((k) => k.startsWith("56:")).length;
   const waqiahDone = waqiahSeen >= waqiah.verses;
   const ids = setIds[set];
-  const count = ids.filter((i) => done.has(doneKey(set, i))).length;
+  const ready = !!now; // before the device clock is read the tile is neutral, so a wrong routine never flashes as complete
+  const count = ready ? ids.filter((i) => done.has(doneKey(set, i))).length : 0;
   const total = ids.length;
-  const setDone = total > 0 && count >= total;
+  const setDone = ready && total > 0 && count >= total;
 
   return (
     <section aria-labelledby="hero-line" className="mx-auto max-w-5xl px-4 pt-8 short:pt-3 md:px-8 md:pt-14">
@@ -105,8 +106,8 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
             <Ring count={count} total={total} />
             )}
             <span className="grid flex-1">
-              <span className="text-lead font-semibold leading-snug">{setDone ? `${SETS[set]} complete` : SETS[set]}</span>
-              <span className="text-meta opacity-90 tabular">{setDone ? `All ${total} recited today` : `${count} of ${total} adhkar today`}</span>
+              <span className="text-lead font-semibold leading-snug">{!ready ? "Today\u2019s adhkar" : setDone ? `${SETS[set]} complete` : SETS[set]}</span>
+              <span className="text-meta opacity-90 tabular">{!ready ? "\u00a0" : setDone ? `All ${total} recited today` : `${count} of ${total} adhkar today`}</span>
             </span>
             <Chevron className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>

@@ -25,7 +25,7 @@ export function SkyClock() {
           document.querySelector("meta[name=theme-color]")?.setAttribute("content", THEME_COLOR[sky]);
         }
       }
-      // "Recited today" is keyed by the local date; nudge listeners so it rolls over at midnight.
+      // "Recited today" is keyed by the routine day (it turns over at 04:00); nudge listeners so it rolls over on time.
       window.dispatchEvent(new Event("rp-progress"));
     };
 

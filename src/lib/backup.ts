@@ -7,7 +7,7 @@
  */
 const FORMAT = 1;
 const APP = "RuqyaPro";
-const ALLOWED = /^rp:(v1:quran:(last|days|seen|marks|prefs)|done:\d{4}-\d{2}-\d{2}|arabic|translit|v1:prayer:prefs)$/;
+const ALLOWED = /^rp:(v1:quran:(last|days|seen|marks|prefs)|done:\d{4}-\d{2}-\d{2}|v2:done:\d{4}-\d{2}-\d{2}|arabic|translit|v1:prayer:prefs)$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_VALUE = 200_000;
 
@@ -85,7 +85,7 @@ export async function restoreBackup(file: File): Promise<BackupSummary> {
 
     if (k === "rp:v1:quran:days") {
       set(k, union(strings(parse(get(k), [])), strings(incoming)).filter((d) => DATE.test(d)).sort());
-    } else if (k === "rp:v1:quran:marks" || k.startsWith("rp:done:")) {
+    } else if (k === "rp:v1:quran:marks" || k.startsWith("rp:done:") || k.startsWith("rp:v2:done:")) {
       set(k, union(strings(parse(get(k), [])), strings(incoming)));
     } else if (k === "rp:v1:quran:last") {
       const a = parse<{ at?: number } | null>(get(k), null);
