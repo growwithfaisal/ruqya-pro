@@ -8,6 +8,7 @@ const errors: string[] = [];
 
 if (meta.chapters.length !== 114) errors.push(`expected 114 chapters, found ${meta.chapters.length}`);
 if (meta.juz.length !== 30) errors.push(`expected 30 juz, found ${meta.juz.length}`);
+if (!Array.isArray(meta.pool) || meta.pool.length !== 114) errors.push("missing ayah-of-the-day pool");
 if (!meta.bismillah?.trim()) errors.push("missing Bismillah line");
 
 let total = 0;

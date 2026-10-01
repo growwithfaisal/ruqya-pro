@@ -125,6 +125,9 @@ mkdirSync(join(ROOT, "public", "quran-data", DATA_VERSION), { recursive: true })
 mkdirSync(join(ROOT, "data", "quran"), { recursive: true });
 
 const mismatches: string[] = [];
+const pool: Record<number, string> = {};
+// A verse is a candidate for "Ayah of the day" when it fits comfortably on a card.
+const hex = (bits: number[]) => { let o = ""; for (let i = 0; i < bits.length; i += 4) o += ((bits[i] << 3) | ((bits[i + 1] ?? 0) << 2) | ((bits[i + 2] ?? 0) << 1) | (bits[i + 3] ?? 0)).toString(16); return o; };
 const noColour: string[] = [];
 let total = 0;
 let bismillah = "";
@@ -153,6 +156,7 @@ async function surah(c: Chapter) {
     const ts = silentTranslit(v.text_uthmani, trText);
     return { n, ar: v.text_uthmani, ...(tg && tg.length ? { tg } : {}), tr: trText, ...(tu.length ? { tu } : {}), ...(ts.length ? { ts } : {}), en: strip(en.translations[i].text) };
   });
+  pool[c.id] = hex(out.map((v) => (v.ar.trim().length <= 300 && v.en.length <= 400 ? 1 : 0)));
   if (c.id === 1) bismillah = out[0].ar;
   total += out.length;
   writeFileSync(join(ROOT, "public", "quran-data", DATA_VERSION, `${c.id}.json`), JSON.stringify(out));
@@ -174,6 +178,7 @@ writeFileSync(
         verses: c.verses_count, bismillahPre: c.bismillah_pre, place: c.revelation_place,
       })),
       juz,
+      pool: chapters.map((c) => pool[c.id]),
     },
     null,
     1,

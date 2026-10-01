@@ -1,5 +1,5 @@
 import { SkyHero } from "@/components/SkyHero";
-import { IntentList } from "@/components/IntentList";
+import { AyahOfTheDay } from "@/components/AyahOfTheDay";
 import { entries } from "@/lib/entries";
 import type { TimeTag } from "@/lib/types";
 
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <SkyHero setIds={setIds} />
-      <IntentList />
+      <AyahOfTheDay />
     </>
   );
 }

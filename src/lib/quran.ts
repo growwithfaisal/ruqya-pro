@@ -27,6 +27,7 @@ export function juzOf(surah: number, verse: number) {
 export const chapters = meta.chapters as Chapter[];
 export const juz = meta.juz as Juz[];
 export const bismillah = meta.bismillah as string;
+const pool = meta.pool as string[];
 export const DATA_VERSION = meta.source.dataVersion as string;
 export const QURAN_CACHE = `rp-quran-${DATA_VERSION}`;
 
@@ -102,4 +103,33 @@ export async function tajweedForEntry(
     return out;
   }
   return null;
+}
+
+/* ---------- Ayah of the day ---------- */
+
+const eligible = (surahIdx: number, verse: number) => (parseInt(pool[surahIdx][(verse - 1) >> 2], 16) >> (3 - ((verse - 1) & 3))) & 1;
+
+/** A small seeded generator, so everyone on the same local date gets the same verse. */
+function seeded(date: string) {
+  let h = 2166136261;
+  for (const c of date) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); }
+  let t = (h >>> 0) + 0x6d2b79f5;
+  t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+}
+
+/** One verse for a local date (YYYY-MM-DD), drawn evenly from every verse short enough for a card. Changes at local midnight. */
+export function ayahOfTheDay(date: string): { surah: number; verse: number } {
+  let total = 0;
+  chapters.forEach((c, i) => { for (let v = 1; v <= c.verses; v++) total += eligible(i, v); });
+  let k = Math.floor(seeded(date) * total);
+  for (let i = 0; i < chapters.length; i++) {
+    for (let v = 1; v <= chapters[i].verses; v++) {
+      if (!eligible(i, v)) continue;
+      if (k === 0) return { surah: i + 1, verse: v };
+      k--;
+    }
+  }
+  return { surah: 1, verse: 1 };
 }
