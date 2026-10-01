@@ -23,12 +23,37 @@ function latinTokens(word: string) {
   return out;
 }
 
+/* ---------- Word alignment ----------
+   The Arabic words and the Latin words are lined up one for one. Tanzil writes a vocative ya as a word of its own
+   ("Ya ayyuha", "ya qawmi") where the Arabic joins it to the name (يَـٰٓأَيُّهَا), so that Latin pair counts as one word. */
+const VOCATIVE = /^\u064A\u064E?\u0640?\u0670/;
+export interface Tok { text: string; at: number }
+export function joinVocatives(aw: string[], lat: Tok[], tr: string): Tok[] | null {
+  if (aw.length === lat.length) return lat;
+  const out: Tok[] = [];
+  let j = 0;
+  for (const w of aw) {
+    const t = lat[j];
+    if (!t) return null;
+    const n = lat[j + 1];
+    if (VOCATIVE.test(w) && t.text.toLowerCase() === "ya" && n) {
+      out.push({ text: tr.slice(t.at, n.at + n.text.length), at: t.at });
+      j += 2;
+    } else {
+      out.push(t);
+      j++;
+    }
+  }
+  return j === lat.length ? out : null;
+}
+
 /** [start, end) ranges over `tr` to underline, or [] where the Arabic and the Latin do not line up word for word. */
 function consonantMarks(ar: string, tr: string): [number, number][] {
   const aWords = ar.split(/\s+/).filter((w) => [...w].some(isArabicLetter));
-  const lWords: { text: string; at: number }[] = [];
-  for (const m of tr.matchAll(/\S+/g)) lWords.push({ text: m[0], at: m.index! });
-  if (aWords.length !== lWords.length) return [];
+  const raw: { text: string; at: number }[] = [];
+  for (const m of tr.matchAll(/\S+/g)) raw.push({ text: m[0], at: m.index! });
+  const lWords = joinVocatives(aWords, raw, tr);
+  if (!lWords) return [];
 
   const out: [number, number][] = [];
   aWords.forEach((aw, wi) => {
@@ -78,9 +103,9 @@ const FATHA = 0x64e, DAMMA = 0x64f, KASRA = 0x650, FATHATAN = 0x64b, DAMMATAN = 
 const DAGGER = 0x670, MADDAH = 0x653, WASL = 0x671;
 const isMarkCp = (o: number) => (o >= 0x64b && o <= 0x65f) || o === 0x670 || (o >= 0x6d6 && o <= 0x6ed);
 
-interface VEvent { v: "a" | "i" | "u"; long: boolean; alif: boolean; wasl?: boolean; initial?: boolean }
+interface VEvent { v: "a" | "i" | "u"; long: boolean; alif: boolean; wasl?: boolean; initial?: boolean; tanween?: boolean }
 
-function arabicEvents(word: string): VEvent[] | null {
+export function arabicEvents(word: string): VEvent[] | null {
   // units: a letter and the marks that follow it
   const units: { ch: string; marks: Set<number> }[] = [];
   for (const c of word) {
@@ -94,7 +119,7 @@ function arabicEvents(word: string): VEvent[] | null {
   // vowel or a hamza is a seat for a hamza (سَيِّـَٔ) and counts as a letter of its own.
   for (let k = units.length - 1; k > 0; k--) {
     const u = units[k];
-    if (u.ch === "\u0640" && [...u.marks].every((m) => m === DAGGER || m === MADDAH)) {
+    if (u.ch === "\u0640" && [...u.marks].every((m) => m === DAGGER || m === MADDAH || m === 0x6e5 || m === 0x6e6 || m === 0x6e7)) {
       u.marks.forEach((m) => units[k - 1].marks.add(m));
       units.splice(k, 1);
     }
@@ -110,10 +135,11 @@ function arabicEvents(word: string): VEvent[] | null {
     if (o === WASL) { ev.push({ v: "a", long: false, alif: false, wasl: true, initial: k === 0 }); continue; }
     if (o === 0x622) { ev.push({ v: "a", long: true, alif: true }); continue; } // آ
     const maddLetter = o === 0x627 || o === 0x648 || o === 0x64a || o === 0x649;
+    if (maddLetter && marks.has(0x6df) && o === 0x648 && !own) continue; // a silent waw (أُو۟لَـٰٓئِكَ "olaika"): written, not said
     if (maddLetter && !own && !marks.has(0x651) && !marks.has(0x652) && !marks.has(0x6e1)) {
       const pm = prevUnit?.marks ?? new Set<number>();
       if ((o === 0x627 || o === 0x649) && prev && (pm.has(FATHA) || pm.has(FATHATAN))) {
-        if (pm.has(FATHATAN)) prev.alif = true;
+        if (pm.has(FATHATAN)) prev.tanween = true; // said long only when the verse stops here
         else { prev.long = true; prev.alif = true; }
         continue;
       }
@@ -123,7 +149,7 @@ function arabicEvents(word: string): VEvent[] | null {
     }
     if (marks.has(DAGGER)) { ev.push({ v: "a", long: true, alif: true }); continue; }
     if (own) {
-      const e: VEvent = { v: own, long: false, alif: false };
+      const e: VEvent = { v: own, long: (own === "u" && (marks.has(0x6e5) || (o === 0x648 && units[k + 1]?.ch === "\u0627" && units[k + 1].marks.has(0x6df)))) || (own === "i" && (marks.has(0x6e6) || marks.has(0x6e7))), alif: false };
       // The long ā of Allah: a lam with shadda and fatha before ه.
       if (o === 0x644 && marks.has(0x651) && own === "a" && units[k + 1]?.ch === "ه") { e.long = true; e.alif = true; }
       ev.push(e);
@@ -133,7 +159,7 @@ function arabicEvents(word: string): VEvent[] | null {
 }
 
 interface VTok { ch: string; start: number; end: number; run: number }
-function latinVowelChars(word: string): { c: string; i: number; run: number }[] {
+export function latinVowelChars(word: string): { c: string; i: number; run: number }[] {
   const out: { c: string; i: number; run: number }[] = [];
   let run = -1, inRun = false;
   for (let i = 0; i < word.length; i++) {
@@ -147,7 +173,7 @@ function latinVowelChars(word: string): { c: string; i: number; run: number }[] 
 }
 
 /** Match events to Latin vowel characters in order. Returns the character ranges of each event, or null. */
-function matchVowels(ev: VEvent[], chars: { c: string; i: number; run: number }[]): { start: number; end: number }[] | null {
+export function matchVowels(ev: VEvent[], chars: { c: string; i: number; run: number }[]): { start: number; end: number }[] | null {
   const memo = new Map<string, { start: number; end: number }[] | null>();
   const go = (ei: number, ci: number): { start: number; end: number }[] | null => {
     if (ei === ev.length) return ci === chars.length ? [] : null;
@@ -158,7 +184,9 @@ function matchVowels(ev: VEvent[], chars: { c: string; i: number; run: number }[
     const here = chars[ci];
     if (!here) { memo.set(key, null); return null; }
     // Spellings: short a / i / u; long ā "a" or "aa", long ī "i" or "ee", long ū "u" or "oo".
-    const forms: string[] = e.long ? (e.v === "a" ? ["aa", "a"] : e.v === "i" ? ["ee", "i"] : ["oo", "u"]) : [e.v];
+    // A hamzat wasl takes whatever vowel starts the word when it is said alone (ittaqoo, othkur, onthur). Tanzil also writes a
+    // short u as "o" (olaika, okhra, yashao, shayon).
+    const forms: string[] = e.wasl ? ["a", "i", "u", "o"] : e.long ? (e.v === "a" ? ["aa", "a"] : e.v === "i" ? ["ee", "i"] : ["oo", "u"]) : e.v === "u" ? ["u", "o"] : [e.v];
     for (const f of forms) {
       let ok = true;
       for (let q = 0; q < f.length; q++) {
@@ -178,9 +206,10 @@ function matchVowels(ev: VEvent[], chars: { c: string; i: number; run: number }[
 
 function vowelMarks(ar: string, tr: string): [number, number][] {
   const aWords = ar.split(/\s+/).filter((w) => [...w].some((c) => /[ء-يٱ]/.test(c)));
-  const lWords: { text: string; at: number }[] = [];
-  for (const m of tr.matchAll(/\S+/g)) lWords.push({ text: m[0], at: m.index! });
-  if (aWords.length !== lWords.length) return [];
+  const raw: { text: string; at: number }[] = [];
+  for (const m of tr.matchAll(/\S+/g)) raw.push({ text: m[0], at: m.index! });
+  const lWords = joinVocatives(aWords, raw, tr);
+  if (!lWords) return [];
   const out: [number, number][] = [];
   aWords.forEach((aw, wi) => {
     const { text, at } = lWords[wi];
@@ -189,7 +218,8 @@ function vowelMarks(ar: string, tr: string): [number, number][] {
     const hit = matchVowels(ev, latinVowelChars(text));
     if (!hit) return;
     ev.forEach((e, k) => {
-      if (e.alif || (e.long && (e.v === "u" || e.v === "i"))) out.push([at + hit[k].start, at + hit[k].end]);
+      const stops = wi === aWords.length - 1 && k === ev.length - 1 && e.tanween;
+      if (e.alif || stops) out.push([at + hit[k].start, at + hit[k].end]);
     });
   });
   return out;
@@ -243,9 +273,10 @@ export function silentTranslit(ar: string, tr: string): [number, number][] {
       stop = WAQF.test(tok);
     } else stop = true; // a waqf sign standing alone
   }
-  const lWords: { text: string; at: number }[] = [];
-  for (const m of tr.matchAll(/\S+/g)) lWords.push({ text: m[0], at: m.index! });
-  if (words.length !== lWords.length) return [];
+  const latRaw: { text: string; at: number }[] = [];
+  for (const m of tr.matchAll(/\S+/g)) latRaw.push({ text: m[0], at: m.index! });
+  const lWords = joinVocatives(words.map((w) => w.text), latRaw, tr);
+  if (!lWords) return [];
 
   const out: [number, number][] = [];
   words.forEach((w, wi) => {
@@ -253,7 +284,12 @@ export function silentTranslit(ar: string, tr: string): [number, number][] {
     const ev = arabicEvents(w.text);
     if (ev?.length) {
       const hit = matchVowels(ev, latinVowelChars(text));
-      if (hit) ev.forEach((e, k) => { if (e.wasl && (!e.initial || w.connected)) out.push([at + hit[k].start, at + hit[k].end]); });
+      if (hit) {
+        ev.forEach((e, k) => { if (e.wasl && (!e.initial || w.connected)) out.push([at + hit[k].start, at + hit[k].end]); });
+        // A verse that ends on a tanween alif is said "...an" as a long ā with the n dropped (nukra): the n is not said.
+        const k = ev.length - 1;
+        if (wi === words.length - 1 && ev[k].tanween && hit[k].end === text.length - 1 && text[hit[k].end].toLowerCase() === "n") out.push([at + hit[k].end, at + hit[k].end + 1]);
+      }
     }
     if (silentLamAt(w.text)) {
       // the Latin "l" that sits right before a doubled letter ("al" + "ss")
