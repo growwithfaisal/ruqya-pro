@@ -18,7 +18,7 @@ export default function Sources() {
 
       <ol className="mt-10 grid gap-4">
         {entries.map((e) => (
-          <li key={e.id} id={e.id} className="glass scroll-mt-24 rounded-[28px] border border-line px-5 py-6 text-card-ink">
+          <li key={e.id} id={e.id} className="glass-lite cv-auto-card scroll-mt-24 rounded-[28px] border border-line px-5 py-6 text-card-ink">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="display text-h3 leading-tight">{e.title}</h2>
               <span className="text-accent"><GradeBadge entry={e} /></span>

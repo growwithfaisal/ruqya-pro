@@ -40,7 +40,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
     const here = q.last?.surah === c.id;
     const saved = off.offline.has(c.id);
     return (
-      <li key={c.id} className={`flex items-stretch rounded-[20px] border ${here ? "border-[var(--accent)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)]" : "border-line"}`}>
+      <li key={c.id} className={`cv-auto flex items-stretch rounded-[20px] border ${here ? "border-[var(--accent)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)]" : "border-line"}`}>
         <button
           onClick={() => setPick(c)}
           aria-label={`${c.name}, ${c.verses} verses. Choose where to start`}

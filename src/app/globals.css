@@ -239,7 +239,7 @@ a {
   width: 90vmax;
   height: 90vmax;
   border-radius: 50%;
-  filter: blur(40px);
+  /* The radial gradient already fades to nothing; a blur filter on a layer this size is costly on older phones. */
   will-change: transform;
 }
 .sky-haze.a {
@@ -265,8 +265,9 @@ a {
   -webkit-mask-size: 96px 96px;
   mask-size: 96px 96px;
   animation: lattice-drift 240s linear infinite;
-  will-change: transform;
 }
+/* No drawing while the app is in the background. */
+html.rp-hidden .sky-haze, html.rp-hidden .sky-lattice { animation-play-state: paused; }
 .sky-lattice-fade {
   position: absolute;
   inset: 0;
@@ -439,6 +440,10 @@ body {
   backdrop-filter: blur(var(--blur)) saturate(1.3);
 }
 .glass { --blur: 16px; background-color: color-mix(in oklch, var(--card) 72%, transparent); background-image: linear-gradient(145deg, var(--glass-sheen), transparent 45%); }
+.glass-lite { background-color: color-mix(in oklch, var(--card) 90%, transparent); background-image: linear-gradient(145deg, var(--glass-sheen), transparent 40%); }
+/* Long lists: draw only what is near the screen. */
+.cv-auto { content-visibility: auto; contain-intrinsic-size: auto 4.5rem; }
+.cv-auto-card { content-visibility: auto; contain-intrinsic-size: auto 14rem; }
 .glass-strong { --blur: 24px; background-color: color-mix(in oklch, var(--card) 88%, transparent); background-image: linear-gradient(145deg, var(--glass-sheen), transparent 40%); }
 .glass-bar { --blur: 16px; background-color: color-mix(in oklch, var(--sky-top) 64%, transparent); }
 .glass-chip { --blur: 10px; background-color: color-mix(in oklch, var(--card) 42%, transparent); }

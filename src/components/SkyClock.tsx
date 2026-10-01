@@ -29,7 +29,11 @@ export function SkyClock() {
       window.dispatchEvent(new Event("rp-progress"));
     };
 
-    const onVisible = () => document.visibilityState === "visible" && tick();
+    const onVisible = () => {
+      const visible = document.visibilityState === "visible";
+      document.documentElement.classList.toggle("rp-hidden", !visible); // pauses the sky's drift while hidden
+      if (visible) tick();
+    };
     const onPlace = () => { cachedFor = ""; tick(); }; // the reader changed their place or method
     const id = setInterval(tick, 60_000);
     document.addEventListener("visibilitychange", onVisible);
