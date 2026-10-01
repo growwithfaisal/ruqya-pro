@@ -11,9 +11,10 @@ import { join } from "node:path";
 const ROOT = join(import.meta.dirname, "..");
 const API = "https://api.quran.com/api/v4";
 const TR_EN = 20; // Saheeh International
-const TR_LATIN = 57; // transliteration
+// Transliteration: Tanzil's original text (word-spaced), as packaged by risan/quran-json 3.1.2. Quran.com's resource 57 joins words and drops letters.
+const TANZIL_TRANSLIT = "https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/quran_transliteration.json";
 const SECOND = "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quranuthmanihaf.min.json"; // King Fahd Complex, Uthmani Hafs
-const DATA_VERSION = "v2"; // v2 adds the tajweed-coloured text (tj). Bump the service worker cache name in public/sw.js with it.
+const DATA_VERSION = "v3"; // v2 added tajweed colour ranges; v3 switches transliteration to Tanzil's word-spaced text. Bump the cache name in public/sw.js with it.
 const RETRIEVED = new Date().toISOString().slice(0, 10);
 
 const strip = (s: string) => s.replace(/<sup[^>]*>.*?<\/sup>/g, "").replace(/<[^>]+>/g, "").trim();
@@ -112,6 +113,9 @@ const juz = [...juzMap.values()]
     }),
   }));
 
+const tanzil = await json<{ id: number; verses: { id: number; transliteration: string }[] }[]>(TANZIL_TRANSLIT);
+const tanzilTr = (surah: number) => tanzil.find((x) => x.id === surah)!.verses;
+
 const second = await json<{ quran: { chapter: number; verse: number; text: string }[] }>(SECOND);
 const secondByKey = new Map(second.quran.map((v) => [`${v.chapter}:${v.verse}`, v.text]));
 
@@ -124,14 +128,14 @@ let total = 0;
 let bismillah = "";
 
 async function surah(c: Chapter) {
-  const [ar, tj, en, tr] = await Promise.all([
+  const [ar, tj, en] = await Promise.all([
     json<{ verses: { verse_key: string; text_uthmani: string }[] }>(`${API}/quran/verses/uthmani?chapter_number=${c.id}`),
     json<{ verses: { verse_key: string; text_uthmani_tajweed: string }[] }>(`${API}/quran/verses/uthmani_tajweed?chapter_number=${c.id}`),
     json<{ translations: { text: string }[] }>(`${API}/quran/translations/${TR_EN}?chapter_number=${c.id}`),
-    json<{ translations: { text: string }[] }>(`${API}/quran/translations/${TR_LATIN}?chapter_number=${c.id}`),
   ]);
-  if (tj.verses.length !== c.verses_count || ar.verses.length !== c.verses_count || en.translations.length !== c.verses_count || tr.translations.length !== c.verses_count)
-    throw new Error(`surah ${c.id}: verse count mismatch (${ar.verses.length}/${en.translations.length}/${tr.translations.length} vs ${c.verses_count})`);
+  const tr = tanzilTr(c.id);
+  if (tj.verses.length !== c.verses_count || ar.verses.length !== c.verses_count || en.translations.length !== c.verses_count || tr.length !== c.verses_count)
+    throw new Error(`surah ${c.id}: verse count mismatch (${ar.verses.length}/${en.translations.length}/${tr.length} vs ${c.verses_count})`);
 
   const out = ar.verses.map((v, i) => {
     const n = Number(v.verse_key.split(":")[1]);
@@ -142,7 +146,7 @@ async function surah(c: Chapter) {
     // to colour letter clusters of the exact Arabic above. Verses that cannot be aligned letter for letter get no colour.
     const tg = alignTajweed(v.text_uthmani, tj.verses[i].text_uthmani_tajweed);
     if (!tg) noColour.push(v.verse_key);
-    return { n, ar: v.text_uthmani, ...(tg && tg.length ? { tg } : {}), tr: strip(tr.translations[i].text), en: strip(en.translations[i].text) };
+    return { n, ar: v.text_uthmani, ...(tg && tg.length ? { tg } : {}), tr: tr[i].transliteration.trim(), en: strip(en.translations[i].text) };
   });
   if (c.id === 1) bismillah = out[0].ar;
   total += out.length;
@@ -158,7 +162,7 @@ writeFileSync(
   join(ROOT, "data", "quran", "chapters.json"),
   JSON.stringify(
     {
-      source: { arabic: "Quran.com API v4 text_uthmani", translation: `Saheeh International (Quran.com resource ${TR_EN})`, transliteration: `Quran.com resource ${TR_LATIN}`, tajweed: "Quran.com API v4 uthmani_tajweed", retrieved: RETRIEVED, dataVersion: DATA_VERSION },
+      source: { arabic: "Quran.com API v4 text_uthmani", translation: `Saheeh International (Quran.com resource ${TR_EN})`, transliteration: "Tanzil (en.transliteration) via risan/quran-json 3.1.2", tajweed: "Quran.com API v4 uthmani_tajweed", retrieved: RETRIEVED, dataVersion: DATA_VERSION },
       bismillah,
       chapters: chapters.map((c) => ({
         id: c.id, name: c.name_simple, arabic: c.name_arabic, meaning: c.translated_name.name,

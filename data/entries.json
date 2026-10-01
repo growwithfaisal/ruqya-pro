@@ -11,7 +11,7 @@
     ],
     "times": [],
     "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ مَـٰلِكِ يَوْمِ ٱلدِّينِ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
-    "transliteration": "Bismi Allahi arrahmani arraheem Alhamdu lillahi rabbi alAAalameen Arrahmani arraheem Maliki yawmi addeen Iyyaka naAAbudu wa-iyyaka nastaAAeen Ihdina assirata almustaqeem Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala addalleen",
+    "transliteration": "Bismi Allahi alrrahmani alrraheemi Alhamdu lillahi rabbi alAAalameena Alrrahmani alrraheemi Maliki yawmi alddeeni Iyyaka naAAbudu waiyyaka nastaAAeenu Ihdina alssirata almustaqeema Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala alddalleena",
     "translation": "In the name of Allāh, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allāh, Lord of the worlds - The Entirely Merciful, the Especially Merciful, Sovereign of the Day of Recompense. It is You we worship and You we ask for help. Guide us to the straight path - The path of those upon whom You have bestowed favor, not of those who have earned [Your] anger or of those who are astray.",
     "practice": "Recited in full. The hadith that reports Al-Fatiha as a ruqyah is not yet attached to this entry.",
     "repeat": "",
@@ -29,9 +29,9 @@
     },
     "takhrij_url": "https://quran.com/1/1-7",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57"
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
     "verified": false,
     "verified_by": "",
@@ -50,7 +50,7 @@
       "bedtime"
     ],
     "arabic": "ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ",
-    "transliteration": "Allahu la ilaha illahuwa alhayyu alqayyoomu la ta/khuthuhusinatun wala nawmun lahu ma fee assamawatiwama fee al-ardi man tha allatheeyashfaAAu AAindahu illa bi-ithnihi yaAAlamu mabayna aydeehim wama khalfahum wala yuheetoonabishay-in min AAilmihi illa bima shaawasiAAa kursiyyuhu assamawati wal-ardawala yaooduhu hifthuhumawahuwa alAAaliyyu alAAatheem",
+    "transliteration": "Allahu la ilaha illa huwa alhayyu alqayyoomu la takhuthuhu sinatun wala nawmun lahu ma fee alssamawati wama fee alardi man tha allathee yashfaAAu AAindahu illa biithnihi yaAAlamu ma bayna aydeehim wama khalfahum wala yuheetoona bishayin min AAilmihi illa bima shaa wasiAAa kursiyyuhu alssamawati waalarda wala yaooduhu hifthuhuma wahuwa alAAaliyyu alAAatheemu",
     "translation": "Allāh - there is no deity except Him, the Ever-Living, the Self-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursī extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.",
     "practice": "Recite before sleeping.",
     "repeat": "",
@@ -74,9 +74,9 @@
     },
     "takhrij_url": "https://quran.com/2/255",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57"
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
     "verified": false,
     "verified_by": "",
@@ -96,7 +96,7 @@
       "evening"
     ],
     "arabic": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيْهِ مِن رَّبِّهِۦ وَٱلْمُؤْمِنُونَ ۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَـٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِۦ ۚ وَقَالُوا۟ سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ ٱلْمَصِيرُ لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا ٱكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَآ إِن نَّسِينَآ أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَآ إِصْرًا كَمَا حَمَلْتَهُۥ عَلَى ٱلَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِۦ ۖ وَٱعْفُ عَنَّا وَٱغْفِرْ لَنَا وَٱرْحَمْنَآ ۚ أَنتَ مَوْلَىٰنَا فَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَـٰفِرِينَ",
-    "transliteration": "Amana arrasoolu bimaonzila ilayhi min rabbihi walmu/minoona kullun amanabillahi wamala-ikatihi wakutubihiwarusulihi la nufarriqu bayna ahadin min rusulihiwaqaloo samiAAna waataAAna ghufranakarabbana wa-ilayka almaseer La yukallifu Allahu nafsanilla wusAAaha laha ma kasabatwaAAalayha ma iktasabat rabbana latu-akhithna in naseena aw akhta/narabbana wala tahmil AAalayna isrankama hamaltahu AAala allatheena minqablina rabbana wala tuhammilnama la taqata lana bihi waAAfuAAanna waghfir lana warhamnaanta mawlana fansurna AAalaalqawmi alkafireen",
+    "transliteration": "Amana alrrasoolu bima onzila ilayhi min rabbihi waalmuminoona kullun amana biAllahi wamalaikatihi wakutubihi warusulihi la nufarriqu bayna ahadin min rusulihi waqaloo samiAAna waataAAna ghufranaka rabbana wailayka almaseeru La yukallifu Allahu nafsan illa wusAAaha laha ma kasabat waAAalayha ma iktasabat rabbana la tuakhithna in naseena aw akhtana rabbana wala tahmil AAalayna isran kama hamaltahu AAala allatheena min qablina rabbana wala tuhammilna ma la taqata lana bihi waoAAfu AAanna waighfir lana wairhamna anta mawlana faonsurna AAala alqawmi alkafireena",
     "translation": "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allāh and His angels and His books and His messengers, [saying], \"We make no distinction between any of His messengers.\" And they say, \"We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.\" Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"",
     "practice": "Recite at night.",
     "repeat": "",
@@ -125,9 +125,9 @@
     },
     "takhrij_url": "https://quran.com/2/285-286",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57"
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
     "verified": false,
     "verified_by": "",
@@ -147,7 +147,7 @@
       "bedtime"
     ],
     "arabic": " تَبَـٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ ٱلَّذِى خَلَقَ ٱلْمَوْتَ وَٱلْحَيَوٰةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا ۚ وَهُوَ ٱلْعَزِيزُ ٱلْغَفُورُ ٱلَّذِى خَلَقَ سَبْعَ سَمَـٰوَٰتٍ طِبَاقًا ۖ مَّا تَرَىٰ فِى خَلْقِ ٱلرَّحْمَـٰنِ مِن تَفَـٰوُتٍ ۖ فَٱرْجِعِ ٱلْبَصَرَ هَلْ تَرَىٰ مِن فُطُورٍ ثُمَّ ٱرْجِعِ ٱلْبَصَرَ كَرَّتَيْنِ يَنقَلِبْ إِلَيْكَ ٱلْبَصَرُ خَاسِئًا وَهُوَ حَسِيرٌ وَلَقَدْ زَيَّنَّا ٱلسَّمَآءَ ٱلدُّنْيَا بِمَصَـٰبِيحَ وَجَعَلْنَـٰهَا رُجُومًا لِّلشَّيَـٰطِينِ ۖ وَأَعْتَدْنَا لَهُمْ عَذَابَ ٱلسَّعِيرِ وَلِلَّذِينَ كَفَرُوا۟ بِرَبِّهِمْ عَذَابُ جَهَنَّمَ ۖ وَبِئْسَ ٱلْمَصِيرُ إِذَآ أُلْقُوا۟ فِيهَا سَمِعُوا۟ لَهَا شَهِيقًا وَهِىَ تَفُورُ تَكَادُ تَمَيَّزُ مِنَ ٱلْغَيْظِ ۖ كُلَّمَآ أُلْقِىَ فِيهَا فَوْجٌ سَأَلَهُمْ خَزَنَتُهَآ أَلَمْ يَأْتِكُمْ نَذِيرٌ قَالُوا۟ بَلَىٰ قَدْ جَآءَنَا نَذِيرٌ فَكَذَّبْنَا وَقُلْنَا مَا نَزَّلَ ٱللَّهُ مِن شَىْءٍ إِنْ أَنتُمْ إِلَّا فِى ضَلَـٰلٍ كَبِيرٍ وَقَالُوا۟ لَوْ كُنَّا نَسْمَعُ أَوْ نَعْقِلُ مَا كُنَّا فِىٓ أَصْحَـٰبِ ٱلسَّعِيرِ فَٱعْتَرَفُوا۟ بِذَنۢبِهِمْ فَسُحْقًا لِّأَصْحَـٰبِ ٱلسَّعِيرِ إِنَّ ٱلَّذِينَ يَخْشَوْنَ رَبَّهُم بِٱلْغَيْبِ لَهُم مَّغْفِرَةٌ وَأَجْرٌ كَبِيرٌ وَأَسِرُّوا۟ قَوْلَكُمْ أَوِ ٱجْهَرُوا۟ بِهِۦٓ ۖ إِنَّهُۥ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ أَلَا يَعْلَمُ مَنْ خَلَقَ وَهُوَ ٱللَّطِيفُ ٱلْخَبِيرُ هُوَ ٱلَّذِى جَعَلَ لَكُمُ ٱلْأَرْضَ ذَلُولًا فَٱمْشُوا۟ فِى مَنَاكِبِهَا وَكُلُوا۟ مِن رِّزْقِهِۦ ۖ وَإِلَيْهِ ٱلنُّشُورُ ءَأَمِنتُم مَّن فِى ٱلسَّمَآءِ أَن يَخْسِفَ بِكُمُ ٱلْأَرْضَ فَإِذَا هِىَ تَمُورُ أَمْ أَمِنتُم مَّن فِى ٱلسَّمَآءِ أَن يُرْسِلَ عَلَيْكُمْ حَاصِبًا ۖ فَسَتَعْلَمُونَ كَيْفَ نَذِيرِ وَلَقَدْ كَذَّبَ ٱلَّذِينَ مِن قَبْلِهِمْ فَكَيْفَ كَانَ نَكِيرِ أَوَلَمْ يَرَوْا۟ إِلَى ٱلطَّيْرِ فَوْقَهُمْ صَـٰٓفَّـٰتٍ وَيَقْبِضْنَ ۚ مَا يُمْسِكُهُنَّ إِلَّا ٱلرَّحْمَـٰنُ ۚ إِنَّهُۥ بِكُلِّ شَىْءٍۭ بَصِيرٌ أَمَّنْ هَـٰذَا ٱلَّذِى هُوَ جُندٌ لَّكُمْ يَنصُرُكُم مِّن دُونِ ٱلرَّحْمَـٰنِ ۚ إِنِ ٱلْكَـٰفِرُونَ إِلَّا فِى غُرُورٍ أَمَّنْ هَـٰذَا ٱلَّذِى يَرْزُقُكُمْ إِنْ أَمْسَكَ رِزْقَهُۥ ۚ بَل لَّجُّوا۟ فِى عُتُوٍّ وَنُفُورٍ أَفَمَن يَمْشِى مُكِبًّا عَلَىٰ وَجْهِهِۦٓ أَهْدَىٰٓ أَمَّن يَمْشِى سَوِيًّا عَلَىٰ صِرَٰطٍ مُّسْتَقِيمٍ قُلْ هُوَ ٱلَّذِىٓ أَنشَأَكُمْ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ ۖ قَلِيلًا مَّا تَشْكُرُونَ قُلْ هُوَ ٱلَّذِى ذَرَأَكُمْ فِى ٱلْأَرْضِ وَإِلَيْهِ تُحْشَرُونَ وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْوَعْدُ إِن كُنتُمْ صَـٰدِقِينَ قُلْ إِنَّمَا ٱلْعِلْمُ عِندَ ٱللَّهِ وَإِنَّمَآ أَنَا۠ نَذِيرٌ مُّبِينٌ فَلَمَّا رَأَوْهُ زُلْفَةً سِيٓـَٔتْ وُجُوهُ ٱلَّذِينَ كَفَرُوا۟ وَقِيلَ هَـٰذَا ٱلَّذِى كُنتُم بِهِۦ تَدَّعُونَ قُلْ أَرَءَيْتُمْ إِنْ أَهْلَكَنِىَ ٱللَّهُ وَمَن مَّعِىَ أَوْ رَحِمَنَا فَمَن يُجِيرُ ٱلْكَـٰفِرِينَ مِنْ عَذَابٍ أَلِيمٍ قُلْ هُوَ ٱلرَّحْمَـٰنُ ءَامَنَّا بِهِۦ وَعَلَيْهِ تَوَكَّلْنَا ۖ فَسَتَعْلَمُونَ مَنْ هُوَ فِى ضَلَـٰلٍ مُّبِينٍ قُلْ أَرَءَيْتُمْ إِنْ أَصْبَحَ مَآؤُكُمْ غَوْرًا فَمَن يَأْتِيكُم بِمَآءٍ مَّعِينٍۭ",
-    "transliteration": "Tabaraka allathee biyadihialmulku wahuwa AAala kulli shay-in qadeer Allathee khalaqa almawta walhayataliyabluwakum ayyukum ahsanu AAamalan wahuwa alAAazeezualghafoor Allathee khalaqa sabAAa samawatintibaqan ma tara fee khalqi arrahmanimin tafawutin farjiAAi albasara hal taramin futoor Thumma irjiAAi albasara karratayniyanqalib ilayka albasaru khasi-an wahuwa haseer Walaqad zayyanna assamaaaddunya bimasabeeha wajaAAalnaharujooman lishshayateeni waaAAtadna lahumAAathaba assaAAeer Walillatheena kafaroo birabbihim AAathabujahannama wabi/sa almaseer Itha olqoo feeha samiAAoo lahashaheeqan wahiya tafoor Takadu tamayyazu mina alghaythikullama olqiya feeha fawjun saalahum khazanatuhaalam ya/tikum natheer Qaloo bala qad jaananatheerun fakaththabna waqulna manazzala Allahu min shay-in in antum illa fee dalalinkabeer Waqaloo law kunna nasmaAAu awnaAAqilu ma kunna fee as-habi assaAAeer FaAAtarafoo bithanbihim fasuhqanli-as-habi assaAAeer Inna allatheena yakhshawna rabbahumbilghaybi lahum maghfiratun waajrun kabeer Waasirroo qawlakum awi ijharoo bihi innahuAAaleemun bithati assudoor Ala yaAAlamu man khalaqa wahuwa allateefualkhabeer Huwa allathee jaAAala lakumu al-ardathaloolan famshoo fee manakibihawakuloo min rizqihi wa-ilayhi annushoor Aamintum man fee assama-i anyakhsifa bikumu al-arda fa-itha hiya tamoor Am amintum man fee assama-ian yursila AAalaykum hasiban fasataAAlamoona kayfa natheer Walaqad kaththaba allatheenamin qablihim fakayfa kana nakeer Awa lam yaraw ila attayrifawqahum saffatin wayaqbidna mayumsikuhunna illa arrahmanu innahubikulli shay-in baseer Amman hatha allathee huwajundun lakum yansurukum min dooni arrahmaniini alkafiroona illa fee ghuroor Amman hatha allatheeyarzuqukum in amsaka rizqahu bal lajjoo fee AAutuwwin wanufoor Afaman yamshee mukibban AAala wajhihiahda amman yamshee sawiyyan AAala siratinmustaqeem Qul huwa allathee anshaakum wajaAAalalakumu assamAAa wal-absara wal-af-idataqaleelan ma tashkuroon Qul huwa allathee tharaakumfee al-ardi wa-ilayhi tuhsharoon Wayaqooloona mata hathaalwaAAdu in kuntum sadiqeen Qul innama alAAilmu AAinda Allahiwa-innama ana natheerun mubeen Falamma raawhu zulfatan see-atwujoohu allatheena kafaroo waqeela hatha allatheekuntum bihi taddaAAoon Qul araaytum in ahlakaniya Allahuwaman maAAiya aw rahimana faman yujeeru alkafireenamin AAathabin aleem Qul huwa arrahmanu amannabihi waAAalayhi tawakkalna fasataAAlamoona man huwa fee dalalinmubeen Qul araaytum in asbaha maokumghawran faman ya/teekum bima-in maAAeen",
+    "transliteration": "Tabaraka allathee biyadihi almulku wahuwa AAala kulli shayin qadeerun Allathee khalaqa almawta waalhayata liyabluwakum ayyukum ahsanu AAamalan wahuwa alAAazeezu alghafooru Allathee khalaqa sabAAa samawatin tibaqan ma tara fee khalqi alrrahmani min tafawutin fairjiAAi albasara hal tara min futoorin Thumma irjiAAi albasara karratayni yanqalib ilayka albasaru khasian wahuwa haseerun Walaqad zayyanna alssamaa alddunya bimasabeeha wajaAAalnaha rujooman lilshshayateeni waaAAtadna lahum AAathaba alssaAAeeri Walillatheena kafaroo birabbihim AAathabu jahannama wabisa almaseeru Itha olqoo feeha samiAAoo laha shaheeqan wahiya tafooru Takadu tamayyazu mina alghaythi kullama olqiya feeha fawjun saalahum khazanatuha alam yatikum natheerun Qaloo bala qad jaana natheerun fakaththabna waqulna ma nazzala Allahu min shayin in antum illa fee dalalin kabeerin Waqaloo law kunna nasmaAAu aw naAAqilu ma kunna fee ashabi alssaAAeeri FaiAAtarafoo bithanbihim fasuhqan liashabi alssaAAeeri Inna allatheena yakhshawna rabbahum bialghaybi lahum maghfiratun waajrun kabeerun Waasirroo qawlakum awi ijharoo bihi innahu AAaleemun bithati alssudoori Ala yaAAlamu man khalaqa wahuwa allateefu alkhabeeru Huwa allathee jaAAala lakumu alarda thaloolan faimshoo fee manakibiha wakuloo min rizqihi wailayhi alnnushooru Aamintum man fee alssamai an yakhsifa bikumu alarda faitha hiya tamooru Am amintum man fee alssamai an yursila AAalaykum hasiban fasataAAlamoona kayfa natheeri Walaqad kaththaba allatheena min qablihim fakayfa kana nakeeri Awalam yaraw ila alttayri fawqahum saffatin wayaqbidna ma yumsikuhunna illa alrrahmanu innahu bikulli shayin baseerun Amman hatha allathee huwa jundun lakum yansurukum min dooni alrrahmani ini alkafiroona illa fee ghuroorin Amman hatha allathee yarzuqukum in amsaka rizqahu bal lajjoo fee AAutuwwin wanufoorin Afaman yamshee mukibban AAala wajhihi ahda amman yamshee sawiyyan AAala siratin mustaqeemin Qul huwa allathee anshaakum wajaAAala lakumu alssamAAa waalabsara waalafidata qaleelan ma tashkuroona Qul huwa allathee tharaakum fee alardi wailayhi tuhsharoona Wayaqooloona mata hatha alwaAAdu in kuntum sadiqeena Qul innama alAAilmu AAinda Allahi wainnama ana natheerun mubeenun Falamma raawhu zulfatan seeat wujoohu allatheena kafaroo waqeela hatha allathee kuntum bihi taddaAAoona Qul araaytum in ahlakaniya Allahu waman maAAiya aw rahimana faman yujeeru alkafireena min AAathabin aleemin Qul huwa alrrahmanu amanna bihi waAAalayhi tawakkalna fasataAAlamoona man huwa fee dalalin mubeenin Qul araaytum in asbaha maokum ghawran faman yateekum bimain maAAeenin",
     "translation": "Blessed is He in whose hand is dominion, and He is over all things competent - [He] who created death and life to test you [as to] which of you is best in deed - and He is the Exalted in Might, the Forgiving - [And] who created seven heavens in layers. You do not see in the creation of the Most Merciful any inconsistency. So return [your] vision [to the sky]; do you see any breaks? Then return [your] vision twice again. [Your] vision will return to you humbled while it is fatigued. And We have certainly beautified the nearest heaven with lamps [i.e., stars] and have made [from] them what is thrown at the devils and have prepared for them the punishment of the Blaze. And for those who disbelieved in their Lord is the punishment of Hell, and wretched is the destination. When they are thrown into it, they hear from it a [dreadful] inhaling while it boils up. It almost bursts with rage. Every time a company is thrown into it, its keepers ask them, \"Did there not come to you a warner?\" They will say, \"Yes, a warner had come to us, but we denied and said, 'Allāh has not sent down anything. You are not but in great error.'\" And they will say, \"If only we had been listening or reasoning, we would not be among the companions of the Blaze.\" And they will admit their sin, so [it is] alienation for the companions of the Blaze. Indeed, those who fear their Lord unseen will have forgiveness and great reward. And conceal your speech or publicize it; indeed, He is Knowing of that within the breasts. Does He who created not know, while He is the Subtle, the Aware? It is He who made the earth tame for you - so walk among its slopes and eat of His provision - and to Him is the resurrection. Do you feel secure that He who is above would not cause the earth to swallow you and suddenly it would sway? Or do you feel secure that He who is above would not send against you a storm of stones? Then you would know how [severe] was My warning. And already had those before them denied, and how [terrible] was My reproach. Do they not see the birds above them with wings outspread and [sometimes] folded in? None holds them [aloft] except the Most Merciful. Indeed He is, of all things, Seeing. Or who is it that could be an army for you to aid you other than the Most Merciful? The disbelievers are not but in delusion. Or who is it that could provide for you if He withheld His provision? But they have persisted in insolence and aversion. Then is one who walks fallen on his face better guided or one who walks erect on a straight path? Say, \"It is He who has produced you and made for you hearing and vision and hearts [i.e., intellect]; little are you grateful.\" Say, \"It is He who has multiplied you throughout the earth, and to Him you will be gathered.\" And they say, \"When is this promise, if you should be truthful?\" Say, \"The knowledge is only with Allāh, and I am only a clear warner.\" But when they see it approaching, the faces of those who disbelieve will be distressed, and it will be said, \"This is that for which you used to call.\" Say, [O Muḥammad], \"Have you considered: whether Allāh should cause my death and those with me or have mercy upon us, who can protect the disbelievers from a painful punishment?\" Say, \"He is the Most Merciful; we have believed in Him, and upon Him we have relied. And you will [come to] know who it is that is in clear error.\" Say, \"Have you considered: if your water was to become sunken [into the earth], then who could bring you flowing water?\"",
     "practice": "Jabir reported that the Prophet would not sleep until he had recited it (with Surah As-Sajdah).",
     "repeat": "",
@@ -181,9 +181,9 @@
     },
     "takhrij_url": "https://quran.com/67/1-30",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57"
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
     "verified": false,
     "verified_by": "",
@@ -205,7 +205,7 @@
       "bedtime"
     ],
     "arabic": " قُلْ هُوَ ٱللَّهُ أَحَدٌ ٱللَّهُ ٱلصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
-    "transliteration": "Qul huwa Allahu ahad Allahu assamad Lam yalid walam yoolad Walam yakun lahu kufuwan ahad",
+    "transliteration": "Qul huwa Allahu ahadun Allahu alssamadu Lam yalid walam yooladu Walam yakun lahu kufuwan ahadun",
     "translation": "Say, \"He is Allāh, [who is] One, Allāh, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.\"",
     "practice": "Recite with Al-Falaq and An-Nas, blow gently into the cupped palms, then wipe over the face and as much of the body as the hands can reach.",
     "repeat": "",
@@ -229,9 +229,9 @@
     },
     "takhrij_url": "https://quran.com/112/1-4",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57"
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
     "verified": false,
     "verified_by": "",
@@ -254,7 +254,7 @@
       "bedtime"
     ],
     "arabic": " قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ مِن شَرِّ مَا خَلَقَ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-    "transliteration": "Qul aAAoothu birabbi alfalaq Min sharri ma khalaq Wamin sharri ghasiqin ithawaqab Wamin sharri annaffathatifee alAAuqad Wamin sharri hasidin itha hasad",
+    "transliteration": "Qul aAAoothu birabbi alfalaqi Min sharri ma khalaqa Wamin sharri ghasiqin itha waqaba Wamin sharri alnnaffathati fee alAAuqadi Wamin sharri hasidin itha hasada",
     "translation": "Say, \"I seek refuge in the Lord of daybreak From the evil of that which He created And from the evil of darkness when it settles And from the evil of the blowers in knots And from the evil of an envier when he envies.\"",
     "practice": "Recite with Al-Ikhlas and An-Nas, blow gently into the cupped palms, then wipe over the face and as much of the body as the hands can reach.",
     "repeat": "",
@@ -278,9 +278,9 @@
     },
     "takhrij_url": "https://quran.com/113/1-5",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57"
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
     "verified": false,
     "verified_by": "",
@@ -303,7 +303,7 @@
       "bedtime"
     ],
     "arabic": " قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ مَلِكِ ٱلنَّاسِ إِلَـٰهِ ٱلنَّاسِ مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
-    "transliteration": "Qul aAAoothu birabbi annas Maliki annas Ilahi annas Min sharri alwaswasi alkhannas Allathee yuwaswisu fee sudoori annas Mina aljinnati wannas",
+    "transliteration": "Qul aAAoothu birabbi alnnasi Maliki alnnasi Ilahi alnnasi Min sharri alwaswasi alkhannasi Allathee yuwaswisu fee sudoori alnnasi Mina aljinnati wa alnnasm",
     "translation": "Say, \"I seek refuge in the Lord of mankind, The Sovereign of mankind, The God of mankind, From the evil of the retreating whisperer - Who whispers [evil] into the breasts of mankind - From among the jinn and mankind\".",
     "practice": "Recite with Al-Ikhlas and Al-Falaq, blow gently into the cupped palms, then wipe over the face and as much of the body as the hands can reach.",
     "repeat": "",
@@ -327,9 +327,9 @@
     },
     "takhrij_url": "https://quran.com/114/1-6",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57"
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
     "verified": false,
     "verified_by": "",
@@ -544,7 +544,7 @@
       "bedtime"
     ],
     "arabic": " قُلْ يَـٰٓأَيُّهَا ٱلْكَـٰفِرُونَ لَآ أَعْبُدُ مَا تَعْبُدُونَ وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ وَلَآ أَنَا۠ عَابِدٌ مَّا عَبَدتُّمْ وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ لَكُمْ دِينُكُمْ وَلِىَ دِينِ",
-    "transliteration": "Qul ya ayyuha alkafiroon La aAAbudu ma taAAbudoon Wala antum AAabidoona maaAAbud Wala ana AAabidun maAAabadtum Wala antum AAabidoona maaAAbud Lakum deenukum waliya deen",
+    "transliteration": "Qul ya ayyuha alkafiroona La aAAbudu ma taAAbudoona Wala antum AAabidoona ma aAAbudu Wala ana AAabidun ma AAabadtum Wala antum AAabidoona ma aAAbudu Lakum deenukum waliya deeni",
     "translation": "Say, \"O disbelievers, I do not worship what you worship. Nor are you worshippers of what I worship. Nor will I be a worshipper of what you worship. Nor will you be worshippers of what I worship. For you is your religion, and for me is my religion.\"",
     "practice": "Recite the surah, then sleep on its ending.",
     "repeat": "",
@@ -568,9 +568,9 @@
     },
     "takhrij_url": "https://sunnah.com/abudawud:5055",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "grade": "fawazahmed0/hadith-api grades on ara-abudawud"
     },
     "verified": false,
@@ -587,7 +587,7 @@
     ],
     "times": [],
     "arabic": " الٓمٓ ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ وَٱلَّذِينَ يُؤْمِنُونَ بِمَآ أُنزِلَ إِلَيْكَ وَمَآ أُنزِلَ مِن قَبْلِكَ وَبِٱلْـَٔاخِرَةِ هُمْ يُوقِنُونَ أُو۟لَـٰٓئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ إِنَّ ٱلَّذِينَ كَفَرُوا۟ سَوَآءٌ عَلَيْهِمْ ءَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ خَتَمَ ٱللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰٓ أَبْصَـٰرِهِمْ غِشَـٰوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ وَمِنَ ٱلنَّاسِ مَن يَقُولُ ءَامَنَّا بِٱللَّهِ وَبِٱلْيَوْمِ ٱلْـَٔاخِرِ وَمَا هُم بِمُؤْمِنِينَ يُخَـٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا۟ فِى ٱلْأَرْضِ قَالُوٓا۟ إِنَّمَا نَحْنُ مُصْلِحُونَ أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
-    "transliteration": "Alif-lam-meem Thalika alkitabu larayba feehi hudan lilmuttaqeen Allatheena yu/minoona bilghaybiwayuqeemoona assalata wamimma razaqnahumyunfiqoon Wallatheena yu/minoona bimaonzila ilayka wama onzila min qablika wabil-akhiratihum yooqinoon Ola-ika AAala hudan minrabbihim waola-ika humu almuflihoon Inna allatheena kafaroo sawaonAAalayhim aanthartahum am lam tunthirhum layu/minoon Khatama Allahu AAala quloobihimwaAAala samAAihim waAAala absarihim ghishawatunwalahum AAathabun AAatheem Wamina annasi man yaqoolu amannabiAllahi wabilyawmi al-akhiri wamahum bimu/mineen YukhadiAAoona Allaha wallatheenaamanoo wama yakhdaAAoona illa anfusahum wamayashAAuroon Fee quloobihim maradun fazadahumuAllahu maradan walahum AAathabun aleemun bimakanoo yakthiboon Wa-itha qeela lahum latufsidoo fee al-ardi qaloo innama nahnumuslihoon Ala innahum humu almufsidoona walakinla yashAAuroon",
+    "transliteration": "Aliflammeem Thalika alkitabu la rayba feehi hudan lilmuttaqeena Allatheena yuminoona bialghaybi wayuqeemoona alssalata wamimma razaqnahum yunfiqoona Waallatheena yuminoona bima onzila ilayka wama onzila min qablika wabialakhirati hum yooqinoona Olaika AAala hudan min rabbihim waolaika humu almuflihoona Inna allatheena kafaroo sawaon AAalayhim aanthartahum am lam tunthirhum la yuminoona Khatama Allahu AAala quloobihim waAAala samAAihim waAAala absarihim ghishawatun walahum AAathabun AAatheemun Wamina alnnasi man yaqoolu amanna biAllahi wabialyawmi alakhiri wama hum bimumineena YukhadiAAoona Allaha waallatheena amanoo wama yakhdaAAoona illa anfusahum wama yashAAuroona Fee quloobihim maradun fazadahumu Allahu maradan walahum AAathabun aleemun bima kanoo yakthiboona Waitha qeela lahum la tufsidoo fee alardi qaloo innama nahnu muslihoona Ala innahum humu almufsidoona walakin la yashAAuroona",
     "translation": "Alif, Lām, Meem. This is the Book about which there is no doubt, a guidance for those conscious of Allāh - Who believe in the unseen, establish prayer, and spend out of what We have provided for them, And who believe in what has been revealed to you, [O Muḥammad], and what was revealed before you, and of the Hereafter they are certain [in faith]. Those are upon [right] guidance from their Lord, and it is those who are the successful. Indeed, those who disbelieve - it is all the same for them whether you warn them or do not warn them - they will not believe. Allāh has set a seal upon their hearts and upon their hearing, and over their vision is a veil. And for them is a great punishment. And of the people are some who say, \"We believe in Allāh and the Last Day,\" but they are not believers. They [think to] deceive Allāh and those who believe, but they deceive not except themselves and perceive [it] not. In their hearts is disease, so Allāh has increased their disease; and for them is a painful punishment because they [habitually] used to lie. And when it is said to them, \"Do not cause corruption on the earth,\" they say, \"We are but reformers.\" Unquestionably, it is they who are the corrupters, but they perceive [it] not.",
     "practice": "Recite the passage.",
     "repeat": "",
@@ -605,9 +605,9 @@
     },
     "takhrij_url": "https://quran.com/2/1-12",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
     },
     "verified": false,
@@ -624,7 +624,7 @@
     ],
     "times": [],
     "arabic": "وَٱتَّبَعُوا۟ مَا تَتْلُوا۟ ٱلشَّيَـٰطِينُ عَلَىٰ مُلْكِ سُلَيْمَـٰنَ ۖ وَمَا كَفَرَ سُلَيْمَـٰنُ وَلَـٰكِنَّ ٱلشَّيَـٰطِينَ كَفَرُوا۟ يُعَلِّمُونَ ٱلنَّاسَ ٱلسِّحْرَ وَمَآ أُنزِلَ عَلَى ٱلْمَلَكَيْنِ بِبَابِلَ هَـٰرُوتَ وَمَـٰرُوتَ ۚ وَمَا يُعَلِّمَانِ مِنْ أَحَدٍ حَتَّىٰ يَقُولَآ إِنَّمَا نَحْنُ فِتْنَةٌ فَلَا تَكْفُرْ ۖ فَيَتَعَلَّمُونَ مِنْهُمَا مَا يُفَرِّقُونَ بِهِۦ بَيْنَ ٱلْمَرْءِ وَزَوْجِهِۦ ۚ وَمَا هُم بِضَآرِّينَ بِهِۦ مِنْ أَحَدٍ إِلَّا بِإِذْنِ ٱللَّهِ ۚ وَيَتَعَلَّمُونَ مَا يَضُرُّهُمْ وَلَا يَنفَعُهُمْ ۚ وَلَقَدْ عَلِمُوا۟ لَمَنِ ٱشْتَرَىٰهُ مَا لَهُۥ فِى ٱلْـَٔاخِرَةِ مِنْ خَلَـٰقٍ ۚ وَلَبِئْسَ مَا شَرَوْا۟ بِهِۦٓ أَنفُسَهُمْ ۚ لَوْ كَانُوا۟ يَعْلَمُونَ",
-    "transliteration": "WattabaAAoo ma tatloo ashshayateenuAAala mulki sulaymana wama kafara sulaymanuwalakinna ashshayateena kafarooyuAAallimoona annasa assihra wamaonzila AAala almalakayni bibabila harootawamaroota wama yuAAallimani min ahadinhatta yaqoola innama nahnufitnatun fala takfur fayataAAallamoona minhuma mayufarriqoona bihi bayna almar-i wazawjihi wama hum bidarreenabihi min ahadin illa bi-ithni AllahiwayataAAallamoona ma yadurruhum walayanfaAAuhum walaqad AAalimoo lamani ishtarahu malahu fee al-akhirati min khalaqin walabi/sa masharaw bihi anfusahum law kanoo yaAAlamoon",
+    "transliteration": "WaittabaAAoo ma tatloo alshshayateenu AAala mulki sulaymana wama kafara sulaymanu walakinna alshshayateena kafaroo yuAAallimoona alnnasa alssihra wama onzila AAala almalakayni bibabila haroota wamaroota wama yuAAallimani min ahadin hatta yaqoola innama nahnu fitnatun fala takfur fayataAAallamoona minhuma ma yufarriqoona bihi bayna almari wazawjihi wama hum bidarreena bihi min ahadin illa biithni Allahi wayataAAallamoona ma yadurruhum wala yanfaAAuhum walaqad AAalimoo lamani ishtarahu ma lahu fee alakhirati min khalaqin walabisa ma sharaw bihi anfusahum law kanoo yaAAlamoona",
     "translation": "And they followed [instead] what the devils had recited during the reign of Solomon. It was not Solomon who disbelieved, but the devils disbelieved, teaching people magic and that which was revealed to the two angels at Babylon, Hārūt and Mārūt. But they [i.e., the two angels] do not teach anyone unless they say, \"We are a trial, so do not disbelieve [by practicing magic].\" And [yet] they learn from them that by which they cause separation between a man and his wife. But they do not harm anyone through it except by permission of Allāh. And they [i.e., people] learn what harms them and does not benefit them. But they [i.e., the Children of Israel] certainly knew that whoever purchased it [i.e., magic] would not have in the Hereafter any share. And wretched is that for which they sold themselves, if they only knew.",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -642,9 +642,9 @@
     },
     "takhrij_url": "https://quran.com/2/102",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
     },
     "verified": false,
@@ -661,7 +661,7 @@
     ],
     "times": [],
     "arabic": "وَإِلَـٰهُكُمْ إِلَـٰهٌ وَٰحِدٌ ۖ لَّآ إِلَـٰهَ إِلَّا هُوَ ٱلرَّحْمَـٰنُ ٱلرَّحِيمُ إِنَّ فِى خَلْقِ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ وَٱخْتِلَـٰفِ ٱلَّيْلِ وَٱلنَّهَارِ وَٱلْفُلْكِ ٱلَّتِى تَجْرِى فِى ٱلْبَحْرِ بِمَا يَنفَعُ ٱلنَّاسَ وَمَآ أَنزَلَ ٱللَّهُ مِنَ ٱلسَّمَآءِ مِن مَّآءٍ فَأَحْيَا بِهِ ٱلْأَرْضَ بَعْدَ مَوْتِهَا وَبَثَّ فِيهَا مِن كُلِّ دَآبَّةٍ وَتَصْرِيفِ ٱلرِّيَـٰحِ وَٱلسَّحَابِ ٱلْمُسَخَّرِ بَيْنَ ٱلسَّمَآءِ وَٱلْأَرْضِ لَـَٔايَـٰتٍ لِّقَوْمٍ يَعْقِلُونَ",
-    "transliteration": "Wa-ilahukum ilahun wahidunla ilaha illa huwa arrahmanuarraheem Inna fee khalqi assamawatiwal-ardi wakhtilafi allayli wannahariwalfulki allatee tajree fee albahri bimayanfaAAu annasa wama anzala Allahumina assama-i min ma-in faahyabihi al-arda baAAda mawtiha wabaththa feehamin kulli dabbatin watasreefi arriyahiwassahabi almusakhkhari bayna assama-iwal-ardi laayatin liqawminyaAAqiloon",
+    "transliteration": "Wailahukum ilahun wahidun la ilaha illa huwa alrrahmanu alrraheemu Inna fee khalqi alssamawati waalardi waikhtilafi allayli waalnnahari waalfulki allatee tajree fee albahri bima yanfaAAu alnnasa wama anzala Allahu mina alssamai min main faahya bihi alarda baAAda mawtiha wabaththa feeha min kulli dabbatin watasreefi alrriyahi waalssahabi almusakhkhari bayna alssamai waalardi laayatin liqawmin yaAAqiloona",
     "translation": "And your god is one God. There is no deity [worthy of worship] except Him, the Entirely Merciful, the Especially Merciful. Indeed, in the creation of the heavens and the earth, and the alternation of the night and the day, and the [great] ships which sail through the sea with that which benefits people, and what Allāh has sent down from the heavens of rain, giving life thereby to the earth after its lifelessness and dispersing therein every [kind of] moving creature, and [His] directing of the winds and the clouds controlled between the heaven and earth are signs for a people who use reason.",
     "practice": "Recite the passage.",
     "repeat": "",
@@ -679,9 +679,9 @@
     },
     "takhrij_url": "https://quran.com/2/163-164",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
     },
     "verified": false,
@@ -698,7 +698,7 @@
     ],
     "times": [],
     "arabic": "إِنَّ رَبَّكُمُ ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ يُغْشِى ٱلَّيْلَ ٱلنَّهَارَ يَطْلُبُهُۥ حَثِيثًا وَٱلشَّمْسَ وَٱلْقَمَرَ وَٱلنُّجُومَ مُسَخَّرَٰتٍۭ بِأَمْرِهِۦٓ ۗ أَلَا لَهُ ٱلْخَلْقُ وَٱلْأَمْرُ ۗ تَبَارَكَ ٱللَّهُ رَبُّ ٱلْعَـٰلَمِينَ ٱدْعُوا۟ رَبَّكُمْ تَضَرُّعًا وَخُفْيَةً ۚ إِنَّهُۥ لَا يُحِبُّ ٱلْمُعْتَدِينَ وَلَا تُفْسِدُوا۟ فِى ٱلْأَرْضِ بَعْدَ إِصْلَـٰحِهَا وَٱدْعُوهُ خَوْفًا وَطَمَعًا ۚ إِنَّ رَحْمَتَ ٱللَّهِ قَرِيبٌ مِّنَ ٱلْمُحْسِنِينَ",
-    "transliteration": "Inna rabbakumu Allahu allatheekhalaqa assamawati wal-ardafee sittati ayyamin thumma istawa AAalaalAAarshi yughshee allayla annahara yatlubuhuhatheethan washshamsa walqamara wannujoomamusakhkharatin bi-amrihi ala lahu alkhalqu wal-amrutabaraka Allahu rabbu alAAalameen OdAAoo rabbakum tadarruAAanwakhufyatan innahu la yuhibbu almuAAtadeen Wala tufsidoo fee al-ardibaAAda islahiha wadAAoohu khawfan watamaAAaninna rahmata Allahi qareebun mina almuhsineen",
+    "transliteration": "Inna rabbakumu Allahu allathee khalaqa alssamawati waalarda fee sittati ayyamin thumma istawa AAala alAAarshi yughshee allayla alnnahara yatlubuhu hatheethan waalshshamsa waalqamara waalnnujooma musakhkharatin biamrihi ala lahu alkhalqu waalamru tabaraka Allahu rabbu alAAalameena OdAAoo rabbakum tadarruAAan wakhufyatan innahu la yuhibbu almuAAtadeena Wala tufsidoo fee alardi baAAda islahiha waodAAoohu khawfan watamaAAan inna rahmata Allahi qareebun mina almuhsineena",
     "translation": "Indeed, your Lord is Allāh, who created the heavens and earth in six days and then established Himself above the Throne. He covers the night with the day, [another night] chasing it rapidly; and [He created] the sun, the moon, and the stars, subjected by His command. Unquestionably, His is the creation and the command; blessed is Allāh, Lord of the worlds. Call upon your Lord in humility and privately; indeed, He does not like transgressors. And cause not corruption upon the earth after its reformation. And invoke Him in fear and aspiration. Indeed, the mercy of Allāh is near to the doers of good.",
     "practice": "Recite the passage.",
     "repeat": "",
@@ -716,9 +716,9 @@
     },
     "takhrij_url": "https://quran.com/7/54-56",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
     },
     "verified": false,
@@ -735,7 +735,7 @@
     ],
     "times": [],
     "arabic": " وَٱلصَّـٰٓفَّـٰتِ صَفًّا فَٱلزَّٰجِرَٰتِ زَجْرًا فَٱلتَّـٰلِيَـٰتِ ذِكْرًا إِنَّ إِلَـٰهَكُمْ لَوَٰحِدٌ رَّبُّ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ وَمَا بَيْنَهُمَا وَرَبُّ ٱلْمَشَـٰرِقِ إِنَّا زَيَّنَّا ٱلسَّمَآءَ ٱلدُّنْيَا بِزِينَةٍ ٱلْكَوَاكِبِ وَحِفْظًا مِّن كُلِّ شَيْطَـٰنٍ مَّارِدٍ لَّا يَسَّمَّعُونَ إِلَى ٱلْمَلَإِ ٱلْأَعْلَىٰ وَيُقْذَفُونَ مِن كُلِّ جَانِبٍ دُحُورًا ۖ وَلَهُمْ عَذَابٌ وَاصِبٌ إِلَّا مَنْ خَطِفَ ٱلْخَطْفَةَ فَأَتْبَعَهُۥ شِهَابٌ ثَاقِبٌ",
-    "transliteration": "Wassaffati saffa Fazzajirati zajra Fattaliyati thikra Inna ilahakum lawahid Rabbu assamawati wal-ardiwama baynahuma warabbu almashariq Inna zayyanna assamaaaddunya bizeenatin alkawakib Wahifthan min kulli shaytaninmarid La yassammaAAoona ila almala-ial-aAAla wayuqthafoona min kulli janib Duhooran walahum AAathabun wasib Illa man khatifa alkhatfatafaatbaAAahu shihabun thaqib",
+    "transliteration": "Waalssaffati saffan Faalzzajirati zajran Faalttaliyati thikran Inna ilahakum lawahidun Rabbu alssamawati waalardi wama baynahuma warabbu almashariqi Inna zayyanna alssamaa alddunya bizeenatin alkawakibi Wahifthan min kulli shaytanin maridin La yassammaAAoona ila almalai alaAAla wayuqthafoona min kulli janibin Duhooran walahum AAathabun wasibun Illa man khatifa alkhatfata faatbaAAahu shihabun thaqibun",
     "translation": "By those [angels] lined up in rows And those who drive [the clouds] And those who recite the message, Indeed, your God is One, Lord of the heavens and the earth and that between them and Lord of the sunrises. Indeed, We have adorned the nearest heaven with an adornment of stars And as protection against every rebellious devil [So] they may not listen to the exalted assembly [of angels] and are pelted from every side, Repelled; and for them is a constant punishment, Except one who snatches [some words] by theft, but they are pursued by a burning flame, piercing [in brightness].",
     "practice": "Recite the passage.",
     "repeat": "",
@@ -753,9 +753,9 @@
     },
     "takhrij_url": "https://quran.com/37/1-10",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
     },
     "verified": false,
@@ -772,7 +772,7 @@
     ],
     "times": [],
     "arabic": "لَوْ أَنزَلْنَا هَـٰذَا ٱلْقُرْءَانَ عَلَىٰ جَبَلٍ لَّرَأَيْتَهُۥ خَـٰشِعًا مُّتَصَدِّعًا مِّنْ خَشْيَةِ ٱللَّهِ ۚ وَتِلْكَ ٱلْأَمْثَـٰلُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ هُوَ ٱللَّهُ ٱلَّذِى لَآ إِلَـٰهَ إِلَّا هُوَ ۖ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ۖ هُوَ ٱلرَّحْمَـٰنُ ٱلرَّحِيمُ هُوَ ٱللَّهُ ٱلَّذِى لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْمَلِكُ ٱلْقُدُّوسُ ٱلسَّلَـٰمُ ٱلْمُؤْمِنُ ٱلْمُهَيْمِنُ ٱلْعَزِيزُ ٱلْجَبَّارُ ٱلْمُتَكَبِّرُ ۚ سُبْحَـٰنَ ٱللَّهِ عَمَّا يُشْرِكُونَ هُوَ ٱللَّهُ ٱلْخَـٰلِقُ ٱلْبَارِئُ ٱلْمُصَوِّرُ ۖ لَهُ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ ۚ يُسَبِّحُ لَهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۖ وَهُوَ ٱلْعَزِيزُ ٱلْحَكِيمُ",
-    "transliteration": "Law anzalna hatha alqur-anaAAala jabalin laraaytahu khashiAAan mutasaddiAAanmin khashyati Allahi watilka al-amthalu nadribuhalinnasi laAAallahum yatafakkaroon Huwa Allahu allathee lailaha illa huwa AAalimu alghaybi washshahadatihuwa arrahmanu arraheem Huwa Allahu allathee lailaha illa huwa almaliku alquddoosu assalamualmu/minu almuhayminu alAAazeezu aljabbaru almutakabbirusubhana Allahi AAamma yushrikoon Huwa Allahu alkhaliqu albari-oalmusawwiru lahu al-asmao alhusnayusabbihu lahu ma fee assamawatiwal-ardi wahuwa alAAazeezu alhakeem",
+    "transliteration": "Law anzalna hatha alqurana AAala jabalin laraaytahu khashiAAan mutasaddiAAan min khashyati Allahi watilka alamthalu nadribuha lilnnasi laAAallahum yatafakkaroona Huwa Allahu allathee la ilaha illa huwa AAalimu alghaybi waalshshahadati huwa alrrahmanu alrraheemu Huwa Allahu allathee la ilaha illa huwa almaliku alquddoosu alssalamu almuminu almuhayminu alAAazeezu aljabbaru almutakabbiru subhana Allahi AAamma yushrikoona Huwa Allahu alkhaliqu albario almusawwiru lahu alasmao alhusna yusabbihu lahu ma fee alssamawati waalardi wahuwa alAAazeezu alhakeemu",
     "translation": "If We had sent down this Qur’ān upon a mountain, you would have seen it humbled and splitting from fear of Allāh. And these examples We present to the people that perhaps they will give thought. He is Allāh, other than whom there is no deity, Knower of the unseen and the witnessed. He is the Entirely Merciful, the Especially Merciful. He is Allāh, other than whom there is no deity, the Sovereign, the Pure, the Perfection, the Grantor of Security, the Overseer, the Exalted in Might, the Compeller, the Superior. Exalted is Allāh above whatever they associate with Him. He is Allāh, the Creator, the Producer, the Fashioner; to Him belong the best names. Whatever is in the heavens and earth is exalting Him. And He is the Exalted in Might, the Wise.",
     "practice": "Recite the passage.",
     "repeat": "",
@@ -790,9 +790,9 @@
     },
     "takhrij_url": "https://quran.com/59/21-24",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
     },
     "verified": false,
@@ -809,7 +809,7 @@
     ],
     "times": [],
     "arabic": "فَإِذَا بَلَغْنَ أَجَلَهُنَّ فَأَمْسِكُوهُنَّ بِمَعْرُوفٍ أَوْ فَارِقُوهُنَّ بِمَعْرُوفٍ وَأَشْهِدُوا۟ ذَوَىْ عَدْلٍ مِّنكُمْ وَأَقِيمُوا۟ ٱلشَّهَـٰدَةَ لِلَّهِ ۚ ذَٰلِكُمْ يُوعَظُ بِهِۦ مَن كَانَ يُؤْمِنُ بِٱللَّهِ وَٱلْيَوْمِ ٱلْـَٔاخِرِ ۚ وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ۚ وَمَن يَتَوَكَّلْ عَلَى ٱللَّهِ فَهُوَ حَسْبُهُۥٓ ۚ إِنَّ ٱللَّهَ بَـٰلِغُ أَمْرِهِۦ ۚ قَدْ جَعَلَ ٱللَّهُ لِكُلِّ شَىْءٍ قَدْرًا",
-    "transliteration": "Fa-itha balaghna ajalahunnafaamsikoohunna bimaAAroofin aw fariqoohunna bimaAAroofinwaashhidoo thaway AAadlin minkum waaqeemoo ashshahadatalillahi thalikum yooAAathu bihi man kanayu/minu billahi walyawmi al-akhiriwaman yattaqi Allaha yajAAal lahu makhraja Wayarzuqhu min haythu la yahtasibuwaman yatawakkal AAala Allahi fahuwa hasbuhuinna Allaha balighu amrihi qad jaAAala Allahulikulli shay-in qadra",
+    "transliteration": "Faitha balaghna ajalahunna faamsikoohunna bimaAAroofin aw fariqoohunna bimaAAroofin waashhidoo thaway AAadlin minkum waaqeemoo alshshahadata lillahi thalikum yooAAathu bihi man kana yuminu biAllahi waalyawmi alakhiri waman yattaqi Allaha yajAAal lahu makhrajan Wayarzuqhu min haythu la yahtasibu waman yatawakkal AAala Allahi fahuwa hasbuhu inna Allaha balighu amrihi qad jaAAala Allahu likulli shayin qadran",
     "translation": "And when they have [nearly] fulfilled their term, either retain them according to acceptable terms or part with them according to acceptable terms. And bring to witness two just men from among you and establish the testimony for [the acceptance of] Allāh. That is instructed to whoever should believe in Allāh and the Last Day. And whoever fears Allāh - He will make for him a way out And will provide for him from where he does not expect. And whoever relies upon Allāh - then He is sufficient for him. Indeed, Allāh will accomplish His purpose. Allāh has already set for everything a [decreed] extent.",
     "practice": "Recite the passage.",
     "repeat": "",
@@ -827,9 +827,9 @@
     },
     "takhrij_url": "https://quran.com/65/2-3",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
     },
     "verified": false,
@@ -846,7 +846,7 @@
     ],
     "times": [],
     "arabic": "وَأُخْرَىٰ تُحِبُّونَهَا ۖ نَصْرٌ مِّنَ ٱللَّهِ وَفَتْحٌ قَرِيبٌ ۗ وَبَشِّرِ ٱلْمُؤْمِنِينَ",
-    "transliteration": "Waokhra tuhibboonaha nasrunmina Allahi wafathun qarreebun wabashshirialmu/mineen",
+    "transliteration": "Waokhra tuhibboonaha nasrun mina Allahi wafathun qarreebun wabashshiri almumineena",
     "translation": "And [you will obtain] another [favor] that you love - victory from Allāh and an imminent conquest; and give good tidings to the believers.",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -864,9 +864,9 @@
     },
     "takhrij_url": "https://quran.com/61/13",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -883,7 +883,7 @@
     ],
     "times": [],
     "arabic": "فَإِن تَوَلَّوْا۟ فَقَدْ أَبْلَغْتُكُم مَّآ أُرْسِلْتُ بِهِۦٓ إِلَيْكُمْ ۚ وَيَسْتَخْلِفُ رَبِّى قَوْمًا غَيْرَكُمْ وَلَا تَضُرُّونَهُۥ شَيْـًٔا ۚ إِنَّ رَبِّى عَلَىٰ كُلِّ شَىْءٍ حَفِيظٌ",
-    "transliteration": "Fa-in tawallaw faqad ablaghtukum maorsiltu bihi ilaykum wayastakhlifu rabbee qawman ghayrakum walatadurroonahu shay-an inna rabbee AAala kullishay-in hafeeth",
+    "transliteration": "Fain tawallaw faqad ablaghtukum ma orsiltu bihi ilaykum wayastakhlifu rabbee qawman ghayrakum wala tadurroonahu shayan inna rabbee AAala kulli shayin hafeethun",
     "translation": "But if you turn away, then I have already conveyed that with which I was sent to you. My Lord will give succession to a people other than you, and you will not harm Him at all. Indeed my Lord is, over all things, Guardian.\"",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -901,9 +901,9 @@
     },
     "takhrij_url": "https://quran.com/11/57",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -920,7 +920,7 @@
     ],
     "times": [],
     "arabic": "وَهُوَ ٱلْقَاهِرُ فَوْقَ عِبَادِهِۦ ۖ وَيُرْسِلُ عَلَيْكُمْ حَفَظَةً حَتَّىٰٓ إِذَا جَآءَ أَحَدَكُمُ ٱلْمَوْتُ تَوَفَّتْهُ رُسُلُنَا وَهُمْ لَا يُفَرِّطُونَ",
-    "transliteration": "Wahuwa alqahiru fawqa AAibadihiwayursilu AAalaykum hafathatan hattaitha jaa ahadakumu almawtu tawaffat-hurusuluna wahum la yufarritoon",
+    "transliteration": "Wahuwa alqahiru fawqa AAibadihi wayursilu AAalaykum hafathatan hatta itha jaa ahadakumu almawtu tawaffathu rusuluna wahum la yufarritoona",
     "translation": "And He is the subjugator over His servants, and He sends over you guardian-angels until, when death comes to one of you, Our messengers [i.e., angels of death] take him, and they do not fail [in their duties].",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -938,9 +938,9 @@
     },
     "takhrij_url": "https://quran.com/6/61",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -957,7 +957,7 @@
     ],
     "times": [],
     "arabic": "إِن كُلُّ نَفْسٍ لَّمَّا عَلَيْهَا حَافِظٌ",
-    "transliteration": "In kullu nafsin lamma AAalayha hafith",
+    "transliteration": "In kullu nafsin lamma AAalayha hafithun",
     "translation": "There is no soul but that it has over it a protector.",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -975,9 +975,9 @@
     },
     "takhrij_url": "https://quran.com/86/4",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -994,7 +994,7 @@
     ],
     "times": [],
     "arabic": "هُوَ ٱلْأَوَّلُ وَٱلْـَٔاخِرُ وَٱلظَّـٰهِرُ وَٱلْبَاطِنُ ۖ وَهُوَ بِكُلِّ شَىْءٍ عَلِيمٌ",
-    "transliteration": "Huwa al-awwalu wal-akhiru waththahiruwalbatinu wahuwa bikulli shay-in AAaleem",
+    "transliteration": "Huwa alawwalu waalakhiru waalththahiru waalbatinu wahuwa bikulli shayin AAaleemun",
     "translation": "He is the First and the Last, the Ascendant and the Intimate, and He is, of all things, Knowing.",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -1012,9 +1012,9 @@
     },
     "takhrij_url": "https://quran.com/57/3",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -1031,7 +1031,7 @@
     ],
     "times": [],
     "arabic": "وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ",
-    "transliteration": "Wa-itha maridtu fahuwayashfeen",
+    "transliteration": "Waitha maridtu fahuwa yashfeeni",
     "translation": "And when I am ill, it is He who cures me",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -1049,9 +1049,9 @@
     },
     "takhrij_url": "https://quran.com/26/80",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -1068,7 +1068,7 @@
     ],
     "times": [],
     "arabic": "فَقَضَىٰهُنَّ سَبْعَ سَمَـٰوَاتٍ فِى يَوْمَيْنِ وَأَوْحَىٰ فِى كُلِّ سَمَآءٍ أَمْرَهَا ۚ وَزَيَّنَّا ٱلسَّمَآءَ ٱلدُّنْيَا بِمَصَـٰبِيحَ وَحِفْظًا ۚ ذَٰلِكَ تَقْدِيرُ ٱلْعَزِيزِ ٱلْعَلِيمِ",
-    "transliteration": "Faqadahunna sabAAa samawatinfee yawmayni waawha fee kulli sama-in amrahawazayyanna assamaa addunyabimasabeeha wahifthan thalikataqdeeru alAAazeezi alAAaleem",
+    "transliteration": "Faqadahunna sabAAa samawatin fee yawmayni waawha fee kulli samain amraha wazayyanna alssamaa alddunya bimasabeeha wahifthan thalika taqdeeru alAAazeezi alAAaleemi",
     "translation": "And He completed them as seven heavens within two days and inspired [i.e., made known] in each heaven its command. And We adorned the nearest heaven with lamps [i.e., stars, for beauty] and as protection. That is the determination of the Exalted in Might, the Knowing.",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -1086,9 +1086,9 @@
     },
     "takhrij_url": "https://quran.com/41/12",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -1105,7 +1105,7 @@
     ],
     "times": [],
     "arabic": " طسٓ ۚ تِلْكَ ءَايَـٰتُ ٱلْقُرْءَانِ وَكِتَابٍ مُّبِينٍ",
-    "transliteration": "Ta-seen tilka ayatualqur-ani wakitabin mubeen",
+    "transliteration": "Taseen tilka ayatu alqurani wakitabin mubeenin",
     "translation": "Ṭā, Seen. These are the verses of the Qur’ān [i.e., recitation] and a clear Book",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -1123,9 +1123,9 @@
     },
     "takhrij_url": "https://quran.com/27/1",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -1142,7 +1142,7 @@
     ],
     "times": [],
     "arabic": "قُلْنَا يَـٰنَارُ كُونِى بَرْدًا وَسَلَـٰمًا عَلَىٰٓ إِبْرَٰهِيمَ",
-    "transliteration": "Qulna ya naru kooneebardan wasalaman AAala ibraheem",
+    "transliteration": "Qulna ya naru koonee bardan wasalaman AAala ibraheema",
     "translation": "We [i.e., Allāh] said, \"O fire, be coolness and safety upon Abraham.\"",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -1160,9 +1160,9 @@
     },
     "takhrij_url": "https://quran.com/21/69",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -1179,7 +1179,7 @@
     ],
     "times": [],
     "arabic": "۞ وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ أَنْ أَلْقِ عَصَاكَ ۖ فَإِذَا هِىَ تَلْقَفُ مَا يَأْفِكُونَ",
-    "transliteration": "Waawhayna ila moosaan alqi AAasaka fa-itha hiya talqafu maya/fikoon",
+    "transliteration": "Waawhayna ila moosa an alqi AAasaka faitha hiya talqafu ma yafikoona",
     "translation": "And We inspired to Moses, \"Throw your staff,\" and at once it devoured what they were falsifying.",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -1197,9 +1197,9 @@
     },
     "takhrij_url": "https://quran.com/7/117",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -1216,7 +1216,7 @@
     ],
     "times": [],
     "arabic": "إِلَّا مَنِ ٱسْتَرَقَ ٱلسَّمْعَ فَأَتْبَعَهُۥ شِهَابٌ مُّبِينٌ",
-    "transliteration": "Illa mani istaraqa assamAAafaatbaAAahu shihabun mubeen",
+    "transliteration": "Illa mani istaraqa alssamAAa faatbaAAahu shihabun mubeenun",
     "translation": "Except one who steals a hearing and is pursued by a clear burning flame.",
     "practice": "Recite the verse.",
     "repeat": "",
@@ -1234,9 +1234,9 @@
     },
     "takhrij_url": "https://quran.com/15/18",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
     },
     "verified": false,
@@ -1253,7 +1253,7 @@
     ],
     "times": [],
     "arabic": " تَبَّتْ يَدَآ أَبِى لَهَبٍ وَتَبَّ مَآ أَغْنَىٰ عَنْهُ مَالُهُۥ وَمَا كَسَبَ سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ وَٱمْرَأَتُهُۥ حَمَّالَةَ ٱلْحَطَبِ فِى جِيدِهَا حَبْلٌ مِّن مَّسَدٍۭ",
-    "transliteration": "Tabbat yada abee lahabin watab Ma aghna AAanhu maluhuwama kasab Sayasla naran thatalahab Wamraatuhu hammalata alhatab Fee jeediha hablun min masad",
+    "transliteration": "Tabbat yada abee lahabin watabba Ma aghna AAanhu maluhu wama kasaba Sayasla naran thata lahabin Waimraatuhu hammalata alhatabi Fee jeediha hablun min masadin",
     "translation": "May the hands of Abū Lahab be ruined, and ruined is he. His wealth will not avail him or that which he gained. He will [enter to] burn in a Fire of [blazing] flame And his wife [as well] - the carrier of firewood. Around her neck is a rope of [twisted] fiber.",
     "practice": "",
     "repeat": "41 times",
@@ -1271,9 +1271,9 @@
     },
     "takhrij_url": "https://quran.com/111/1-5",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2032). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
     },
     "verified": false,
@@ -1290,7 +1290,7 @@
     ],
     "times": [],
     "arabic": "وَمَكَرُوا۟ وَمَكَرَ ٱللَّهُ ۖ وَٱللَّهُ خَيْرُ ٱلْمَـٰكِرِينَ",
-    "transliteration": "Wamakaroo wamakara Allahu wallahukhayru almakireen",
+    "transliteration": "Wamakaroo wamakara Allahu waAllahu khayru almakireena",
     "translation": "And they [i.e., the disbelievers] planned, but Allāh planned. And Allāh is the best of planners.",
     "practice": "",
     "repeat": "41 times",
@@ -1308,9 +1308,9 @@
     },
     "takhrij_url": "https://quran.com/3/54",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2031). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
     },
     "verified": false,
@@ -1327,7 +1327,7 @@
     ],
     "times": [],
     "arabic": "إِنَّ ٱلَّذِينَ يَأْكُلُونَ أَمْوَٰلَ ٱلْيَتَـٰمَىٰ ظُلْمًا إِنَّمَا يَأْكُلُونَ فِى بُطُونِهِمْ نَارًا ۖ وَسَيَصْلَوْنَ سَعِيرًا",
-    "transliteration": "Inna allatheena ya/kuloona amwalaalyatama thulman innamaya/kuloona fee butoonihim naran wasayaslawnasaAAeera",
+    "transliteration": "Inna allatheena yakuloona amwala alyatama thulman innama yakuloona fee butoonihim naran wasayaslawna saAAeeran",
     "translation": "Indeed, those who devour the property of orphans unjustly are only consuming into their bellies fire. And they will be burned in a Blaze [i.e., Hellfire].",
     "practice": "",
     "repeat": "101 times",
@@ -1345,9 +1345,9 @@
     },
     "takhrij_url": "https://quran.com/4/10",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2037). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
     },
     "verified": false,
@@ -1364,7 +1364,7 @@
     ],
     "times": [],
     "arabic": "قُلْنَا يَـٰنَارُ كُونِى بَرْدًا وَسَلَـٰمًا عَلَىٰٓ إِبْرَٰهِيمَ",
-    "transliteration": "Qulna ya naru kooneebardan wasalaman AAala ibraheem",
+    "transliteration": "Qulna ya naru koonee bardan wasalaman AAala ibraheema",
     "translation": "We [i.e., Allāh] said, \"O fire, be coolness and safety upon Abraham.\"",
     "practice": "",
     "repeat": "41 times",
@@ -1382,9 +1382,9 @@
     },
     "takhrij_url": "https://quran.com/21/69",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2021). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
     },
     "verified": false,
@@ -1401,7 +1401,7 @@
     ],
     "times": [],
     "arabic": "وُجُوهٌ يَوْمَئِذٍ نَّاضِرَةٌ",
-    "transliteration": "Wujoohun yawma-ithin nadira",
+    "transliteration": "Wujoohun yawmaithin nadiratun",
     "translation": "[Some] faces, that Day, will be radiant,",
     "practice": "",
     "repeat": "11 times, with Al-Baqarah 102 (11 times)",
@@ -1419,9 +1419,9 @@
     },
     "takhrij_url": "https://quran.com/75/22",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2023). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
     },
     "verified": false,
@@ -1438,7 +1438,7 @@
     ],
     "times": [],
     "arabic": "هُوَ ٱلْأَوَّلُ وَٱلْـَٔاخِرُ وَٱلظَّـٰهِرُ وَٱلْبَاطِنُ ۖ وَهُوَ بِكُلِّ شَىْءٍ عَلِيمٌ",
-    "transliteration": "Huwa al-awwalu wal-akhiru waththahiruwalbatinu wahuwa bikulli shay-in AAaleem",
+    "transliteration": "Huwa alawwalu waalakhiru waalththahiru waalbatinu wahuwa bikulli shayin AAaleemun",
     "translation": "He is the First and the Last, the Ascendant and the Intimate, and He is, of all things, Knowing.",
     "practice": "",
     "repeat": "41 times and 33 times",
@@ -1456,9 +1456,9 @@
     },
     "takhrij_url": "https://quran.com/57/3",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-09-30)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Quran.com resource 57",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2024). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
     },
     "verified": false,

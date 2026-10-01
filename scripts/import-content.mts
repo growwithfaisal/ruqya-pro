@@ -18,7 +18,7 @@ const DUA_DHIKR_COMMIT = "f42f895f914319a844c3e3c2279483cae060ea19";
 const DUA_DHIKR_BASE = `https://raw.githubusercontent.com/fitrahive/dua-dhikr/${DUA_DHIKR_COMMIT}/data/dua-dhikr`;
 const QURAN_API = "https://api.quran.com/api/v4";
 const TR_SAHEEH = 20;
-const TR_TRANSLIT = 57;
+const TANZIL_TRANSLIT = "https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/quran_transliteration.json"; // Tanzil en.transliteration, word-spaced
 
 const missing: string[] = [];
 const mismatches: string[] = [];
@@ -31,6 +31,7 @@ async function json<T>(url: string): Promise<T> {
 
 /* ---------- Quran ---------- */
 interface QVerse { verse_key: string; text_uthmani: string }
+let tanzilCache: { id: number; verses: { id: number; transliteration: string }[] }[] | null = null;
 async function quranRange(chapter: number, from: number, to: number) {
   const ar: string[] = [];
   const en: string[] = [];
@@ -39,10 +40,11 @@ async function quranRange(chapter: number, from: number, to: number) {
     const k = `${chapter}:${v}`;
     const a = await json<{ verse: QVerse }>(`${QURAN_API}/verses/by_key/${k}?fields=text_uthmani`);
     const t = await json<{ translations: { text: string }[] }>(`${QURAN_API}/quran/translations/${TR_SAHEEH}?verse_key=${k}`);
-    const l = await json<{ translations: { text: string }[] }>(`${QURAN_API}/quran/translations/${TR_TRANSLIT}?verse_key=${k}`);
+    const tz = (tanzilCache ??= await json<NonNullable<typeof tanzilCache>>(TANZIL_TRANSLIT));
+    const l = tz.find((x) => x.id === chapter)!.verses[v - 1];
     ar.push(a.verse.text_uthmani);
     en.push(strip(t.translations[0].text));
-    tr.push(strip(l.translations[0].text));
+    tr.push(l.transliteration.trim());
   }
   return { arabic: ar.join(" "), translation: en.join(" "), transliteration: tr.join(" ") };
 }
@@ -124,7 +126,7 @@ async function supportFrom(col: string, colLabel: string, internal: number): Pro
   return { book: colLabel, ref: String(h.a.arabicnumber), chapter: h.chapter };
 }
 
-const QURAN_PROV = `Arabic: Quran.com API v4 text_uthmani (retrieved ${new Date().toISOString().slice(0, 10)}); translation: Saheeh International (Quran.com resource ${TR_SAHEEH}); transliteration: Quran.com resource ${TR_TRANSLIT}`;
+const QURAN_PROV = `Arabic: Quran.com API v4 text_uthmani (retrieved ${new Date().toISOString().slice(0, 10)}); translation: Saheeh International (Quran.com resource ${TR_SAHEEH}); transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2`;
 
 const SELECTION_LIST = "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection.";
 const SELECTION_COLLECTION = "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not.";

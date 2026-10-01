@@ -33,14 +33,14 @@ Hadith are cited by the book-wide number that sunnah.com uses (`arabicnumber` in
 
 ## Transliteration of the duas
 
-- **Qur'anic entries:** Quran.com resource 57, in the Tanzil scheme (for example `aAA` for the letter ayn).
+- **Qur'anic entries:** Tanzil `en.transliteration` (see "Transliteration update" below), in the Tanzil scheme (for example `AA` for the letter ayn).
 - **Abu Dawud 5090 (dua-033, dua-040):** `fitrahive/dua-dhikr` morning-dhikr, first three requests only; its Arabic matches the Abu Dawud text after normalisation.
 - **Pain dua (dua-008) and children's refuge (dua-009):** the translators' transliteration inside the English hadith text.
 - **Jibril ruqyah (dua-007), Seeking refuge in Allah's might (dua-031), At a time of distress (dua-032):** no cited repo carries these. The Latin transliteration printed on the owner's images (IMG_2025, IMG_2026, IMG_2029) was used, read by eye. The owner should check it against the images.
 
 ## The Qur'an reader (`/quran`)
 
-- **Arabic:** Quran.com API v4 `quran/verses/uthmani`, stored exactly as returned, retrieved 2026-09-30. **Translation:** Saheeh International, Quran.com resource 20. **Transliteration:** Quran.com resource 57 (Tanzil scheme). **Chapter names, verse counts, juz ranges:** Quran.com `chapters` and `juzs` (the API lists every juz twice; duplicates are dropped).
+- **Arabic:** Quran.com API v4 `quran/verses/uthmani`, stored exactly as returned, retrieved 2026-09-30. **Translation:** Saheeh International, Quran.com resource 20. **Transliteration:** now Tanzil's original `en.transliteration` (see "Transliteration update" below; earlier builds used Quran.com resource 57). **Chapter names, verse counts, juz ranges:** Quran.com `chapters` and `juzs` (the API lists every juz twice; duplicates are dropped).
 - **Second-source check:** every one of the 6,236 verses was compared, letters only (diacritics and hamza carriers ignored), with the King Fahd Complex Uthmani Hafs text in `fawazahmed0/quran-api` (commit `47ca096b0976443ba2eab2e45cdf0fb4096a2610`, Unlicense). All verses agree. Diacritics are not compared because the two sources encode them differently.
 - **Files:** `public/quran-data/v1/{1..114}.json` and `data/quran/chapters.json`, built by `scripts/import-quran.mts` and checked by `scripts/validate-quran.mts` on every build.
 - **Still to confirm before wide release:** the reuse terms of the Quran.com API and the Tanzil-derived text (attribution is shown in the reader).
@@ -51,3 +51,10 @@ Hadith are cited by the book-wide number that sunnah.com uses (`arabicnumber` in
 - From Quran.com API v4 `uthmani_tajweed`. That text uses its own code points (for example U+0672 and U+066E) and one verse has a broken tag, so it is **never displayed**. Its tags are only used to colour letter clusters of the exact Arabic above, stored as ranges (`tg`) in `public/quran-data/v2/`. A verse is coloured only when its letters line up exactly with the plain text: 5,968 of 6,236 verses are coloured, 268 show in plain colour.
 - The colour legend names come from the source's class names; have a scholar check them before wide release.
 - Data version is now `v2` (path `/quran-data/v2/`, cache `rp-quran-v2`). Saved-surah records carry the version, so a bump starts clean.
+
+## Transliteration update (data v3)
+
+- **Source:** Tanzil's original English transliteration, as packaged in `risan/quran-json` npm 3.1.2 (`dist/quran_transliteration.json`). Tanzil licence: attribution, text unmodified; the package is CC-BY-4.0 on npm and CC-BY-SA-4.0 on GitHub, so check the share-alike wording before wide release. Attribution is shown in the app.
+- **Why:** Quran.com's resource 57, used before, joined neighbouring words ("yahtasibuwaman", "hasbuhuinna"), dropped some letters ("ajra" for "ajran") and left stray hyphens. Tanzil's text is spaced word for word, and every one of the 6,236 verses has it.
+- **Not included:** the underlined letters (long vowels and special letters) seen in some apps are not part of this text or of any open dataset I could verify, so no underlines are shown.
+- Data moved to `/quran-data/v3/` and cache `rp-quran-v3`; saved surahs from older versions are cleared and can be saved again.
