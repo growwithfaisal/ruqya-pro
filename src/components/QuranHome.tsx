@@ -46,7 +46,7 @@ export function QuranHome() {
         </Link>
       )}
 
-      <div className="mt-8">
+      <div className="mt-8 lg:hidden">
         <ChapterList />
       </div>
 

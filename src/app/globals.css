@@ -351,6 +351,18 @@ body {
 [data-sky="night"] .status-scrim { --scrim: 0.12; }
 .drawer-panel { padding-bottom: env(safe-area-inset-bottom); }
 
+/* Qur'an on wide screens: surah list on the left, the page or reader on the right. */
+.quran-side { display: none; }
+@media (min-width: 1024px) {
+  .quran-shell { display: grid; grid-template-columns: 21rem minmax(0, 1fr); gap: 1.5rem; max-width: 76rem; margin-inline: auto; padding-inline: 2rem; }
+  .quran-side {
+    display: block; position: sticky; top: 4.25rem; align-self: start;
+    height: calc(100dvh - 4.75rem); overflow-y: auto; overscroll-behavior: contain; padding-top: 2rem;
+  }
+  .quran-main { min-width: 0; }
+  .arabic { font-size: calc(2.2rem * var(--arabic-scale)); }
+}
+
 /* Tab bar (phones): fixed to the bottom edge, the page gets room beneath its last line. */
 :root { --tab-h: 3.5rem; }
 .tabbar {

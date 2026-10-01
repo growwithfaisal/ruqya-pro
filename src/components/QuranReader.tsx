@@ -134,7 +134,7 @@ export function QuranReader() {
   const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
 
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
+    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-4 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
       {failed && (
         <div className="mt-12 rounded-[28px] border border-line p-6 text-center short:col-span-2 short:mt-4" role="alert">
           <p className="display text-title">This surah is not on this device yet.</p>
@@ -237,7 +237,7 @@ export function QuranReader() {
 
       {/* Actions stay under the thumb and above the home indicator. */}
       {verses && (
-        <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:pb-2 short:pt-1" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
+        <div className="sticky bottom-0 z-20 mt-auto -mx-4 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:fixed short:inset-x-0 short:mx-0 short:pb-2 short:pt-1 md:-mx-8 md:px-8" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
           <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
             <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
               <Chevron className="rotate-180" size={24} />
