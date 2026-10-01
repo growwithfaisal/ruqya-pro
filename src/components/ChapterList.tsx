@@ -1,10 +1,12 @@
 "use client";
 import Fuse from "fuse.js";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { chapters, juz, juzSpan, chapter, loadSurah, readHref, surahUrl, type Chapter, type Verse } from "@/lib/quran";
 import { toggleMark, useOffline, useQuran } from "@/lib/quran-store";
 import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
+import { VerseSheet } from "./VerseSheet";
 
 type Tab = "chapter" | "juz" | "bookmarks";
 
@@ -12,7 +14,11 @@ type Tab = "chapter" | "juz" | "bookmarks";
 export function ChapterList({ onPick }: { onPick?: () => void }) {
   const q = useQuran();
   const off = useOffline();
+  const router = useRouter();
   const [tab, setTab] = useState<Tab>("chapter");
+  const [pick, setPick] = useState<Chapter | null>(null);
+  const marks = useMemo(() => new Set(q.marks), [q.marks]);
+  const seen = useMemo(() => new Set(q.seen.keys), [q.seen.keys]);
   const [term, setTerm] = useState("");
   const [busy, setBusy] = useState<number | null>(null);
 
@@ -40,8 +46,14 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
             <span className="display text-[1.25rem] leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
             <span className="text-[0.92rem] text-ink-soft">{c.meaning}{here && q.last!.verse > 1 ? ` · resume at verse ${q.last!.verse}` : ""}</span>
           </span>
-          <span className="text-[0.92rem] text-ink-soft tabular">{c.verses} verses</span>
         </Link>
+        <button
+          onClick={() => setPick(c)}
+          aria-label={`${c.name}: choose which of its ${c.verses} verses to start from`}
+          className="my-2 mr-1 flex min-h-11 min-w-[7.6rem] shrink-0 items-center justify-between gap-1 self-center rounded-full border border-line px-3 text-[0.92rem] text-ink-soft tabular"
+        >
+          {c.verses} verses <Chevron size={14} className="rotate-90" />
+        </button>
         <button
           onClick={() => toggleSave(c)}
           disabled={busy === c.id}
@@ -56,6 +68,16 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
 
   return (
     <div>
+      <VerseSheet
+        open={pick !== null}
+        onOpenChange={(o) => !o && setPick(null)}
+        surah={pick?.id ?? 1}
+        count={pick?.verses ?? 7}
+        current={pick && q.last?.surah === pick.id ? q.last.verse : 0}
+        seen={seen}
+        marks={marks}
+        onPick={(n) => { const id = pick!.id; setPick(null); onPick?.(); router.push(readHref(id, n)); }}
+      />
       <div className="flex rounded-full border border-line p-1" role="tablist" aria-label="Browse by">
         {(["juz", "chapter", "bookmarks"] as Tab[]).map((t) => (
           <button
