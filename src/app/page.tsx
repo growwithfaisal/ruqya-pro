@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <SkyHero setIds={setIds} />
-      <AyahOfTheDay />
       <IntentList />
+      <AyahOfTheDay />
       <section aria-label="Medical note" className="mx-auto max-w-2xl px-4 pt-10 md:px-8">
         <Disclaimer className="text-center" />
       </section>
