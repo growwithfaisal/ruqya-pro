@@ -16,7 +16,7 @@ export function StreakPill() {
   const streak = currentStreak(q.days, q.today);
 
   return (
-    <div className="flex items-stretch overflow-hidden rounded-full border border-line">
+    <div className="glass-chip flex items-stretch overflow-hidden rounded-full border border-line">
       <CalendarSheet />
       <div className="flex min-h-14 flex-1 items-center gap-3 border-l border-line px-3.5" aria-live="polite">
         <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent text-accent-ink"><Book size={20} /></span>
@@ -43,7 +43,7 @@ export function WeekRow() {
   const q = useQuran();
   const days = new Set(q.days);
   return (
-    <ol className="grid grid-cols-7 gap-1 rounded-full border border-line p-1.5" aria-label="This week">
+    <ol className="glass-chip grid grid-cols-7 gap-1 rounded-full border border-line p-1.5" aria-label="This week">
       {weekOf(q.today).map((d, i) => {
         const read = days.has(d);
         const today = d === q.today;
@@ -87,7 +87,7 @@ function CalendarSheet() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="drawer-overlay fixed inset-0 z-40 bg-black/45" />
-        <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col rounded-t-[28px] border border-line bg-card text-card-ink shadow-[0_-16px_48px_-16px_rgb(0_0_0/0.4)] md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[26rem] md:rounded-l-[28px] md:rounded-tr-none">
+        <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col glass-strong rounded-t-[28px] border border-line text-card-ink shadow-[0_-16px_48px_-16px_rgb(0_0_0/0.4)] md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[26rem] md:rounded-l-[28px] md:rounded-tr-none">
           <div className="flex items-start justify-between gap-4 px-6 pb-2 pt-6">
             <div>
               <Dialog.Title className="display text-[1.5rem] leading-tight">Your reading days</Dialog.Title>

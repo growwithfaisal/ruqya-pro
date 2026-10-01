@@ -31,7 +31,7 @@ export function CitationBadge({ entry, tone = "card" }: { entry: Entry; tone?: "
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="drawer-overlay fixed inset-0 z-40 bg-black/45" />
-        <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[88dvh] flex-col rounded-t-[28px] border border-line bg-card text-card-ink shadow-[0_-16px_48px_-16px_rgb(0_0_0/0.4)] md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[30rem] md:rounded-l-[28px] md:rounded-tr-none">
+        <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[88dvh] flex-col glass-strong rounded-t-[28px] border border-line text-card-ink shadow-[0_-16px_48px_-16px_rgb(0_0_0/0.4)] md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[30rem] md:rounded-l-[28px] md:rounded-tr-none">
           <div className="flex items-start justify-between gap-4 px-6 pb-3 pt-6">
             <div>
               <Dialog.Title className="display text-[1.5rem] leading-tight">{entry.title}</Dialog.Title>

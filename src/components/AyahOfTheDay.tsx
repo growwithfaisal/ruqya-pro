@@ -33,7 +33,7 @@ export function AyahOfTheDay() {
           {c.name} <span className="tabular">{pick.surah}:{pick.verse}</span>
         </p>
 
-        <div className="mt-5 min-h-[18rem] rounded-[28px] border border-line bg-card px-5 py-7 text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]">
+        <div className="mt-5 min-h-[18rem] glass rounded-[28px] border border-line px-5 py-7 text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]">
           {failed && (
             <p className="py-10 text-center text-card-soft" role="status">
               Today&apos;s ayah is not on this device yet. Connect once, or open it in the Qur&apos;an reader.

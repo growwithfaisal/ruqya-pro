@@ -291,3 +291,34 @@ footer { padding-bottom: env(safe-area-inset-bottom); }
 .tj-idgham_wo_ghunnah { color: oklch(var(--tjl) 0.14 145); }
 .tj-iqlab { color: oklch(var(--tjl) 0.18 305); }
 .tj-ghunnah { color: oklch(var(--tjl) 0.19 350); }
+
+/* ---------------- Glass ----------------
+   A light touch: cards, sheets, the header and a few pills are frosted so the drifting sky and lattice show faintly
+   through. Opacity stays high (72 to 88%) so text keeps its contrast, blur is kept small for phones, and every
+   surface falls back to a solid colour where blur is unavailable or the reader asks for less transparency.
+   The swipe deck keeps solid faces: backdrop blur would flatten its 3D flip. */
+:root { --glass-sheen: oklch(1 0 0 / 0.5); }
+:root[data-sky="dusk"], :root[data-sky="night"] { --glass-sheen: oklch(1 0 0 / 0.09); }
+
+.sheen { background-image: linear-gradient(145deg, var(--glass-sheen), transparent 45%); }
+
+.glass,
+.glass-strong,
+.glass-bar,
+.glass-chip {
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.3);
+  backdrop-filter: blur(var(--blur)) saturate(1.3);
+}
+.glass { --blur: 16px; background-color: color-mix(in oklch, var(--card) 72%, transparent); background-image: linear-gradient(145deg, var(--glass-sheen), transparent 45%); }
+.glass-strong { --blur: 24px; background-color: color-mix(in oklch, var(--card) 88%, transparent); background-image: linear-gradient(145deg, var(--glass-sheen), transparent 40%); }
+.glass-bar { --blur: 16px; background-color: color-mix(in oklch, var(--sky-top) 64%, transparent); }
+.glass-chip { --blur: 10px; background-color: color-mix(in oklch, var(--card) 42%, transparent); }
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .glass-strong, .glass-chip { background-color: var(--card); }
+  .glass-bar { background-color: var(--sky-top); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .glass-strong, .glass-chip { background-color: var(--card); background-image: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .glass-bar { background-color: var(--sky-top); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

@@ -60,7 +60,7 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
           Download the whole app once: every page, the daily routines, all recitations and the entire Qur&apos;an. After that it opens with no connection. Everything stays on this device.
         </p>
 
-        <div className="mt-6 rounded-[28px] border border-line bg-card p-5 text-card-ink">
+        <div className="mt-6 glass rounded-[28px] border border-line p-5 text-card-ink">
           {rec && !busy ? (
             <div className="flex items-start gap-4">
               <span className="grid size-12 shrink-0 place-items-center rounded-full bg-accent text-accent-ink"><Check size={24} /></span>

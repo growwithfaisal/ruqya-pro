@@ -152,7 +152,7 @@ export function QuranReader() {
                 key={`${surah}:${n}`}
                 custom={dir}
                 aria-label={`${c.name} verse ${n} of ${c.verses}`}
-                className="touch-pan-y rounded-[28px] border border-line bg-card text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]"
+                className="touch-pan-y glass rounded-[28px] border border-line text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]"
                 variants={{
                   enter: (d: number) => ({ x: reduce ? 0 : d * 70, opacity: 0 }),
                   center: { x: 0, opacity: 1 },
@@ -222,7 +222,7 @@ export function QuranReader() {
       {verses && (
         <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
           <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
-            <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 place-items-center rounded-full border border-line bg-card text-card-ink disabled:opacity-40">
+            <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
               <Chevron className="rotate-180" size={24} />
             </button>
             <button onClick={done} className="min-h-14 rounded-full bg-accent text-[1.1rem] font-semibold text-accent-ink transition-transform active:scale-[0.98]">I&apos;m Done</button>

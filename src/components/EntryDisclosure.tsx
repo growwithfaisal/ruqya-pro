@@ -16,7 +16,7 @@ export function EntryDisclosure({ entry }: { entry: Entry }) {
         <Chevron className="shrink-0 text-ink-soft transition-transform duration-300 group-open:rotate-90" />
       </summary>
       <div className="pb-7">
-        <div className="rounded-[28px] border border-line bg-card px-5 py-6 text-card-ink">
+        <div className="glass rounded-[28px] border border-line px-5 py-6 text-card-ink">
           {entry.arabic.split("\n").map((l, i) => (
             <p key={i} lang="ar" dir="rtl" className="arabic">{l.trim()}</p>
           ))}

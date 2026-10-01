@@ -32,7 +32,7 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
         <CitationBadge entry={e} tone="sky" />
       </div>
 
-      <div className="mt-8 rounded-[28px] border border-line bg-card px-5 py-8 text-card-ink">
+      <div className="mt-8 rounded-[28px] glass border border-line px-5 py-8 text-card-ink">
         {e.arabic.split("\n").map((l, k) => (
           <p key={k} lang="ar" dir="rtl" className="arabic">{l.trim()}</p>
         ))}

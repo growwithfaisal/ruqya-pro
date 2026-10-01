@@ -106,8 +106,8 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
             style={{ perspective: 1400 }}
           >
             {/* the stack behind */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 top-3 mx-3 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] border border-line bg-card opacity-60" />
-            <div aria-hidden className="pointer-events-none absolute inset-0 top-6 mx-6 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] border border-line bg-card opacity-30" />
+            <div aria-hidden className="pointer-events-none absolute inset-0 top-3 mx-3 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] sheen border border-line bg-card opacity-60" />
+            <div aria-hidden className="pointer-events-none absolute inset-0 top-6 mx-6 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] sheen border border-line bg-card opacity-30" />
 
             <div className="relative h-[clamp(28rem,calc(100dvh-17rem),44rem)]">
               <AnimatePresence initial={false} custom={dir} mode="popLayout">
@@ -169,7 +169,7 @@ function Card({
   const tlLines = entry.transliteration.split("\n");
   const enLines = entry.translation.split("\n");
   const shape = "rounded-[50%_50%_28px_28px/150px_150px_28px_28px]";
-  const face = `absolute inset-0 flex flex-col overflow-hidden ${shape} border border-line bg-card text-card-ink shadow-[0_24px_48px_-20px_rgb(0_0_0/0.35),0_2px_0_0_rgb(255_255_255/0.06)_inset]`;
+  const face = `absolute inset-0 flex flex-col overflow-hidden ${shape} sheen border border-line bg-card text-card-ink shadow-[0_24px_48px_-20px_rgb(0_0_0/0.35),0_2px_0_0_rgb(255_255_255/0.06)_inset]`;
 
   return (
     <motion.div
@@ -246,7 +246,7 @@ function Card({
 
 function EndCard({ onRestart, onBack }: { onRestart: () => void; onBack: () => void }) {
   return (
-    <div className="absolute inset-0 grid place-content-center gap-5 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] border border-line bg-card px-10 pt-24 text-center text-card-ink">
+    <div className="absolute inset-0 grid place-content-center gap-5 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] sheen border border-line bg-card px-10 pt-24 text-center text-card-ink">
       <h2 className="display text-[1.8rem] leading-tight">End of the set.</h2>
       <div className="flex justify-center gap-3">
         <button onClick={onBack} className="min-h-12 rounded-full border border-line px-5">Go back</button>

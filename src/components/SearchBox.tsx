@@ -27,7 +27,7 @@ export function SearchBox({ entries }: { entries: Entry[] }) {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Try “sleep”, “Bukhari” or “evil eye”"
-        className="min-h-14 w-full rounded-full border border-line bg-card px-6 text-[1.05rem] text-card-ink placeholder:text-card-soft"
+        className="min-h-14 w-full glass-chip rounded-full border border-line px-6 text-[1.05rem] text-card-ink placeholder:text-card-soft"
         autoComplete="off"
       />
       <ul className="mt-6 border-t border-line" aria-live="polite">

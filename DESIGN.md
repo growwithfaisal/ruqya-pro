@@ -116,6 +116,8 @@ Mobile-first single column with a 16px gutter, `max-w-5xl` container, two column
 
 ## Elevation & Depth
 
+A light touch of frosted glass sits over the tonal layering: cards (`.glass`, 72% of the card colour, 16px blur), sheets and the menu (`.glass-strong`, 88%, 24px), the sticky header (`.glass-bar`, 64% of the sky top, 16px) and a few pills and the search field (`.glass-chip`, 42%, 10px), each with a soft diagonal sheen. The drifting sky and lattice show faintly through while text keeps its contrast. The swipe deck keeps solid faces, because backdrop blur would flatten its 3D flip. Every glass surface becomes solid where blur is unavailable or `prefers-reduced-transparency` is set.
+
 Tonal layering with two soft shadows. The recitation card has one offset, wide-blur shadow (`0 24px 48px -20px rgb(0 0 0 / 0.35)`); drawers use an upward version. Cards behind the top card are the same shape at 60% and 30% opacity, shifted down, to suggest a deck.
 
 ## Shapes

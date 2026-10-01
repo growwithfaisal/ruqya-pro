@@ -27,7 +27,7 @@ export function Header() {
   const active = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 
   return (
-    <header className="app-header sticky top-0 z-30 border-b border-line" style={{ background: "var(--sky-top)" }}>
+    <header className="app-header glass-bar sticky top-0 z-30 border-b border-line">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-8">
         {standalone && path !== "/" && (
           <button onClick={() => router.back()} aria-label="Back" className="-ml-2 mr-1 grid min-h-11 min-w-11 place-items-center rounded-full">
@@ -56,7 +56,7 @@ export function Header() {
           <Dialog.Trigger className="min-h-11 rounded-full border border-line px-4 text-[0.95rem] lg:hidden">Menu</Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="drawer-overlay fixed inset-0 z-40 bg-black/40" />
-            <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 rounded-t-[28px] border border-line bg-card p-6 pb-10 text-card-ink shadow-[0_-12px_40px_-12px_rgb(0_0_0/0.35)]">
+            <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 glass-strong rounded-t-[28px] border border-line p-6 pb-10 text-card-ink shadow-[0_-12px_40px_-12px_rgb(0_0_0/0.35)]">
               <Dialog.Title className="display mb-1 text-2xl">RuqyaPro</Dialog.Title>
               <Dialog.Description className="mb-4 text-card-soft">Where to?</Dialog.Description>
               <nav aria-label="Menu" className="grid">
