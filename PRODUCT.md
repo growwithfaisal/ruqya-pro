@@ -32,13 +32,13 @@ Transparent sourcing. Every dua shows a citation badge that opens a drawer with 
 ## Capabilities and Constraints
 
 - Nav: Home | Qur'an | Self-Ruqyah | Recitations | Sources | Search | Settings. Settings holds a one-tap "Download everything" (all pages, assets and the whole Qur'an into Cache Storage, kept fresh after deploys) and the reading preferences. Red Flags and Wellness are paused by the owner and will be added back on request (the earlier placeholder pages are in git history).
-- Home shows an "Ayah of the day" (one verse drawn from the whole Qur'an by the device's local date, so it changes at local midnight; verses too long for a card are left out of the draw). The intent selector rows were removed from Home at the owner's request; the medical disclaimer stays in the footer of every page.
+- Home shows an "Ayah of the day" (one verse drawn from the whole Qur'an by the device's local date, so it changes at local midnight; verses too long for a card are left out of the draw). The intent selector rows were removed from Home at the owner's request; the medical disclaimer now sits on Home only.
 - Qur'an reader: all 114 surahs verse by verse (Arabic, optional transliteration and Saheeh International translation), Chapter/Juz browsing with search, verse picker, resume where you stopped, bookmarks, a daily reading streak (a day counts after 10 verses; the pill shows days read this month out of 30), and per-surah offline saving.
 - **Standing rules for every feature:** user data stays on the user's own device (no accounts, no servers); the app is used as a home-screen web app, so it must work standalone and offline where sensible; every deploy must reach people who already installed it (network-first pages, build-id service worker, saved content in its own persistent cache).
 - Editorial invariant enforced by build: a published entry needs `verified: true`, a source, and grade Sahih or Hasan. `scripts/validate-content.ts` runs in the build.
 - Never generate or alter Arabic, transliteration or gradings from model memory; never normalise Quranic Arabic; missing values go to `MISSING.md` and the entry stays unpublished.
 - No images of living beings; no talismans, "energy", or occult language.
-- Permanent, visible medical disclaimer (home, intent selector, footer): ruqyah complements medical and mental-health care, never replaces it.
+- Medical disclaimer (ruqyah complements medical and mental-health care, never replaces it): shown on Home only, below the ayah of the day, at the owner's direction. It is no longer in the footer or on other pages.
 - Device local time only; no location or prayer-time API in v1.
 - Undecided: domain, logo/wordmark (Canva), whether ayat keep swipe-to-dismiss.
 

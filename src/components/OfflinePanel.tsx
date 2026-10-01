@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { OfflineRecord, downloadEverything, readRecord, removeEverything } from "@/lib/offline";
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { ArabicSizeControl } from "./ArabicSizeControl";
+import { TranslitSizeControl } from "./TranslitSizeControl";
 import { Check, CloudDown } from "./Glyphs";
 
 const mb = (b: number) => `${(b / 1024 / 1024).toFixed(b < 10 * 1024 * 1024 ? 1 : 0)} MB`;
@@ -126,6 +127,10 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
           <div className="flex min-h-16 items-center justify-between border-b border-line">
             <span>Arabic size</span>
             <ArabicSizeControl />
+          </div>
+          <div className="flex min-h-16 items-center justify-between border-b border-line">
+            <span>Transliteration size</span>
+            <TranslitSizeControl />
           </div>
         </div>
       </section>

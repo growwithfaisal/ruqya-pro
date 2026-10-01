@@ -3,7 +3,6 @@ import Link from "next/link";
 import method from "../../../data/method.json";
 import { ayatList, entries, namedVerses } from "@/lib/entries";
 import { EntryDisclosure } from "@/components/EntryDisclosure";
-import { Disclaimer } from "@/components/Disclaimer";
 
 export const metadata: Metadata = { title: "Self-Ruqyah" };
 
@@ -19,7 +18,6 @@ export default function SelfRuqyah() {
       <p className="mt-2 max-w-[56ch] text-ink-soft">
         Reciting for yourself, from texts you can check. Every passage below opens with its source.
       </p>
-      <Disclaimer className="mt-4 max-w-[56ch]" />
 
       <section className="mt-12" aria-labelledby="method-title">
         <h2 id="method-title" className="display text-[clamp(1.6rem,4.5vw,2.1rem)] leading-tight">How it was done</h2>

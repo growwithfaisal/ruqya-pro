@@ -46,7 +46,7 @@ export function AyahOfTheDay() {
                 {q.prefs.tajweed && verse.tg ? <Coloured ar={verse.ar.trim()} ranges={verse.tg} lead={lead} /> : verse.ar.trim()}
               </p>
               {q.prefs.translit && (
-                <p className="mt-5 text-center text-[clamp(1.15rem,4.2vw,1.4rem)] leading-snug">
+                <p className="mt-5 text-center text-[calc(clamp(1.15rem,4.2vw,1.4rem)*var(--translit-scale))] leading-snug">
                   <Translit text={verse.tr} marks={verse.tu} silent={verse.ts} />
                 </p>
               )}

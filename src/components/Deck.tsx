@@ -195,7 +195,7 @@ function Card({
             ))}
           </div>
           {entry.transliteration ? (
-            <div className="mt-4 text-center text-[0.98rem] italic leading-relaxed text-card-soft">
+            <div className="mt-4 text-center text-[calc(0.98rem*var(--translit-scale))] italic leading-relaxed text-card-soft">
               {tlLines.map((l, i) => <p key={i}>{tlLines.length === 1 ? <Translit text={l} marks={entry.tu} silent={entry.ts} /> : l}</p>)}
             </div>
           ) : (

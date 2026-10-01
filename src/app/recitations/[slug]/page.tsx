@@ -41,7 +41,7 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
       {e.transliteration && (
         <section className="mt-8">
           <h2 className="text-[0.95rem] font-semibold text-ink-soft">Transliteration</h2>
-          <div className="mt-1 max-w-[65ch] italic leading-relaxed">{e.transliteration.split("\n").map((l, k, all) => <p key={k}>{all.length === 1 ? <Translit text={l} marks={e.tu} silent={e.ts} /> : l}</p>)}</div>
+          <div className="mt-1 max-w-[65ch] text-[calc(1rem*var(--translit-scale))] italic leading-relaxed">{e.transliteration.split("\n").map((l, k, all) => <p key={k}>{all.length === 1 ? <Translit text={l} marks={e.tu} silent={e.ts} /> : l}</p>)}</div>
         </section>
       )}
       <section className="mt-8">

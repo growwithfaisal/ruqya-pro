@@ -41,6 +41,8 @@ var tc={dawn:'#c6bff8',day:'#b4e7fc',dusk:'#411c49',night:'#060b22'}[s];
 var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',tc);
 var a=parseFloat(localStorage.getItem('rp:arabic')||'1');
 if(a>=0.8&&a<=1.8)document.documentElement.style.setProperty('--arabic-scale',String(a));
+var t=parseFloat(localStorage.getItem('rp:translit')||'1');
+if(t>=0.8&&t<=1.8)document.documentElement.style.setProperty('--translit-scale',String(t));
 }catch(e){}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

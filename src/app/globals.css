@@ -104,6 +104,7 @@
 :root {
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --arabic-scale: 1;
+  --translit-scale: 1;
   --gutter: 16px;
 }
 

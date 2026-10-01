@@ -22,7 +22,7 @@ export function EntryDisclosure({ entry }: { entry: Entry }) {
           ))}
         </div>
         {entry.transliteration && (
-          <div className="mt-4 max-w-[65ch] italic leading-relaxed text-ink-soft">
+          <div className="mt-4 max-w-[65ch] text-[calc(1rem*var(--translit-scale))] italic leading-relaxed text-ink-soft">
             {entry.transliteration.split("\n").map((l, i, all) => <p key={i}>{all.length === 1 ? <Translit text={l} marks={entry.tu} silent={entry.ts} /> : l}</p>)}
           </div>
         )}
