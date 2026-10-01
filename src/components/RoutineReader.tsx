@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import type { Entry, TimeTag } from "@/lib/types";
 import { SETS, citation } from "@/lib/entries";
-import { bismillah, chapter, loadSurah, readHref, tajweedForEntry, underlinesForEntry, type Verse } from "@/lib/quran";
+import { bismillah, chapter, loadSurah, readHref, tajweedForEntry, type Verse } from "@/lib/quran";
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { doneKey, useDone } from "@/lib/progress";
 import { ArabicSizeControl } from "./ArabicSizeControl";
@@ -89,17 +89,12 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   const [panel, setPanel] = useState<Panel>(null);
   const [note, setNote] = useState("");
   const [tg, setTg] = useState<[number, number, number][] | null>(null);
-  const [tu, setTu] = useState<[number, number][] | null>(null);
 
   // Tajweed colours for a whole-card Qur'an passage, when the data can match it exactly.
   useEffect(() => {
     let live = true;
     setTg(null);
-    setTu(null);
-    if (e && !cur?.verse) {
-      tajweedForEntry(e.arabic, [e.source, ...e.support]).then((r) => live && setTg(r)).catch(() => {});
-      underlinesForEntry(e.transliteration, [e.source, ...e.support]).then((r) => live && setTu(r)).catch(() => {});
-    }
+    if (e && !cur?.verse) tajweedForEntry(e.arabic, [e.source, ...e.support]).then((r) => live && setTg(r)).catch(() => {});
     return () => { live = false; };
   }, [e, cur?.verse]);
 
@@ -238,7 +233,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
           verse
             ? <p className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug"><Translit text={verse.tr} marks={verse.tu} /></p>
             : e.transliteration
-              ? <div className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug">{e.transliteration.split("\n").map((l, k) => <p key={k}>{e.transliteration.includes("\n") ? l : <Translit text={l} marks={tu} />}</p>)}</div>
+              ? <div className="text-[clamp(1.25rem,4.6vw,1.55rem)] leading-snug">{e.transliteration.split("\n").map((l, k) => <p key={k}>{e.transliteration.includes("\n") ? l : <Translit text={l} marks={e.tu} />}</p>)}</div>
               : <p className="text-[0.95rem] text-[var(--draft)]">Transliteration pending a cited source.</p>
         )}
         {q.prefs.translation && (

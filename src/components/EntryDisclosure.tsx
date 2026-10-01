@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Entry } from "@/lib/types";
+import { Translit } from "./Translit";
 import { CitationBadge, DraftNotice } from "./CitationBadge";
 import { Chevron } from "./Glyphs";
 
@@ -23,7 +24,7 @@ export function EntryDisclosure({ entry }: { entry: Entry }) {
         </div>
         {entry.transliteration && (
           <div className="mt-4 max-w-[65ch] italic leading-relaxed text-ink-soft">
-            {entry.transliteration.split("\n").map((l, i) => <p key={i}>{l}</p>)}
+            {entry.transliteration.split("\n").map((l, i, all) => <p key={i}>{all.length === 1 ? <Translit text={l} marks={entry.tu} /> : l}</p>)}
           </div>
         )}
         <div className="mt-4 max-w-[65ch] leading-relaxed">

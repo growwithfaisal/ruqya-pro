@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import type { Entry, Intent, TimeTag } from "@/lib/types";
 import { INTENTS, SETS } from "@/lib/entries";
+import { Translit } from "./Translit";
 import { CitationBadge, DraftNotice, GradeBadge } from "./CitationBadge";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { Chevron } from "./Glyphs";
@@ -195,7 +196,7 @@ function Card({
           </div>
           {entry.transliteration ? (
             <div className="mt-4 text-center text-[0.98rem] italic leading-relaxed text-card-soft">
-              {tlLines.map((l, i) => <p key={i}>{l}</p>)}
+              {tlLines.map((l, i) => <p key={i}>{tlLines.length === 1 ? <Translit text={l} marks={entry.tu} /> : l}</p>)}
             </div>
           ) : (
             <p className="mt-4 text-center text-[0.9rem] text-[var(--draft)]">Transliteration pending a cited source.</p>

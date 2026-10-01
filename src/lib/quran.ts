@@ -103,25 +103,3 @@ export async function tajweedForEntry(
   }
   return null;
 }
-
-/** Underline ranges for a Qur'an entry's transliteration; null unless it is exactly the verses' text joined by single spaces. */
-export async function underlinesForEntry(
-  transliteration: string,
-  refs: { book: string; ref: string }[],
-): Promise<[number, number][] | null> {
-  for (const r of refs) {
-    const m = r.book === "The Qur'an" ? /^(\d+):(\d+)(?:-(\d+))?$/.exec(r.ref) : null;
-    if (!m) continue;
-    const s = Number(m[1]), from = Number(m[2]), to = Number(m[3] ?? m[2]);
-    const slice = (await loadSurah(s)).slice(from - 1, to);
-    if (slice.map((v) => v.tr).join(" ") !== transliteration) continue;
-    const out: [number, number][] = [];
-    let off = 0;
-    for (const v of slice) {
-      for (const [a, b] of v.tu ?? []) out.push([off + a, off + b]);
-      off += v.tr.length + 1;
-    }
-    return out;
-  }
-  return null;
-}

@@ -7,6 +7,7 @@
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { underlineTranslit } from "./lib/translit-marks.mjs";
 
 const ROOT = join(import.meta.dirname, "..");
 const API = "https://api.quran.com/api/v4";
@@ -79,75 +80,6 @@ function alignTajweed(ar: string, tagged: string): [number, number, number][] | 
   return out;
 }
 
-
-/* ---------- Underlines for Latin letters that stand for more than one Arabic letter ----------
-   Tanzil's scheme writes ث ذ ظ as "th", ح ه as "h", س ص as "s", د ض as "d" and ت ط as "t". The letter a reader
-   is most likely to say wrongly is the heavy one (ظ ذ, ح, ص, ض, ط), so that one is underlined.
-   Nothing is guessed: letters are matched in order, word by word, and a word whose counts do not agree is left plain. */
-const GROUPS: { latin: string; letters: Record<string, boolean> }[] = [
-  { latin: "th", letters: { "\u062B": false, "\u0630": true, "\u0638": true } },
-  { latin: "h", letters: { "\u0647": false, "\u062D": true } },
-  { latin: "s", letters: { "\u0633": false, "\u0635": true } },
-  { latin: "d", letters: { "\u062F": false, "\u0636": true } },
-  { latin: "t", letters: { "\u062A": false, "\u0637": true } },
-];
-const TA_MARBUTA = "\u0629";
-const SHADDA = 0x651;
-const isArabicLetter = (c: string) => /[\u0621-\u064A\u0671]/.test(c);
-
-function latinTokens(word: string) {
-  const out: { t: string; start: number; end: number }[] = [];
-  for (let i = 0; i < word.length; i++) {
-    const two = word.slice(i, i + 2).toLowerCase();
-    if (["th", "sh", "kh", "gh"].includes(two)) { out.push({ t: two, start: i, end: i + 2 }); i++; }
-    else out.push({ t: word[i].toLowerCase(), start: i, end: i + 1 });
-  }
-  return out;
-}
-
-/** [start, end) ranges over `tr` to underline, or [] where the Arabic and the Latin do not line up word for word. */
-export function underlineTranslit(ar: string, tr: string): [number, number][] {
-  const aWords = ar.split(/\s+/).filter((w) => [...w].some(isArabicLetter));
-  const lWords: { text: string; at: number }[] = [];
-  for (const m of tr.matchAll(/\S+/g)) lWords.push({ text: m[0], at: m.index! });
-  if (aWords.length !== lWords.length) return [];
-
-  const out: [number, number][] = [];
-  aWords.forEach((aw, wi) => {
-    const { text, at } = lWords[wi];
-    const chars = [...aw];
-    const hasTaMarbuta = chars.includes(TA_MARBUTA);
-    const toks = latinTokens(text);
-    for (const g of GROUPS) {
-      if (hasTaMarbuta && (g.latin === "h" || g.latin === "t")) continue; // the letter may be written t or h; do not guess
-      // Arabic letters of this group, in order, with whether each carries a shadda (written doubled in Latin).
-      const arabic: { heavy: boolean; doubled: boolean }[] = [];
-      chars.forEach((c, k) => {
-        if (c in g.letters) {
-          let doubled = false;
-          for (let j = k + 1; j < chars.length && !isArabicLetter(chars[j]); j++) if (chars[j].charCodeAt(0) === SHADDA) doubled = true;
-          arabic.push({ heavy: g.letters[c], doubled });
-        }
-      });
-      const latin = toks.filter((x) => x.t === g.latin);
-      const marks: [number, number][] = [];
-      let li = 0, ok = true;
-      for (const a of arabic) {
-        const first = latin[li++];
-        if (!first) { ok = false; break; }
-        let end = first.end;
-        if (a.doubled) {
-          const second = latin[li];
-          if (!second || second.start !== first.end) { ok = false; break; }
-          end = second.end; li++;
-        }
-        if (a.heavy) marks.push([at + first.start, at + end]);
-      }
-      if (ok && li === latin.length) out.push(...marks);
-    }
-  });
-  return out.sort((a, b) => a[0] - b[0]);
-}
 
 async function json<T>(url: string, tries = 4): Promise<T> {
   for (let i = 0; ; i++) {

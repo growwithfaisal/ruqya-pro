@@ -32,6 +32,8 @@ export interface Entry {
   /** Arabic exactly as sourced. Lines are joined with \n. */
   arabic: string;
   transliteration: string;
+  /** [start, end) ranges over `transliteration` to underline (heavy-letter consonants and long vowels). Qur'an text only. */
+  tu?: [number, number][];
   translation: string;
   /** Plain-language practice note, faithful to the cited source. */
   practice: string;
