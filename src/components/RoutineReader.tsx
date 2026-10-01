@@ -158,12 +158,12 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   const showBismillah = !!verse && verse.n === 1 && !!ch?.bismillahPre;
 
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 md:px-8 md:pt-8">
-      <p className="text-center text-small text-ink-soft tabular" aria-live="polite">
+    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
+      <p className="text-center text-small text-ink-soft tabular short:col-span-2" aria-live="polite">
         {SETS[set]} · {left === 0 ? "all recited today" : `${left} left`}
       </p>
 
-      <div className="relative mt-3">
+      <div className="relative mt-3 short:mt-1">
         <AnimatePresence initial={false} custom={dir} mode="popLayout">
           <motion.section
             key={`${e.id}:${cur.vi ?? 0}`}
@@ -205,7 +205,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
               </span>
             </header>
 
-            <div className="max-h-[46dvh] overflow-y-auto px-5 py-5">
+            <div className="max-h-[46dvh] overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-13rem)] short:py-2">
               {showBismillah && <p lang="ar" dir="rtl" className="arabic mb-2 border-b border-line pb-3 !text-[1.6rem] text-card-soft">{bismillah}</p>}
               {lines.map((l, k) => (
                 <p key={k} lang="ar" dir="rtl" className="arabic arabic-read !text-center">
@@ -227,7 +227,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
         </AnimatePresence>
       </div>
 
-      <div className="mt-6 text-center">
+      <div className="mt-6 text-center short:mt-1 short:max-h-[calc(100dvh-6.5rem)] short:overflow-y-auto">
         {e.repeat && <p className="mb-3"><span className="rounded-full border border-line px-3.5 py-1.5 text-small">{e.repeat}</span></p>}
         {q.prefs.translit && (
           verse
@@ -253,13 +253,13 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
         </p>
       )}
 
-      <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
+      <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:pb-2 short:pt-1" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
         <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
-          <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="grid min-h-14 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
+          <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
             <Chevron className="rotate-180" size={24} />
           </button>
-          <button onClick={finish} className="btn btn-primary px-0">I&apos;m Done</button>
-          <button onClick={() => go(1)} disabled={i === steps.length - 1} aria-label={verse ? "Next verse" : "Next card"} className="grid min-h-14 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
+          <button onClick={finish} className="btn btn-primary px-0 short:!min-h-11">I&apos;m Done</button>
+          <button onClick={() => go(1)} disabled={i === steps.length - 1} aria-label={verse ? "Next verse" : "Next card"} className="grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
             <Chevron size={24} />
           </button>
         </div>

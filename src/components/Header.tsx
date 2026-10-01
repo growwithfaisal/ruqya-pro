@@ -18,8 +18,8 @@ export function Header() {
   const active = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 
   return (
-    <header className="app-header glass-bar sticky top-0 z-30 border-b border-line">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-8">
+    <header className="app-header glass-bar sticky top-0 z-30 border-b border-line short:static">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 short:py-1.5 md:px-8">
         {standalone && path !== "/" && (
           <button onClick={() => router.back()} aria-label="Back" className="-ml-2 mr-1 grid min-h-11 min-w-11 place-items-center rounded-full">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 5l-7 7 7 7" /></svg>

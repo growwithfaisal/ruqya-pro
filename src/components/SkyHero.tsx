@@ -67,10 +67,10 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
   const setDone = total > 0 && count >= total;
 
   return (
-    <section aria-labelledby="hero-line" className="mx-auto max-w-5xl px-4 pt-8 md:px-8 md:pt-14">
-      <div className="grid items-end gap-6 md:grid-cols-[1.15fr_1fr] md:gap-12">
+    <section aria-labelledby="hero-line" className="mx-auto max-w-5xl px-4 pt-8 short:pt-3 md:px-8 md:pt-14">
+      <div className="grid items-end gap-6 short:grid-cols-[1fr_1.25fr] short:items-center short:gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12">
         <div className="relative">
-          <svg viewBox="0 0 400 150" className="w-full overflow-visible" role="img" aria-label={now ? `${SKY_LABEL[sky]}. The ${body} is ${Math.round(t * 100)} percent of the way across the sky.` : "Sky"}>
+          <svg viewBox="0 0 400 150" className="w-full overflow-visible short:max-h-28" role="img" aria-label={now ? `${SKY_LABEL[sky]}. The ${body} is ${Math.round(t * 100)} percent of the way across the sky.` : "Sky"}>
             <defs>
               <radialGradient id="orbglow">
                 <stop offset="0" stopColor="var(--orb-glow)" />
@@ -94,7 +94,7 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
         </div>
 
         <div className="pb-1">
-          <h1 id="hero-line" className="display text-[clamp(2.1rem,7vw,3.6rem)] leading-[1.06]">{now ? LINE[sky] : LINE.day}</h1>
+          <h1 id="hero-line" className="display text-[clamp(2.1rem,7vw,3.6rem)] leading-[1.06] short:text-[1.9rem]">{now ? LINE[sky] : LINE.day}</h1>
           <Link
             href={`/recitations?set=${set}`}
             className="cta cta-solid group mt-7"

@@ -134,9 +134,9 @@ export function QuranReader() {
   const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
 
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 md:px-8 md:pt-8">
+    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
       {failed && (
-        <div className="mt-12 rounded-[28px] border border-line p-6 text-center" role="alert">
+        <div className="mt-12 rounded-[28px] border border-line p-6 text-center short:col-span-2 short:mt-4" role="alert">
           <p className="display text-title">This surah is not on this device yet.</p>
           <p className="mt-2 text-ink-soft">You seem to be offline. Connect once and open it, or save it from the Qur&apos;an page for later.</p>
           <div className="mt-4 flex justify-center gap-3">
@@ -147,7 +147,7 @@ export function QuranReader() {
       )}
 
       {!verses && !failed && (
-        <div role="status" aria-label={`Opening ${c.name}`}>
+        <div role="status" aria-label={`Opening ${c.name}`} className="short:col-span-2">
           <p className="text-center text-small text-ink-soft">Opening {c.name}</p>
           <div className="skeleton mt-3 h-[min(26rem,52dvh)]" aria-hidden />
           <div className="mt-6 grid gap-3" aria-hidden>
@@ -159,11 +159,11 @@ export function QuranReader() {
 
       {verses && v && (
         <>
-          <p className="text-center text-small text-ink-soft tabular" aria-live="polite">
+          <p className="text-center text-small text-ink-soft tabular short:hidden" aria-live="polite">
             Juz {juzOf(surah, n)} · {left === 0 ? "last verse" : `${left} ${left === 1 ? "verse" : "verses"} left`}
           </p>
 
-          <div className="relative mt-3">
+          <div className="relative mt-3 short:mt-0">
             <AnimatePresence initial={false} custom={dir} mode="popLayout">
               <motion.section
                 key={`${surah}:${n}`}
@@ -204,7 +204,7 @@ export function QuranReader() {
                   </button>
                 </header>
 
-                <div className="max-h-[46dvh] overflow-y-auto px-5 py-5">
+                <div className="max-h-[46dvh] overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-11.5rem)] short:py-2">
                   {n === 1 && c.bismillahPre && <p lang="ar" dir="rtl" className="arabic mb-2 border-b border-line pb-3 !text-[1.6rem] text-card-soft">{bismillah}</p>}
                   <p lang="ar" dir="rtl" className="arabic arabic-read !text-center">
                     {q.prefs.tajweed && v.tg ? <Coloured ar={v.ar.trim()} ranges={v.tg} lead={v.ar.length - v.ar.trimStart().length} /> : v.ar.trim()}
@@ -222,7 +222,7 @@ export function QuranReader() {
             </AnimatePresence>
           </div>
 
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center short:mt-0 short:max-h-[calc(100dvh-5.5rem)] short:overflow-y-auto">
             {q.prefs.translit && <p className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug"><Translit text={v.tr} marks={v.tu} silent={v.ts} /></p>}
             {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-base" : "text-[1.2rem] text-ink"}`}>{v.en}</p>}
           </div>
@@ -237,13 +237,13 @@ export function QuranReader() {
 
       {/* Actions stay under the thumb and above the home indicator. */}
       {verses && (
-        <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
+        <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:pb-2 short:pt-1" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
           <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
-            <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
+            <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
               <Chevron className="rotate-180" size={24} />
             </button>
-            <button onClick={done} className="btn btn-primary px-0">I&apos;m Done</button>
-            <button onClick={() => go(1)} disabled={n === c.verses && surah === 114} aria-label="Next verse" className="grid min-h-14 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
+            <button onClick={done} className="btn btn-primary px-0 short:!min-h-11">I&apos;m Done</button>
+            <button onClick={() => go(1)} disabled={n === c.verses && surah === 114} aria-label="Next verse" className="grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
               <Chevron size={24} />
             </button>
           </div>

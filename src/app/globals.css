@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* A phone held sideways: little height, so chrome gets small and content goes side by side. */
+@custom-variant short (@media (max-height: 500px) and (orientation: landscape));
+
 /* ------------------------------------------------------------------
    RuqyaPro: the day is the interface.
    Four sky states (dawn, day, dusk, night) set by device local time.
@@ -368,6 +371,12 @@ body {
 @media (max-width: 1023.98px) {
   html.has-tabbar body { padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom)); }
   html.has-tabbar footer, html.rp-immersive footer { display: none; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  :root { --tab-h: 2.75rem; }
+  .tab { padding-top: 0.2rem; }
+  .tab > span:last-child { display: none; }
+  .tab-icon { height: 1.9rem; }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .tabbar { background-color: var(--sky-top); }

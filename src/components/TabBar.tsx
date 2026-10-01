@@ -41,7 +41,7 @@ export function TabBar() {
             const on = isActive(path, href);
             return (
               <li key={href}>
-                <Link href={href} aria-current={on ? "page" : undefined} className={`tab ${on ? "tab-on" : ""}`}>
+                <Link href={href} aria-label={label} aria-current={on ? "page" : undefined} className={`tab ${on ? "tab-on" : ""}`}>
                   <span className="tab-icon"><Icon size={22} /></span>
                   <span>{label}</span>
                 </Link>
@@ -49,7 +49,7 @@ export function TabBar() {
             );
           })}
           <li>
-            <button onClick={() => setMore(true)} aria-haspopup="dialog" className={`tab w-full ${moreActive ? "tab-on" : ""}`}>
+            <button onClick={() => setMore(true)} aria-label="More" aria-haspopup="dialog" className={`tab w-full ${moreActive ? "tab-on" : ""}`}>
               <span className="tab-icon"><Dots size={22} /></span>
               <span>More</span>
             </button>
