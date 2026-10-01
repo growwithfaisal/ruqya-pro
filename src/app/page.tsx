@@ -1,5 +1,6 @@
 import { SkyHero } from "@/components/SkyHero";
 import { AyahOfTheDay } from "@/components/AyahOfTheDay";
+import { IntentList } from "@/components/IntentList";
 import { Disclaimer } from "@/components/Disclaimer";
 import { entries } from "@/lib/entries";
 import type { TimeTag } from "@/lib/types";
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <SkyHero setIds={setIds} />
       <AyahOfTheDay />
+      <IntentList />
       <section aria-label="Medical note" className="mx-auto max-w-2xl px-4 pt-10 md:px-8">
         <Disclaimer className="text-center" />
       </section>
