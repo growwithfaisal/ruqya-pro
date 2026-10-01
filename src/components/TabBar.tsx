@@ -24,8 +24,10 @@ export function TabBar() {
   const immersive = path.startsWith("/quran/read") || (path === "/recitations" && params.has("set"));
 
   useEffect(() => {
-    document.documentElement.classList.toggle("has-tabbar", !immersive);
-    return () => document.documentElement.classList.remove("has-tabbar");
+    const root = document.documentElement.classList;
+    root.toggle("has-tabbar", !immersive);
+    root.toggle("rp-immersive", immersive);
+    return () => { root.remove("has-tabbar"); root.remove("rp-immersive"); };
   }, [immersive]);
 
   if (immersive) return null;

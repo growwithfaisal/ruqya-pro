@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/nav";
-import { Wordmark } from "./Glyphs";
+import { Search, Wordmark } from "./Glyphs";
 
 
 export function Header() {
@@ -28,6 +28,10 @@ export function Header() {
         <Link href="/" className="mr-auto flex items-center gap-2.5 no-underline" aria-label="RuqyaPro home">
           <Wordmark className="text-accent" />
           <span className="display text-title leading-none">RuqyaPro</span>
+        </Link>
+
+        <Link href="/search" aria-label="Search" aria-current={path.startsWith("/search") ? "page" : undefined} className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line lg:hidden">
+          <Search size={20} />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

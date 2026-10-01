@@ -146,7 +146,16 @@ export function QuranReader() {
         </div>
       )}
 
-      {!verses && !failed && <p className="mt-24 text-center text-ink-soft" role="status">Opening {c.name}…</p>}
+      {!verses && !failed && (
+        <div role="status" aria-label={`Opening ${c.name}`}>
+          <p className="text-center text-small text-ink-soft">Opening {c.name}</p>
+          <div className="skeleton mt-3 h-[min(26rem,52dvh)]" aria-hidden />
+          <div className="mt-6 grid gap-3" aria-hidden>
+            <div className="skeleton mx-auto h-5 w-4/5 !rounded-full" />
+            <div className="skeleton mx-auto h-5 w-3/5 !rounded-full" />
+          </div>
+        </div>
+      )}
 
       {verses && v && (
         <>

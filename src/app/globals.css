@@ -349,22 +349,28 @@ body {
 .drawer-panel { padding-bottom: env(safe-area-inset-bottom); }
 
 /* Tab bar (phones): fixed to the bottom edge, the page gets room beneath its last line. */
+:root { --tab-h: 3.5rem; }
 .tabbar {
   position: fixed; inset: auto 0 0 0; z-index: 25;
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+  /* More opaque than the header: lists scroll underneath it and must not show through the labels. */
+  background-color: color-mix(in oklch, var(--sky-top) 86%, transparent);
 }
 .tab {
-  display: grid; justify-items: center; gap: 0.15rem; min-height: 3.5rem; padding-top: 0.45rem;
-  font-size: 0.72rem; line-height: 1.1; color: var(--ink-soft); text-decoration: none; background: none;
+  display: grid; justify-items: center; gap: 0.15rem; min-height: var(--tab-h); padding-top: 0.45rem;
+  font-size: clamp(0.62rem, 2.9vw, 0.72rem); line-height: 1.1; white-space: nowrap; color: var(--ink-soft); text-decoration: none; background: none;
 }
 .tab-icon { display: grid; place-items: center; width: 3.4rem; height: 1.9rem; border-radius: 9999px; transition: background-color 0.3s var(--ease-out), color 0.3s; }
 .tab-on { color: var(--ink); font-weight: 600; }
 .tab-on .tab-icon { background: color-mix(in oklch, var(--accent) 24%, transparent); color: var(--accent); }
 [data-sky="dusk"] .tab-on .tab-icon, [data-sky="night"] .tab-on .tab-icon { color: var(--ink); background: color-mix(in oklch, var(--accent) 30%, transparent); }
 @media (max-width: 1023.98px) {
-  html.has-tabbar body { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)); }
-  html.has-tabbar footer { display: none; }
+  html.has-tabbar body { padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom)); }
+  html.has-tabbar footer, html.rp-immersive footer { display: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tabbar { background-color: var(--sky-top); }
 }
 
 @media (display-mode: standalone) {
@@ -424,3 +430,14 @@ body {
   .glass, .glass-strong, .glass-chip { background-color: var(--card); background-image: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   .glass-bar { background-color: var(--sky-top); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+
+/* Loading placeholder: the verse card's shape, so the page does not jump when the text arrives. */
+.skeleton {
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: linear-gradient(110deg, color-mix(in oklch, var(--card) 55%, transparent) 30%, color-mix(in oklch, var(--card) 80%, transparent) 50%, color-mix(in oklch, var(--card) 55%, transparent) 70%);
+  background-size: 200% 100%;
+  animation: skeleton 1.6s ease-in-out infinite;
+}
+@keyframes skeleton { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
