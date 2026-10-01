@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Deck } from "@/components/Deck";
+import { RecitationList } from "@/components/RecitationList";
 import { RoutineReader } from "@/components/RoutineReader";
 import { deckEntries } from "@/lib/entries";
 import type { Intent, TimeTag } from "@/lib/types";
@@ -16,7 +16,7 @@ export default async function Recitations({ searchParams }: PageProps<"/recitati
   const intent = String(sp.intent ?? "");
   const set = String(sp.set ?? "");
 
-  // A daily routine opens in the one-card reader; browsing by intent keeps the swipe deck.
+  // A daily routine opens in the one-card reader; browsing by need is a list, like the Qur'an tab.
   if (SET_IDS.includes(set)) {
     const tag = set as TimeTag;
     return (
@@ -26,19 +26,16 @@ export default async function Recitations({ searchParams }: PageProps<"/recitati
     );
   }
 
-  const initial = {
-    intent: (INTENT_IDS.includes(intent) ? intent : "all") as Intent | "all",
-    set: "" as TimeTag | "",
-  };
+  const initial = (INTENT_IDS.includes(intent) ? intent : "all") as Intent | "all";
   return (
-    <>
-      <PageShell width="deck" className="!pb-0">
-        <h1 className="t-h1">Recitations</h1>
-        <p className="mt-2 hidden max-w-[52ch] text-ink-soft sm:block">Each card carries its source. Tap the citation to see the grade, the book and the chapter.</p>
-      </PageShell>
-      <Suspense>
-        <Deck entries={deckEntries} initial={initial} />
-      </Suspense>
-    </>
+    <PageShell>
+      <h1 className="t-h1">Recitations</h1>
+      <p className="mt-2 max-w-[52ch] text-ink-soft">Each recitation carries its source. Open one to read it and see the grade, the book and the chapter.</p>
+      <div className="mt-6">
+        <Suspense>
+          <RecitationList entries={deckEntries} initial={initial} />
+        </Suspense>
+      </div>
+    </PageShell>
   );
 }

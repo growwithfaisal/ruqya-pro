@@ -132,11 +132,8 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 
 ## Components
 
-### Recitation card
-- **Shape:** arch niche, `--card` surface, `--card-ink` text.
-- **Front:** title, grade tag, Arabic (scrolls inside), transliteration, translation, citation badge, "Mark as recited", "Read in full".
-- **Back (tap or Details):** practice, repeat count, source, grader, draft notice.
-- **Motion:** spring swipe with a 90px or 500px/s threshold; a 3D flip; instant under reduced motion.
+### Recitations list
+- The Recitations tab matches the Qur'an tab: a segmented tab pill (All, Protection, Pain, Evil eye, Learning; scrolls sideways if narrow), a rounded search field, then one 20px-radius outlined row per recitation (display title, citation, grade, chevron) that opens its page. No arch cards, no swipe deck. The earlier arch-niche card was retired at the owner's request; the arch token remains only for the shape glossary.
 
 ### Citation badge and drawer
 - Pill with grade and reference. Opens a bottom sheet on mobile and a 30rem right panel from 768px: Arabic, grade, grader, book, reference, chapter, exegetical note, link to `/sources#id`.
