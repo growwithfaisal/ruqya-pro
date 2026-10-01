@@ -153,6 +153,16 @@ export function toggleMark(surah: number, verse: number) {
   write("marks", marks.includes(key) ? marks.filter((k) => k !== key) : [...marks, key]);
 }
 
+/**
+ * Surahs saved under an older data version. Their files were cleared when the data changed, so the saved list reads
+ * empty until they are fetched again (see OfflineSync, which does that quietly on the next open with a connection).
+ */
+export function staleSavedIds(): number[] {
+  const v = parse<{ v?: string; ids?: number[] } | number[]>(read("offline"), []);
+  const ids = Array.isArray(v) ? v : v.v !== DATA_VERSION && Array.isArray(v.ids) ? v.ids : [];
+  return ids.filter((n) => Number.isInteger(n) && n >= 1 && n <= 114);
+}
+
 /** Record surahs as saved (after the offline download has put them in Cache Storage). */
 export function markSaved(ids: number[]) {
   writeSaved([...new Set([...state().offline, ...ids])].sort((a, b) => a - b));
