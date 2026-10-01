@@ -55,7 +55,7 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
   return (
     <div className="grid gap-12">
       <section aria-labelledby="offline-title">
-        <h2 id="offline-title" className="display text-[clamp(1.6rem,4.5vw,2.1rem)] leading-tight">Use without internet</h2>
+        <h2 id="offline-title" className="t-h2">Use without internet</h2>
         <p className="mt-2 max-w-[56ch] text-ink-soft">
           Download the whole app once: every page, the daily routines, all recitations and the entire Qur&apos;an. After that it opens with no connection. Everything stays on this device.
         </p>
@@ -65,8 +65,8 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
             <div className="flex items-start gap-4">
               <span className="grid size-12 shrink-0 place-items-center rounded-full bg-accent text-accent-ink"><Check size={24} /></span>
               <div>
-                <p className="display text-[1.3rem] leading-tight">Everything is on this device</p>
-                <p className="mt-1 text-[0.95rem] text-card-soft">
+                <p className="display text-title leading-tight">Everything is on this device</p>
+                <p className="mt-1 text-small text-card-soft">
                   {rec.files} files · {mb(rec.bytes)} · updated {new Date(rec.at).toLocaleDateString(undefined, { day: "numeric", month: "long" })}
                 </p>
               </div>
@@ -75,8 +75,8 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
             <div className="flex items-start gap-4">
               <span className="grid size-12 shrink-0 place-items-center rounded-full border border-line"><CloudDown size={26} /></span>
               <div>
-                <p className="display text-[1.3rem] leading-tight">{busy ? "Downloading…" : "Not downloaded yet"}</p>
-                <p className="mt-1 text-[0.95rem] text-card-soft">About 8 MB. Best over Wi-Fi.</p>
+                <p className="display text-title leading-tight">{busy ? "Downloading…" : "Not downloaded yet"}</p>
+                <p className="mt-1 text-small text-card-soft">About 8 MB. Best over Wi-Fi.</p>
               </div>
             </div>
           )}
@@ -86,36 +86,36 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
               <div className="h-2.5 overflow-hidden rounded-full bg-[color-mix(in_oklch,var(--card-ink)_14%,transparent)]">
                 <div className="h-full rounded-full bg-accent transition-[width] duration-300" style={{ width: `${pct}%` }} />
               </div>
-              <p className="mt-2 text-[0.92rem] text-card-soft">{progress.done} of {progress.total} files · {pct}%</p>
+              <p className="mt-2 text-meta text-card-soft">{progress.done} of {progress.total} files · {pct}%</p>
             </div>
           )}
 
-          {error && <p className="mt-4 text-[0.95rem]" role="alert">{error}</p>}
-          {!online && !busy && <p className="mt-4 text-[0.95rem] text-card-soft">You are offline now. Connect to download or update.</p>}
+          {error && <p className="mt-4 text-small" role="alert">{error}</p>}
+          {!online && !busy && <p className="mt-4 text-small text-card-soft">You are offline now. Connect to download or update.</p>}
 
           <div className="mt-5 flex flex-wrap gap-3">
             <button
               onClick={start}
               disabled={busy || !online}
-              className="min-h-14 flex-1 rounded-full bg-accent px-6 text-[1.05rem] font-semibold text-accent-ink transition-transform active:scale-[0.98] disabled:opacity-50"
+              className="btn btn-primary flex-1"
             >
               {busy ? "Downloading…" : rec ? "Update the download" : "Download everything"}
             </button>
             {rec && !busy && (
-              <button onClick={remove} className="min-h-14 rounded-full border border-line px-6">Remove</button>
+              <button onClick={remove} className="btn btn-secondary">Remove</button>
             )}
           </div>
-          {used !== null && <p className="mt-4 text-[0.85rem] text-card-soft">This app uses {mb(used)} on this device.</p>}
+          {used !== null && <p className="mt-4 text-meta text-card-soft">This app uses {mb(used)} on this device.</p>}
         </div>
         {rec && (
-          <p className="mt-3 max-w-[56ch] text-[0.92rem] text-ink-soft">
+          <p className="mt-3 max-w-[56ch] text-meta text-ink-soft">
             When a new version of the app is released, your download is refreshed by itself the next time you open the app with a connection.
           </p>
         )}
       </section>
 
       <section aria-labelledby="reading-title">
-        <h2 id="reading-title" className="display text-[clamp(1.6rem,4.5vw,2.1rem)] leading-tight">Reading</h2>
+        <h2 id="reading-title" className="t-h2">Reading</h2>
         <p className="mt-2 text-ink-soft">These apply to the Qur&apos;an, the routines and the ayah of the day.</p>
         <div className="mt-4 border-t border-line">
           {([["translit", "Transliteration"], ["translation", "Translation (Saheeh International)"], ["tajweed", "Tajweed colours"]] as const).map(([k, label]) => (

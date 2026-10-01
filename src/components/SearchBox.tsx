@@ -27,15 +27,15 @@ export function SearchBox({ entries }: { entries: Entry[] }) {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Try “sleep”, “Bukhari” or “evil eye”"
-        className="min-h-14 w-full glass-chip rounded-full border border-line px-6 text-[1.05rem] text-card-ink placeholder:text-card-soft"
+        className="min-h-14 w-full glass-chip rounded-full border border-line px-6 text-lead text-card-ink placeholder:text-card-soft"
         autoComplete="off"
       />
       <ul className="mt-6 border-t border-line" aria-live="polite">
         {results.map((e) => (
           <li key={e.id} className="border-b border-line">
             <Link href={`/recitations/${e.slug}`} className="block py-4 no-underline">
-              <span className="display block text-[1.3rem] leading-tight">{e.title}</span>
-              <span className="text-[0.92rem] text-ink-soft">{citation(e)}</span>
+              <span className="display block text-title leading-tight">{e.title}</span>
+              <span className="text-meta text-ink-soft">{citation(e)}</span>
             </Link>
           </li>
         ))}

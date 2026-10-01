@@ -10,8 +10,8 @@ export function EntryDisclosure({ entry }: { entry: Entry }) {
     <details id={entry.slug} className="group border-b border-line">
       <summary className="flex min-h-[4rem] cursor-pointer list-none items-center gap-3 py-3 [&::-webkit-details-marker]:hidden">
         <span className="grid flex-1">
-          <span className="display text-[1.3rem] leading-tight">{entry.title}</span>
-          <span className="text-[0.92rem] text-ink-soft">{entry.source.book === "The Qur'an" ? `Qur'an ${entry.source.ref}` : `${entry.source.book} ${entry.source.ref}`}</span>
+          <span className="display text-title leading-tight">{entry.title}</span>
+          <span className="text-meta text-ink-soft">{entry.source.book === "The Qur'an" ? `Qur'an ${entry.source.ref}` : `${entry.source.book} ${entry.source.ref}`}</span>
         </span>
         <Chevron className="shrink-0 text-ink-soft transition-transform duration-300 group-open:rotate-90" />
       </summary>
@@ -32,7 +32,7 @@ export function EntryDisclosure({ entry }: { entry: Entry }) {
         {entry.repeat && <p className="mt-3 text-ink-soft">{entry.repeat}</p>}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <CitationBadge entry={entry} tone="sky" />
-          <Link href={`/recitations/${entry.slug}`} className="min-h-11 content-center text-[0.95rem] underline">Read in full</Link>
+          <Link href={`/recitations/${entry.slug}`} className="min-h-11 content-center text-small underline">Read in full</Link>
         </div>
       </div>
     </details>

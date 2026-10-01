@@ -43,14 +43,14 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
       <li key={c.id} className={`flex items-stretch rounded-[20px] border ${here ? "border-[var(--accent)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)]" : "border-line"}`}>
         <Link href={readHref(c.id, here ? q.last!.verse : 1)} onClick={onPick} className="flex min-h-[4.5rem] flex-1 items-center gap-3 px-4 py-3 no-underline">
           <span className="grid flex-1">
-            <span className="display text-[1.25rem] leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
-            <span className="text-[0.92rem] text-ink-soft">{c.meaning}{here && q.last!.verse > 1 ? ` · resume at verse ${q.last!.verse}` : ""}</span>
+            <span className="display text-title leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
+            <span className="text-meta text-ink-soft">{c.meaning}{here && q.last!.verse > 1 ? ` · resume at verse ${q.last!.verse}` : ""}</span>
           </span>
         </Link>
         <button
           onClick={() => setPick(c)}
           aria-label={`${c.name}: choose which of its ${c.verses} verses to start from`}
-          className="my-2 mr-1 flex min-h-11 min-w-[7.6rem] shrink-0 items-center justify-between gap-1 self-center rounded-full border border-line px-3 text-[0.92rem] text-ink-soft tabular"
+          className="my-2 mr-1 flex min-h-11 min-w-[7.6rem] shrink-0 items-center justify-between gap-1 self-center rounded-full border border-line px-3 text-meta text-ink-soft tabular"
         >
           {c.verses} verses <Chevron size={14} className="rotate-90" />
         </button>
@@ -85,7 +85,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
             role="tab"
             aria-selected={tab === t}
             onClick={() => setTab(t)}
-            className={`min-h-11 flex-1 rounded-full text-[1rem] font-semibold transition-colors ${tab === t ? "bg-accent text-accent-ink" : ""}`}
+            className={`min-h-11 flex-1 rounded-full text-base font-semibold transition-colors ${tab === t ? "bg-accent text-accent-ink" : ""}`}
           >
             {t === "juz" ? "Juz" : t === "chapter" ? "Chapter" : `Bookmarks${q.marks.length ? ` (${q.marks.length})` : ""}`}
           </button>
@@ -103,7 +103,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
           onChange={(e) => setTerm(e.target.value)}
           placeholder="Search a surah"
           autoComplete="off"
-          className="min-h-12 w-full rounded-full border border-line bg-transparent pl-11 pr-4 text-[1rem] placeholder:text-ink-soft"
+          className="field pl-11 placeholder:text-ink-soft"
         />
       </label>
 
@@ -118,8 +118,8 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
               <details className="group">
                 <summary className="flex min-h-[4.5rem] cursor-pointer list-none items-center gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden">
                   <span className="grid flex-1">
-                    <span className="display text-[1.25rem] leading-tight">Juz {j.n}</span>
-                    <span className="text-[0.92rem] text-ink-soft">{juzSpan(j)}</span>
+                    <span className="display text-title leading-tight">Juz {j.n}</span>
+                    <span className="text-meta text-ink-soft">{juzSpan(j)}</span>
                   </span>
                   <Chevron className="shrink-0 text-ink-soft transition-transform duration-300 group-open:rotate-90" />
                 </summary>
@@ -128,7 +128,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
                     <li key={r.surah}>
                       <Link href={readHref(r.surah, r.from)} onClick={onPick} className="flex min-h-11 items-center justify-between rounded-full px-3 no-underline hover:bg-[color-mix(in_oklch,var(--ink)_8%,transparent)]">
                         <span>{chapter(r.surah).name}</span>
-                        <span className="text-[0.92rem] text-ink-soft tabular">verses {r.from}{r.to > r.from ? `–${r.to}` : ""}</span>
+                        <span className="text-meta text-ink-soft tabular">verses {r.from}{r.to > r.from ? `–${r.to}` : ""}</span>
                       </Link>
                     </li>
                   ))}
@@ -167,7 +167,7 @@ function Bookmarks({ onPick }: { onPick?: () => void }) {
     return (
       <div className="mt-6 rounded-[28px] border border-line p-6 text-center">
         <Bookmark size={28} className="mx-auto text-ink-soft" />
-        <p className="display mt-2 text-[1.3rem]">No bookmarks yet</p>
+        <p className="display mt-2 text-title">No bookmarks yet</p>
         <p className="mt-1 text-ink-soft">Tap the bookmark at the top of a verse to keep it here. Bookmarks stay on this device.</p>
       </div>
     );
@@ -179,14 +179,14 @@ function Bookmarks({ onPick }: { onPick?: () => void }) {
         return (
           <li key={key} className="flex items-stretch rounded-[20px] border border-line">
             <Link href={readHref(s, v)} onClick={onPick} className="grid min-h-[4.5rem] flex-1 gap-1 px-4 py-3 no-underline">
-              <span className="display text-[1.2rem] leading-tight">{chapter(s).name} <span className="tabular text-ink-soft">{s}:{v}</span></span>
+              <span className="display text-title leading-tight">{chapter(s).name} <span className="tabular text-ink-soft">{s}:{v}</span></span>
               {verse ? (
                 <>
                   <span lang="ar" dir="rtl" className="truncate text-right font-[family-name:var(--font-arabic)] text-[1.3rem] leading-[1.8]">{verse.ar.trim()}</span>
-                  <span className="line-clamp-2 text-[0.92rem] text-ink-soft">{verse.en}</span>
+                  <span className="line-clamp-2 text-meta text-ink-soft">{verse.en}</span>
                 </>
               ) : (
-                <span className="text-[0.92rem] text-ink-soft">Loading…</span>
+                <span className="text-meta text-ink-soft">Loading…</span>
               )}
             </Link>
             <button

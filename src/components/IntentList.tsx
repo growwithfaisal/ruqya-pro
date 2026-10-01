@@ -9,7 +9,7 @@ export function IntentList() {
     <section aria-labelledby="intent-title" className="mx-auto max-w-5xl px-4 pt-14 md:px-8 md:pt-20">
       <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:gap-16">
         <div>
-          <h2 id="intent-title" className="display text-[clamp(1.8rem,5vw,2.5rem)] leading-tight">What brings you here today?</h2>
+          <h2 id="intent-title" className="t-h2-lead">What brings you here today?</h2>
         </div>
         <ul className="border-t border-line">
           {INTENTS.map((it, i) => {
@@ -22,8 +22,8 @@ export function IntentList() {
                 >
                   <Glyph className="shrink-0 text-accent" size={30} />
                   <span className="grid flex-1">
-                    <span className="display text-[1.4rem] leading-tight">{it.label}</span>
-                    <span className="text-[0.95rem] text-ink-soft">{it.blurb}</span>
+                    <span className="display text-title leading-tight">{it.label}</span>
+                    <span className="text-small text-ink-soft">{it.blurb}</span>
                   </span>
                   <Chevron className="shrink-0 text-ink-soft transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>

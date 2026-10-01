@@ -17,8 +17,8 @@ export function TranslitSizeControl() {
 
   return (
     <div className="flex items-center gap-1" role="group" aria-label="Transliteration size">
-      <button className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-[0.85rem]" onClick={() => size(-0.1)} aria-label="Smaller transliteration">A−</button>
-      <button className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-[1.15rem]" onClick={() => size(0.1)} aria-label="Larger transliteration">A+</button>
+      <button className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-meta" onClick={() => size(-0.1)} aria-label="Smaller transliteration">A−</button>
+      <button className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-lead" onClick={() => size(0.1)} aria-label="Larger transliteration">A+</button>
     </div>
   );
 }

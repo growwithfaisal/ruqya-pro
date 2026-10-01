@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { METHODS, LocateError, forgetPlace, locate, setPrayerPrefs, suggestedMethod, usePrayerState, type MethodId } from "@/lib/prayer";
 
-const field = "min-h-12 w-full rounded-full border border-line bg-transparent px-4 text-[1rem]";
+const field = "field";
 
 export function PrayerSettings() {
   const { place, prefs } = usePrayerState();
@@ -19,7 +19,7 @@ export function PrayerSettings() {
 
   return (
     <section aria-labelledby="prayer-settings-title">
-      <h2 id="prayer-settings-title" className="display text-[clamp(1.6rem,4.5vw,2.1rem)] leading-tight">Prayer times</h2>
+      <h2 id="prayer-settings-title" className="t-h2">Prayer times</h2>
       <p className="mt-2 max-w-[56ch] text-ink-soft">
         Worked out on this device from the sun&apos;s position at your location, so they work with no internet. They can differ by a few minutes from your local mosque; choose the method it follows if you know it.
       </p>
@@ -44,12 +44,12 @@ export function PrayerSettings() {
             Location:{" "}
             <span className="text-ink-soft">{place ? `saved on this device (${place.lat.toFixed(2)}, ${place.lon.toFixed(2)})` : "not set"}</span>
           </p>
-          {error && <p role="alert" className="text-[0.95rem]">{error === "denied" ? "Location is off for this app. Allow it in your phone's settings, then try again." : "Your location could not be found. Try again."}</p>}
+          {error && <p role="alert" className="text-small">{error === "denied" ? "Location is off for this app. Allow it in your phone's settings, then try again." : "Your location could not be found. Try again."}</p>}
           <div className="flex flex-wrap gap-3">
-            <button onClick={update} disabled={busy} className="min-h-12 rounded-full border border-line px-5 disabled:opacity-60">
+            <button onClick={update} disabled={busy} className="btn btn-sm btn-secondary">
               {busy ? "Finding you…" : place ? "Update my location" : "Use my location"}
             </button>
-            {place && <button onClick={forgetPlace} className="min-h-12 rounded-full border border-line px-5">Forget my location</button>}
+            {place && <button onClick={forgetPlace} className="btn btn-sm btn-secondary">Forget my location</button>}
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
               </g>
             )}
           </svg>
-          <p className="mt-1 flex items-baseline gap-3 text-[0.95rem] text-ink-soft tabular">
+          <p className="mt-1 flex items-baseline gap-3 text-small text-ink-soft tabular">
             <span>{now ? SKY_LABEL[sky] : " "}</span>
             <span aria-hidden className="h-px flex-1 bg-[var(--line)]" />
             <span>{now ? now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : " "}</span>
@@ -86,7 +86,7 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
           <h1 id="hero-line" className="display text-[clamp(2.1rem,7vw,3.6rem)] leading-[1.06]">{now ? LINE[sky] : LINE.day}</h1>
           <Link
             href={`/recitations?set=${set}`}
-            className="group mt-7 flex min-h-[4.5rem] items-center gap-4 rounded-[28px] bg-accent px-5 py-3 text-accent-ink no-underline transition-transform duration-200 active:scale-[0.98]"
+            className="cta cta-solid group mt-7"
           >
             {setDone ? (
               <span className="grid size-[60px] shrink-0 place-items-center rounded-full bg-accent-ink text-accent" aria-hidden><Check size={30} /></span>
@@ -104,20 +104,20 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
             </svg>
             )}
             <span className="grid flex-1">
-              <span className="text-[1.1rem] font-semibold leading-snug">{setDone ? `${SETS[set]} complete` : SETS[set]}</span>
-              <span className="text-[0.92rem] opacity-90 tabular">{setDone ? `All ${total} recited today` : `${count} of ${total} adhkar today`}</span>
+              <span className="text-lead font-semibold leading-snug">{setDone ? `${SETS[set]} complete` : SETS[set]}</span>
+              <span className="text-meta opacity-90 tabular">{setDone ? `All ${total} recited today` : `${count} of ${total} adhkar today`}</span>
             </span>
             <Chevron className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           {friday && (
             <Link
               href={readHref(18, kahfDone ? 1 : kahfAt)}
-              className={`group mt-3 flex min-h-[4.5rem] items-center gap-4 rounded-[28px] px-5 py-3 no-underline transition-transform duration-200 active:scale-[0.98] ${kahfDone ? "bg-accent text-accent-ink" : "border-2 border-[var(--accent)]"}`}
+              className={`cta group mt-3 ${kahfDone ? "cta-solid" : "cta-outline"}`}
             >
               {kahfDone && <span className="grid size-[44px] shrink-0 place-items-center rounded-full bg-accent-ink text-accent" aria-hidden><Check size={24} /></span>}
               <span className="grid flex-1">
-                <span className="text-[1.1rem] font-semibold leading-snug">{kahfDone ? "Friday recitation complete" : "Friday recitation"}</span>
-                <span className={`text-[0.92rem] ${kahfDone ? "opacity-90" : "text-ink-soft"}`}>
+                <span className="text-lead font-semibold leading-snug">{kahfDone ? "Friday recitation complete" : "Friday recitation"}</span>
+                <span className={`text-meta ${kahfDone ? "opacity-90" : "text-ink-soft"}`}>
                   {kahfDone ? (
                     <>Surah {kahf.name} read today</>
                   ) : (

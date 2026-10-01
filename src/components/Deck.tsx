@@ -74,13 +74,13 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
             key={c.id}
             aria-pressed={filter.intent === c.id && !filter.set}
             onClick={() => applyFilter({ intent: c.id, set: "" })}
-            className={`min-h-11 shrink-0 rounded-full border px-4 text-[0.95rem] transition-colors ${filter.intent === c.id && !filter.set ? "border-transparent bg-ink text-[var(--sky-bottom)]" : "border-line"}`}
+            className={`min-h-11 shrink-0 rounded-full border px-4 text-small transition-colors ${filter.intent === c.id && !filter.set ? "border-transparent bg-ink text-[var(--sky-bottom)]" : "border-line"}`}
           >
             {c.label}
           </button>
         ))}
         {filter.set && (
-          <button aria-pressed className="min-h-11 shrink-0 rounded-full border border-transparent bg-accent px-4 text-[0.95rem] text-accent-ink" onClick={() => applyFilter({ intent: "all", set: "" })}>
+          <button aria-pressed className="min-h-11 shrink-0 rounded-full border border-transparent bg-accent px-4 text-small text-accent-ink" onClick={() => applyFilter({ intent: "all", set: "" })}>
             {SETS[filter.set]} ✕
           </button>
         )}
@@ -90,7 +90,7 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
         <p className="mt-16 text-center text-ink-soft">Nothing to show here yet.</p>
       ) : (
         <>
-          <div className="mt-5 flex items-center justify-between text-[0.92rem] text-ink-soft">
+          <div className="mt-5 flex items-center justify-between text-meta text-ink-soft">
             <p aria-live="polite" className="tabular">
               {atEnd ? "Set complete" : `${index + 1} of ${list.length}`}
             </p>
@@ -149,9 +149,9 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
           </div>
 
           <div className="mx-auto mt-5 flex max-w-[26rem] items-center justify-between md:max-w-[30rem]">
-            <button onClick={() => go(-1)} disabled={index === 0} className="min-h-12 rounded-full border border-line px-5 disabled:opacity-40">Previous</button>
-            <span className="text-[0.85rem] text-ink-soft">Swipe or use the buttons</span>
-            <button onClick={() => go(1)} disabled={atEnd} className="min-h-12 rounded-full border border-line px-5 disabled:opacity-40">Next</button>
+            <button onClick={() => go(-1)} disabled={index === 0} className="btn btn-sm btn-secondary">Previous</button>
+            <span className="text-meta text-ink-soft">Swipe or use the buttons</span>
+            <button onClick={() => go(1)} disabled={atEnd} className="btn btn-sm btn-secondary">Next</button>
           </div>
         </>
       )}
@@ -181,7 +181,7 @@ function Card({
       {/* FRONT */}
       <div className={face} style={{ backfaceVisibility: "hidden" }} aria-hidden={flipped} inert={flipped}>
         <div className="px-8 pt-[4.5rem] text-center">
-          <h2 className="display text-[1.35rem] leading-tight">{entry.title}</h2>
+          <h2 className="display text-title leading-tight">{entry.title}</h2>
           <div className="mt-2 flex justify-center"><span className="text-accent"><GradeBadge entry={entry} /></span></div>
         </div>
         <div
@@ -199,16 +199,16 @@ function Card({
               {tlLines.map((l, i) => <p key={i}>{tlLines.length === 1 ? <Translit text={l} marks={entry.tu} silent={entry.ts} /> : l}</p>)}
             </div>
           ) : (
-            <p className="mt-4 text-center text-[0.9rem] text-[var(--draft)]">Transliteration pending a cited source.</p>
+            <p className="mt-4 text-center text-meta text-[var(--draft)]">Transliteration pending a cited source.</p>
           )}
-          <div className="mt-4 text-center text-[1.02rem] leading-relaxed">
+          <div className="mt-4 text-center text-base leading-relaxed">
             {enLines.map((l, i) => <p key={i}>{l}</p>)}
           </div>
         </div>
         <div className="grid gap-2 border-t border-line px-4 py-3">
           <div className="flex items-center justify-between gap-2">
             <CitationBadge entry={entry} />
-            <button onClick={() => setFlipped(true)} className="min-h-11 shrink-0 rounded-full px-3 text-[0.9rem] underline">Details</button>
+            <button onClick={() => setFlipped(true)} className="min-h-11 shrink-0 rounded-full px-3 text-meta underline">Details</button>
           </div>
           <div className="flex gap-2">
             <Link href={`/recitations/${entry.slug}`} className="flex min-h-12 flex-1 items-center justify-center whitespace-nowrap rounded-full border border-line px-4 font-semibold no-underline">Read in full</Link>
@@ -219,23 +219,23 @@ function Card({
       {/* BACK */}
       <div className={face} style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }} aria-hidden={!flipped} inert={!flipped}>
         <div className="px-8 pt-[4.5rem] text-center">
-          <h2 className="display text-[1.35rem] leading-tight">{entry.title}</h2>
+          <h2 className="display text-title leading-tight">{entry.title}</h2>
         </div>
-        <div className="mt-3 flex-1 overflow-y-auto px-7 pb-4 text-[0.98rem] leading-relaxed">
+        <div className="mt-3 flex-1 overflow-y-auto px-7 pb-4 text-small leading-relaxed">
           <dl className="grid gap-4">
-            <div><dt className="text-[0.85rem] text-card-soft">How</dt><dd>{entry.practice}</dd></div>
-            {entry.repeat && <div><dt className="text-[0.85rem] text-card-soft">How many times</dt><dd>{entry.repeat}</dd></div>}
+            <div><dt className="text-meta text-card-soft">How</dt><dd>{entry.practice}</dd></div>
+            {entry.repeat && <div><dt className="text-meta text-card-soft">How many times</dt><dd>{entry.repeat}</dd></div>}
             <div>
-              <dt className="text-[0.85rem] text-card-soft">Source</dt>
+              <dt className="text-meta text-card-soft">Source</dt>
               <dd>{entry.source.book} {entry.source.ref}<span className="block text-card-soft">{entry.source.chapter}</span></dd>
             </div>
-            <div><dt className="text-[0.85rem] text-card-soft">Graded by</dt><dd>{entry.grader || "Not yet recorded"}</dd></div>
+            <div><dt className="text-meta text-card-soft">Graded by</dt><dd>{entry.grader || "Not yet recorded"}</dd></div>
           </dl>
         </div>
         <div className="grid gap-2 border-t border-line px-4 py-3">
           <div className="flex items-center justify-between gap-2">
             <CitationBadge entry={entry} />
-            <Link href={`/recitations/${entry.slug}`} className="min-h-11 shrink-0 content-center whitespace-nowrap rounded-full px-3 text-[0.9rem] underline">Read in full</Link>
+            <Link href={`/recitations/${entry.slug}`} className="min-h-11 shrink-0 content-center whitespace-nowrap rounded-full px-3 text-meta underline">Read in full</Link>
           </div>
           <button onClick={() => setFlipped(false)} className="min-h-12 rounded-full border border-line font-semibold">Back to the text</button>
         </div>
@@ -247,10 +247,10 @@ function Card({
 function EndCard({ onRestart, onBack }: { onRestart: () => void; onBack: () => void }) {
   return (
     <div className="absolute inset-0 grid place-content-center gap-5 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] sheen border border-line bg-card px-10 pt-24 text-center text-card-ink">
-      <h2 className="display text-[1.8rem] leading-tight">End of the set.</h2>
+      <h2 className="t-h2">End of the set.</h2>
       <div className="flex justify-center gap-3">
-        <button onClick={onBack} className="min-h-12 rounded-full border border-line px-5">Go back</button>
-        <button onClick={onRestart} className="min-h-12 rounded-full bg-accent px-5 font-semibold text-accent-ink">Back to the start</button>
+        <button onClick={onBack} className="btn btn-sm btn-secondary">Go back</button>
+        <button onClick={onRestart} className="btn btn-sm btn-primary">Back to the start</button>
       </div>
     </div>
   );

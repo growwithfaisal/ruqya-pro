@@ -28,8 +28,8 @@ export function AyahOfTheDay() {
   return (
     <section aria-labelledby="ayah-title" className="mx-auto max-w-5xl px-4 pt-14 md:px-8 md:pt-20">
       <div className="mx-auto max-w-2xl">
-        <h2 id="ayah-title" className="display text-center text-[clamp(1.8rem,5vw,2.5rem)] leading-tight">Ayah of the day</h2>
-        <p className="mt-1 text-center text-[0.95rem] text-ink-soft">
+        <h2 id="ayah-title" className="t-h2-lead text-center">Ayah of the day</h2>
+        <p className="mt-1 text-center text-small text-ink-soft">
           {c.name} <span className="tabular">{pick.surah}:{pick.verse}</span>
         </p>
 
@@ -51,7 +51,7 @@ export function AyahOfTheDay() {
                 </p>
               )}
               {q.prefs.translation && (
-                <p className="mx-auto mt-4 max-w-[60ch] text-center text-[1.02rem] leading-relaxed text-card-soft">{verse.en}</p>
+                <p className="mx-auto mt-4 max-w-[60ch] text-center text-base leading-relaxed text-card-soft">{verse.en}</p>
               )}
             </>
           )}

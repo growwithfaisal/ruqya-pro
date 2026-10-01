@@ -99,6 +99,12 @@
   --font-display: var(--font-display);
   --font-sans: var(--font-ui);
   --font-arabic: var(--font-arabic);
+  /* The type scale. Body copy is 1rem; everything else on the app is one of these. */
+  --text-meta: 0.9rem;
+  --text-small: 0.95rem;
+  --text-lead: 1.1rem;
+  --text-title: 1.3rem;
+  --text-h3: 1.5rem;
 }
 
 :root {
@@ -168,6 +174,51 @@ a {
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- Shared parts: headings, buttons, fields ---------------- */
+
+@layer components {
+  /* Page title, section title, and the larger section title used for the moments on Home. */
+  .t-h1, .t-h2, .t-h2-lead {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+  .t-h1 { font-size: clamp(2rem, 6vw, 3rem); }
+  .t-h2 { font-size: clamp(1.6rem, 4.5vw, 2.1rem); }
+  .t-h2-lead { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+
+  /* Buttons: .btn is the main action (56px). .btn-sm is for secondary and utility actions (44px). */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 3.5rem; padding-inline: 1.5rem; border-radius: 9999px;
+    font-size: 1.05rem; line-height: 1.2; text-align: center; text-decoration: none;
+    transition: transform 0.2s var(--ease-out), opacity 0.2s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.5; }
+  .btn-sm { min-height: 2.75rem; padding-inline: 1.25rem; font-size: var(--text-small); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .btn-secondary { border: 1px solid var(--line); }
+
+  /* Large tappable tiles with a 28px radius: the hero actions on Home and the Qur'an page. */
+  .cta {
+    display: flex; align-items: center; gap: 1rem;
+    min-height: 4.5rem; padding: 0.75rem 1.25rem; border-radius: 28px; text-decoration: none;
+    transition: transform 0.2s var(--ease-out);
+  }
+  .cta:active { transform: scale(0.98); }
+  .cta-solid { background: var(--accent); color: var(--accent-ink); }
+  .cta-outline { border: 2px solid var(--accent); }
+
+  /* Text and search inputs. */
+  .field {
+    min-height: 3rem; width: 100%; border-radius: 9999px; border: 1px solid var(--line);
+    background: transparent; padding-inline: 1rem; font-size: 1rem;
+  }
 }
 
 /* ---------------- Living background ---------------- */

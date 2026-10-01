@@ -3,6 +3,7 @@ import { BackupPanel } from "@/components/BackupPanel";
 import { PrayerSettings } from "@/components/PrayerSettings";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { INTENTS, SETS, entries } from "@/lib/entries";
+import { PageShell } from "@/components/PageShell";
 
 export const metadata: Metadata = { title: "Settings" };
 
@@ -18,8 +19,8 @@ function pages() {
 
 export default function Settings() {
   return (
-    <div className="mx-auto max-w-2xl px-4 pb-4 pt-8 md:px-8 md:pt-12">
-      <h1 className="display text-[clamp(2rem,6vw,3rem)] leading-tight">Settings</h1>
+    <PageShell>
+      <h1 className="t-h1">Settings</h1>
       <div className="mt-8">
         <OfflinePanel pages={pages()} />
       </div>
@@ -29,7 +30,7 @@ export default function Settings() {
       <div className="mt-12">
         <BackupPanel />
       </div>
-      <p className="mt-12 text-[0.92rem] text-ink-soft">Everything above is kept only on this device. Nothing is sent to a server.</p>
-    </div>
+      <p className="mt-12 text-meta text-ink-soft">Everything above is kept only on this device. Nothing is sent to a server.</p>
+    </PageShell>
   );
 }

@@ -16,7 +16,7 @@ export function VerseSheet({
       <label className="relative mt-1 block">
         <span className="sr-only">Search verse number</span>
         <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-card-soft" />
-        <input inputMode="numeric" value={term} onChange={(e) => setTerm(e.target.value.replace(/\D/g, ""))} placeholder="Verse number" className="min-h-12 w-full rounded-full border border-line bg-transparent pl-11 pr-4 text-[1rem] placeholder:text-card-soft" />
+        <input inputMode="numeric" value={term} onChange={(e) => setTerm(e.target.value.replace(/\D/g, ""))} placeholder="Verse number" className="field pl-11 placeholder:text-card-soft" />
       </label>
       <ul className="mt-4 grid grid-cols-5 gap-2.5">
         {list.map((n) => {
@@ -27,7 +27,7 @@ export function VerseSheet({
                 onClick={() => onPick(n)}
                 aria-current={n === current ? "true" : undefined}
                 aria-label={`Verse ${n}${seen.has(key) ? ", read today" : ""}${marks.has(key) ? ", bookmarked" : ""}`}
-                className={`relative grid aspect-square w-full place-items-center rounded-[18px] text-[1.05rem] font-semibold tabular ${n === current ? "bg-accent text-accent-ink" : "border border-line"}`}
+                className={`relative grid aspect-square w-full place-items-center rounded-[20px] text-lead font-semibold tabular ${n === current ? "bg-accent text-accent-ink" : "border border-line"}`}
               >
                 {n}
                 {seen.has(key) && n !== current && <span aria-hidden className="absolute bottom-1.5 size-1.5 rounded-full bg-accent" />}

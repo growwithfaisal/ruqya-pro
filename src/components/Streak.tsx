@@ -25,12 +25,12 @@ export function StreakPill() {
           initial={reduce ? false : { scale: 1.22 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 420, damping: 18 }}
-          className="display tabular text-[1.5rem] leading-none"
+          className="display tabular text-h3 leading-none"
           aria-label={`${month} of ${MONTH_GOAL} days read this month`}
         >
           {month}/{MONTH_GOAL}
         </motion.span>
-        <span className="hidden text-[0.9rem] text-ink-soft min-[380px]:inline">
+        <span className="hidden text-meta text-ink-soft min-[380px]:inline">
           {streak > 0 ? `${streak}-day streak` : "days this month"}
         </span>
       </div>
@@ -53,8 +53,8 @@ export function WeekRow() {
             <span
               role="img"
               aria-label={`${longDay(d)}${read ? ", read" : today ? ", today" : ""}`}
-              className={`grid size-10 place-items-center rounded-full text-[0.95rem] font-semibold transition-colors ${
-                read ? "bg-accent text-accent-ink" : future ? "text-ink-soft opacity-60" : "text-ink"
+              className={`grid size-10 place-items-center rounded-full text-small font-semibold transition-colors ${
+                read ? "bg-accent text-accent-ink" : future ? "text-ink-soft" : "text-ink"
               } ${today ? "ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-transparent" : ""}`}
             >
               {read ? <Check size={18} /> : LETTERS[i]}
@@ -90,23 +90,23 @@ function CalendarSheet() {
         <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col glass-strong rounded-t-[28px] border border-line text-card-ink shadow-[0_-16px_48px_-16px_rgb(0_0_0/0.4)] md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[26rem] md:rounded-l-[28px] md:rounded-tr-none">
           <div className="flex items-start justify-between gap-4 px-6 pb-2 pt-6">
             <div>
-              <Dialog.Title className="display text-[1.5rem] leading-tight">Your reading days</Dialog.Title>
-              <Dialog.Description className="mt-1 text-[0.95rem] text-card-soft">
+              <Dialog.Title className="display text-h3 leading-tight">Your reading days</Dialog.Title>
+              <Dialog.Description className="mt-1 text-small text-card-soft">
                 A day counts after 10 verses. Kept on this device only.
               </Dialog.Description>
             </div>
-            <Dialog.Close className="min-h-11 shrink-0 rounded-full border border-line px-4 text-[0.9rem]">Close</Dialog.Close>
+            <Dialog.Close className="btn btn-sm btn-secondary shrink-0">Close</Dialog.Close>
           </div>
 
           <div className="overflow-y-auto px-6 pb-8">
             <div className="mt-3 flex items-center justify-between">
               <button onClick={() => shift(-1)} aria-label="Previous month" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line"><Chevron className="rotate-180" /></button>
-              <p className="display text-[1.2rem]">{title}</p>
+              <p className="display text-title">{title}</p>
               <button onClick={() => shift(1)} disabled={isNow} aria-label="Next month" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line disabled:opacity-30"><Chevron /></button>
             </div>
 
             <div className="mt-4 grid grid-cols-7 gap-y-1.5 text-center" role="grid" aria-label={title}>
-              {LETTERS.map((l, i) => <span key={i} className="pb-1 text-[0.85rem] text-card-soft" aria-hidden>{l}</span>)}
+              {LETTERS.map((l, i) => <span key={i} className="pb-1 text-meta text-card-soft" aria-hidden>{l}</span>)}
               {Array.from({ length: lead }, (_, i) => <span key={"e" + i} />)}
               {Array.from({ length: count }, (_, i) => {
                 const d = `${ym}-${String(i + 1).padStart(2, "0")}`;
@@ -116,8 +116,8 @@ function CalendarSheet() {
                     key={d}
                     role="gridcell"
                     aria-label={`${longDay(d)}${read ? ", read" : ""}`}
-                    className={`mx-auto grid size-10 place-items-center rounded-full text-[0.95rem] tabular ${
-                      read ? "bg-accent font-semibold text-accent-ink" : d > q.today ? "text-card-soft opacity-50" : ""
+                    className={`mx-auto grid size-10 place-items-center rounded-full text-small tabular ${
+                      read ? "bg-accent font-semibold text-accent-ink" : d > q.today ? "text-card-soft" : ""
                     } ${d === q.today ? "ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--card)]" : ""}`}
                   >
                     {i + 1}
@@ -134,7 +134,7 @@ function CalendarSheet() {
               ].map(([n, label]) => (
                 <div key={label as string}>
                   <dd className="display tabular text-[1.8rem] leading-none">{n}</dd>
-                  <dt className="mt-1 text-[0.85rem] text-card-soft">{label}</dt>
+                  <dt className="mt-1 text-meta text-card-soft">{label}</dt>
                 </div>
               ))}
             </dl>

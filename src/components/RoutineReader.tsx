@@ -159,7 +159,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
 
   return (
     <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 md:px-8 md:pt-8">
-      <p className="text-center text-[0.95rem] text-ink-soft tabular" aria-live="polite">
+      <p className="text-center text-small text-ink-soft tabular" aria-live="polite">
         {SETS[set]} · {left === 0 ? "all recited today" : `${left} left`}
       </p>
 
@@ -190,9 +190,9 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
               <button onClick={() => setPanel("list")} aria-label="See all cards in this routine" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden><path d="M4 7h16M4 12h16M4 17h10" /></svg>
               </button>
-              <button onClick={() => setPanel("list")} aria-label={`Card ${cur.entryIndex + 1} of ${entries.length}. See all cards`} className="min-h-12 rounded-2xl text-center">
-                <span className="display block text-[1.3rem] leading-tight">{e.title}</span>
-                <span className="block text-[0.95rem] text-card-soft tabular">
+              <button onClick={() => setPanel("list")} aria-label={`Card ${cur.entryIndex + 1} of ${entries.length}. See all cards`} className="min-h-12 rounded-[20px] text-center">
+                <span className="display block text-title leading-tight">{e.title}</span>
+                <span className="block text-small text-card-soft tabular">
                   {verse ? `Verse ${(cur.vi ?? 0) + 1}/${cur.vCount}` : `${cur.entryIndex + 1}/${entries.length}`}
                 </span>
               </button>
@@ -221,34 +221,34 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M14 5l6 6-6 6M20 11H9a5 5 0 0 0-5 5v2" /></svg>
               </button>
               <CitationBadge entry={e} />
-              <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full border border-line text-[1.05rem]">Aa</button>
+              <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full border border-line text-lead">Aa</button>
             </footer>
           </motion.section>
         </AnimatePresence>
       </div>
 
       <div className="mt-6 text-center">
-        {e.repeat && <p className="mb-3"><span className="rounded-full border border-line px-3.5 py-1.5 text-[0.95rem]">{e.repeat}</span></p>}
+        {e.repeat && <p className="mb-3"><span className="rounded-full border border-line px-3.5 py-1.5 text-small">{e.repeat}</span></p>}
         {q.prefs.translit && (
           verse
             ? <p className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug"><Translit text={verse.tr} marks={verse.tu} silent={verse.ts} /></p>
             : e.transliteration
               ? <div className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug">{e.transliteration.split("\n").map((l, k) => <p key={k}>{e.transliteration.includes("\n") ? l : <Translit text={l} marks={e.tu} silent={e.ts} />}</p>)}</div>
-              : <p className="text-[0.95rem] text-[var(--draft)]">Transliteration pending a cited source.</p>
+              : <p className="text-small text-[var(--draft)]">Transliteration pending a cited source.</p>
         )}
         {q.prefs.translation && (
-          <div className={`mx-auto max-w-[60ch] leading-relaxed ${q.prefs.translit ? "mt-4 text-[1.02rem] text-ink-soft" : "text-[1.2rem]"}`}>
+          <div className={`mx-auto max-w-[60ch] leading-relaxed ${q.prefs.translit ? "mt-4 text-base text-ink-soft" : "text-[1.2rem]"}`}>
             {(verse ? [verse.en] : e.translation.split("\n")).map((l, k) => <p key={k}>{l}</p>)}
           </div>
         )}
-        {e.practice && (!verse || cur.vi === 0) && <p className="mx-auto mt-4 max-w-[52ch] text-[0.95rem] text-ink-soft">{e.practice}</p>}
-        <p className="mt-4 text-[0.9rem] text-ink-soft">
+        {e.practice && (!verse || cur.vi === 0) && <p className="mx-auto mt-4 max-w-[52ch] text-small text-ink-soft">{e.practice}</p>}
+        <p className="mt-4 text-meta text-ink-soft">
           <Link href={`/recitations/${e.slug}`} className="underline">Read in full</Link> · {citation(e)}
         </p>
       </div>
 
       {note && (
-        <p role="status" className="fixed inset-x-0 top-[calc(env(safe-area-inset-top)+4.5rem)] z-30 mx-auto w-fit rounded-full bg-accent px-4 py-2 text-[0.95rem] font-semibold text-accent-ink shadow-[0_8px_24px_-8px_rgb(0_0_0/0.4)]">
+        <p role="status" className="fixed inset-x-0 top-[calc(env(safe-area-inset-top)+4.5rem)] z-30 mx-auto w-fit rounded-full bg-accent px-4 py-2 text-small font-semibold text-accent-ink shadow-[0_8px_24px_-8px_rgb(0_0_0/0.4)]">
           {note}
         </p>
       )}
@@ -258,7 +258,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
           <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="grid min-h-14 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
             <Chevron className="rotate-180" size={24} />
           </button>
-          <button onClick={finish} className="min-h-14 rounded-full bg-accent text-[1.1rem] font-semibold text-accent-ink transition-transform active:scale-[0.98]">I&apos;m Done</button>
+          <button onClick={finish} className="btn btn-primary px-0">I&apos;m Done</button>
           <button onClick={() => go(1)} disabled={i === steps.length - 1} aria-label={verse ? "Next verse" : "Next card"} className="grid min-h-14 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
             <Chevron size={24} />
           </button>

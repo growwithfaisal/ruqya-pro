@@ -15,10 +15,10 @@ export function Sheet({
         >
           <div className="flex items-start justify-between gap-4 px-6 pb-3 pt-6">
             <div>
-              <Dialog.Title className="display text-[1.5rem] leading-tight">{title}</Dialog.Title>
-              {description ? <Dialog.Description className="mt-1 text-[0.95rem] text-card-soft">{description}</Dialog.Description> : <Dialog.Description className="sr-only">{title}</Dialog.Description>}
+              <Dialog.Title className="display text-h3 leading-tight">{title}</Dialog.Title>
+              {description ? <Dialog.Description className="mt-1 text-small text-card-soft">{description}</Dialog.Description> : <Dialog.Description className="sr-only">{title}</Dialog.Description>}
             </div>
-            <Dialog.Close className="min-h-11 shrink-0 rounded-full border border-line px-4 text-[0.9rem]">Close</Dialog.Close>
+            <Dialog.Close className="btn btn-sm btn-secondary shrink-0">Close</Dialog.Close>
           </div>
           <div className="overflow-y-auto px-6 pb-8">{children}</div>
         </Dialog.Content>

@@ -65,21 +65,21 @@ export function PrayerTimes() {
             <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-[color-mix(in_oklch,currentColor_26%,transparent)]" aria-hidden>
               <div className="h-full rounded-full bg-current transition-[width] duration-700" style={{ width: `${Math.round(t.progress * 100)}%` }} />
             </div>
-            <p className="mt-3 text-[1.02rem]">
+            <p className="mt-3 text-base">
               {t.next.name} in <span className="tabular font-semibold">{until(t.next.at, now)}</span>
             </p>
           </div>
         ) : (
           <div className={card} style={skin}>
-            <p className="display text-[1.5rem] leading-tight">Prayer times for where you are</p>
-            <p className="mt-1 text-[0.98rem]">
+            <p className="display text-h3 leading-tight">Prayer times for where you are</p>
+            <p className="mt-1 text-small">
               Your location is used on this device to work out the times. It is never sent anywhere.
             </p>
-            {error && <p role="alert" className="mt-3 text-[0.95rem]">{ERRORS[error]}</p>}
+            {error && <p role="alert" className="mt-3 text-small">{ERRORS[error]}</p>}
             <button
               onClick={find}
               disabled={busy}
-              className="mt-4 min-h-14 w-full rounded-full bg-[#fdf8ee] px-6 text-[1.05rem] font-semibold text-[#0e1630] transition-transform active:scale-[0.98] disabled:opacity-60"
+              className="btn mt-4 w-full bg-[#fdf8ee] font-semibold text-[#0e1630]"
             >
               {busy ? "Finding you…" : error ? "Try again" : "Show prayer times"}
             </button>

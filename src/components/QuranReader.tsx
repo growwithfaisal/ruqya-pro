@@ -130,11 +130,11 @@ export function QuranReader() {
     <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 md:px-8 md:pt-8">
       {failed && (
         <div className="mt-12 rounded-[28px] border border-line p-6 text-center" role="alert">
-          <p className="display text-[1.4rem]">This surah is not on this device yet.</p>
+          <p className="display text-title">This surah is not on this device yet.</p>
           <p className="mt-2 text-ink-soft">You seem to be offline. Connect once and open it, or save it from the Qur&apos;an page for later.</p>
           <div className="mt-4 flex justify-center gap-3">
-            <button onClick={() => setAttempt((a) => a + 1)} className="min-h-12 rounded-full bg-accent px-5 font-semibold text-accent-ink">Try again</button>
-            <Link href="/quran" className="grid min-h-12 place-items-center rounded-full border border-line px-5 no-underline">All surahs</Link>
+            <button onClick={() => setAttempt((a) => a + 1)} className="btn btn-sm btn-primary">Try again</button>
+            <Link href="/quran" className="btn btn-sm btn-secondary">All surahs</Link>
           </div>
         </div>
       )}
@@ -143,7 +143,7 @@ export function QuranReader() {
 
       {verses && v && (
         <>
-          <p className="text-center text-[0.95rem] text-ink-soft tabular" aria-live="polite">
+          <p className="text-center text-small text-ink-soft tabular" aria-live="polite">
             Juz {juzOf(surah, n)} · {left === 0 ? "last verse" : `${left} ${left === 1 ? "verse" : "verses"} left`}
           </p>
 
@@ -174,9 +174,9 @@ export function QuranReader() {
                   <button onClick={() => setPanel("surah")} aria-label="Choose a surah" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden><path d="M4 7h16M4 12h16M4 17h10" /></svg>
                   </button>
-                  <button onClick={() => setPanel("verse")} aria-label={`Verse ${n} of ${c.verses}. Choose a verse`} className="min-h-12 rounded-2xl text-center">
-                    <span className="display block text-[1.3rem] leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
-                    <span className="block text-[0.95rem] text-card-soft tabular">{n}/{c.verses}</span>
+                  <button onClick={() => setPanel("verse")} aria-label={`Verse ${n} of ${c.verses}. Choose a verse`} className="min-h-12 rounded-[20px] text-center">
+                    <span className="display block text-title leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
+                    <span className="block text-small text-card-soft tabular">{n}/{c.verses}</span>
                   </button>
                   <button
                     onClick={() => toggleMark(surah, n)}
@@ -199,8 +199,8 @@ export function QuranReader() {
                   <button onClick={share} aria-label={`Share verse ${n}`} className="grid min-h-11 min-w-11 place-items-center rounded-full bg-accent text-accent-ink">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M14 5l6 6-6 6M20 11H9a5 5 0 0 0-5 5v2" /></svg>
                   </button>
-                  <span className="text-[0.85rem] text-card-soft">{seen.has(`${surah}:${n}`) ? "Read today" : ""}</span>
-                  <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-[1.05rem]">Aa</button>
+                  <span className="text-meta text-card-soft">{seen.has(`${surah}:${n}`) ? "Read today" : ""}</span>
+                  <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-lead">Aa</button>
                 </footer>
               </motion.section>
             </AnimatePresence>
@@ -208,13 +208,13 @@ export function QuranReader() {
 
           <div className="mt-6 text-center">
             {q.prefs.translit && <p className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug"><Translit text={v.tr} marks={v.tu} silent={v.ts} /></p>}
-            {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-[1.02rem]" : "text-[1.2rem] text-ink"}`}>{v.en}</p>}
+            {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-base" : "text-[1.2rem] text-ink"}`}>{v.en}</p>}
           </div>
         </>
       )}
 
       {note && (
-        <p role="status" className="fixed inset-x-0 top-[calc(env(safe-area-inset-top)+4.5rem)] z-30 mx-auto w-fit rounded-full bg-accent px-4 py-2 text-[0.95rem] font-semibold text-accent-ink shadow-[0_8px_24px_-8px_rgb(0_0_0/0.4)]">
+        <p role="status" className="fixed inset-x-0 top-[calc(env(safe-area-inset-top)+4.5rem)] z-30 mx-auto w-fit rounded-full bg-accent px-4 py-2 text-small font-semibold text-accent-ink shadow-[0_8px_24px_-8px_rgb(0_0_0/0.4)]">
           {note}
         </p>
       )}
@@ -226,7 +226,7 @@ export function QuranReader() {
             <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
               <Chevron className="rotate-180" size={24} />
             </button>
-            <button onClick={done} className="min-h-14 rounded-full bg-accent text-[1.1rem] font-semibold text-accent-ink transition-transform active:scale-[0.98]">I&apos;m Done</button>
+            <button onClick={done} className="btn btn-primary px-0">I&apos;m Done</button>
             <button onClick={() => go(1)} disabled={n === c.verses && surah === 114} aria-label="Next verse" className="grid min-h-14 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
               <Chevron size={24} />
             </button>
@@ -266,15 +266,15 @@ function SettingsSheet({ open, onOpenChange, surah }: { open: boolean; onOpenCha
       <button
         disabled={busy}
         onClick={async () => { setBusy(true); if (saved) await off.remove(surah, surahUrl); else await off.save([surah], surahUrl); setBusy(false); }}
-        className="mt-5 flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-line font-semibold disabled:opacity-60"
+        className="btn btn-sm btn-secondary mt-5 w-full font-semibold"
       >
         {saved ? <CloudCheck /> : <CloudDown />} {saved ? "Saved offline. Remove" : "Save this surah for offline"}
       </button>
 
       {q.prefs.tajweed && (
         <section className="mt-7" aria-labelledby="tj-legend">
-          <h3 id="tj-legend" className="text-[0.95rem] font-semibold">Colours</h3>
-          <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[0.92rem]">
+          <h3 id="tj-legend" className="text-small font-semibold">Colours</h3>
+          <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 text-meta">
             {TAJWEED.map(([cls, label]) => (
               <li key={cls} className="flex items-center gap-2">
                 <span className={`tj-${cls} arabic !text-[1.3rem] !leading-none`} aria-hidden>ـــ</span>
@@ -282,7 +282,7 @@ function SettingsSheet({ open, onOpenChange, surah }: { open: boolean; onOpenCha
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-[0.85rem] text-card-soft">Colours come from Quran.com&apos;s tajweed marking. A few verses show without colour where it could not be matched to the text exactly.</p>
+          <p className="mt-3 text-meta text-card-soft">Colours come from Quran.com&apos;s tajweed marking. A few verses show without colour where it could not be matched to the text exactly.</p>
         </section>
       )}
     </Sheet>

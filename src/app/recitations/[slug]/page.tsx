@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { bySlug, citation, entries } from "@/lib/entries";
 import { Translit } from "@/components/Translit";
 import { CitationBadge, GradeBadge } from "@/components/CitationBadge";
+import { PageShell } from "@/components/PageShell";
 
 export function generateStaticParams() {
   return entries.map((e) => ({ slug: e.slug }));
@@ -24,9 +25,9 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
   const next = entries[i + 1];
 
   return (
-    <article className="mx-auto max-w-2xl px-4 pt-8 md:px-8 md:pt-12">
-      <p className="text-[0.95rem]"><Link href="/recitations" className="underline">All recitations</Link></p>
-      <h1 className="display mt-4 text-[clamp(2rem,6vw,3rem)] leading-tight">{e.title}</h1>
+    <PageShell as="article">
+      <p className="text-small"><Link href="/recitations" className="underline">All recitations</Link></p>
+      <h1 className="t-h1 mt-4">{e.title}</h1>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <span className="text-accent"><GradeBadge entry={e} /></span>
         <CitationBadge entry={e} tone="sky" />
@@ -40,17 +41,17 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
 
       {e.transliteration && (
         <section className="mt-8">
-          <h2 className="text-[0.95rem] font-semibold text-ink-soft">Transliteration</h2>
+          <h2 className="text-small font-semibold text-ink-soft">Transliteration</h2>
           <div className="mt-1 max-w-[65ch] text-[calc(1rem*var(--translit-scale))] italic leading-relaxed">{e.transliteration.split("\n").map((l, k, all) => <p key={k}>{all.length === 1 ? <Translit text={l} marks={e.tu} silent={e.ts} /> : l}</p>)}</div>
         </section>
       )}
       <section className="mt-8">
-        <h2 className="text-[0.95rem] font-semibold text-ink-soft">Translation</h2>
-        <div className="mt-1 max-w-[65ch] text-[1.1rem] leading-relaxed">{e.translation.split("\n").map((l, k) => <p key={k}>{l}</p>)}</div>
+        <h2 className="text-small font-semibold text-ink-soft">Translation</h2>
+        <div className="mt-1 max-w-[65ch] text-lead leading-relaxed">{e.translation.split("\n").map((l, k) => <p key={k}>{l}</p>)}</div>
       </section>
       {(e.practice || e.repeat) && (
         <section className="mt-8">
-          <h2 className="text-[0.95rem] font-semibold text-ink-soft">{e.practice ? "How" : "Times"}</h2>
+          <h2 className="text-small font-semibold text-ink-soft">{e.practice ? "How" : "Times"}</h2>
           <p className="mt-1 max-w-[65ch]">{e.practice}{e.practice && e.repeat ? " " : ""}{e.repeat}</p>
         </section>
       )}
@@ -60,6 +61,6 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
         {prev ? <Link href={`/recitations/${prev.slug}`} className="min-h-11 underline">Previous: {prev.title}</Link> : <span />}
         {next ? <Link href={`/recitations/${next.slug}`} className="min-h-11 text-right underline">Next: {next.title}</Link> : <span />}
       </nav>
-    </article>
+    </PageShell>
   );
 }

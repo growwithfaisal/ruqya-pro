@@ -39,24 +39,24 @@ export function BackupPanel() {
 
   return (
     <section aria-labelledby="backup-title">
-      <h2 id="backup-title" className="display text-[clamp(1.6rem,4.5vw,2.1rem)] leading-tight">Your progress</h2>
+      <h2 id="backup-title" className="t-h2">Your progress</h2>
       <p className="mt-2 max-w-[56ch] text-ink-soft">
         Your reading days, streak, bookmarks and place live only on this device. Deleting the app removes them. Save a backup file before you delete or switch phones, then restore it in the new copy.
       </p>
       <div className="mt-6 glass rounded-[28px] border border-line p-5 text-card-ink">
-        <p className="text-[0.95rem] text-card-soft">
+        <p className="text-small text-card-soft">
           On this device now: {counts.days} reading {counts.days === 1 ? "day" : "days"}, {counts.marks} {counts.marks === 1 ? "bookmark" : "bookmarks"}{counts.hasPlace ? ", and your place in the Qur'an" : ""}.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
-          <button onClick={save} disabled={busy} className="min-h-14 w-full rounded-full bg-accent px-6 text-[1.05rem] font-semibold text-accent-ink transition-transform active:scale-[0.98] disabled:opacity-50 sm:w-auto sm:flex-1">
+          <button onClick={save} disabled={busy} className="btn btn-primary w-full sm:w-auto sm:flex-1">
             Save a backup
           </button>
-          <button onClick={() => input.current?.click()} disabled={busy} className="min-h-14 w-full rounded-full border border-line px-6 text-[1.05rem] disabled:opacity-50 sm:w-auto sm:flex-1">
+          <button onClick={() => input.current?.click()} disabled={busy} className="btn btn-secondary w-full sm:w-auto sm:flex-1">
             Restore from a backup
           </button>
           <input ref={input} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-hidden onChange={(e) => restore(e.target.files?.[0])} />
         </div>
-        {msg && <p role="status" aria-live="polite" className="mt-4 text-[0.95rem]">{msg}</p>}
+        {msg && <p role="status" aria-live="polite" className="mt-4 text-small">{msg}</p>}
       </div>
     </section>
   );

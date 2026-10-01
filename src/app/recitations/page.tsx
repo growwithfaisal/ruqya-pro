@@ -4,6 +4,7 @@ import { Deck } from "@/components/Deck";
 import { RoutineReader } from "@/components/RoutineReader";
 import { deckEntries } from "@/lib/entries";
 import type { Intent, TimeTag } from "@/lib/types";
+import { PageShell } from "@/components/PageShell";
 
 export const metadata: Metadata = { title: "Recitations" };
 
@@ -31,10 +32,10 @@ export default async function Recitations({ searchParams }: PageProps<"/recitati
   };
   return (
     <>
-      <div className="mx-auto max-w-5xl px-4 pt-6 md:px-8 md:pt-12">
-        <h1 className="display text-[clamp(1.8rem,6vw,3rem)] leading-tight">Recitations</h1>
+      <PageShell width="deck" className="!pb-0">
+        <h1 className="t-h1">Recitations</h1>
         <p className="mt-2 hidden max-w-[52ch] text-ink-soft sm:block">Each card carries its source. Tap the citation to see the grade, the book and the chapter.</p>
-      </div>
+      </PageShell>
       <Suspense>
         <Deck entries={deckEntries} initial={initial} />
       </Suspense>
