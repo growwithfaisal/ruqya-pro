@@ -37,6 +37,8 @@ typography:
     lineHeight: 2.15
 rounded:
   card: "28px"
+  row: "20px"
+  hairline: "6px"
   arch: "50% 50% 28px 28px / 150px 150px 28px 28px"
   pill: "9999px"
 spacing:
@@ -102,9 +104,11 @@ Committed, drenched-by-sky: the page ground is the palette. Each sky defines `--
 
 ### Hierarchy
 - **Display** (400, clamp(2.1rem, 7vw, 3.6rem), 1.06): the hour's line on Home.
-- **Headline** (400, clamp(1.8rem, 5vw, 2.5rem), 1.1): page and section titles.
-- **Title** (400, 1.35 to 1.5rem): card and entry titles.
-- **Body** (400, 1rem, 1.6): copy, capped near 65ch.
+- **Page title `.t-h1`** (400, clamp(2rem, 6vw, 3rem), 1.2): the title of every page.
+- **Section lead `.t-h2-lead`** (400, clamp(1.8rem, 5vw, 2.5rem), 1.2): the moments on Home (topics, Ayah of the day).
+- **Section title `.t-h2`** (400, clamp(1.6rem, 4.5vw, 2.1rem), 1.2): sections inside a page.
+- **Card heading `text-h3`** (400, 1.5rem) and **row title `text-title`** (400, 1.3rem): cards, rows, sheets.
+- **Lead `text-lead`** (1.1rem), **Body** (400, 1rem, 1.6, capped near 65ch), **Small `text-small`** (0.95rem), **Meta `text-meta`** (0.9rem). Buttons use 1.05rem; the tab bar labels use 0.72rem. Nothing else is a size.
 - **Arabic** (400, 1.9rem at scale 1, 2.15): centred, RTL, `lang="ar"`.
 
 ### Named Rules
@@ -112,7 +116,7 @@ Committed, drenched-by-sky: the page ground is the palette. Each sky defines `--
 
 ## Layout
 
-Mobile-first single column with a 16px gutter, `max-w-5xl` container, two columns from 768px on Home (hero and intents). Sections are separated by generous space and hairline rules, not boxes. The inline navigation appears from 1024px; below that a Menu button opens a bottom sheet. Rows are at least 44px tall; primary controls 48px or more.
+Mobile-first single column with a 16px gutter, `max-w-5xl` container, two columns from 768px on Home (hero and intents). Sections are separated by generous space and hairline rules, not boxes. The inline navigation appears from 1024px; below that a glass tab bar (Home, Qur'an, Recitations, Self-Ruqyah, More) sits at the bottom edge, with Sources, Search and Settings under More, and it steps aside on the reading screens that own the bottom edge. Every page uses `PageShell`: `narrow` (max-w-2xl) for app screens, `wide` (3xl) for reference pages, `deck` (5xl). Rows are at least 44px tall; primary controls 56px (`.btn`), secondary and utility 44px (`.btn-sm`), hero tiles `.cta` (72px, 28px radius).
 
 ## Elevation & Depth
 
@@ -121,6 +125,8 @@ A light touch of frosted glass sits over the tonal layering: cards (`.glass`, 72
 Tonal layering with two soft shadows. The recitation card has one offset, wide-blur shadow (`0 24px 48px -20px rgb(0 0 0 / 0.35)`); drawers use an upward version. Cards behind the top card are the same shape at 60% and 30% opacity, shifted down, to suggest a deck.
 
 ## Shapes
+
+Three radii only: 28px for cards, sheets and hero tiles; 20px for list rows and small tiles (verse numbers); full pills for controls and fields.
 
 The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 150px 150px 28px 28px`. Controls are full pills; drawers have 28px top corners. Hairlines are 1px `--line`.
 

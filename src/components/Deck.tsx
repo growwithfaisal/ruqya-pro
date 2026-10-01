@@ -109,7 +109,7 @@ export function Deck({ entries, initial }: { entries: Entry[]; initial: Filter }
             <div aria-hidden className="pointer-events-none absolute inset-0 top-3 mx-3 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] sheen border border-line bg-card opacity-60" />
             <div aria-hidden className="pointer-events-none absolute inset-0 top-6 mx-6 rounded-[50%_50%_28px_28px/150px_150px_28px_28px] sheen border border-line bg-card opacity-30" />
 
-            <div className="relative h-[clamp(28rem,calc(100dvh-17rem),44rem)]">
+            <div className="relative h-[clamp(26rem,calc(100dvh-21rem),44rem)] lg:h-[clamp(28rem,calc(100dvh-17rem),44rem)]">
               <AnimatePresence initial={false} custom={dir} mode="popLayout">
                 <motion.div
                   key={atEnd ? "end" : current.id}

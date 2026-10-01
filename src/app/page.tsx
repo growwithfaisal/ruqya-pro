@@ -1,6 +1,7 @@
 import { SkyHero } from "@/components/SkyHero";
 import { PrayerTimes } from "@/components/PrayerTimes";
 import { AyahOfTheDay } from "@/components/AyahOfTheDay";
+import { InstallHint } from "@/components/InstallHint";
 import { IntentList } from "@/components/IntentList";
 import { Disclaimer } from "@/components/Disclaimer";
 import { entries } from "@/lib/entries";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <SkyHero setIds={setIds} />
+      <InstallHint />
       <IntentList />
       <PrayerTimes />
       <AyahOfTheDay />

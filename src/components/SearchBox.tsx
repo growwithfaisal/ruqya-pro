@@ -1,6 +1,7 @@
 "use client";
 import Fuse from "fuse.js";
 import Link from "next/link";
+import { Chevron } from "./Glyphs";
 import { useMemo, useState } from "react";
 import type { Entry } from "@/lib/types";
 import { citation } from "@/lib/entries";
@@ -33,9 +34,12 @@ export function SearchBox({ entries }: { entries: Entry[] }) {
       <ul className="mt-6 border-t border-line" aria-live="polite">
         {results.map((e) => (
           <li key={e.id} className="border-b border-line">
-            <Link href={`/recitations/${e.slug}`} className="block py-4 no-underline">
-              <span className="display block text-title leading-tight">{e.title}</span>
-              <span className="text-meta text-ink-soft">{citation(e)}</span>
+            <Link href={`/recitations/${e.slug}`} className="group flex min-h-[4.5rem] items-center gap-3 py-3 no-underline">
+              <span className="grid flex-1">
+                <span className="display text-title leading-tight">{e.title}</span>
+                <span className="text-meta text-ink-soft">{citation(e)}</span>
+              </span>
+              <Chevron className="shrink-0 text-ink-soft transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </li>
         ))}

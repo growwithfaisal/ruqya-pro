@@ -16,26 +16,26 @@ export default function Sources() {
       </p>
       {SHOW_DRAFTS && <p className="mt-3 text-meta text-[var(--draft)]">Preview: entries not yet verified by the owner are marked as drafts.</p>}
 
-      <ol className="mt-10 border-t border-line">
+      <ol className="mt-10 grid gap-4">
         {entries.map((e) => (
-          <li key={e.id} id={e.id} className="scroll-mt-24 border-b border-line py-7">
+          <li key={e.id} id={e.id} className="glass scroll-mt-24 rounded-[28px] border border-line px-5 py-6 text-card-ink">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="display text-h3 leading-tight">{e.title}</h2>
               <span className="text-accent"><GradeBadge entry={e} /></span>
             </div>
             <dl className="mt-4 grid grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-small">
-              <dt className="text-ink-soft">Cited as</dt><dd>{citation(e)}</dd>
-              <dt className="text-ink-soft">Chapter</dt><dd>{e.source.chapter || "Not yet recorded"}</dd>
-              <dt className="text-ink-soft">Graded by</dt><dd>{e.grader || "Not yet recorded"}</dd>
-              {e.support.length > 0 && (<><dt className="text-ink-soft">Also see</dt><dd>{e.support.map((s) => (s.book === "The Qur'an" ? `Qur'an ${s.ref}` : `${s.book} ${s.ref}`)).join("; ")}</dd></>)}
-              {e.exegesis.note && (<><dt className="text-ink-soft">Note</dt><dd>{e.exegesis.note}{e.exegesis.work && ` (${e.exegesis.work})`}</dd></>)}
-              <dt className="text-ink-soft">Verified</dt>
+              <dt className="text-card-soft">Cited as</dt><dd>{citation(e)}</dd>
+              <dt className="text-card-soft">Chapter</dt><dd>{e.source.chapter || "Not yet recorded"}</dd>
+              <dt className="text-card-soft">Graded by</dt><dd>{e.grader || "Not yet recorded"}</dd>
+              {e.support.length > 0 && (<><dt className="text-card-soft">Also see</dt><dd>{e.support.map((s) => (s.book === "The Qur'an" ? `Qur'an ${s.ref}` : `${s.book} ${s.ref}`)).join("; ")}</dd></>)}
+              {e.exegesis.note && (<><dt className="text-card-soft">Note</dt><dd>{e.exegesis.note}{e.exegesis.work && ` (${e.exegesis.work})`}</dd></>)}
+              <dt className="text-card-soft">Verified</dt>
               <dd>{e.verified ? `${e.verified_by}, ${e.verified_on}` : "Not yet"}</dd>
             </dl>
-            <details className="mt-3 text-meta text-ink-soft">
+            <details className="mt-3 text-meta text-card-soft">
               <summary className="min-h-11 cursor-pointer content-center">Where each text came from</summary>
               <ul className="mt-1 grid gap-1">
-                {Object.entries(e.provenance).map(([k, v]) => (<li key={k}><span className="font-semibold text-ink">{k}:</span> {v}</li>))}
+                {Object.entries(e.provenance).map(([k, v]) => (<li key={k}><span className="font-semibold text-card-ink">{k}:</span> {v}</li>))}
               </ul>
             </details>
             <div className="mt-3 flex flex-wrap gap-4 text-small">

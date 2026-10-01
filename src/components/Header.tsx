@@ -2,18 +2,9 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
+import { NAV } from "@/lib/nav";
 import { Wordmark } from "./Glyphs";
 
-const NAV = [
-  { href: "/", label: "Home" },
-  { href: "/quran", label: "Qur'an" },
-  { href: "/self-ruqyah", label: "Self-Ruqyah" },
-  { href: "/recitations", label: "Recitations" },
-  { href: "/sources", label: "Sources" },
-  { href: "/search", label: "Search" },
-  { href: "/settings", label: "Settings" },
-];
 
 export function Header() {
   const path = usePathname();
@@ -52,27 +43,6 @@ export function Header() {
           ))}
         </nav>
 
-        <Dialog.Root>
-          <Dialog.Trigger className="min-h-11 rounded-full border border-line px-4 text-small lg:hidden">Menu</Dialog.Trigger>
-          <Dialog.Portal>
-            <Dialog.Overlay className="drawer-overlay fixed inset-0 z-40 bg-black/40" />
-            <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 glass-strong rounded-t-[28px] border border-line p-6 pb-10 text-card-ink shadow-[0_-12px_40px_-12px_rgb(0_0_0/0.35)]">
-              <Dialog.Title className="display mb-1 text-2xl">RuqyaPro</Dialog.Title>
-              <Dialog.Description className="mb-4 text-card-soft">Where to?</Dialog.Description>
-              <nav aria-label="Menu" className="grid">
-                {NAV.map((n) => (
-                  <Dialog.Close asChild key={n.href}>
-                    <Link href={n.href} aria-current={active(n.href) ? "page" : undefined} className="flex min-h-14 items-center justify-between border-t border-line text-lead no-underline">
-                      {n.label}
-                      {active(n.href) && <span className="text-sm text-card-soft">Here</span>}
-                    </Link>
-                  </Dialog.Close>
-                ))}
-              </nav>
-              <Dialog.Close className="btn btn-sm btn-secondary mt-5 w-full">Close</Dialog.Close>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
       </div>
     </header>
   );

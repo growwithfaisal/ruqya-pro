@@ -23,12 +23,12 @@ export default function SelfRuqyah() {
       <section className="mt-12" aria-labelledby="method-title">
         <h2 id="method-title" className="t-h2">How it was done</h2>
         <p className="mt-2 max-w-[56ch] text-ink-soft">Two reports of the Prophet&apos;s practice, quoted as they appear in the collections.</p>
-        <ul className="mt-5 grid gap-6">
+        <ul className="mt-5 grid gap-4">
           {method.map((m) => (
-            <li key={m.ref} className="border-t border-line pt-5">
-              <p className="text-small text-ink-soft">{m.note}</p>
+            <li key={m.ref} className="glass rounded-[28px] border border-line px-5 py-5 text-card-ink">
+              <p className="text-small text-card-soft">{m.note}</p>
               <blockquote className="mt-2 max-w-[65ch] text-lead leading-relaxed">{tidy(m.english)}</blockquote>
-              <p className="mt-2 text-meta text-ink-soft">
+              <p className="mt-2 text-meta text-card-soft">
                 {m.label} {m.ref}, {m.chapter}.{" "}
                 <a href={m.takhrij_url} target="_blank" rel="noreferrer" className="underline">Check the original</a>
               </p>

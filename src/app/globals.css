@@ -296,6 +296,15 @@ a {
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .rise { animation: rise 0.8s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
 
+/* Route changes: the old page eases out, the new one eases up into place. One shared motion for the whole app. */
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+::view-transition-old(.page-fade) { animation: 140ms var(--ease-out) both vt-out; }
+::view-transition-new(.page-fade) { animation: 280ms var(--ease-out) 40ms both vt-in; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
 /* Scrollbars carry the palette */
 * { scrollbar-width: thin; scrollbar-color: color-mix(in oklch, var(--ink) 30%, transparent) transparent; }
 
@@ -338,6 +347,25 @@ body {
 [data-sky="dusk"] .status-scrim { --scrim: 0.25; }
 [data-sky="night"] .status-scrim { --scrim: 0.12; }
 .drawer-panel { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Tab bar (phones): fixed to the bottom edge, the page gets room beneath its last line. */
+.tabbar {
+  position: fixed; inset: auto 0 0 0; z-index: 25;
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+}
+.tab {
+  display: grid; justify-items: center; gap: 0.15rem; min-height: 3.5rem; padding-top: 0.45rem;
+  font-size: 0.72rem; line-height: 1.1; color: var(--ink-soft); text-decoration: none; background: none;
+}
+.tab-icon { display: grid; place-items: center; width: 3.4rem; height: 1.9rem; border-radius: 9999px; transition: background-color 0.3s var(--ease-out), color 0.3s; }
+.tab-on { color: var(--ink); font-weight: 600; }
+.tab-on .tab-icon { background: color-mix(in oklch, var(--accent) 24%, transparent); color: var(--accent); }
+[data-sky="dusk"] .tab-on .tab-icon, [data-sky="night"] .tab-on .tab-icon { color: var(--ink); background: color-mix(in oklch, var(--accent) 30%, transparent); }
+@media (max-width: 1023.98px) {
+  html.has-tabbar body { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)); }
+  html.has-tabbar footer { display: none; }
+}
 
 @media (display-mode: standalone) {
   /* No browser chrome: keep text from being selected by accident while swiping. */

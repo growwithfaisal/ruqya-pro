@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useSyncExternalStore } from "react";
+import type { Sky } from "./sky";
 import { CalculationMethod, Coordinates, HighLatitudeRule, Madhab, PrayerTimes } from "adhan";
 
 /**
@@ -72,7 +73,7 @@ export function setPrayerPrefs(patch: Partial<PrayerPrefs>) {
   window.dispatchEvent(new Event("rp-prayer"));
 }
 export function forgetPlace() {
-  try { localStorage.removeItem(PLACE_KEY); } catch {}
+  try { localStorage.removeItem(PLACE_KEY); localStorage.removeItem("rp:v1:prayer:skybounds"); } catch {}
   window.dispatchEvent(new Event("rp-prayer"));
 }
 
@@ -107,13 +108,17 @@ export type PrayerName = "Fajr" | "Sunrise" | "Dhuhr" | "Asr" | "Maghrib" | "Ish
 export interface Moment { name: PrayerName; at: Date }
 export interface Now { current: Moment; next: Moment; progress: number }
 
-function day(place: Place, prefs: PrayerPrefs, date: Date): Moment[] {
+function times(place: Place, prefs: PrayerPrefs, date: Date): PrayerTimes {
   const coords = new Coordinates(place.lat, place.lon);
   const id = prefs.method === "auto" ? suggestedMethod() : prefs.method;
   const params = CalculationMethod[id]();
   params.madhab = prefs.asr === "hanafi" ? Madhab.Hanafi : Madhab.Shafi;
   params.highLatitudeRule = HighLatitudeRule.recommended(coords);
-  const t = new PrayerTimes(coords, date, params);
+  return new PrayerTimes(coords, date, params);
+}
+
+function day(place: Place, prefs: PrayerPrefs, date: Date): Moment[] {
+  const t = times(place, prefs, date);
   return [
     { name: "Fajr", at: t.fajr }, { name: "Sunrise", at: t.sunrise }, { name: "Dhuhr", at: t.dhuhr },
     { name: "Asr", at: t.asr }, { name: "Maghrib", at: t.maghrib }, { name: "Isha", at: t.isha },
@@ -142,4 +147,66 @@ export function until(to: Date, now = new Date()): string {
   if (mins < 1) return "less than a minute";
   const h = Math.floor(mins / 60), m = mins % 60;
   return h ? `${h} h${m ? ` ${m} min` : ""}` : `${m} min`;
+}
+
+/* ---------------- The page's sky, from the real sun ---------------- */
+
+/**
+ * The page theme follows where the sun is at the reader's own place: dawn from Fajr, day from 90 minutes after sunrise,
+ * dusk from 75 minutes before Maghrib, night from Isha. With no saved place it falls back to fixed clock hours (see sky.ts).
+ */
+export interface SkyTimeline {
+  /** When each sky begins, in time order, from yesterday to tomorrow. */
+  sky: [number, Sky][];
+  /** Sunrise and sunset instants, in time order, from yesterday to tomorrow. */
+  sun: [number, "rise" | "set"][];
+}
+const MIN = 60_000;
+
+export function skyTimeline(place: Place, prefs: PrayerPrefs, now = new Date()): SkyTimeline | null {
+  try {
+    const sky: [number, Sky][] = [], sun: [number, "rise" | "set"][] = [];
+    for (const n of [-1, 0, 1]) {
+      const d = new Date(now); d.setDate(d.getDate() + n);
+      const t = times(place, prefs, d);
+      sky.push([t.fajr.getTime(), "dawn"], [t.sunrise.getTime() + 90 * MIN, "day"], [t.maghrib.getTime() - 75 * MIN, "dusk"], [t.isha.getTime(), "night"]);
+      sun.push([t.sunrise.getTime(), "rise"], [t.sunset.getTime(), "set"]);
+    }
+    const ok = (e: [number, unknown]) => Number.isFinite(e[0]);
+    const tl = { sky: sky.filter(ok).sort((a, b) => a[0] - b[0]), sun: sun.filter(ok).sort((a, b) => a[0] - b[0]) };
+    return tl.sky.length >= 8 && tl.sun.length >= 4 ? tl : null;
+  } catch {
+    return null;
+  }
+}
+
+export function skyFromTimeline(tl: SkyTimeline, now = new Date()): Sky | null {
+  const n = now.getTime();
+  if (n < tl.sky[0][0] || n >= tl.sky[tl.sky.length - 1][0]) return null;
+  let cur: Sky | null = null;
+  for (const [at, sky] of tl.sky) if (at <= n) cur = sky;
+  return cur;
+}
+
+/** Sun between rise and set, moon between set and the next rise; t runs 0..1 along the arc. */
+export function arcFromTimeline(tl: SkyTimeline, now = new Date()): { body: "sun" | "moon"; t: number } | null {
+  const n = now.getTime();
+  let prev: [number, "rise" | "set"] | null = null, next: [number, "rise" | "set"] | null = null;
+  for (const e of tl.sun) { if (e[0] <= n) prev = e; else { next = e; break; } }
+  if (!prev || !next) return null;
+  return { body: prev[1] === "rise" ? "sun" : "moon", t: Math.min(1, Math.max(0, (n - prev[0]) / (next[0] - prev[0]))) };
+}
+
+const CACHE_KEY = "rp:v1:prayer:skybounds";
+export function readInputs(): { place: Place | null; prefs: PrayerPrefs } {
+  const p = parse<Place | null>(read(PLACE_KEY), null);
+  return { place: p && Number.isFinite(p.lat) && Number.isFinite(p.lon) ? p : null, prefs: { ...DEFAULTS, ...parse<Partial<PrayerPrefs>>(read(PREFS_KEY), {}) } };
+}
+
+/** Today's sky times, kept for the pre-paint script in layout.tsx so the right sky shows from the first frame. Derived data only. */
+export function writeSkyCache(tl: SkyTimeline | null, now = new Date()) {
+  try {
+    if (!tl) localStorage.removeItem(CACHE_KEY);
+    else localStorage.setItem(CACHE_KEY, JSON.stringify({ d: now.toLocaleDateString("en-CA"), t: tl.sky }));
+  } catch {}
 }

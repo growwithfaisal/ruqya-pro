@@ -76,3 +76,17 @@ export const Bookmark = ({ className, size = 18, filled = false }: P & { filled?
     <path d="M6.5 4h11v16.5L12 16.5l-5.5 4z" />
   </svg>
 );
+export const Horizon = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M6 15a6 6 0 0 1 12 0" />
+    <path d="M3 15h18" />
+    <path d="M7 19h10" />
+  </svg>
+);
+export const Dots = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="6" cy="12" r="1.3" />
+    <circle cx="12" cy="12" r="1.3" />
+    <circle cx="18" cy="12" r="1.3" />
+  </svg>
+);

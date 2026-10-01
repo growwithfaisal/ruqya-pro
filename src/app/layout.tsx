@@ -1,3 +1,4 @@
+import { Suspense, ViewTransition } from "react";
 import type { Metadata, Viewport } from "next";
 import { Amiri, Hedvig_Letters_Serif, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
@@ -6,6 +7,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PwaRegister } from "@/components/PwaRegister";
 import { SkyClock } from "@/components/SkyClock";
+import { TabBar } from "@/components/TabBar";
 import { OfflineSync } from "@/components/OfflineSync";
 import { SPLASH_SIZES } from "@/lib/splash";
 
@@ -41,13 +43,15 @@ export const viewport: Viewport = {
 };
 
 /**
- * Runs before paint: sets the sky from device local time (?sky=dawn|day|dusk|night overrides,
- * for previewing) and restores the reader's Arabic size. No network, no location.
+ * Runs before paint: sets the sky from the real sun at the saved place (cached by SkyClock), else from device local time
+ * (?sky=dawn|day|dusk|night overrides, for previewing) and restores the reader's Arabic size. No network, no location.
  */
 const bootScript = `(function(){try{
 var q=new URLSearchParams(location.search).get('sky');
 var d=new Date(),h=d.getHours()+d.getMinutes()/60;
 var s=(q&&/^(dawn|day|dusk|night)$/.test(q))?q:(h>=5&&h<8?'dawn':h>=8&&h<16.5?'day':h>=16.5&&h<19.5?'dusk':'night');
+if(!q){var c=JSON.parse(localStorage.getItem('rp:v1:prayer:skybounds')||'null'),n=d.getTime();
+if(c&&c.t&&c.d===d.toLocaleDateString('en-CA')&&n>=c.t[0][0]&&n<c.t[c.t.length-1][0]){for(var i=0;i<c.t.length;i++){if(c.t[i][0]<=n)s=c.t[i][1];}}}
 document.documentElement.dataset.sky=s;
 var tc={dawn:'#c6bff8',day:'#b4e7fc',dusk:'#411c49',night:'#060b22'}[s];
 var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',tc);
@@ -76,8 +80,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="status-scrim" aria-hidden />
         <SkyBackdrop />
         <Header />
-        <main id="main" className="flex-1">{children}</main>
+        <main id="main" className="flex-1"><ViewTransition default="page-fade">{children}</ViewTransition></main>
         <Footer />
+        <Suspense fallback={null}><TabBar /></Suspense>
         <PwaRegister />
         <SkyClock />
         <OfflineSync />

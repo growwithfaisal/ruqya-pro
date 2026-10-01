@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { arcProgress, decimalHour, isFriday, setForHour, skyForHour, SKY_LABEL, type Sky } from "@/lib/sky";
+import { arcProgress, decimalHour, isFriday, setForHour, SKY_LABEL, type Sky } from "@/lib/sky";
+import { liveSky } from "@/lib/sky-live";
+import { usePrayerState } from "@/lib/prayer";
 import { doneKey, useDone } from "@/lib/progress";
 import { chapter, readHref } from "@/lib/quran";
 import { useQuran } from "@/lib/quran-store";
@@ -35,13 +37,15 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
     return () => clearInterval(id);
   }, []);
 
+  const { place, prefs } = usePrayerState();
   const h = now ? decimalHour(now) : 9;
-  const override = typeof document !== "undefined" ? (document.documentElement.dataset.sky as Sky) : undefined;
-  const sky = now ? (override ?? skyForHour(h)) : "day";
-  // When previewing with ?sky=, place the body at a representative hour for that sky.
-  const preview = { dawn: 6.5, day: 12, dusk: 18, night: 22 }[sky];
-  const shown = now && override && override !== skyForHour(h) ? preview : h;
-  const { body, t } = arcProgress(shown);
+  // ?sky= previews a sky at a representative hour; otherwise the sun's place comes from the real sunrise and sunset when known.
+  const previewSky = typeof location !== "undefined" ? new URLSearchParams(location.search).get("sky") : null;
+  const previewing = !!previewSky && previewSky in SKY_LABEL;
+  const live = now ? liveSky(now, { place, prefs }) : null;
+  const sky: Sky = previewing ? (previewSky as Sky) : live?.sky ?? "day";
+  const shown = previewing ? { dawn: 6.5, day: 12, dusk: 18, night: 22 }[sky] : h;
+  const { body, t } = previewing || !live ? arcProgress(shown) : live;
   const [x, y] = at(t);
   const set: TimeTag = setForHour(shown);
   const friday = !!now && isFriday(now);
