@@ -1,4 +1,5 @@
 "use client";
+import { applySky } from "./night";
 
 /**
  * Save and restore everything a reader keeps on this device (place, reading days, bookmarks, today's ticks, settings).
@@ -7,7 +8,7 @@
  */
 const FORMAT = 1;
 const APP = "RuqyaPro";
-const ALLOWED = /^rp:(v1:quran:(last|days|seen|marks|prefs)|done:\d{4}-\d{2}-\d{2}|v2:done:\d{4}-\d{2}-\d{2}|arabic|translit|v1:prayer:prefs)$/;
+const ALLOWED = /^rp:(v1:quran:(last|days|seen|marks|prefs)|done:\d{4}-\d{2}-\d{2}|v2:done:\d{4}-\d{2}-\d{2}|arabic|translit|v1:prayer:prefs|v1:night)$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_VALUE = 200_000;
 
@@ -97,6 +98,8 @@ export async function restoreBackup(file: File): Promise<BackupSummary> {
       if (typeof b?.date !== "string") continue;
       if (!a?.date || a.date < b.date) set(k, { date: b.date, keys: strings(b.keys) });
       else if (a.date === b.date) set(k, { date: b.date, keys: union(strings(a.keys), strings(b.keys)) });
+    } else if (k === "rp:v1:night") {
+      if (raw === "1") set(k, "1");
     } else if (k === "rp:v1:quran:prefs" || k === "rp:v1:prayer:prefs") {
       if (typeof incoming === "object" && incoming) set(k, raw);
     } else {
@@ -108,6 +111,8 @@ export async function restoreBackup(file: File): Promise<BackupSummary> {
     const n = parseFloat(get(key) ?? "");
     if (n >= 0.8 && n <= 1.8) document.documentElement.style.setProperty(prop, String(n));
   }
+  applySky(); // a restored night mode takes hold at once
+  window.dispatchEvent(new Event("rp-night"));
   window.dispatchEvent(new Event("rp-quran"));
   window.dispatchEvent(new Event("rp-progress"));
   return summarise(get);

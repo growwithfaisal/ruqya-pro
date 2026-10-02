@@ -50,8 +50,8 @@ const bootScript = `(function(){try{
 var q=new URLSearchParams(location.search).get('sky');
 var d=new Date(),h=d.getHours()+d.getMinutes()/60;
 var s=(q&&/^(dawn|day|dusk|night)$/.test(q))?q:(h>=5&&h<8?'dawn':h>=8&&h<16.5?'day':h>=16.5&&h<19.5?'dusk':'night');
-if(!q){var c=JSON.parse(localStorage.getItem('rp:v1:prayer:skybounds')||'null'),n=d.getTime();
-if(c&&c.t&&c.d===d.toLocaleDateString('en-CA')&&n>=c.t[0][0]&&n<c.t[c.t.length-1][0]){for(var i=0;i<c.t.length;i++){if(c.t[i][0]<=n)s=c.t[i][1];}}}
+if(!q){if(localStorage.getItem('rp:v1:night')==='1'){s='night';}else{var c=JSON.parse(localStorage.getItem('rp:v1:prayer:skybounds')||'null'),n=d.getTime();
+if(c&&c.t&&c.d===d.toLocaleDateString('en-CA')&&n>=c.t[0][0]&&n<c.t[c.t.length-1][0]){for(var i=0;i<c.t.length;i++){if(c.t[i][0]<=n)s=c.t[i][1];}}}}
 document.documentElement.dataset.sky=s;
 var tc={dawn:'#c6bff8',day:'#b4e7fc',dusk:'#411c49',night:'#060b22'}[s];
 var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',tc);

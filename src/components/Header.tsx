@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/nav";
 import { Search, Wordmark } from "./Glyphs";
+import { NightButton } from "./NightMode";
 
 
 export function Header() {
@@ -19,18 +20,18 @@ export function Header() {
 
   return (
     <header className="app-header glass-bar sticky top-0 z-30 border-b border-line short:static">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 short:py-1.5 md:px-8">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-1.5 px-4 py-3 short:py-1.5 md:px-8">
         {standalone && path !== "/" && (
           <button onClick={() => router.back()} aria-label="Back" className="-ml-2 mr-1 grid min-h-11 min-w-11 place-items-center rounded-full">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 5l-7 7 7 7" /></svg>
           </button>
         )}
-        <Link href="/" className="mr-auto flex min-h-11 items-center gap-2.5 no-underline" aria-label="RuqyaPro home">
+        <Link href="/" className="mr-auto flex min-h-[44px] min-w-0 items-center gap-2 no-underline" aria-label="RuqyaPro home">
           <Wordmark className="text-accent" />
-          <span className="display text-title leading-none">RuqyaPro</span>
+          <span className="display truncate text-title leading-none">RuqyaPro</span>
         </Link>
 
-        <Link href="/search" aria-label="Search" aria-current={path.startsWith("/search") ? "page" : undefined} className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line lg:hidden">
+        <Link href="/search" aria-label="Search" aria-current={path.startsWith("/search") ? "page" : undefined} className="grid min-h-[44px] min-w-[44px] shrink-0 place-items-center rounded-full border border-line lg:hidden">
           <Search size={20} />
         </Link>
 
@@ -47,6 +48,7 @@ export function Header() {
           ))}
         </nav>
 
+        <NightButton />
       </div>
     </header>
   );

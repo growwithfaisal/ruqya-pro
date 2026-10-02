@@ -2,11 +2,12 @@
 import { useEffect } from "react";
 import { THEME_COLOR } from "@/lib/sky";
 import { liveSky, writeSkyCache } from "@/lib/sky-live";
+import { readNight } from "@/lib/night";
 
 /**
  * Keeps the sky in step with the device clock while the app stays open. A home-screen app can sit in the
  * background for hours, so the sky is re-read every minute and whenever the app returns to the front.
- * A `?sky=` preview in the address bar is left alone.
+ * While night mode is on the sky stays night. A `?sky=` preview in the address bar is left alone.
  */
 export function SkyClock() {
   useEffect(() => {
@@ -16,7 +17,8 @@ export function SkyClock() {
     const tick = () => {
       if (!preview) {
         const now = new Date();
-        const { sky, timeline } = liveSky(now);
+        const { sky: real, timeline } = liveSky(now);
+        const sky = readNight() ? "night" : real;
         // Keep today's sky times where the pre-paint script can read them.
         const stamp = `${now.toLocaleDateString("en-CA")}|${timeline ? "real" : "fixed"}`;
         if (stamp !== cachedFor) { cachedFor = stamp; writeSkyCache(timeline, now); }
@@ -40,9 +42,11 @@ export function SkyClock() {
     window.addEventListener("pageshow", tick);
     window.addEventListener("focus", tick);
     window.addEventListener("rp-prayer", onPlace);
+    window.addEventListener("storage", tick); // night mode switched in another window
     tick();
     return () => {
       window.removeEventListener("rp-prayer", onPlace);
+      window.removeEventListener("storage", tick);
       clearInterval(id);
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("pageshow", tick);

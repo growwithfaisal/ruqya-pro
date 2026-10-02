@@ -28,6 +28,13 @@ export const Niche = ({ className, size = 24 }: P) => (
     <path d="M9.5 21v-9.5a2.5 2.5 0 0 1 5 0V21" />
   </svg>
 );
+/** Light and dark in one mark: a ring with its right half filled. Used for the night-mode switch. */
+export const HalfDisc = ({ className, size = 22 }: P) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" />
+  </svg>
+);
 export const Chevron = ({ className, size = 20 }: P) => (
   <svg {...base(size)} className={className}><path d="M9 5l7 7-7 7" /></svg>
 );
