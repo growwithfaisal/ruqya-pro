@@ -49,6 +49,8 @@ export const viewport: Viewport = {
  * (?sky=dawn|day|dusk|night overrides, for previewing) and restores the reader's Arabic size. No network, no location.
  */
 const bootScript = `(function(){try{
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__rpInstall=e;window.dispatchEvent(new Event('rp-install'));});
+window.addEventListener('appinstalled',function(){window.__rpInstall=null;try{var o=JSON.parse(localStorage.getItem('rp:v1:install')||'{}');o.installed=true;localStorage.setItem('rp:v1:install',JSON.stringify(o));}catch(x){}window.dispatchEvent(new Event('rp-install'));});
 var q=new URLSearchParams(location.search).get('sky');
 var d=new Date(),h=d.getHours()+d.getMinutes()/60;
 var s=(q&&/^(dawn|day|dusk|night)$/.test(q))?q:(h>=5&&h<8?'dawn':h>=8&&h<16.5?'day':h>=16.5&&h<19.5?'dusk':'night');

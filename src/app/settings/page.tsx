@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BackupPanel } from "@/components/BackupPanel";
 import { PrayerSettings } from "@/components/PrayerSettings";
 import { OfflinePanel } from "@/components/OfflinePanel";
+import { InstallRow } from "@/components/InstallPrompt";
 import { NightSwitch } from "@/components/NightMode";
 import { AccountSettings } from "@/components/AccountSettings";
 import { ReadingSettings } from "@/components/ReadingSettings";
@@ -47,6 +48,7 @@ export default function Settings() {
       </nav>
       <div className="mt-8">
         <NightSwitch />
+        <InstallRow />
       </div>
       <div className="mt-10">
         <ReadingSettings />

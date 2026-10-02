@@ -1,7 +1,7 @@
 import { SkyHero } from "@/components/SkyHero";
 import { PrayerTimes } from "@/components/PrayerTimes";
 import { AyahOfTheDay } from "@/components/AyahOfTheDay";
-import { InstallHint } from "@/components/InstallHint";
+import { InstallPrompt } from "@/components/InstallPrompt";
 import { IntentList } from "@/components/IntentList";
 import { Disclaimer } from "@/components/Disclaimer";
 import { entries } from "@/lib/entries";
@@ -13,8 +13,8 @@ export default function Home() {
 
   return (
     <>
+      <InstallPrompt />
       <SkyHero setIds={setIds}><PrayerTimes /></SkyHero>
-      <InstallHint />
       <IntentList />
       <AyahOfTheDay />
       <section aria-label="Medical note" className="mx-auto max-w-2xl px-4 pt-10 md:px-8">

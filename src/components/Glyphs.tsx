@@ -35,6 +35,33 @@ export const HalfDisc = ({ className, size = 22 }: P) => (
     <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" />
   </svg>
 );
+/** The Share button as it looks in Safari: a box with an arrow leaving the top. */
+export const ShareMark = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M12 15V3.5M8.5 7L12 3.5 15.5 7" />
+    <path d="M8 10H7a2 2 0 0 0-2 2v6.5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V12a2 2 0 0 0-2-2h-1" />
+  </svg>
+);
+/** "Add to Home Screen": a square with a plus. */
+export const AddSquare = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <rect x="4" y="4" width="16" height="16" rx="3.5" />
+    <path d="M12 8.5v7M8.5 12h7" />
+  </svg>
+);
+/** "Open in browser": an arrow leaving a box. */
+export const OpenOut = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M14 4h6v6M20 4l-8.5 8.5" />
+    <path d="M18 14v3.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 4 17.5v-9A2.5 2.5 0 0 1 6.5 6H10" />
+  </svg>
+);
+export const ArrowDown = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}><path d="M12 4v15M6 13.5l6 6 6-6" /></svg>
+);
+export const ArrowUp = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}><path d="M12 20V5M6 10.5l6-6 6 6" /></svg>
+);
 export const Chevron = ({ className, size = 20 }: P) => (
   <svg {...base(size)} className={className}><path d="M9 5l7 7-7 7" /></svg>
 );
