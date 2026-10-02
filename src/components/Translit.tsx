@@ -1,3 +1,7 @@
+/** The two marks, shared with the reading guide so its examples look exactly like the verses. */
+export const MARK_UNDERLINE = "underline decoration-[1.5px] underline-offset-[0.22em]";
+export const MARK_SILENT = "font-bold opacity-50";
+
 /**
  * Transliteration with marks. Underlined: a letter that can be said more than one way (heavy letters) and long vowels.
  * Bold and faded: a letter that is not said. The letters themselves are never changed.
@@ -17,7 +21,7 @@ export function Translit({
       const k = kind[start];
       out.push(
         k === 0 ? piece : (
-          <span key={start} className={`${k & 1 ? "underline decoration-[1.5px] underline-offset-[0.22em] " : ""}${k & 2 ? "font-bold opacity-50" : ""}`}>{piece}</span>
+          <span key={start} className={`${k & 1 ? MARK_UNDERLINE + " " : ""}${k & 2 ? MARK_SILENT : ""}`}>{piece}</span>
         ),
       );
       start = i;

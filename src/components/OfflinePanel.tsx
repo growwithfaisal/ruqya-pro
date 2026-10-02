@@ -4,6 +4,7 @@ import { OfflineRecord, downloadEverything, readRecord, removeEverything } from 
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { TranslitSizeControl } from "./TranslitSizeControl";
+import { TranslitGuideRow } from "./TranslitGuide";
 import { Check, CloudDown } from "./Glyphs";
 
 const mb = (b: number) => `${(b / 1024 / 1024).toFixed(b < 10 * 1024 * 1024 ? 1 : 0)} MB`;
@@ -132,6 +133,7 @@ export function OfflinePanel({ pages }: { pages: string[] }) {
             <span>Transliteration size</span>
             <TranslitSizeControl />
           </div>
+          <TranslitGuideRow />
         </div>
       </section>
 

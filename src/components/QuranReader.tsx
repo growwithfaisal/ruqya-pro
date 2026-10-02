@@ -12,6 +12,7 @@ import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
 import { Coloured } from "./Coloured";
 import { Translit } from "./Translit";
 import { Sheet } from "./Sheet";
+import { TranslitGuideRow } from "./TranslitGuide";
 import { VerseSheet } from "./VerseSheet";
 
 type Panel = null | "surah" | "verse" | "settings";
@@ -279,6 +280,7 @@ function SettingsSheet({ open, onOpenChange, surah }: { open: boolean; onOpenCha
         <span>Arabic size</span>
         <ArabicSizeControl />
       </div>
+      <TranslitGuideRow />
       <button
         disabled={busy}
         onClick={async () => { setBusy(true); if (saved) await off.remove(surah, surahUrl); else await off.save([surah], surahUrl); setBusy(false); }}

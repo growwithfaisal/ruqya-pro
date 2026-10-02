@@ -14,6 +14,7 @@ import { Coloured } from "./Coloured";
 import { Translit } from "./Translit";
 import { Check, Chevron } from "./Glyphs";
 import { Sheet } from "./Sheet";
+import { TranslitGuideRow } from "./TranslitGuide";
 
 type Panel = null | "list" | "settings";
 const SWIPE = 80;
@@ -298,6 +299,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
           <span>Arabic size</span>
           <ArabicSizeControl />
         </div>
+        <TranslitGuideRow />
       </Sheet>
     </div>
   );
