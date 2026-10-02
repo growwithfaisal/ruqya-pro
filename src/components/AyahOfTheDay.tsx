@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ayahOfTheDay, chapter, loadSurah, readHref, type Verse } from "@/lib/quran";
 import { useQuran } from "@/lib/quran-store";
-import { Coloured } from "./Coloured";
-import { Translit } from "./Translit";
 import { Chevron } from "./Glyphs";
 
-/** One verse a day, chosen from the whole Qur'an by the device's own date. It changes at local midnight. */
+/**
+ * One verse a day, chosen from the whole Qur'an by the device's own date. It changes at local midnight.
+ * The card shows the translation only (Saheeh International); the Arabic is one tap away in the reader.
+ */
 export function AyahOfTheDay() {
   const q = useQuran();
   const pick = useMemo(() => ayahOfTheDay(q.today), [q.today]);
@@ -23,7 +24,6 @@ export function AyahOfTheDay() {
   }, [pick.surah, pick.verse]);
 
   const c = chapter(pick.surah);
-  const lead = verse ? verse.ar.length - verse.ar.trimStart().length : 0;
 
   return (
     <section aria-labelledby="ayah-title" className="mx-auto max-w-5xl px-4 pt-14 md:px-8 md:pt-20">
@@ -33,29 +33,25 @@ export function AyahOfTheDay() {
           {c.name} <span className="tabular">{pick.surah}:{pick.verse}</span>
         </p>
 
-        <div className="mt-5 min-h-[18rem] glass rounded-[28px] border border-line px-5 py-7 text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]">
+        <figure className="mt-5 grid min-h-[11rem] place-content-center glass rounded-[28px] border border-line px-6 py-8 text-center text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]">
           {failed && (
-            <p className="py-10 text-center text-card-soft" role="status">
+            <p className="text-card-soft" role="status">
               Today&apos;s ayah is not on this device yet. Connect once, or open it in the Qur&apos;an reader.
             </p>
           )}
-          {!verse && !failed && <p className="py-10 text-center text-card-soft" role="status">Opening today&apos;s ayah…</p>}
+          {!verse && !failed && (
+            <div role="status" aria-label="Opening today's ayah" className="grid gap-3">
+              <div className="skeleton mx-auto h-4 w-4/5 !rounded-full" aria-hidden />
+              <div className="skeleton mx-auto h-4 w-3/5 !rounded-full" aria-hidden />
+            </div>
+          )}
           {verse && (
             <>
-              <p lang="ar" dir="rtl" className="arabic arabic-read !text-center">
-                {q.prefs.tajweed && verse.tg ? <Coloured ar={verse.ar.trim()} ranges={verse.tg} lead={lead} /> : verse.ar.trim()}
-              </p>
-              {q.prefs.translit && (
-                <p className="mt-5 text-center text-[calc(clamp(1.15rem,4.2vw,1.4rem)*var(--translit-scale))] leading-snug">
-                  <Translit text={verse.tr} marks={verse.tu} silent={verse.ts} />
-                </p>
-              )}
-              {q.prefs.translation && (
-                <p className="mx-auto mt-4 max-w-[60ch] text-center text-base leading-relaxed text-card-soft">{verse.en}</p>
-              )}
+              <blockquote className="mx-auto max-w-[34ch] text-[clamp(1.2rem,4.6vw,1.5rem)] leading-snug text-balance">{verse.en}</blockquote>
+              <figcaption className="mt-4 text-meta text-card-soft">Saheeh International</figcaption>
             </>
           )}
-        </div>
+        </figure>
 
         <Link
           href={readHref(pick.surah, pick.verse)}
