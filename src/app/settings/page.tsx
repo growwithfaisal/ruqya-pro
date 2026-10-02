@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BackupPanel } from "@/components/BackupPanel";
 import { PrayerSettings } from "@/components/PrayerSettings";
 import { OfflinePanel } from "@/components/OfflinePanel";
+import { ReadingSettings } from "@/components/ReadingSettings";
 import { INTENTS, SETS, entries } from "@/lib/entries";
 import { PageShell } from "@/components/PageShell";
 
@@ -17,15 +18,33 @@ function pages() {
   ];
 }
 
+/** The sections, most used first. Each id is the heading of that section. */
+const JUMPS = [
+  ["Reading", "reading-title"],
+  ["Prayer times", "prayer-settings-title"],
+  ["Offline", "offline-title"],
+  ["Backup", "backup-title"],
+] as const;
+
 export default function Settings() {
   return (
     <PageShell>
       <h1 className="t-h1">Settings</h1>
-      <div className="mt-8">
-        <OfflinePanel pages={pages()} />
+      <nav aria-label="Sections" className="mt-5">
+        <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+          {JUMPS.map(([label, id]) => (
+            <li key={id}><a href={`#${id}`} className="btn btn-sm btn-secondary w-full !px-4 no-underline sm:w-auto">{label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <div className="mt-10">
+        <ReadingSettings />
       </div>
       <div className="mt-12">
         <PrayerSettings />
+      </div>
+      <div className="mt-12">
+        <OfflinePanel pages={pages()} />
       </div>
       <div className="mt-12">
         <BackupPanel />

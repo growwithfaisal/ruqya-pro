@@ -12,7 +12,7 @@ import { Check, Chevron, INTENT_GLYPH } from "./Glyphs";
 export function CategoryList({ ids: byCategory }: { ids: Record<Intent, string[]> }) {
   const { done } = useDone();
   return (
-    <ul className="grid gap-2.5">
+    <ul className="grid grid-cols-[minmax(0,1fr)] gap-2.5">
       {INTENTS.map((it) => {
         const Glyph = INTENT_GLYPH[it.id];
         const ids = byCategory[it.id] ?? [];
@@ -22,7 +22,7 @@ export function CategoryList({ ids: byCategory }: { ids: Record<Intent, string[]
           <li key={it.id} className="cv-auto rounded-[20px] border border-line">
             <Link href={`/recitations?intent=${it.id}`} className="group flex min-h-[5.25rem] items-center gap-4 px-4 py-3 no-underline">
               <Glyph className="shrink-0 text-accent" size={30} />
-              <span className="grid flex-1 gap-0.5">
+              <span className="grid min-w-0 flex-1 gap-0.5 [overflow-wrap:anywhere]">
                 <span className="display text-title leading-tight">{it.label}</span>
                 <span className="text-meta text-ink-soft">{it.blurb}</span>
                 {complete ? (

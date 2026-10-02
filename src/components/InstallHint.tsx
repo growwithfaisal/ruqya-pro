@@ -24,12 +24,12 @@ export function InstallHint() {
 
   return (
     <section aria-label="Add to Home Screen" className="mx-auto max-w-5xl px-4 pt-6 md:px-8">
-      <div className="glass flex items-center gap-4 rounded-[28px] border border-line px-5 py-4 text-card-ink">
-        <p className="flex-1 text-small">
+      <div className="glass flex flex-col gap-3 rounded-[28px] border border-line px-5 py-4 text-card-ink min-[420px]:flex-row min-[420px]:items-center min-[420px]:gap-4">
+        <p className="min-w-0 flex-1 text-small">
           <strong className="font-semibold">Keep RuqyaPro on your Home Screen.</strong>{" "}
           Tap <span className="whitespace-nowrap">Share</span>, then <span className="whitespace-nowrap">Add to Home Screen</span>. It opens like an app, works without internet and keeps your progress on this phone.
         </p>
-        <button onClick={dismiss} className="btn btn-sm btn-secondary shrink-0">Got it</button>
+        <button onClick={dismiss} className="btn btn-sm btn-secondary shrink-0 self-start min-[420px]:self-auto">Got it</button>
       </div>
     </section>
   );

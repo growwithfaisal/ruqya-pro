@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { arcProgress, decimalHour, isFriday, setForHour, SKY_LABEL, type Sky } from "@/lib/sky";
 import { liveSky } from "@/lib/sky-live";
 import { prayerNow, usePrayerState } from "@/lib/prayer";
@@ -25,7 +25,11 @@ const at = (t: number) => [
   (1 - t) ** 2 * P0[1] + 2 * (1 - t) * t * C[1] + t ** 2 * P2[1],
 ];
 
-export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
+/**
+ * The top of Home. On a phone it reads down: the sky, the line for the hour, the tiles, then `children` (the prayer card).
+ * From 768px and in a sideways phone it is two columns: the sky and the prayer card on the left, the line and tiles on the right.
+ */
+export function SkyHero({ setIds, children }: { setIds: Record<TimeTag, string[]>; children?: ReactNode }) {
   const [now, setNow] = useState<Date | null>(null);
   const [previewSky, setPreviewSky] = useState<string | null>(null); // set after mount so the first render matches the server
   const { done } = useDone();
@@ -69,9 +73,9 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
 
   return (
     <section aria-labelledby="hero-line" className="mx-auto max-w-5xl px-4 pt-8 short:pt-3 md:px-8 md:pt-14">
-      <div className="grid items-end gap-6 short:grid-cols-[1fr_1.25fr] short:items-center short:gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12">
-        <div className="relative">
-          <svg viewBox="0 0 400 150" className="w-full overflow-visible short:max-h-28" role="img" aria-label={now ? `${SKY_LABEL[sky]}. The ${body} is ${Math.round(t * 100)} percent of the way across the sky.` : "Sky"}>
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 compact:gap-4 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-start md:gap-x-12 md:gap-y-8 short:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] short:grid-rows-[auto_1fr] short:gap-x-8 short:gap-y-3">
+        <div className="relative md:col-start-1 md:row-start-1 short:col-start-1 short:row-start-1">
+          <svg viewBox="0 28 400 122" className="w-full overflow-visible short:max-h-24" role="img" aria-label={now ? `${SKY_LABEL[sky]}. The ${body} is ${Math.round(t * 100)} percent of the way across the sky.` : "Sky"}>
             <defs>
               <radialGradient id="orbglow">
                 <stop offset="0" stopColor="var(--orb-glow)" />
@@ -94,11 +98,11 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
           </p>
         </div>
 
-        <div className="pb-1">
-          <h1 id="hero-line" className="display text-[clamp(2.1rem,7vw,3.6rem)] leading-[1.06] short:text-[1.9rem]">{now ? LINE[sky] : LINE.day}</h1>
+        <div className="pb-1 md:col-start-2 md:row-span-2 md:row-start-1 short:col-start-2 short:row-span-2 short:row-start-1">
+          <h1 id="hero-line" className="display text-[clamp(2.1rem,7vw,3.6rem)] leading-[1.06] compact:text-[clamp(1.9rem,6.4vw,3.6rem)] md:text-[clamp(2.4rem,5.4vw,3.6rem)] short:text-[1.9rem]">{now ? LINE[sky] : LINE.day}</h1>
           <Link
             href={`/recitations?set=${set}`}
-            className="cta cta-solid group mt-7"
+            className="cta cta-solid group mt-6 compact:mt-4"
           >
             {setDone ? (
               <span className="grid size-[60px] shrink-0 place-items-center rounded-full bg-accent-ink text-accent" aria-hidden><Check size={30} /></span>
@@ -153,6 +157,8 @@ export function SkyHero({ setIds }: { setIds: Record<TimeTag, string[]> }) {
             </Link>
           )}
         </div>
+
+        {children && <div className="md:col-start-1 md:row-start-2 short:col-start-1 short:row-start-2">{children}</div>}
       </div>
     </section>
   );

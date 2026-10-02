@@ -125,6 +125,39 @@ function day(place: Place, prefs: PrayerPrefs, date: Date): Moment[] {
   ];
 }
 
+export type RowState = "past" | "now" | "next" | "later";
+export interface DayRow extends Moment { state: RowState }
+export interface DayView {
+  /** Today's six times in order, each marked as passed, running now, next to come, or still to come. */
+  rows: DayRow[];
+  /** Set when the next prayer is not in today's list (after Isha): tomorrow's Fajr. */
+  tomorrowFajr: Moment | null;
+}
+
+/** Everything the "all times" panel shows for the date of `now`. Null where the sun gives no times (far north in summer). */
+export function dayRows(place: Place, prefs: PrayerPrefs, now = new Date()): DayView | null {
+  try {
+    const list = day(place, prefs, now);
+    if (list.some((m) => Number.isNaN(m.at.getTime()))) return null;
+    const n = prayerNow(place, prefs, now);
+    const cur = n?.current.at.getTime(), nxt = n?.next.at.getTime();
+    const rows = list.map((m): DayRow => {
+      const t = m.at.getTime();
+      return { ...m, state: t === cur ? "now" : t === nxt ? "next" : t < now.getTime() ? "past" : "later" };
+    });
+    return { rows, tomorrowFajr: n && !rows.some((r) => r.state === "next") ? n.next : null };
+  } catch {
+    return null;
+  }
+}
+
+/** The method and Asr school in words, for the line under the panel's list. */
+export function methodLabel(prefs: PrayerPrefs): { method: string; asr: string } {
+  const id = prefs.method === "auto" ? suggestedMethod() : prefs.method;
+  const label = METHODS.find((m) => m.id === id)?.label ?? id;
+  return { method: prefs.method === "auto" ? `${label} (automatic)` : label, asr: prefs.asr === "hanafi" ? "Hanafi" : "Standard" };
+}
+
 /** Where the day stands: the last time that has passed, the next one to come, and how far through the gap we are. */
 export function prayerNow(place: Place, prefs: PrayerPrefs, now = new Date()): Now | null {
   try {

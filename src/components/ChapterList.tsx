@@ -44,13 +44,13 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
         <button
           onClick={() => setPick(c)}
           aria-label={`${c.name}, ${c.verses} verses. Choose where to start`}
-          className="flex min-h-[4.5rem] flex-1 items-center gap-3 px-4 py-3 text-left"
+          className="flex min-h-[4.5rem] min-w-0 flex-1 flex-wrap items-center gap-x-3 px-4 py-3 text-left"
         >
-          <span className="grid flex-1">
+          <span className="grid min-w-0 flex-[1_1_8rem] [overflow-wrap:anywhere]">
             <span className="display text-title leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
             <span className="text-meta text-ink-soft">{c.meaning}{here && q.last!.verse > 1 ? ` · you were at verse ${q.last!.verse}` : ""}</span>
           </span>
-          <span className="text-meta text-ink-soft tabular">{c.verses} verses</span>
+          <span className="shrink-0 text-meta text-ink-soft tabular">{c.verses} verses</span>
         </button>
         <button
           onClick={() => toggleSave(c)}
@@ -107,11 +107,11 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
       </label>
 
       {found ? (
-        found.length ? <ul className="mt-4 grid gap-2.5">{found.map(row)}</ul> : <p className="mt-6 text-center text-ink-soft">No surah matches that.</p>
+        found.length ? <ul className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-2.5">{found.map(row)}</ul> : <p className="mt-6 text-center text-ink-soft">No surah matches that.</p>
       ) : tab === "chapter" ? (
-        <ul className="mt-4 grid gap-2.5">{chapters.map(row)}</ul>
+        <ul className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-2.5">{chapters.map(row)}</ul>
       ) : (
-        <ul className="mt-4 grid gap-2.5">
+        <ul className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-2.5">
           {juz.map((j) => (
             <li key={j.n} className="rounded-[20px] border border-line">
               <details className="group">
@@ -172,7 +172,7 @@ function Bookmarks({ onPick }: { onPick?: () => void }) {
     );
 
   return (
-    <ul className="mt-4 grid gap-2.5">
+    <ul className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-2.5">
       {items.map(({ key, s, v }) => {
         const verse = text[s]?.[v - 1];
         return (

@@ -3,6 +3,9 @@
 /* A phone held sideways: little height, so chrome gets small and content goes side by side. */
 @custom-variant short (@media (max-height: 500px) and (orientation: landscape));
 
+/* A phone held upright with little height (iPhone SE and the like): the first screen gives up a little space so the next thing is in view. */
+@custom-variant compact (@media (max-height: 720px) and (orientation: portrait));
+
 /* ------------------------------------------------------------------
    RuqyaPro: the day is the interface.
    Four sky states (dawn, day, dusk, night) set by device local time.
@@ -151,6 +154,9 @@ body {
 [data-sky="night"] :focus-visible {
   outline-color: var(--ink);
 }
+
+/* A heading reached by a link (Settings sections) clears the sticky header. */
+h2[id] { scroll-margin-top: 5rem; }
 
 a {
   text-underline-offset: 0.22em;

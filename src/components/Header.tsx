@@ -25,7 +25,7 @@ export function Header() {
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 5l-7 7 7 7" /></svg>
           </button>
         )}
-        <Link href="/" className="mr-auto flex items-center gap-2.5 no-underline" aria-label="RuqyaPro home">
+        <Link href="/" className="mr-auto flex min-h-11 items-center gap-2.5 no-underline" aria-label="RuqyaPro home">
           <Wordmark className="text-accent" />
           <span className="display text-title leading-none">RuqyaPro</span>
         </Link>
