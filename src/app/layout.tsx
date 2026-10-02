@@ -9,6 +9,7 @@ import { PwaRegister } from "@/components/PwaRegister";
 import { SkyClock } from "@/components/SkyClock";
 import { TabBar } from "@/components/TabBar";
 import { OfflineSync } from "@/components/OfflineSync";
+import { ReminderSync } from "@/components/ReminderSync";
 import { SPLASH_SIZES } from "@/lib/splash";
 
 const display = Hedvig_Letters_Serif({ variable: "--font-display", subsets: ["latin"], weight: "400" });
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <PwaRegister />
         <SkyClock />
         <OfflineSync />
+        <ReminderSync />
       </body>
     </html>
   );

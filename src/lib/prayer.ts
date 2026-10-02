@@ -125,6 +125,9 @@ function day(place: Place, prefs: PrayerPrefs, date: Date): Moment[] {
   ];
 }
 
+/** The six times for the date of `date`, in order. Used for the reminders' schedule as well as the day's panel. */
+export const prayerDay = day;
+
 export type RowState = "past" | "now" | "next" | "later";
 export interface DayRow extends Moment { state: RowState }
 export interface DayView {

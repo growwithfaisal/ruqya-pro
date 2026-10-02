@@ -110,7 +110,7 @@ export async function tajweedForEntry(
 const eligible = (surahIdx: number, verse: number) => (parseInt(pool[surahIdx][(verse - 1) >> 2], 16) >> (3 - ((verse - 1) & 3))) & 1;
 
 /** A small seeded generator, so everyone on the same local date gets the same verse. */
-function seeded(date: string) {
+export function seeded(date: string) {
   let h = 2166136261;
   for (const c of date) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); }
   let t = (h >>> 0) + 0x6d2b79f5;

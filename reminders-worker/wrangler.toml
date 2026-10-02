@@ -1,0 +1,28 @@
+# RuqyaPro reminders: a free Cloudflare Worker with a D1 database.
+# It never sees what a reminder says, only a push address and the minutes at which to poke it.
+name = "ruqyapro-reminders"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+[vars]
+# Shown to push services as the sender's contact (a web address, not anyone's email).
+SUBJECT = "https://ruqya-pro11.vercel.app"
+# Browsers on these origins may call the API. Add a new domain here.
+ALLOWED_ORIGINS = "https://ruqya-pro11.vercel.app,http://localhost:3000,http://localhost:3111"
+# Stop taking new sign-ups beyond this many phones (protects the free limits).
+MAX_SUBS = "20000"
+# Minimum seconds between two syncs from one phone.
+SYNC_GAP_SECONDS = "15"
+# Free plan: ~40 pokes per run. 1 = one run per minute. See README for the 5-shard experiment.
+SHARDS = "1"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ruqyapro-reminders"
+# Replace with the id printed by: npx wrangler d1 create ruqyapro-reminders
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+[triggers]
+# Every minute: poke whoever is due. Daily at 03:00 UTC: tidy up.
+crons = ["* * * * *", "0 3 * * *"]

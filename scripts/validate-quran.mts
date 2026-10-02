@@ -48,6 +48,30 @@ for (const j of meta.juz) for (const r of j.ranges) {
   if (!c || r.from < 1 || r.to > c.verses) errors.push(`juz ${j.n}: bad range ${r.surah}:${r.from}-${r.to}`);
 }
 
+// The short-verse list for reminders (scripts/build-reminder-ayat.mts) must be a faithful, current copy of the source files.
+{
+  const file = join(ROOT, "public", "quran-data", meta.source.dataVersion, "short.json");
+  const exclude = new Set<string>(JSON.parse(readFileSync(join(ROOT, "data", "reminder-ayat-exclude.json"), "utf8")));
+  if (!existsSync(file)) errors.push("short.json is missing: run npx tsx scripts/build-reminder-ayat.mts");
+  else {
+    const short = JSON.parse(readFileSync(file, "utf8")) as [number, number, string][];
+    let expected = 0;
+    const seen = new Set<string>();
+    for (const c of meta.chapters) {
+      const verses = JSON.parse(readFileSync(join(ROOT, "public", "quran-data", meta.source.dataVersion, `${c.id}.json`), "utf8")) as { n: number; en: string }[];
+      for (const v of verses) if (v.en.length <= 140 && !exclude.has(`${c.id}:${v.n}`)) expected++;
+      for (const [s, n, en] of short) {
+        if (s !== c.id) continue;
+        seen.add(`${s}:${n}`);
+        if (verses[n - 1]?.en !== en) errors.push(`short.json ${s}:${n} differs from the source translation`);
+        if (exclude.has(`${s}:${n}`)) errors.push(`short.json ${s}:${n} is on the exclusion list`);
+      }
+    }
+    if (seen.size !== short.length) errors.push("short.json has duplicate or unknown verses");
+    if (short.length !== expected) errors.push(`short.json has ${short.length} verses, expected ${expected}: run npx tsx scripts/build-reminder-ayat.mts`);
+  }
+}
+
 if (errors.length) {
   console.error(`\nQur'an validation failed (${errors.length}):\n` + errors.slice(0, 30).map((m) => "  - " + m).join("\n") + "\n");
   process.exit(1);

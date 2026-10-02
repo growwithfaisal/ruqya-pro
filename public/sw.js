@@ -12,6 +12,10 @@ const QURAN = "rp-quran-v6";
 // page deletes the older ones once a fresh copy is complete, so a deploy never leaves a reader without an offline copy.
 const OFFLINE_PREFIX = "rp-offline-";
 
+// Reminders: what to show when the reminder server pokes this phone. If this file cannot be fetched the app still works;
+// a poke then shows the plain "open the app" notice, so the phone never goes silent.
+try { importScripts("/reminders-sw.js"); } catch (e) {}
+
 self.addEventListener("install", () => self.skipWaiting());
 
 self.addEventListener("activate", (event) => {
@@ -71,5 +75,74 @@ self.addEventListener("fetch", (event) => {
         }
         return Response.error();
       }),
+  );
+});
+
+/* ---------------- Reminders ----------------
+   The phone's own schedule lives in IndexedDB "rp-reminders" (store "kv": "schedule" = items, "shown" = {id: shownAt}).
+   src/lib/reminders.ts writes it; the server only ever sends an empty push at the right minute. */
+function remindersDb() {
+  return new Promise((resolve, reject) => {
+    const open = indexedDB.open("rp-reminders", 1);
+    open.onupgradeneeded = () => open.result.createObjectStore("kv");
+    open.onsuccess = () => resolve(open.result);
+    open.onerror = () => reject(open.error);
+  });
+}
+async function kvGet(key) {
+  const db = await remindersDb();
+  return new Promise((resolve, reject) => {
+    const q = db.transaction("kv").objectStore("kv").get(key);
+    q.onsuccess = () => resolve(q.result);
+    q.onerror = () => reject(q.error);
+  });
+}
+async function kvSet(key, value) {
+  const db = await remindersDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("kv", "readwrite");
+    tx.objectStore("kv").put(value, key);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+self.addEventListener("push", (event) => {
+  event.waitUntil(
+    (async () => {
+      let items = [], shown = {};
+      try { items = (await kvGet("schedule")) || []; shown = (await kvGet("shown")) || {}; } catch (e) {}
+      const now = Date.now();
+      const r = self.RPReminders
+        ? self.RPReminders.dueNow(items, shown, now)
+        : { show: [{ id: "refresh", title: "RuqyaPro", body: "Open the app to refresh your reminders.", url: "/settings#reminders-title" }], mark: false };
+      await Promise.all(
+        r.show.map((i) =>
+          self.registration.showNotification(i.title, { body: i.body, tag: i.id, icon: "/icons/192", data: { url: i.url }, renotify: false }),
+        ),
+      );
+      if (r.mark) {
+        for (const i of r.show) shown[i.id] = now;
+        try { await kvSet("shown", self.RPReminders.prune(shown, now)); } catch (e) {}
+      }
+    })(),
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = new URL((event.notification.data && event.notification.data.url) || "/", self.location.origin).href;
+  event.waitUntil(
+    (async () => {
+      const wins = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+      for (const w of wins) {
+        try {
+          await w.focus();
+          if ("navigate" in w) await w.navigate(target);
+          return;
+        } catch (e) {}
+      }
+      await self.clients.openWindow(target);
+    })(),
   );
 });
