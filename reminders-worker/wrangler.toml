@@ -6,9 +6,9 @@ compatibility_date = "2025-09-01"
 
 [vars]
 # Shown to push services as the sender's contact (a web address, not anyone's email).
-SUBJECT = "https://ruqya-pro11.vercel.app"
-# Browsers on these origins may call the API. Add a new domain here.
-ALLOWED_ORIGINS = "https://ruqya-pro11.vercel.app,http://localhost:3000,http://localhost:3111"
+SUBJECT = "https://www.ruqyapro.app"
+# Browsers on these origins may call the API. The old Vercel address stays so apps already added to a Home Screen from it keep working.
+ALLOWED_ORIGINS = "https://www.ruqyapro.app,https://ruqyapro.app,https://ruqya-pro11.vercel.app,http://localhost:3000,http://localhost:3111"
 # Stop taking new sign-ups beyond this many phones (protects the free limits).
 MAX_SUBS = "20000"
 # Stop taking new accounts beyond this many.
