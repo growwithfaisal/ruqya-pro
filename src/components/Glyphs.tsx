@@ -83,6 +83,8 @@ export const Horizon = ({ className, size = 24 }: P) => (
     <path d="M7 19h10" />
   </svg>
 );
+/** One mark per need, shared by Home's topic rows and the Recitations tab. */
+export const INTENT_GLYPH = { "daily-protection": Star8, pain: Ripple, "evil-eye": Vesica, learning: Niche } as const;
 export const Dots = ({ className, size = 24 }: P) => (
   <svg {...base(size)} className={className}>
     <circle cx="6" cy="12" r="1.3" />

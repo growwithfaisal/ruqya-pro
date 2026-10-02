@@ -21,7 +21,7 @@ export function TabBar() {
   const path = usePathname();
   const params = useSearchParams();
   const [more, setMore] = useState(false);
-  const immersive = path.startsWith("/quran/read") || (path === "/recitations" && params.has("set"));
+  const immersive = path.startsWith("/quran/read") || (path === "/recitations" && (params.has("set") || params.has("intent")));
 
   useEffect(() => {
     const root = document.documentElement.classList;

@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { INTENTS } from "@/lib/entries";
-import { Chevron, Niche, Ripple, Star8, Vesica } from "./Glyphs";
-
-const GLYPH = { "daily-protection": Star8, pain: Ripple, "evil-eye": Vesica, learning: Niche } as const;
+import { Chevron, INTENT_GLYPH as GLYPH } from "./Glyphs";
 
 export function IntentList() {
   return (

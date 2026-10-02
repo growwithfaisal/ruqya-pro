@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
-import type { Entry, TimeTag } from "@/lib/types";
-import { SETS, citation } from "@/lib/entries";
+import type { Entry } from "@/lib/types";
+import { citation } from "@/lib/entries";
 import { bismillah, chapter, loadSurah, readHref, tajweedForEntry, type Verse } from "@/lib/quran";
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { doneKey, useDone } from "@/lib/progress";
@@ -33,8 +33,12 @@ const refOf = (e: Entry) => {
   return m ? { surah: Number(m[1]), from: Number(m[2]), to: Number(m[3] ?? m[2]) } : null;
 };
 
-/** A daily set (morning, evening, bedtime) read one card at a time, in the same frame as the Qur'an reader. */
-export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[] }) {
+/**
+ * A set of recitations read one card at a time, in the same frame as the Qur'an reader: a daily routine (morning, evening,
+ * bedtime) or a category from the Recitations tab. `set` names the progress (ticks are saved as "set:entry", so every
+ * routine and category keeps its own), `title` is shown on the card and `exit` is where I'm Done goes.
+ */
+export function RoutineReader({ set, title, entries, exit = "/" }: { set: string; title: string; entries: Entry[]; exit?: string }) {
   const reduce = useReducedMotion();
   const router = useRouter();
   const { done, markDone } = useDone();
@@ -117,10 +121,10 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
     [steps, i, finishedCard, cur, markDone, set],
   );
 
-  // "I'm Done" ends the session: it recites this card if it is finished, then returns to Home.
+  // "I'm Done" ends the session: it recites this card if it is finished, then leaves for `exit` (Home for the daily routines).
   const finish = () => {
     if (finishedCard && e) markDone(doneKey(set, e.id));
-    router.push("/");
+    router.push(exit);
   };
 
   const share = async () => {
@@ -160,7 +164,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
   return (
     <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
       <p className="text-center text-small text-ink-soft tabular short:col-span-2" aria-live="polite">
-        {SETS[set]} · {left === 0 ? "all recited today" : `${left} left`}
+        {title} · {left === 0 ? "all recited today" : `${left} left`}
       </p>
 
       <div className="relative mt-3 short:mt-1">
@@ -265,7 +269,7 @@ export function RoutineReader({ set, entries }: { set: TimeTag; entries: Entry[]
         </div>
       </div>
 
-      <Sheet open={panel === "list"} onOpenChange={(o) => setPanel(o ? "list" : null)} title={SETS[set]} description="Tap a card to go to it.">
+      <Sheet open={panel === "list"} onOpenChange={(o) => setPanel(o ? "list" : null)} title={title} description="Tap a card to go to it.">
         <ul className="grid gap-2 pt-1">
           {entries.map((x, k) => (
             <li key={x.id}>

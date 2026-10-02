@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { RecitationList } from "@/components/RecitationList";
+import { CategoryList } from "@/components/CategoryList";
 import { RoutineReader } from "@/components/RoutineReader";
-import { deckEntries } from "@/lib/entries";
+import { INTENTS, SETS, deckEntries } from "@/lib/entries";
 import type { Intent, TimeTag } from "@/lib/types";
 import { PageShell } from "@/components/PageShell";
 
 export const metadata: Metadata = { title: "Recitations" };
 
-const INTENT_IDS = ["daily-protection", "pain", "evil-eye", "learning"];
 const SET_IDS = ["morning", "evening", "bedtime"];
 
 export default async function Recitations({ searchParams }: PageProps<"/recitations">) {
@@ -16,25 +15,32 @@ export default async function Recitations({ searchParams }: PageProps<"/recitati
   const intent = String(sp.intent ?? "");
   const set = String(sp.set ?? "");
 
-  // A daily routine opens in the one-card reader; browsing by need is a list, like the Qur'an tab.
+  // A daily routine opens in the one-card reader and returns to Home.
   if (SET_IDS.includes(set)) {
     const tag = set as TimeTag;
     return (
       <Suspense>
-        <RoutineReader set={tag} entries={deckEntries.filter((e) => e.times.includes(tag))} />
+        <RoutineReader set={tag} title={SETS[tag]} entries={deckEntries.filter((e) => e.times.includes(tag))} />
       </Suspense>
     );
   }
 
-  const initial = (INTENT_IDS.includes(intent) ? intent : "all") as Intent | "all";
+  // A category opens the same way, with its own progress, and returns to this tab.
+  const cat = INTENTS.find((i) => i.id === intent);
+  if (cat) {
+    return (
+      <Suspense>
+        <RoutineReader set={cat.id} title={cat.label} entries={deckEntries.filter((e) => e.category.includes(cat.id))} exit="/recitations" />
+      </Suspense>
+    );
+  }
+
   return (
     <PageShell>
       <h1 className="t-h1">Recitations</h1>
-      <p className="mt-2 max-w-[52ch] text-ink-soft">Each recitation carries its source. Open one to read it and see the grade, the book and the chapter.</p>
+      <p className="mt-2 max-w-[52ch] text-ink-soft">Choose what you need. Each opens one recitation at a time, with its source, and remembers what you have recited today.</p>
       <div className="mt-6">
-        <Suspense>
-          <RecitationList entries={deckEntries} initial={initial} />
-        </Suspense>
+        <CategoryList ids={Object.fromEntries(INTENTS.map((i) => [i.id, deckEntries.filter((e) => e.category.includes(i.id)).map((e) => e.id)])) as Record<Intent, string[]>} />
       </div>
     </PageShell>
   );
