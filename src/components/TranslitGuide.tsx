@@ -7,13 +7,13 @@ import { MARK_SILENT, MARK_UNDERLINE } from "./Translit";
 /* Examples are drawn with the same styles as the verses (see Translit.tsx), so what the reader learns here is what they see there. */
 const U = ({ children }: { children: ReactNode }) => <span className={MARK_UNDERLINE}>{children}</span>;
 const F = ({ children }: { children: ReactNode }) => <span className={MARK_SILENT}>{children}</span>;
-const ar = "font-[family-name:var(--font-arabic)] text-[1.35rem] leading-none";
+const ar = "font-[family-name:var(--font-arabic)] text-title leading-none";
 
 function Item({ label, example, say, children }: { label: string; example: ReactNode; say: string; children: ReactNode }) {
   return (
     <section className="border-t border-line py-5">
       <h3 className="text-small font-semibold">{label}</h3>
-      <p className="mt-2 text-[1.45rem] leading-snug" role="img" aria-label={say}>{example}</p>
+      <p className="mt-2 text-h3 leading-snug" role="img" aria-label={say}>{example}</p>
       <p className="mt-2 max-w-[56ch] text-card-soft">{children}</p>
     </section>
   );
@@ -22,9 +22,9 @@ function Item({ label, example, say, children }: { label: string; example: React
 function Pair({ plain, strong, arPlain, arStrong, note }: { plain: string; strong: string; arPlain: string; arStrong: string; note: string }) {
   return (
     <li className="grid grid-cols-[3.2rem_1fr] items-baseline gap-x-3 gap-y-0.5 py-2">
-      <span className="text-[1.15rem]">{plain}</span>
+      <span className="text-lead">{plain}</span>
       <span><span lang="ar" className={ar}>{arPlain}</span> <span className="text-card-soft">plain</span></span>
-      <span className="text-[1.15rem]"><U>{strong}</U></span>
+      <span className="text-lead"><U>{strong}</U></span>
       <span><span lang="ar" className={ar}>{arStrong}</span> <span className="text-card-soft">{note}</span></span>
     </li>
   );
@@ -78,13 +78,13 @@ export function TranslitGuideRow() {
         <section className="border-t border-line py-5" aria-labelledby="tg-key">
           <h3 id="tg-key" className="text-small font-semibold">Quick key</h3>
           <dl className="mt-2 grid grid-cols-[6rem_1fr] gap-x-3 gap-y-2">
-            <dt className="text-[1.15rem]">AA</dt>
+            <dt className="text-lead">AA</dt>
             <dd className="text-card-soft">The throat letter <span lang="ar" className={ar}>ع</span>.</dd>
-            <dt className="text-[1.15rem]">oo, ee</dt>
+            <dt className="text-lead">oo, ee</dt>
             <dd className="text-card-soft">Long u and long i, held for about two counts. They are not underlined.</dd>
-            <dt className="text-[1.15rem]">rr, ll, bb</dt>
+            <dt className="text-lead">rr, ll, bb</dt>
             <dd className="text-card-soft">A doubled letter is held a beat longer and pressed.</dd>
-            <dt className="text-[1.15rem]">kh, gh, sh</dt>
+            <dt className="text-lead">kh, gh, sh</dt>
             <dd className="text-card-soft">One letter each (<span lang="ar" className={ar}>خ</span> <span lang="ar" className={ar}>غ</span> <span lang="ar" className={ar}>ش</span>).</dd>
           </dl>
         </section>
