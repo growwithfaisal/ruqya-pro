@@ -28,7 +28,7 @@ npx wrangler deploy
 
 `wrangler deploy` prints the Worker's address (`https://ruqyapro-reminders.<you>.workers.dev`).
 
-In Vercel (Project > Settings > Environment Variables) add, for Production:
+In Vercel (Project > Settings > Environment Variables) add, for Production (this project instead keeps the same two public values in `.env.production` at the project root, which `next build` reads, so no dashboard step was needed):
 
 - `NEXT_PUBLIC_REMINDERS_URL` = the Worker's address
 - `NEXT_PUBLIC_PUSH_KEY` = the PUBLIC key

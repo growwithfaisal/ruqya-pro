@@ -20,7 +20,7 @@ SHARDS = "1"
 binding = "DB"
 database_name = "ruqyapro-reminders"
 # Replace with the id printed by: npx wrangler d1 create ruqyapro-reminders
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "4394a371-9b1d-42f1-8afe-135221d74bc2"
 migrations_dir = "migrations"
 
 [triggers]
