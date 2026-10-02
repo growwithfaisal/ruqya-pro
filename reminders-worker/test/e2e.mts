@@ -38,7 +38,9 @@ await new Promise<void>((r) => mock.listen(MOCK, "127.0.0.1", r));
 const pair = await crypto.subtle.generateKey({ name: "ECDSA", namedCurve: "P-256" }, true, ["sign", "verify"]);
 const j = (await crypto.subtle.exportKey("jwk", pair.privateKey)) as VapidJwk;
 const jwk: VapidJwk = { kty: j.kty, crv: j.crv, x: j.x, y: j.y, d: j.d };
-writeFileSync(join(root, ".dev.vars"), `VAPID_PRIVATE_JWK='${JSON.stringify(jwk)}'\nEXTRA_ORIGINS=http://127.0.0.1:${MOCK}\nSYNC_GAP_SECONDS=0\n`);
+const CODE = "pilot-code-for-tests";
+const DATA_KEY = Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString("base64url");
+writeFileSync(join(root, ".dev.vars"), `VAPID_PRIVATE_JWK='${JSON.stringify(jwk)}'\nEXTRA_ORIGINS=http://127.0.0.1:${MOCK}\nSYNC_GAP_SECONDS=0\nSIGNUP_CODE=${CODE}\nDATA_KEY=${DATA_KEY}\nMAX_ACCOUNTS=3\n`);
 
 const wrangler = (...a: string[]) => execFileSync("npx", ["wrangler", ...a], { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
 wrangler("d1", "migrations", "apply", "ruqyapro-reminders", ...FLAGS);
@@ -64,7 +66,7 @@ const step = async (name: string, fn: () => Promise<void>) => {
 };
 const post = (path: string, body: unknown, headers: Record<string, string> = {}) =>
   fetch(base + path, { method: "POST", headers: { "content-type": "application/json", ...headers }, body: JSON.stringify(body) }).then(async (r) => ({ status: r.status, body: (await r.json().catch(() => null)) as any, headers: r.headers }));
-const cron = () => fetch(`${base}/__scheduled?cron=*+*+*+*+*`).then(() => new Promise((r) => setTimeout(r, 700)));
+const cron = () => fetch(`${base}/__scheduled?cron=*+*+*+*+*`).then(() => new Promise((r) => setTimeout(r, 1500)));
 const now = Math.floor(Date.now() / 1000 / 60) * 60;
 const ep = (kind: string, id: string) => `http://127.0.0.1:${MOCK}/${kind}/${id}-padding-padding`;
 const pokesTo = (e: string) => seen.filter((s) => s.path === new URL(e).pathname).length;
@@ -139,6 +141,7 @@ await step("a push service that errors is retried, not dropped", async () => {
   assert.equal((await post("/v1/sync", { endpoint: E, times: [now, now + 7200], token: r.body.token })).status, 200);
   await cron();
   await cron();
+  for (let i = 0; i < 20 && pokesTo(E) < 3; i++) await new Promise((r) => setTimeout(r, 250)); // the run finishes in the background
   assert.ok(pokesTo(E) >= 3, `expected retries, saw ${pokesTo(E)}`);
   const row = sql("SELECT times, next_at FROM subs WHERE endpoint LIKE '%charlie%'")[0];
   assert.equal(row.next_at, now, "the due time is kept for the next retry");
@@ -166,6 +169,118 @@ await step("an empty schedule removes the phone", async () => {
   const gone = await post("/v1/sync", { endpoint: Z, times: [], token: r.body.token });
   assert.equal(gone.status, 200);
   assert.equal(sql("SELECT COUNT(*) AS c FROM subs WHERE endpoint LIKE '%echo%'")[0].c, 0);
+});
+
+/* ---------------- accounts ---------------- */
+
+const call = (method: string, path: string, body?: unknown, token?: string, origin?: string) =>
+  fetch(base + path, {
+    method,
+    headers: { ...(body ? { "content-type": "application/json" } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}), ...(origin ? { origin } : {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  }).then(async (r) => ({ status: r.status, body: (await r.json().catch(() => null)) as any, headers: r.headers }));
+const AUTH = "Q".repeat(43), WRONG = "R".repeat(43);
+
+let t1 = "", t2 = "";
+await step("browsers may send the sign-in header and use PUT and DELETE", async () => {
+  const r = await fetch(`${base}/v1/data`, { method: "OPTIONS", headers: { Origin: "https://ruqya-pro11.vercel.app" } });
+  assert.equal(r.status, 204);
+  assert.match(r.headers.get("access-control-allow-headers")!, /authorization/);
+  assert.match(r.headers.get("access-control-allow-methods")!, /PUT/);
+  assert.match(r.headers.get("access-control-allow-methods")!, /DELETE/);
+});
+
+await step("creating an account needs the invite code, a sane name and a derived password", async () => {
+  assert.equal((await call("POST", "/v1/account/signup", { username: "ayesha", auth: AUTH })).body.error, "code");
+  assert.equal((await call("POST", "/v1/account/signup", { username: "ayesha", auth: AUTH, code: "wrong" })).status, 403);
+  assert.equal((await call("POST", "/v1/account/signup", { username: "a b", auth: AUTH, code: CODE })).body.error, "username");
+  assert.equal((await call("POST", "/v1/account/signup", { username: "ayesha", auth: "short", code: CODE })).body.error, "auth");
+  assert.equal(sql("SELECT COUNT(*) AS c FROM accounts")[0].c, 0);
+});
+
+await step("a good sign-up works, names are not case-sensitive, and only a salted hash is stored", async () => {
+  const r = await call("POST", "/v1/account/signup", { username: "Ayesha", auth: AUTH, code: CODE });
+  assert.equal(r.status, 201);
+  assert.equal(r.body.username, "ayesha");
+  t1 = r.body.token;
+  assert.ok(t1.length >= 30);
+  const again = await call("POST", "/v1/account/signup", { username: "AYESHA", auth: WRONG, code: CODE });
+  assert.equal(again.status, 409);
+  assert.equal(again.body.error, "taken");
+  const row = sql("SELECT username, salt, auth_hash FROM accounts")[0];
+  assert.equal(row.username, "ayesha");
+  assert.match(row.auth_hash, /^[0-9a-f]{64}$/);
+  assert.ok(!JSON.stringify(row).includes(AUTH), "the derived password is not stored");
+  assert.equal(sql("SELECT n FROM meta WHERE k='accounts'")[0].n, 1);
+  assert.equal(sql("SELECT COUNT(*) AS c FROM sessions")[0].c, 1);
+});
+
+await step("signing in: right password works; wrong password and unknown name give the same answer", async () => {
+  const wrong = await call("POST", "/v1/account/login", { username: "ayesha", auth: WRONG });
+  const nobody = await call("POST", "/v1/account/login", { username: "nobody", auth: WRONG });
+  assert.equal(wrong.status, 401);
+  assert.deepEqual(wrong.body, nobody.body);
+  assert.equal(nobody.status, 401);
+  const ok = await call("POST", "/v1/account/login", { username: "AYESHA", auth: AUTH });
+  assert.equal(ok.status, 200);
+  t2 = ok.body.token;
+  assert.notEqual(t2, t1);
+});
+
+await step("five wrong tries lock the account, even against the right password, until the time passes", async () => {
+  for (let i = 0; i < 5; i++) assert.equal((await call("POST", "/v1/account/login", { username: "ayesha", auth: WRONG })).status, 401);
+  const locked = await call("POST", "/v1/account/login", { username: "ayesha", auth: AUTH });
+  assert.equal(locked.status, 429);
+  assert.equal(locked.body.error, "locked");
+  assert.ok(locked.body.retryAfter > 800 && locked.body.retryAfter <= 900);
+  wrangler("d1", "execute", "ruqyapro-reminders", ...FLAGS, "--command", "UPDATE accounts SET locked_until = 0");
+  assert.equal((await call("POST", "/v1/account/login", { username: "ayesha", auth: AUTH })).status, 200);
+});
+
+await step("progress: needs a session, starts empty, and is saved only against the revision the phone last saw", async () => {
+  assert.equal((await call("GET", "/v1/data")).status, 401);
+  assert.equal((await call("GET", "/v1/data", undefined, "x".repeat(40))).status, 401);
+  const empty = await call("GET", "/v1/data", undefined, t1);
+  assert.deepEqual([empty.status, empty.body.rev, empty.body.data], [200, 0, null]);
+
+  const first = JSON.stringify({ v: 1, marks: ["2:255"], secret: "READABLE-MARKER" });
+  const put1 = await call("PUT", "/v1/data", { baseRev: 0, data: first }, t1);
+  assert.deepEqual([put1.status, put1.body.rev], [200, 1]);
+  const got = await call("GET", "/v1/data", undefined, t2); // a second device
+  assert.deepEqual([got.body.rev, got.body.data], [1, first]);
+  const stored = sql("SELECT data FROM accounts")[0].data as string;
+  assert.ok(stored && !stored.includes("READABLE-MARKER") && !stored.includes("2:255"), "stored sealed, not readable");
+
+  const stale = await call("PUT", "/v1/data", { baseRev: 0, data: JSON.stringify({ v: 1, other: true }) }, t2);
+  assert.equal(stale.status, 409);
+  assert.deepEqual([stale.body.rev, stale.body.data], [1, first], "a stale save is refused and the phone is handed the current copy");
+
+  const next = JSON.stringify({ v: 1, marks: ["2:255", "1:1"] });
+  const put2 = await call("PUT", "/v1/data", { baseRev: 1, data: next }, t2);
+  assert.deepEqual([put2.status, put2.body.rev], [200, 2]);
+  assert.equal((await call("PUT", "/v1/data", { baseRev: 2, data: "not json" }, t1)).body.error, "data");
+  assert.equal((await call("PUT", "/v1/data", { baseRev: 2, data: JSON.stringify({ pad: "x".repeat(310_000) }) }, t1)).status, 400);
+  assert.equal((await call("PUT", "/v1/data", { baseRev: -1, data: "{}" }, t1)).status, 400);
+});
+
+await step("signing out ends that session only", async () => {
+  assert.equal((await call("POST", "/v1/account/logout", undefined, t2)).status, 200);
+  assert.equal((await call("GET", "/v1/data", undefined, t2)).status, 401);
+  assert.equal((await call("GET", "/v1/data", undefined, t1)).status, 200);
+});
+
+await step("deleting an account removes it, its sessions and its progress", async () => {
+  assert.equal((await call("DELETE", "/v1/account")).status, 401);
+  assert.equal((await call("DELETE", "/v1/account", undefined, t1)).status, 200);
+  assert.equal((await call("POST", "/v1/account/login", { username: "ayesha", auth: AUTH })).status, 401);
+  assert.deepEqual([sql("SELECT COUNT(*) AS c FROM accounts")[0].c, sql("SELECT COUNT(*) AS c FROM sessions")[0].c, sql("SELECT n FROM meta WHERE k='accounts'")[0].n], [0, 0, 0]);
+});
+
+await step("the account cap holds", async () => {
+  for (const n of ["one", "two", "three"]) assert.equal((await call("POST", "/v1/account/signup", { username: `user-${n}`, auth: AUTH, code: CODE })).status, 201);
+  const full = await call("POST", "/v1/account/signup", { username: "user-four", auth: AUTH, code: CODE });
+  assert.equal(full.status, 503);
+  assert.equal(full.body.error, "full");
 });
 
 console.log(`${checks} end-to-end groups passed`);

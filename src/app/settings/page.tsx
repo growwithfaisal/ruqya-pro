@@ -3,6 +3,7 @@ import { BackupPanel } from "@/components/BackupPanel";
 import { PrayerSettings } from "@/components/PrayerSettings";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { NightSwitch } from "@/components/NightMode";
+import { AccountSettings } from "@/components/AccountSettings";
 import { ReadingSettings } from "@/components/ReadingSettings";
 import { ReminderSettings } from "@/components/ReminderSettings";
 import { INTENTS, SETS, entries } from "@/lib/entries";
@@ -23,11 +24,13 @@ function pages() {
 /** The sections, most used first. Each id is the heading of that section. */
 // Reminders appear only once the reminder server's address and key are set (see reminders-worker/README.md).
 const REMINDERS = !!process.env.NEXT_PUBLIC_REMINDERS_URL && !!process.env.NEXT_PUBLIC_PUSH_KEY;
+const ACCOUNTS = !!process.env.NEXT_PUBLIC_REMINDERS_URL;
 const JUMPS: (readonly [string, string])[] = [
   ["Reading", "reading-title"],
   ["Prayer times", "prayer-settings-title"],
   ...(REMINDERS ? [["Reminders", "reminders-title"] as const] : []),
   ["Offline", "offline-title"],
+  ...(ACCOUNTS ? [["Account", "account-title"] as const] : []),
   ["Backup", "backup-title"],
 ];
 
@@ -59,10 +62,15 @@ export default function Settings() {
       <div className="mt-12">
         <OfflinePanel pages={pages()} />
       </div>
+      {ACCOUNTS && (
+        <div className="mt-12">
+          <AccountSettings />
+        </div>
+      )}
       <div className="mt-12">
         <BackupPanel />
       </div>
-      <p className="mt-12 text-meta text-ink-soft">Everything above is kept only on this device. Nothing is sent to a server{REMINDERS ? " unless you turn on reminders" : ""}.</p>
+      <p className="mt-12 text-meta text-ink-soft">Everything above is kept only on this device. Nothing is sent to a server{REMINDERS || ACCOUNTS ? ` unless you turn on reminders${ACCOUNTS ? " or sign in" : ""}` : ""}.</p>
     </PageShell>
   );
 }

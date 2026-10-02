@@ -9,6 +9,7 @@ import { PwaRegister } from "@/components/PwaRegister";
 import { SkyClock } from "@/components/SkyClock";
 import { TabBar } from "@/components/TabBar";
 import { OfflineSync } from "@/components/OfflineSync";
+import { AccountSync } from "@/components/AccountSync";
 import { ReminderSync } from "@/components/ReminderSync";
 import { SPLASH_SIZES } from "@/lib/splash";
 
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SkyClock />
         <OfflineSync />
         <ReminderSync />
+        <AccountSync />
       </body>
     </html>
   );

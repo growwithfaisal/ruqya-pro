@@ -11,6 +11,8 @@ SUBJECT = "https://ruqya-pro11.vercel.app"
 ALLOWED_ORIGINS = "https://ruqya-pro11.vercel.app,http://localhost:3000,http://localhost:3111"
 # Stop taking new sign-ups beyond this many phones (protects the free limits).
 MAX_SUBS = "20000"
+# Stop taking new accounts beyond this many.
+MAX_ACCOUNTS = "300"
 # Minimum seconds between two syncs from one phone.
 SYNC_GAP_SECONDS = "15"
 # Free plan: ~40 pokes per run. 1 = one run per minute. See README for the 5-shard experiment.

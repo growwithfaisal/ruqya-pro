@@ -1,9 +1,10 @@
+import { accountRoutes, type AccountEnv } from "./accounts";
 import {
   MINUTE, cleanTimes, isAllowedEndpoint, nextOf, plan, publicKeyOf, randomToken, sameString, sha256hex, shardOf,
   vapidJwt, type VapidJwk,
 } from "./lib";
 
-export interface Env {
+export interface Env extends AccountEnv {
   DB: D1Database;
   VAPID_PRIVATE_JWK: string; // secret: the signing key
   SUBJECT: string;
@@ -57,7 +58,7 @@ function cors(req: Request, env: Env): Record<string, string> | null {
   const origin = req.headers.get("Origin");
   if (!origin) return {}; // not a browser (curl, tests)
   if (!list(env.ALLOWED_ORIGINS).includes(origin)) return null;
-  return { "Access-Control-Allow-Origin": origin, "Access-Control-Allow-Headers": "content-type", "Access-Control-Allow-Methods": "POST, GET, OPTIONS", Vary: "Origin" };
+  return { "Access-Control-Allow-Origin": origin, "Access-Control-Allow-Headers": "content-type, authorization", "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE, OPTIONS", Vary: "Origin" };
 }
 
 const json = (body: unknown, status: number, headers: Record<string, string>) =>
@@ -88,6 +89,8 @@ async function handle(req: Request, env: Env): Promise<Response> {
   if (!h) return new Response("Origin not allowed", { status: 403 });
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: { ...h, "Access-Control-Max-Age": "86400" } });
   if (url.pathname === "/v1/health") return json({ ok: true }, 200, h);
+  const account = await accountRoutes(req, env, url, h);
+  if (account) return account;
   if (req.method !== "POST") return json({ error: "method" }, 405, h);
 
   const body = await readBody(req);

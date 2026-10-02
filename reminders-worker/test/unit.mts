@@ -1,6 +1,6 @@
 // Unit checks for the pure parts of the reminders server.  Run: npx tsx test/unit.mts
 import assert from "node:assert/strict";
-import { b64url, cleanTimes, fromB64url, isAllowedEndpoint, nextOf, plan, publicKeyOf, shardOf, vapidJwt, STALE_AFTER, type VapidJwk } from "../src/lib.ts";
+import { authHash, b64url, cleanTimes, cleanUsername, fromB64url, isAllowedEndpoint, isAuth, nextOf, open, plan, publicKeyOf, seal, shardOf, vapidJwt, STALE_AFTER, type VapidJwk } from "../src/lib.ts";
 
 let n = 0;
 const ok = (name: string, fn: () => void | Promise<void>) => Promise.resolve(fn()).then(() => { n++; }).catch((e) => { console.error("FAIL", name, "\n", e); process.exitCode = 1; });
@@ -101,6 +101,39 @@ await ok("VAPID: public key, JWT shape and signature", async () => {
   const pubKey = await crypto.subtle.importKey("raw", pub, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
   assert.equal(await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, pubKey, fromB64url(s), new TextEncoder().encode(`${h}.${c}`)), true);
   assert.equal(b64url(fromB64url("AAEC_w")), "AAEC_w");
+});
+
+await ok("usernames: lower-case, 3 to 30, no odd characters", () => {
+  assert.equal(cleanUsername("  Ayesha_K "), "ayesha_k");
+  for (const good of ["abc", "a.b-c_d", "ahmed123", "a".repeat(30)]) assert.equal(cleanUsername(good), good);
+  for (const bad of ["ab", "a".repeat(31), "-abc", "abc-", ".abc", "a b c", "ab'c", "abc;", "ünï", "", 5, null, "a/b"]) assert.equal(cleanUsername(bad), null, String(bad));
+});
+
+await ok("auth values are exactly what the phone derives (43 base64url characters)", () => {
+  assert.equal(isAuth("A".repeat(43)), true);
+  for (const bad of ["A".repeat(42), "A".repeat(44), "A".repeat(42) + "=", "", 7, null, "A".repeat(42) + " "]) assert.equal(isAuth(bad), false);
+});
+
+await ok("the stored password check is salted and stable", async () => {
+  const a = "A".repeat(43), b = "B".repeat(43);
+  assert.equal(await authHash("salt1", a), await authHash("salt1", a));
+  assert.notEqual(await authHash("salt1", a), await authHash("salt2", a));
+  assert.notEqual(await authHash("salt1", a), await authHash("salt1", b));
+  assert.match(await authHash("s", a), /^[0-9a-f]{64}$/);
+});
+
+await ok("sealed progress opens only with the right key and the right account", async () => {
+  const key = b64url(crypto.getRandomValues(new Uint8Array(32)));
+  const other = b64url(crypto.getRandomValues(new Uint8Array(32)));
+  const text = JSON.stringify({ marks: ["2:255"], note: "plain words that must not be readable" });
+  const sealed = await seal(text, key, "acct-1");
+  assert.ok(!sealed.includes("plain") && !sealed.includes("2:255"));
+  assert.equal(await open(sealed, key, "acct-1"), text);
+  assert.equal(await open(sealed, other, "acct-1"), null, "wrong key");
+  assert.equal(await open(sealed, key, "acct-2"), null, "bound to its account");
+  assert.equal(await open(sealed.slice(0, -4) + "AAAA", key, "acct-1"), null, "tampered");
+  assert.notEqual(sealed, await seal(text, key, "acct-1"), "a fresh random IV every time");
+  await assert.rejects(seal("x", b64url(new Uint8Array(8)), "a"), /32 bytes/);
 });
 
 console.log(`${n} unit groups passed${process.exitCode ? ", with failures" : ""}`);

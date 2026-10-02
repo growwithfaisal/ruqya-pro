@@ -43,6 +43,24 @@ curl https://<worker address>/v1/health
 npx wrangler tail # live log while a phone turns reminders on
 ```
 
+## Accounts (optional sign-in so progress follows a reader between devices)
+
+Routes: `POST /v1/account/signup`, `POST /v1/account/login`, `POST /v1/account/logout`, `DELETE /v1/account`, `GET|PUT /v1/data`. The server stores a username, a salted hash of what the phone derived from the password, and one JSON copy of the reader's progress sealed with `DATA_KEY`. No email.
+
+One-time (already done for the live Worker):
+
+```bash
+npx wrangler d1 migrations apply ruqyapro-reminders --remote   # adds accounts + sessions tables
+npx wrangler secret put SIGNUP_CODE   # the invite code for creating an account (leave unset to let anyone)
+npx wrangler secret put DATA_KEY      # 32 random bytes, base64url:  node -e "console.log(crypto.randomBytes(32).toString('base64url'))"
+npx wrangler deploy
+```
+
+- **Change the invite code:** `npx wrangler secret put SIGNUP_CODE` with the new value. Existing accounts are not affected.
+- **Reset a forgotten password** (progress is kept): `npx tsx scripts/reset-password.mts <username> "<new password>"` prints two SQL statements; run them with `npx wrangler d1 execute ruqyapro-reminders --remote --command "<statement>"`.
+- **See how many accounts exist:** `npx wrangler d1 execute ruqyapro-reminders --remote --command "SELECT COUNT(*) FROM accounts"`. Cap: `MAX_ACCOUNTS` in `wrangler.toml` (300).
+- Never change `DATA_KEY` after people have signed in: the saved copies could no longer be opened (each phone still has its own and would re-upload at the next sync).
+
 ## Limits (free plan)
 
 - Cloudflare allows 50 outbound calls per run, so one run pokes up to 40 phones. Everyone in a city wants Asr in the same minute, so beyond a few hundred people in one place some reminders arrive a few minutes late (a reminder more than 15 minutes late is skipped).

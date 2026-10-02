@@ -114,3 +114,38 @@ export async function vapidJwt(jwk: VapidJwk, audience: string, subject: string,
   const sig = await crypto.subtle.sign({ name: "ECDSA", hash: "SHA-256" }, key, enc.encode(`${head}.${body}`));
   return `${head}.${body}.${b64url(sig)}`; // WebCrypto returns r||s, which is what JWS ES256 wants
 }
+
+/* ---------- Accounts ---------- */
+
+/** 3 to 30 characters: lower-case letters, digits, dot, underscore, hyphen; starts and ends with a letter or digit. */
+const USERNAME = /^[a-z0-9][a-z0-9._-]{1,28}[a-z0-9]$/;
+export function cleanUsername(raw: unknown): string | null {
+  if (typeof raw !== "string") return null;
+  const u = raw.trim().toLowerCase();
+  return USERNAME.test(u) ? u : null;
+}
+/** What the phone derives from a password (PBKDF2, 32 bytes, base64url). */
+export const isAuth = (v: unknown): v is string => typeof v === "string" && /^[A-Za-z0-9_-]{43}$/.test(v);
+
+export const authHash = (salt: string, auth: string) => sha256hex(`${salt}:${auth}`);
+
+async function aesKey(secret: string): Promise<CryptoKey> {
+  const raw = fromB64url(secret);
+  if (raw.length !== 32) throw new Error("DATA_KEY must be 32 bytes");
+  return crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["encrypt", "decrypt"]);
+}
+/** Seals text for storage: base64url(iv) + "." + base64url(ciphertext), bound to the account it belongs to. */
+export async function seal(text: string, secret: string, accountId: string): Promise<string> {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv, additionalData: enc.encode(accountId) }, await aesKey(secret), enc.encode(text));
+  return `${b64url(iv)}.${b64url(ct)}`;
+}
+export async function open(sealed: string, secret: string, accountId: string): Promise<string | null> {
+  try {
+    const [iv, ct] = sealed.split(".");
+    const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: fromB64url(iv), additionalData: enc.encode(accountId) }, await aesKey(secret), fromB64url(ct));
+    return new TextDecoder().decode(plain);
+  } catch {
+    return null;
+  }
+}
