@@ -8142,7 +8142,7 @@
     "title": "Dua for Money",
     "times": [],
     "arabic": "اللَّهُمَّ أَكْثِرْ مَالَهُ وَوَلَدَهُ، وَبَارِكْ لَهُ فِيمَا أَعْطَيْتَهُ",
-    "transliteration": "",
+    "transliteration": "Allahumma ‘akthir mālahu wa waladahu, wa bārik lahu feemā a‘taytahu.",
     "translation": "O Allah! increase his wealth and offspring, and bless (for him) what ever you give him",
     "practice": "The Prophet's dua for Anas ibn Malik, as Umm Sulaym asked. Many readers say it for themselves.",
     "repeat": "",
@@ -8167,6 +8167,7 @@
     "takhrij_url": "https://sunnah.com/bukhari:6334",
     "provenance": {
       "arabic": "fawazahmed0/hadith-api ara-bukhari #6334 (third person, for Anas)",
+      "transliteration": "The owner's transliteration (library brief, 2026-10-03) of the first-person wording, adapted word for word to the narrated third-person Arabic shown (mālee to mālahu, waladee to waladahu, lee to lahu, a‘taytanee to a‘taytahu); the owner's spelling style; not from a cited repo; owner to check",
       "translation": "fawazahmed0/hadith-api eng-bukhari #6334",
       "grade": "fawazahmed0/hadith-api grades on ara-tirmidhi",
       "selection": "The owner's list gave a first-person wording; the narrated third-person wording is shown, as the owner decided."

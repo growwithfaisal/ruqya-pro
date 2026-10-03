@@ -130,7 +130,11 @@ await ok("the new hadith duas have Arabic, a grade and a cited book; the old cla
     assert.ok(e.source.book && e.source.ref, `${id} source`);
     assert.ok(e.translation.trim(), `${id} translation`);
   }
-  assert.equal(by.get("dua-054")!.transliteration, "", "the narrated Money wording has no matching transliteration yet");
+  // Money: the owner's first-person transliteration adapted to the narrated third-person Arabic, and recorded as such.
+  const money = by.get("dua-054")! as Entry & { provenance: Record<string, string> };
+  assert.equal(money.transliteration, "Allahumma \u2018akthir m\u0101lahu wa waladahu, wa b\u0101rik lahu feem\u0101 a\u2018taytahu.");
+  assert.match(money.provenance.transliteration, /adapted word for word/);
+  assert.ok(!/m\u0101lee|waladee|a\u2018taytanee/.test(money.transliteration), "the first-person endings must not appear under third-person Arabic");
   for (const gone of ["dua-037", "dua-039", "dua-040"]) assert.equal(by.has(gone), false, gone);
   // Titles that make a claim are kept only where the owner chose them: six passages, titled as in the owner's earlier collection.
   const OWNER_TITLED = new Set(["dua-034", "dua-035", "dua-036", "dua-038", "dua-028", "dua-024"]);
