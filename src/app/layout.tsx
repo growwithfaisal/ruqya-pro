@@ -85,7 +85,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="status-scrim" aria-hidden />
         <SkyBackdrop />
         <Header />
-        <main id="main" className="flex-1"><ViewTransition default="page-fade">{children}</ViewTransition></main>
+        {/* Tab switches (tab bar, More, desktop nav, the wordmark) swap at once; opening something from a page crossfades. */}
+        <main id="main" className="flex-1"><ViewTransition default={{ tab: "none", default: "page-fade" }}>{children}</ViewTransition></main>
         <Footer />
         <Suspense fallback={null}><TabBar /></Suspense>
         <PwaRegister />

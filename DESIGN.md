@@ -201,6 +201,11 @@ Taken from Apple's fluid-interface principles: respond on the press, follow the 
   - iPhone on iOS 26.5 and later: Apple stopped script-triggered haptics (May 2026), so only a real finger on a native switch ticks. The reader's Previous, I'm Done and Next each carry an invisible switch over the whole button (`HapticSwitch`): the finger lands on it, iOS ticks, and the click carries on to the button. It is hidden from screen readers and the tab order, disabled with its button, and only rendered on iPhone and iPad. Swipes, sheet drags and the long press cannot tick there.
   - iPhone on iOS 18 to 26.4: a hidden switch is created, clicked and removed from script inside the user's own event. framer reports a drag's end a frame later, so swipes and sheet drags decide at the finger's release (`trackRelease` in `src/lib/swipe.ts`) and tap there. `noteNativeTap()` keeps a button tap from ticking twice.
   - Nothing depends on the tap; every moment is also shown.
+- **Page changes.**
+  - Tab switches (the tab bar, More, the desktop nav, the wordmark) swap at once, as on an iPhone: their links carry the `tab` transition type, and the layout's `ViewTransition` maps it to `none`.
+  - Opening something from a page (a topic, a recitation, a surah) crossfades the content only: opacity, 120ms out and 200ms in.
+  - The header, tab bar and sky are never captured as images (`:root { view-transition-name: none }`), so they stay live, keep their blur and never flicker. Taps pass through a crossfade (`::view-transition { pointer-events: none }`).
+  - Night mode's whole-page colour crossfade puts the root back for its own duration (`html.vt-root`).
 - **Scroll-edge chrome.** The header and tab bar sit on the sky with no line at rest. Their hairline fades in only while content passes under them (`data-scrolled`, `data-more-below` on `<html>`). The tab bar is 86% opaque so lists do not show through its labels.
 - **A way out of the readers.** A 44px close (×) sits left of the "Juz N · X left" line. It leaves without marking anything read: to the Qur'an page, or to where the routine was opened from.
 - **Accessibility settings.**

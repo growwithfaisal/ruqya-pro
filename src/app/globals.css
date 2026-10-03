@@ -323,11 +323,17 @@ html.rp-hidden .sky-haze, html.rp-hidden .sky-lattice { animation-play-state: pa
 .nudge-down { animation: nudge-down 1.5s var(--ease-out) infinite; }
 .nudge-up { animation: nudge-up 1.5s var(--ease-out) infinite; }
 
-/* Route changes: the old page eases out, the new one eases up into place. One shared motion for the whole app. */
+/* Route changes. Tabs swap at once (layout.tsx gives the "tab" type no animation), as on an iPhone. Opening something from
+   a page crossfades the content only: the header, tab bar and sky are never captured as images (the root has no
+   view-transition name), so they stay live, keep their blur and keep answering taps. Night mode puts the root back
+   for its own colour crossfade (html.vt-root, see lib/night.ts). */
+:root { view-transition-name: none; }
+:root.vt-root { view-transition-name: root; }
+::view-transition { pointer-events: none; }
 @keyframes vt-out { to { opacity: 0; } }
-@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
-::view-transition-old(.page-fade) { animation: 140ms var(--ease-out) both vt-out; }
-::view-transition-new(.page-fade) { animation: 280ms var(--ease-out) 40ms both vt-in; }
+@keyframes vt-in { from { opacity: 0; } }
+::view-transition-old(.page-fade) { animation: 120ms ease-out both vt-out; }
+::view-transition-new(.page-fade) { animation: 200ms ease-out both vt-in; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

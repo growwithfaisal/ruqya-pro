@@ -26,7 +26,7 @@ export function Header() {
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 5l-7 7 7 7" /></svg>
           </button>
         )}
-        <Link href="/" className="mr-auto flex min-h-[44px] min-w-0 items-center gap-2 no-underline" aria-label="RuqyaPro home">
+        <Link href="/" transitionTypes={["tab"]} className="mr-auto flex min-h-[44px] min-w-0 items-center gap-2 no-underline" aria-label="RuqyaPro home">
           <Wordmark className="text-accent" />
           <span className="display truncate text-title leading-none">RuqyaPro</span>
         </Link>
@@ -40,6 +40,7 @@ export function Header() {
             <Link
               key={n.href}
               href={n.href}
+              transitionTypes={["tab"]}
               aria-current={active(n.href) ? "page" : undefined}
               className={`press-row whitespace-nowrap rounded-full px-3.5 py-2 text-small no-underline transition-colors ${active(n.href) ? "bg-ink text-[var(--sky-bottom)]" : "hover:bg-[color-mix(in_oklch,var(--ink)_10%,transparent)]"}`}
             >

@@ -6,6 +6,9 @@ import { MORE, isActive } from "@/lib/nav";
 import { Book, Chevron, Dots, Horizon, Niche, Star8 } from "./Glyphs";
 import { Sheet } from "./Sheet";
 
+/** Tabs switch at once, as on an iPhone: the layout's page crossfade is "none" for this transition type. */
+const TAB = ["tab"];
+
 const TABS = [
   { href: "/", label: "Home", Icon: Horizon },
   { href: "/quran", label: "Qur'an", Icon: Book },
@@ -41,7 +44,7 @@ export function TabBar() {
             const on = isActive(path, href);
             return (
               <li key={href}>
-                <Link href={href} aria-label={label} aria-current={on ? "page" : undefined} className={`tab ${on ? "tab-on" : ""}`}>
+                <Link href={href} transitionTypes={TAB} aria-label={label} aria-current={on ? "page" : undefined} className={`tab ${on ? "tab-on" : ""}`}>
                   <span className="tab-icon"><Icon size={22} /></span>
                   <span>{label}</span>
                 </Link>
@@ -63,6 +66,7 @@ export function TabBar() {
             <Link
               key={n.href}
               href={n.href}
+              transitionTypes={TAB}
               onClick={() => setMore(false)}
               aria-current={isActive(path, n.href) ? "page" : undefined}
               className="press-row -mx-3 flex min-h-14 items-center justify-between rounded-2xl border-t border-line px-3 text-lead no-underline"

@@ -40,8 +40,13 @@ export function setNight(on: boolean) {
   // A soft crossfade of the whole page; reduced motion (and browsers without it) change at once.
   const doc = document as Document & { startViewTransition?: (cb: () => void) => Record<"ready" | "finished" | "updateCallbackDone", Promise<unknown>> };
   if (doc.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // The page's root is normally left out of view transitions (globals.css) so the bars stay live; this crossfade is
+    // of the whole page, so it puts the root back for its own duration.
+    const root = document.documentElement;
+    root.classList.add("vt-root");
     // A skipped transition (page hidden, or another one started) still runs `swap`; its promises just reject, which is not an error here.
     const t = doc.startViewTransition(swap);
-    for (const p of [t.ready, t.finished, t.updateCallbackDone]) p?.catch(() => {});
+    for (const p of [t.ready, t.updateCallbackDone]) p?.catch(() => {});
+    t.finished?.catch(() => {}).finally(() => root.classList.remove("vt-root"));
   } else swap();
 }
