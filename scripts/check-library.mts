@@ -164,6 +164,14 @@ await ok("owner's transliteration is kept exactly as typed", () => {
   assert.equal(by.get("dua-050")!.transliteration, "A’ūdhu bi kalimāti-llāhit-tāmmāti min sharri mā khalaq.");
   assert.equal(by.get("dua-052")!.transliteration, "As'alullāha ‘l-`Aẓīma Rabba ‘l-`Arshil-`Aẓīmi an yashfiyak.");
   assert.equal(by.get("dua-057")!.transliteration, "Yā Ḥayyu yā Qayyūm, bi-raḥmatika astaghīth, aṣliḥ lī sha’nī kullah, wa lā takilnī ilā nafsī ṭarfata ʿayn.");
+  // Durood-e-Ibrahim: the owner's two lines as printed on their image, one per half of the Arabic.
+  const durood = by.get("dua-058")! as Entry & { provenance: Record<string, string> };
+  assert.deepEqual(durood.transliteration.split("\n"), [
+    "Allaahumma salli 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa sallayta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
+    "Allaahumma baarik 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa baarakta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
+  ]);
+  assert.match(durood.provenance.transliteration, /Supplied by the owner/);
+  assert.equal(durood.source.ref, "3370", "its Arabic and English stay the cited Bukhari text");
 });
 
 await ok("Preparation: five steps, sources only where the data has them", () => {

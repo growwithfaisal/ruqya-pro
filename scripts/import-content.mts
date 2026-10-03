@@ -171,6 +171,12 @@ const OWNER_TR = {
 const OWNER_PROV = "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check";
 // Dua for Money: the owner's transliteration was of the first-person wording ("... mālee wa waladee, wa bārik lee feemā a‘taytanee"); the narrated wording shown is third person.
 // Only the four pronoun endings were changed, to match the Arabic word for word: mālee -> mālahu, waladee -> waladahu, lee -> lahu, a‘taytanee -> a‘taytahu.
+// Durood-e-Ibrahim: the owner's transliteration, from the image titled "Durood e Ibrahim" they sent on 2026-10-03, copied as printed (two lines, one per half), including "Muhammadinw".
+const DUROOD_TR = [
+  "Allaahumma salli 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa sallayta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
+  "Allaahumma baarik 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa baarakta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
+].join("\n");
+const DUROOD_TR_PROV = "Supplied by the owner (image titled 'Durood e Ibrahim', 2026-10-03), spelling as printed, read by eye from the image; not from a cited repo; owner to check. The image's own Arabic and English were not used: the Arabic and English shown are the cited Bukhari text, whose wording the transliteration follows word for word";
 const MONEY_TR = "Allahumma ‘akthir mālahu wa waladahu, wa bārik lahu feemā a‘taytahu.";
 const MONEY_TR_PROV = "The owner's transliteration (library brief, 2026-10-03) of the first-person wording, adapted word for word to the narrated third-person Arabic shown (mālee to mālahu, waladee to waladahu, lee to lahu, a‘taytanee to a‘taytahu); the owner's spelling style; not from a cited repo; owner to check";
 // Dua for Halal Riqz: the Arabic and English printed on the image of "Dua for Halal Money" the owner sent on 2026-10-03, read by eye at high zoom.
@@ -603,12 +609,12 @@ const DEFS: Def[] = [
       const arabic = cutAr(h.a.text, "اللهم صل على محمد", "إنك حميد مجيد", true);
       const translation = cut(h.e.text, "O Allah! Send Your Mercy on Muhammad", "Glorious", true);
       return {
-        arabic, transliteration: "", translation,
+        arabic, transliteration: DUROOD_TR, translation,
         source: { book: "Sahih al-Bukhari", ref: String(h.a.arabicnumber), chapter: h.chapter },
         grade: "Sahih", grader: "Sahih al-Bukhari (Sahihayn criterion); Albani/Arna'ut cross-check pending",
         takhrij: sunnah("bukhari", h.a.arabicnumber),
-        provenance: { arabic: `fawazahmed0/hadith-api ara-bukhari #${h.a.hadithnumber}`, translation: `fawazahmed0/hadith-api eng-bukhari #${h.a.hadithnumber}`, selection: "Named as 'Durood e Ibrahim' in the owner's Preparation list." },
-        gaps: ["transliteration: none supplied; send one for this wording", "exegesis note not supplied", "Albani / Arna'ut grading: cross-check on Dorar.net"],
+        provenance: { arabic: `fawazahmed0/hadith-api ara-bukhari #${h.a.hadithnumber}`, transliteration: DUROOD_TR_PROV, translation: `fawazahmed0/hadith-api eng-bukhari #${h.a.hadithnumber}`, selection: "Named as 'Durood e Ibrahim' in the owner's Preparation list." },
+        gaps: ["transliteration: supplied by the owner from an image; owner to check", "exegesis note not supplied", "Albani / Arna'ut grading: cross-check on Dorar.net"],
       };
     },
   },
@@ -791,7 +797,7 @@ const notes = [
   "- The ayat list screenshots (IMG_2038 to IMG_2040) stop at As-Saffat 10. If the app list continues past that, send the remaining screenshots.",
   "- Library brief of 2026-10-03: the owner's lists for Recitations and Self-Ruqyah are in `data/library.json`. Six passages carry the owner's own titles from the earlier collection (dua-034 Punishing the Enemy, dua-035 Joint Magic, dua-036 Stomach Magic, dua-038 Black Magic Face, dua-028 Body Burning, dua-024 Waswasah); those titles and the counts that came with them have no cited source, and the counts are not shown. dua-037, dua-039 and dua-040 (duplicates of 21:69, 57:3 and Abu Dawud 5090) stay removed as separate entries.",
   "- Kept without a graded source at the owner's request (dua-059 Halal Riqz, dua-060 Blessings in Provision, dua-061 Depression), labelled \"Not from a graded hadith. Scholars mention this dua.\" No Arabic exists in the pinned hadith dataset, fitrahive/dua-dhikr or a Hisn al-Muslim dataset. dua-059 shows the Arabic and English printed on the image the owner sent (read by eye, unchecked, not a cited text); dua-060 and dua-061 are transliteration only. Send the Arabic, the English and where each comes from for any of them.",
-  "- Transliteration for Durood-e-Ibrahim (dua-058): none supplied. The Money dua (dua-054) shows the owner's first-person transliteration adapted word for word to the narrated third-person Arabic (mālee to mālahu, waladee to waladahu, lee to lahu, a‘taytanee to a‘taytahu); please check it.",
+  "- The Money dua (dua-054) shows the owner's first-person transliteration adapted word for word to the narrated third-person Arabic (mālee to mālahu, waladee to waladahu, lee to lahu, a‘taytanee to a‘taytahu); please check it.",
   "- The owner's Ya Hayyu ya Qayyum transliteration (dua-057) leaves out the final 'abadan' of the Arabic.",
   "- Counts: each count from the owner's list is shown with its source when the cited hadith's English text says it (Abu Dawud 5082 for the three Quls, Tirmidhi 3604 for A'udhu bi kalimatillah, Tirmidhi 3388, Muslim 2202, Abu Dawud 3106, Abu Dawud 5090) and as \"Suggested\" otherwise (Fatiha, Ayat al-Kursi, 2:285-286, the evil-eye and children duas, Jibril, Hasbiya Allah and Hasbunallah). Hasbiya Allah x7 rests on Abu Dawud 5081, which Al-Albani grades Mawdu in the dataset, so it is not cited.",
   "- 'Jinn Expulsion Shield' (IMG_2030) is NOT included: its Arabic (the takbir and tahlil formula) cannot be taken from a cited text. It cites 'Sahih Muslim 382 / Jami at-Tirmidhi'; neither matches the formula in the pinned dataset (Muslim 382 is not this text). Send a sourced text or a correct reference and it will be added.",

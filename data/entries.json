@@ -8295,7 +8295,7 @@
     "title": "Durood-e-Ibrahim",
     "times": [],
     "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ، وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
-    "transliteration": "",
+    "transliteration": "Allaahumma salli 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa sallayta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.\nAllaahumma baarik 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa baarakta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
     "translation": "O Allah! Send Your Mercy on Muhammad and on the family of Muhammad, as You sent Your Mercy on Abraham and on the family of Abraham, for You are the Most Praise-worthy, the Most Glorious. O Allah! Send Your Blessings on Muhammad and the family of Muhammad, as You sent your Blessings on Abraham and on the family of Abraham, for You are the Most Praise-worthy, the Most Glorious",
     "practice": "The words the Prophet taught for sending blessings on him.",
     "repeat": "",
@@ -8314,6 +8314,7 @@
     "takhrij_url": "https://sunnah.com/bukhari:3370",
     "provenance": {
       "arabic": "fawazahmed0/hadith-api ara-bukhari #3370",
+      "transliteration": "Supplied by the owner (image titled 'Durood e Ibrahim', 2026-10-03), spelling as printed, read by eye from the image; not from a cited repo; owner to check. The image's own Arabic and English were not used: the Arabic and English shown are the cited Bukhari text, whose wording the transliteration follows word for word",
       "translation": "fawazahmed0/hadith-api eng-bukhari #3370",
       "selection": "Named as 'Durood e Ibrahim' in the owner's Preparation list."
     },
