@@ -171,7 +171,8 @@ const OWNER_TR = {
 const OWNER_PROV = "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check";
 const imgProv = (k: string) => `content/${IMG_TRANSLIT[k].img}: Latin transliteration as printed on the image (read by eye; owner to check)`;
 
-const SELECTION_OWNER_LIST = "Selection: named in the owner's list of ruqyah ayats (library brief of 2026-10-03). No hadith is attached to this selection. The titles and counts the earlier collection gave this passage were removed: they had no cited source.";
+const TITLE_NOTE = "Title: supplied by the owner (earlier collection); it is not from a cited source, and the app does not claim the verse does what the title says. The count the collection gave it is not shown: it had no cited source.";
+const SELECTION_OWNER_LIST = `Selection: named in the owner's list of ruqyah ayats (library brief of 2026-10-03). No hadith is attached to this selection. ${TITLE_NOTE}`;
 const SELECTION_TITLED = (img: string) => `Selection, title and count: as given in the owner's dua collection (${img}). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not.`;
 
 function quranDef(o: {
@@ -353,7 +354,7 @@ const DEFS: Def[] = [
     ["dua-029", "al-araf-7-117", "Al-A'raf 7:117", "Al-A'raf", 7, 117],
     ["dua-030", "al-hijr-15-18", "Al-Hijr 15:18", "Al-Hijr", 15, 18],
   ] as [string, string, string, string, number, number][]).map(([id, slug, title, name, chapter, v]) =>
-    quranDef({ id, slug, title, name, chapter, from: v, to: v, times: [], collection: "verse", selection: SELECTION_COLLECTION, practice: "Recite the verse." }),
+    quranDef({ id, slug, title, name, chapter, from: v, to: v, times: [], collection: "verse", selection: id === "dua-024" || id === "dua-028" ? `${SELECTION_COLLECTION} ${TITLE_NOTE}` : SELECTION_COLLECTION, practice: "Recite the verse." }),
   ),
 
   /* ---- Owner's collection: title and count only (method text deliberately not carried over) ---- */
@@ -621,10 +622,11 @@ const TITLE: Record<string, string> = {
   "dua-013": "Surah Al-Baqarah (2:1-12)", "dua-014": "Surah Al-Baqarah (2:102)", "dua-015": "Surah Al-Baqarah (2:163-164)",
   "dua-016": "Surah Al-A'raf (7:54-56)", "dua-017": "Surah As-Saffat (37:1-10)", "dua-018": "Surah Al-Hashr (59:21-24)", "dua-019": "Surah At-Talaq (65:2-3)",
   "dua-020": "Surah As-Saff (61:13)", "dua-021": "Surah Hud (11:57)", "dua-022": "Surah Al-An'am (6:61)", "dua-023": "Surah At-Tariq (86:4)",
-  "dua-024": "Surah Al-Hadid (57:3)", "dua-025": "Surah Ash-Shu'ara (26:80)", "dua-026": "Surah Fussilat (41:12)", "dua-027": "Surah An-Naml (27:1)",
-  "dua-028": "Surah Al-Anbiya (21:69)", "dua-029": "Surah Al-A'raf (7:117)", "dua-030": "Surah Al-Hijr (15:18)",
+  "dua-025": "Surah Ash-Shu'ara (26:80)", "dua-026": "Surah Fussilat (41:12)", "dua-027": "Surah An-Naml (27:1)",
+  "dua-029": "Surah Al-A'raf (7:117)", "dua-030": "Surah Al-Hijr (15:18)",
   "dua-032": "Dua for Extreme Distress", "dua-033": "Dua for Good Health",
-  "dua-034": "Surah Al-Masad (111:1-5)", "dua-035": "Surah Ali 'Imran (3:54)", "dua-036": "Surah An-Nisa (4:10)", "dua-038": "Surah Al-Qiyamah (75:22)",
+  // The owner's own titles from the earlier collection (dua-034, 035, 036, 038 keep the titles they are defined with).
+  "dua-024": "Destroy Waswasah With Ruqyah", "dua-028": "Ruqyah for Body Burning",
 };
 
 /* ---------- Run ---------- */
@@ -722,6 +724,7 @@ const library = {
     duas: [
       it("dua-010", n(3, B.harm)), it("dua-050", n(3, B.evil)), it("dua-051", n(3)), it("dua-009", n(3)), it("dua-007", n(3)),
       it("dua-008", { text: "Bismillah three times, then the dua of refuge seven times", basis: B.pain }), it("dua-053"), it("dua-033", n(3, B.health)),
+      it("dua-031"), it("dua-032"),
     ],
   },
 };
@@ -761,7 +764,7 @@ const notes = [
   "- Du'a for sleep disturbance (needs a graded source; none chosen).",
   "- `content/` is 31 phone screenshots, not text. Nothing was transcribed. Verse references and hadith references shown in them were used to fetch text from the cited datasets.",
   "- The ayat list screenshots (IMG_2038 to IMG_2040) stop at As-Saffat 10. If the app list continues past that, send the remaining screenshots.",
-  "- Library brief of 2026-10-03: the owner's lists for Recitations and Self-Ruqyah are in `data/library.json`. The earlier titles and counts for dua-034 to dua-040 (Punishing the Enemy, Joint Magic, Stomach Magic, Body Burning, Black Magic Face, Waswasah, Black Magic) were removed because they had no cited source; their passages remain under plain names, and the duplicates (21:69, 57:3, Abu Dawud 5090) were dropped.",
+  "- Library brief of 2026-10-03: the owner's lists for Recitations and Self-Ruqyah are in `data/library.json`. Six passages carry the owner's own titles from the earlier collection (dua-034 Punishing the Enemy, dua-035 Joint Magic, dua-036 Stomach Magic, dua-038 Black Magic Face, dua-028 Body Burning, dua-024 Waswasah); those titles and the counts that came with them have no cited source, and the counts are not shown. dua-037, dua-039 and dua-040 (duplicates of 21:69, 57:3 and Abu Dawud 5090) stay removed as separate entries.",
   "- Kept without a graded source at the owner's request (dua-059 Halal Riqz, dua-060 Blessings in Provision, dua-061 Depression): shown by transliteration only, labelled \"Not from a graded hadith. Scholars mention this dua.\" No Arabic exists in the pinned hadith dataset, fitrahive/dua-dhikr or a Hisn al-Muslim dataset. Send the Arabic, the English and where each comes from.",
   "- Transliteration for the narrated Money dua (dua-054) and for Durood-e-Ibrahim (dua-058): none supplied. The owner's Money transliteration is the first-person wording, which is not the narrated text.",
   "- The owner's Ya Hayyu ya Qayyum transliteration (dua-057) leaves out the final 'abadan' of the Arabic.",

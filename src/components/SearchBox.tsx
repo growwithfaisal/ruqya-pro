@@ -13,7 +13,7 @@ export function SearchBox({ entries }: { entries: Entry[] }) {
       new Fuse(entries, {
         threshold: 0.35,
         ignoreLocation: true,
-        keys: ["title", "translation", "transliteration", "source.book", "source.ref", "practice"],
+        keys: ["title", "translation", "transliteration", "source.book", "source.ref", "source.chapter", "practice"],
       }),
     [entries],
   );

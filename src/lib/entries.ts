@@ -42,5 +42,11 @@ export function citation(e: Entry) {
   return e.source.book === "The Qur'an" ? `Qur'an ${e.source.ref}` : `${e.source.book} ${e.source.ref}`;
 }
 
+/** The surah a Qur'an passage is from, when its title does not already say so ("Ruqyah for Joint Magic" -> "Surah Ali 'Imran"). */
+export function surahName(e: Entry) {
+  if (e.source.book !== "The Qur'an" || !e.source.chapter) return "";
+  return e.title.includes(e.source.chapter.replace(/^Surah /, "")) ? "" : e.source.chapter;
+}
+
 /** Shown wherever a dua without a graded source appears. */
 export const UNSOURCED_NOTE = "Not from a graded hadith. Scholars mention this dua.";

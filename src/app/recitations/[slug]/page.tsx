@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { UNSOURCED_NOTE, bySlug, citation, entries } from "@/lib/entries";
+import { UNSOURCED_NOTE, bySlug, citation, entries, surahName } from "@/lib/entries";
 import { Translit } from "@/components/Translit";
 import { CitationBadge, GradeBadge } from "@/components/CitationBadge";
 import { PageShell } from "@/components/PageShell";
@@ -28,6 +28,7 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
     <PageShell as="article">
       <p className="text-small"><Link href="/recitations" className="underline">All recitations</Link></p>
       <h1 className="t-h1 mt-4">{e.title}</h1>
+      {surahName(e) && <p className="mt-2 text-lead text-ink-soft">{surahName(e)}</p>}
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <span className="text-accent"><GradeBadge entry={e} /></span>
         <CitationBadge entry={e} tone="sky" />

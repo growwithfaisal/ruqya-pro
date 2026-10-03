@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Entry } from "@/lib/types";
-import { UNSOURCED_NOTE, citation } from "@/lib/entries";
+import { UNSOURCED_NOTE, citation, surahName } from "@/lib/entries";
 import { Translit } from "./Translit";
 import { CitationBadge } from "./CitationBadge";
 import { Chevron } from "./Glyphs";
@@ -12,7 +12,7 @@ export function EntryDisclosure({ entry }: { entry: Entry }) {
       <summary className="flex min-h-[4rem] cursor-pointer list-none items-center gap-3 py-3 [&::-webkit-details-marker]:hidden">
         <span className="grid flex-1">
           <span className="display text-title leading-tight">{entry.title}</span>
-          <span className="text-meta text-ink-soft">{citation(entry)}{entry.repeat ? ` · ${entry.repeat}` : ""}</span>
+          <span className="text-meta text-ink-soft">{[surahName(entry), citation(entry), entry.repeat].filter(Boolean).join(" · ")}</span>
         </span>
         <Chevron className="shrink-0 text-ink-soft transition-transform duration-300 group-open:rotate-90" />
       </summary>

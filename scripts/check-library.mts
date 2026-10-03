@@ -29,11 +29,11 @@ const WANT: Record<string, string[]> = {
 const AYAT = [
   "Surah Al-Ikhlas", "Surah Al-Falaq", "Surah An-Nas", "Surah Al-Fatiha", "Ayat al-Kursi",
   "Surah Al-Baqarah (2:1-12)", "Surah Al-Baqarah (2:102)", "Surah Al-Baqarah (2:163-164)", "Surah Al-Baqarah (2:285-286)",
-  "Surah Ali 'Imran (3:54)", "Surah An-Nisa (4:10)", "Surah Al-An'am (6:61)", "Surah Al-A'raf (7:54-56)", "Surah Al-A'raf (7:117)", "Surah Hud (11:57)", "Surah Al-Hijr (15:18)",
-  "Surah Al-Anbiya (21:69)", "Surah Ash-Shu'ara (26:80)", "Surah An-Naml (27:1)", "Surah As-Saffat (37:1-10)", "Surah Fussilat (41:12)", "Surah Al-Hadid (57:3)",
-  "Surah Al-Hashr (59:21-24)", "Surah As-Saff (61:13)", "Surah At-Talaq (65:2-3)", "Surah Al-Qiyamah (75:22)", "Surah At-Tariq (86:4)", "Surah Al-Masad (111:1-5)",
+  "Ruqyah for Joint Magic", "Destroy Stomach Magic", "Surah Al-An'am (6:61)", "Surah Al-A'raf (7:54-56)", "Surah Al-A'raf (7:117)", "Surah Hud (11:57)", "Surah Al-Hijr (15:18)",
+  "Ruqyah for Body Burning", "Surah Ash-Shu'ara (26:80)", "Surah An-Naml (27:1)", "Surah As-Saffat (37:1-10)", "Surah Fussilat (41:12)", "Destroy Waswasah With Ruqyah",
+  "Surah Al-Hashr (59:21-24)", "Surah As-Saff (61:13)", "Surah At-Talaq (65:2-3)", "Black Magic Face Ruqyah", "Surah At-Tariq (86:4)", "Ruqyah for Punishing the Enemy",
 ];
-const DUAS = ["Dua for Protection From Harm", "Dua for Protection From Evil", "Dua for Evil Eye", "Dua for Protection of Children", "Jibril (AS) Dua for Ruqyah", "Dua for Pain", "Dua for Healing", "Dua for Good Health"];
+const DUAS = ["Dua for Protection From Harm", "Dua for Protection From Evil", "Dua for Evil Eye", "Dua for Protection of Children", "Jibril (AS) Dua for Ruqyah", "Dua for Pain", "Dua for Healing", "Dua for Good Health", "Seeking refuge in Allah's might", "Dua for Extreme Distress"];
 
 /** The counts the owner listed, as the app should label them. A source is named only where the cited hadith says the count. */
 const COUNT = (id: string, list: string): string => {
@@ -123,7 +123,28 @@ await ok("the new hadith duas have Arabic, a grade and a cited book; the old cla
   }
   assert.equal(by.get("dua-054")!.transliteration, "", "the narrated Money wording has no matching transliteration yet");
   for (const gone of ["dua-037", "dua-039", "dua-040"]) assert.equal(by.has(gone), false, gone);
-  for (const e of entries) assert.ok(!/magic|punishing|burning|waswasah/i.test(e.title), `${e.id} still carries a claim in its title: ${e.title}`);
+  // Titles that make a claim are kept only where the owner chose them: six passages, titled as in the owner's earlier collection.
+  const OWNER_TITLED = new Set(["dua-034", "dua-035", "dua-036", "dua-038", "dua-028", "dua-024"]);
+  for (const e of entries) if (!OWNER_TITLED.has(e.id)) assert.ok(!/magic|punishing|burning|waswasah/i.test(e.title), `${e.id} carries a claim in its title: ${e.title}`);
+});
+
+await ok("six passages carry the owner's own titles everywhere, with the surah named under them and no count", async () => {
+  const { surahName } = await import("../src/lib/entries");
+  const WANT_TITLES: Record<string, [string, string]> = {
+    "dua-034": ["Ruqyah for Punishing the Enemy", "Surah Al-Masad"], "dua-035": ["Ruqyah for Joint Magic", "Surah Ali 'Imran"],
+    "dua-036": ["Destroy Stomach Magic", "Surah An-Nisa"], "dua-038": ["Black Magic Face Ruqyah", "Surah Al-Qiyamah"],
+    "dua-028": ["Ruqyah for Body Burning", "Surah Al-Anbiya"], "dua-024": ["Destroy Waswasah With Ruqyah", "Surah Al-Hadid"],
+  };
+  for (const [id, [t, surah]] of Object.entries(WANT_TITLES)) {
+    const e = by.get(id)!;
+    assert.equal(e.title, t, `${id}: the title is on the entry, not a list-only override`);
+    assert.equal(surahName(e as never), surah, `${id}: surah line`);
+    assert.equal(lib.selfRuqyah.ayat.find((i) => i.id === id)?.title, undefined, `${id}: no list-level title`);
+    assert.equal(lib.selfRuqyah.ayat.find((i) => i.id === id)?.count, undefined, `${id}: the collection's count had no source and is not shown`);
+  }
+  assert.equal(surahName(by.get("dua-004") as never), "", "a title that already names the surah gets no extra line");
+  assert.equal(surahName(by.get("dua-010") as never), "", "hadith have no surah");
+  assert.equal(by.has("dua-037") || by.has("dua-039") || by.has("dua-040"), false);
 });
 
 await ok("owner's transliteration is kept exactly as typed", () => {
