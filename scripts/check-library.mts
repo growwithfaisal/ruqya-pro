@@ -100,17 +100,26 @@ await ok("Qur'an entries are exactly the Qur'an data", () => {
   assert.ok(n >= 30, `${n} Qur'an entries checked`);
 });
 
-await ok("the duas without a source: no Arabic, no grade, the owner's transliteration, never published as verified", () => {
-  const un = entries.filter((e) => e.unsourced);
+await ok("the duas without a source: no grade, the owner's transliteration, never verified; Arabic only where the owner supplied it", () => {
+  const un = entries.filter((e) => e.unsourced) as (Entry & { provenance: Record<string, string> })[];
   assert.deepEqual(un.map((e) => e.id), ["dua-059", "dua-060", "dua-061"]);
   for (const e of un) {
-    assert.equal(e.arabic, "");
     assert.equal(e.grade, "");
     assert.equal(e.verified, false);
     assert.ok(e.transliteration.length > 10);
+    if (e.arabic) assert.match(e.provenance.arabic, /supplied by the owner/i, `${e.id}: Arabic must be recorded as owner-supplied`);
   }
   assert.equal(by.get("dua-059")!.transliteration, "Ya Razzaqu urzuqni halalan tayyiba.");
   assert.equal(by.get("dua-061")!.transliteration, "Allahumma Akhrijnee min adhulumaati ilaa annur.");
+  // Halal Riqz: the Arabic and English printed on the owner's image. A mistyped letter would show here; the marks themselves are the owner's to check.
+  const riqz = by.get("dua-059")! as Entry & { provenance: Record<string, string> };
+  const plain = riqz.arabic.replace(/[\u064B-\u0652]/g, "").replace(/\u0649/g, "\u064A");
+  assert.equal(plain, "\u064A\u0627 \u0631\u0632\u0627\u0642 \u0627\u0631\u0632\u0642\u0646\u064A \u062D\u0644\u0627\u0644\u0627 \u0637\u064A\u0628\u0627", "Halal Riqz letters");
+  assert.equal(riqz.arabic.split(" ").length, 5);
+  assert.equal(riqz.translation, "O The provider! please provide me with halal and good rizq.");
+  assert.match(riqz.provenance.translation, /not a cited translation/);
+  assert.equal(by.get("dua-060")!.arabic, "");
+  assert.equal(by.get("dua-061")!.arabic, "");
 });
 
 await ok("the new hadith duas have Arabic, a grade and a cited book; the old claim-titled entries are gone", () => {

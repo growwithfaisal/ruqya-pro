@@ -169,6 +169,18 @@ const OWNER_TR = {
   depression: "Allahumma Akhrijnee min adhulumaati ilaa annur.",
 };
 const OWNER_PROV = "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check";
+// Dua for Halal Riqz: the Arabic and English printed on the image of "Dua for Halal Money" the owner sent on 2026-10-03, read by eye at high zoom.
+// Written as code points so no mark is lost or reordered: يَا رَزَّاقُ ارْزُقْنى حَلَالًا طَيِّبًا (the final yaa of ارزقنى is dotless as drawn; no kasra is drawn under the nun).
+const HALAL_RIQZ_AR = [
+  "\u064A\u064E\u0627",
+  "\u0631\u064E\u0632\u0651\u064E\u0627\u0642\u064F",
+  "\u0627\u0631\u0652\u0632\u064F\u0642\u0652\u0646\u0649",
+  "\u062D\u064E\u0644\u064E\u0627\u0644\u0627\u064B",
+  "\u0637\u064E\u064A\u0651\u0650\u0628\u0627\u064B",
+].join(" ");
+const HALAL_RIQZ_EN = "O The provider! please provide me with halal and good rizq.";
+const OWNER_IMAGE_AR = "Supplied by the owner (image titled 'Dua for Halal Money', 2026-10-03), read by eye from the image; not from a cited text; owner to check";
+const OWNER_IMAGE_EN = "English line printed on the same image; not a cited translation";
 const imgProv = (k: string) => `content/${IMG_TRANSLIT[k].img}: Latin transliteration as printed on the image (read by eye; owner to check)`;
 
 const TITLE_NOTE = "Title: supplied by the owner (earlier collection); it is not from a cited source, and the app does not claim the verse does what the title says. The count the collection gave it is not shown: it had no cited source.";
@@ -599,17 +611,26 @@ const DEFS: Def[] = [
 
   /* ---- Library brief of 2026-10-03: duas the owner asked to keep without a graded source. No Arabic exists in any pinned dataset. ---- */
   ...([
-    ["dua-059", "dua-for-halal-riqz", "Dua for Halal Riqz", OWNER_TR.halal],
-    ["dua-060", "dua-for-blessings-in-provision", "Dua for Blessings in Provision", OWNER_TR.provision],
-    ["dua-061", "dua-for-depression", "Dua for Depression", OWNER_TR.depression],
-  ] as [string, string, string, string][]).map(([id, slug, title, tr]): Def => ({
+    ["dua-059", "dua-for-halal-riqz", "Dua for Halal Riqz", OWNER_TR.halal, HALAL_RIQZ_AR, HALAL_RIQZ_EN],
+    ["dua-060", "dua-for-blessings-in-provision", "Dua for Blessings in Provision", OWNER_TR.provision, "", ""],
+    ["dua-061", "dua-for-depression", "Dua for Depression", OWNER_TR.depression, "", ""],
+  ] as [string, string, string, string, string, string][]).map(([id, slug, title, tr, ar, en]): Def => ({
     id, slug, title, times: [], unsourced: true, practice: "",
     build: async () => ({
-      arabic: "", transliteration: tr, translation: "",
+      arabic: ar, transliteration: tr, translation: en,
       source: { book: "Mentioned by scholars", ref: "", chapter: "" },
       grade: "" as const, grader: "", takhrij: "",
-      provenance: { transliteration: OWNER_PROV, selection: "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no Arabic and no graded source." },
-      gaps: ["no Arabic and no graded source: not found in any pinned dataset; send the Arabic and where it comes from", "no English translation supplied", "exegesis note not supplied"],
+      provenance: {
+        ...(ar ? { arabic: OWNER_IMAGE_AR } : {}),
+        transliteration: OWNER_PROV,
+        ...(en ? { translation: OWNER_IMAGE_EN } : {}),
+        selection: "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no cited text and no graded source." + (ar ? " The Arabic and English shown are the ones on the image the owner sent." : ""),
+      },
+      gaps: [
+        ar ? "no graded source: the Arabic is from the owner's image, not a cited text; send where it comes from" : "no Arabic and no graded source: not found in any pinned dataset; send the Arabic and where it comes from",
+        ...(en ? [] : ["no English translation supplied"]),
+        "exegesis note not supplied",
+      ],
     }),
   })),
 ];
@@ -765,7 +786,7 @@ const notes = [
   "- `content/` is 31 phone screenshots, not text. Nothing was transcribed. Verse references and hadith references shown in them were used to fetch text from the cited datasets.",
   "- The ayat list screenshots (IMG_2038 to IMG_2040) stop at As-Saffat 10. If the app list continues past that, send the remaining screenshots.",
   "- Library brief of 2026-10-03: the owner's lists for Recitations and Self-Ruqyah are in `data/library.json`. Six passages carry the owner's own titles from the earlier collection (dua-034 Punishing the Enemy, dua-035 Joint Magic, dua-036 Stomach Magic, dua-038 Black Magic Face, dua-028 Body Burning, dua-024 Waswasah); those titles and the counts that came with them have no cited source, and the counts are not shown. dua-037, dua-039 and dua-040 (duplicates of 21:69, 57:3 and Abu Dawud 5090) stay removed as separate entries.",
-  "- Kept without a graded source at the owner's request (dua-059 Halal Riqz, dua-060 Blessings in Provision, dua-061 Depression): shown by transliteration only, labelled \"Not from a graded hadith. Scholars mention this dua.\" No Arabic exists in the pinned hadith dataset, fitrahive/dua-dhikr or a Hisn al-Muslim dataset. Send the Arabic, the English and where each comes from.",
+  "- Kept without a graded source at the owner's request (dua-059 Halal Riqz, dua-060 Blessings in Provision, dua-061 Depression), labelled \"Not from a graded hadith. Scholars mention this dua.\" No Arabic exists in the pinned hadith dataset, fitrahive/dua-dhikr or a Hisn al-Muslim dataset. dua-059 shows the Arabic and English printed on the image the owner sent (read by eye, unchecked, not a cited text); dua-060 and dua-061 are transliteration only. Send the Arabic, the English and where each comes from for any of them.",
   "- Transliteration for the narrated Money dua (dua-054) and for Durood-e-Ibrahim (dua-058): none supplied. The owner's Money transliteration is the first-person wording, which is not the narrated text.",
   "- The owner's Ya Hayyu ya Qayyum transliteration (dua-057) leaves out the final 'abadan' of the Arabic.",
   "- Counts: each count from the owner's list is shown with its source when the cited hadith's English text says it (Abu Dawud 5082 for the three Quls, Tirmidhi 3604 for A'udhu bi kalimatillah, Tirmidhi 3388, Muslim 2202, Abu Dawud 3106, Abu Dawud 5090) and as \"Suggested\" otherwise (Fatiha, Ayat al-Kursi, 2:285-286, the evil-eye and children duas, Jibril, Hasbiya Allah and Hasbunallah). Hasbiya Allah x7 rests on Abu Dawud 5081, which Al-Albani grades Mawdu in the dataset, so it is not cited.",

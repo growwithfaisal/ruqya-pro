@@ -25,7 +25,8 @@ for (const e of entries) {
   for (const k of ["id", "slug", "title"] as const) if (!String(e[k] ?? "").trim()) err(e, `missing ${k}`);
   // Arabic is required, except for a dua kept at the owner's request with no graded source, which must then say so and show a transliteration.
   if (e.unsourced) {
-    if (e.arabic.trim()) err(e, "an unsourced entry must not carry Arabic that has no source");
+    // Arabic is allowed only where the owner supplied it and the entry says so; it still has no grade and can never be verified.
+    if (e.arabic.trim() && !/supplied by the owner/i.test(e.provenance?.arabic ?? "")) err(e, "an unsourced entry may carry Arabic only if its provenance records that the owner supplied it");
     if (!e.transliteration?.trim()) err(e, "an unsourced entry needs its transliteration");
     if (e.grade) err(e, "an unsourced entry cannot have a grade");
   } else if (!String(e.arabic ?? "").trim()) err(e, "missing arabic");

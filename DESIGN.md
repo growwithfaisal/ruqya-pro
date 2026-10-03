@@ -143,7 +143,7 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 
 ### Count label and unsourced label
 - The count sits in the meta line as plain text, never a coloured badge: "Three times · Tirmidhi 3388" where a hadith gives the number, "Suggested: seven times" where it does not. In the one-card reader it is a hairline chip under the Arabic with the same wording.
-- A dua with no graded source has no Arabic block. The transliteration takes the display face, and one muted line beneath reads "Not from a graded hadith. Scholars mention this dua." The citation badge and the Sources page say "No graded source"; the drawer explains in a sentence instead of showing an empty Arabic section.
+- A dua with no graded source and no Arabic has no Arabic block. The transliteration takes the display face, and one muted line beneath reads "Not from a graded hadith. Scholars mention this dua." If the owner supplied Arabic (Halal Riqz), it is laid out like any other dua (Arabic in the card, transliteration and English beneath) with the same muted line. The citation badge and the Sources page say "No graded source"; the drawer explains in a sentence instead of showing an empty Arabic section, or repeats the line beneath the Arabic when there is one.
 
 ### Citation badge and drawer
 - Pill with grade and reference. Opens a bottom sheet on mobile and a 30rem right panel from 768px: Arabic, grade, grader, book, reference, chapter, exegetical note, link to `/sources#id`.

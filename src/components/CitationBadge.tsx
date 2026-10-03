@@ -2,7 +2,7 @@
 import Link from "next/link";
 import * as Dialog from "@radix-ui/react-dialog";
 import type { Entry } from "@/lib/types";
-import { citation, gradeLabel } from "@/lib/entries";
+import { UNSOURCED_NOTE, citation, gradeLabel } from "@/lib/entries";
 
 export function GradeBadge({ entry }: { entry: Entry }) {
   return (
@@ -53,8 +53,9 @@ export function CitationBadge({ entry, tone = "card" }: { entry: Entry; tone?: "
                 </div>
               </section>
             ) : (
-              <p className="rounded-[20px] border border-line px-4 py-3 text-small">Not from a graded hadith. Scholars mention this dua. There is no Arabic text here yet.</p>
+              <p className="rounded-[20px] border border-line px-4 py-3 text-small">{UNSOURCED_NOTE} There is no Arabic text here yet.</p>
             )}
+            {entry.unsourced && entry.arabic.trim() && <p className="mt-3 text-small">{UNSOURCED_NOTE}</p>}
 
             <dl className="mt-6 grid grid-cols-[6.5rem_1fr] gap-x-4 gap-y-3 text-small">
               <dt className="text-card-soft">Grade</dt>

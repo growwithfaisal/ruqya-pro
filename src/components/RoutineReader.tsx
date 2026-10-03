@@ -153,6 +153,8 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
   };
 
   const lines = useMemo(() => (cur?.verse ? [cur.verse.ar] : e ? e.arabic.split("\n").filter((l) => l.trim()) : []), [e, cur?.verse]);
+  // A dua with no graded source shows its transliteration in the card where it has no Arabic at all.
+  const noArabic = !!e?.unsourced && lines.length === 0;
   const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
   const isDone = e ? done.has(doneKey(set, e.id)) : false;
 
@@ -212,7 +214,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
             <div className="max-h-[46dvh] overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-13rem)] short:py-2">
               {showBismillah && <p lang="ar" dir="rtl" className="arabic mb-2 border-b border-line pb-3 !text-[1.6rem] text-card-soft">{bismillah}</p>}
-              {e.unsourced && (
+              {noArabic && (
                 <p className="display py-6 text-center text-[calc(clamp(1.6rem,6vw,2.1rem)*var(--translit-scale))] leading-snug">{e.transliteration}</p>
               )}
               {lines.map((l, k) => (
@@ -237,8 +239,8 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
       <div className="mt-6 text-center short:mt-1 short:max-h-[calc(100dvh-6.5rem)] short:overflow-y-auto">
         {e.repeat && <p className="mb-3"><span className="rounded-full border border-line px-3.5 py-1.5 text-small">{e.repeat}</span></p>}
-        {e.unsourced && <p className="mx-auto max-w-[52ch] text-small">{UNSOURCED_NOTE}</p>}
-        {q.prefs.translit && !e.unsourced && (
+        {e.unsourced && <p className="mx-auto mb-3 max-w-[52ch] text-small">{UNSOURCED_NOTE}</p>}
+        {q.prefs.translit && !noArabic && (
           verse
             ? <p className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug"><Translit text={verse.tr} marks={verse.tu} silent={verse.ts} /></p>
             : e.transliteration

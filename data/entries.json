@@ -8327,9 +8327,9 @@
     "title": "Dua for Halal Riqz",
     "unsourced": true,
     "times": [],
-    "arabic": "",
+    "arabic": "يَا رَزَّاقُ ارْزُقْنى حَلَالاً طَيِّباً",
     "transliteration": "Ya Razzaqu urzuqni halalan tayyiba.",
-    "translation": "",
+    "translation": "O The provider! please provide me with halal and good rizq.",
     "practice": "",
     "repeat": "",
     "source": {
@@ -8346,8 +8346,10 @@
     },
     "takhrij_url": "",
     "provenance": {
+      "arabic": "Supplied by the owner (image titled 'Dua for Halal Money', 2026-10-03), read by eye from the image; not from a cited text; owner to check",
       "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
-      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no Arabic and no graded source."
+      "translation": "English line printed on the same image; not a cited translation",
+      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no cited text and no graded source. The Arabic and English shown are the ones on the image the owner sent."
     },
     "verified": false,
     "verified_by": "",
@@ -8380,7 +8382,7 @@
     "takhrij_url": "",
     "provenance": {
       "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
-      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no Arabic and no graded source."
+      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no cited text and no graded source."
     },
     "verified": false,
     "verified_by": "",
@@ -8413,7 +8415,7 @@
     "takhrij_url": "",
     "provenance": {
       "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
-      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no Arabic and no graded source."
+      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no cited text and no graded source."
     },
     "verified": false,
     "verified_by": "",
