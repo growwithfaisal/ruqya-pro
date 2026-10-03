@@ -8,7 +8,7 @@ import { applySky } from "./night";
  */
 const FORMAT = 1;
 const APP = "RuqyaPro";
-const ALLOWED = /^rp:(v1:quran:(last|days|seen|marks|prefs)|done:\d{4}-\d{2}-\d{2}|v2:done:\d{4}-\d{2}-\d{2}|arabic|translit|v1:prayer:prefs|v1:night)$/;
+const ALLOWED = /^rp:(v1:quran:(last|days|seen|night|marks|prefs)|done:\d{4}-\d{2}-\d{2}|v2:done:\d{4}-\d{2}-\d{2}|arabic|translit|v1:prayer:prefs|v1:night)$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_VALUE = 200_000;
 
@@ -92,7 +92,7 @@ export async function restoreBackup(file: File): Promise<BackupSummary> {
       const a = parse<{ at?: number } | null>(get(k), null);
       const b = incoming as { surah?: number; verse?: number; at?: number };
       if (typeof b?.surah === "number" && typeof b.verse === "number" && (!a || (a.at ?? 0) < (b.at ?? 0))) set(k, raw);
-    } else if (k === "rp:v1:quran:seen") {
+    } else if (k === "rp:v1:quran:seen" || k === "rp:v1:quran:night") {
       const a = parse<{ date?: string; keys?: unknown } | null>(get(k), null);
       const b = incoming as { date?: string; keys?: unknown };
       if (typeof b?.date !== "string") continue;

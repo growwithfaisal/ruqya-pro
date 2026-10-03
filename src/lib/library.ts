@@ -19,18 +19,23 @@ const lib = raw as unknown as {
 const NUMBER = ["", "Once", "Twice", "Three times", "Four times", "Five times", "Six times", "Seven times", "Eight times", "Nine times", "Ten times"];
 const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 
+const countWhat = (c: Count) => c.text ?? (c.times && NUMBER[c.times] ? NUMBER[c.times] : `${c.times} times`);
+
 /** "Three times · Tirmidhi 3388" where a sound hadith says it, "Suggested: seven times" where none does. */
 export function countLabel(c: Count): string {
-  const what = c.text ?? (c.times && NUMBER[c.times] ? NUMBER[c.times] : `${c.times} times`);
+  const what = countWhat(c);
   return c.basis ? `${what} · ${c.basis}` : `Suggested: ${lower(what)}`;
 }
+
+/** The same count in two parts, for the reader's label: the number first, then its source or "Suggested". */
+export const countParts = (c: Count) => ({ what: countWhat(c), note: c.basis ?? "Suggested" });
 
 /** The entries of a list, each with this list's title and count in place of its own. */
 export function resolve(items: Item[]): Entry[] {
   const out: Entry[] = [];
   for (const i of items) {
     const e = entries.find((x) => x.id === i.id);
-    if (e) out.push({ ...e, title: i.title ?? e.title, repeat: i.count ? countLabel(i.count) : "" });
+    if (e) out.push({ ...e, title: i.title ?? e.title, repeat: i.count ? countLabel(i.count) : "", countParts: i.count ? countParts(i.count) : undefined });
   }
   return out;
 }

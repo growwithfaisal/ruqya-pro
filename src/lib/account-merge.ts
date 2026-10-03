@@ -21,6 +21,8 @@ export interface Snapshot {
   days: string[];
   marks: string[];
   seen: Seen | null;
+  /** Al-Waqi'ah read tonight (Maghrib to Fajr), named by the evening's date. Optional: older copies do not have it. */
+  night?: Seen | null;
   last: Last | null;
   /** Routine day (YYYY-MM-DD) -> "set:entry" ticks, recent days only. */
   done: Record<string, string[]>;
@@ -32,6 +34,7 @@ export const KEYS = {
   days: "rp:v1:quran:days",
   marks: "rp:v1:quran:marks",
   seen: "rp:v1:quran:seen",
+  night: "rp:v1:quran:night",
   last: "rp:v1:quran:last",
   donePrefix: "rp:v2:done:",
 } as const;
@@ -63,6 +66,7 @@ export function readSettings(store: Store): Record<string, string> {
 
 export function readLocal(store: Store, cutoff: string): Snapshot {
   const seen = json(store, KEYS.seen) as Partial<Seen> | null;
+  const night = json(store, KEYS.night) as Partial<Seen> | null;
   const last = json(store, KEYS.last) as Partial<Last> | null;
   const done: Record<string, string[]> = {};
   for (let i = 0; i < store.length; i++) {
@@ -79,6 +83,7 @@ export function readLocal(store: Store, cutoff: string): Snapshot {
     days: strs(json(store, KEYS.days)).filter((d) => DATE.test(d)),
     marks: strs(json(store, KEYS.marks)),
     seen: seen && typeof seen.date === "string" ? { date: seen.date, keys: strs(seen.keys) } : null,
+    night: night && typeof night.date === "string" ? { date: night.date, keys: strs(night.keys) } : null,
     last: last && num(last.surah) && num(last.verse) && num(last.at) ? { surah: last.surah!, verse: last.verse!, at: last.at! } : null,
     done,
   };
@@ -99,6 +104,7 @@ export function parseSnapshot(text: string | null | undefined): Snapshot | null 
       days: strs(o.days).filter((d) => DATE.test(d)),
       marks: strs(o.marks),
       seen: o.seen && typeof o.seen.date === "string" ? { date: o.seen.date, keys: strs(o.seen.keys) } : null,
+      night: o.night && typeof o.night.date === "string" ? { date: o.night.date, keys: strs(o.night.keys) } : null,
       last: o.last && num(o.last.surah) && num(o.last.verse) && num(o.last.at) ? { surah: o.last.surah, verse: o.last.verse, at: o.last.at } : null,
       done,
       ...(Object.keys(settings).length ? { settings } : {}),
@@ -121,7 +127,7 @@ export function mergeSet(L: string[], R: string[], B: string[] | null): string[]
 
 function mergeSeen(L: Seen | null, R: Seen | null): Seen | null {
   if (!L || !R) return L ?? R;
-  if (L.date !== R.date) return L.date > R.date ? L : R; // "seen today" belongs to its day: the newer day wins
+  if (L.date !== R.date) return L.date > R.date ? L : R; // "seen today" (or tonight) belongs to its day: the newer one wins
   return { date: L.date, keys: mergeSet(L.keys, R.keys, null) };
 }
 
@@ -139,6 +145,7 @@ export function merge(local: Snapshot, remote: Snapshot | null, base: Snapshot |
     days: mergeSet(local.days, R.days, base?.days ?? null).sort(),
     marks: mergeSet(local.marks, R.marks, base?.marks ?? null),
     seen: mergeSeen(local.seen, R.seen),
+    night: mergeSeen(local.night ?? null, R.night ?? null),
     last: !local.last || !R.last ? local.last ?? R.last : R.last.at > local.last.at ? R.last : local.last,
     done,
   };
@@ -151,6 +158,7 @@ export function canonical(s: Snapshot): string {
     days: sorted(s.days),
     marks: sorted(s.marks),
     seen: s.seen ? { date: s.seen.date, keys: sorted(s.seen.keys) } : null,
+    night: s.night ? { date: s.night.date, keys: sorted(s.night.keys) } : null,
     last: s.last,
     done: Object.fromEntries(Object.keys(s.done).sort().filter((d) => s.done[d].length).map((d) => [d, sorted(s.done[d])])),
   });
@@ -164,6 +172,7 @@ export function writeLocal(store: Store, merged: Snapshot, before: Snapshot): bo
   if (sorted(merged.days) !== sorted(before.days)) put(KEYS.days, merged.days);
   if (sorted(merged.marks) !== sorted(before.marks)) put(KEYS.marks, merged.marks);
   if (JSON.stringify(merged.seen) !== JSON.stringify(before.seen) && merged.seen) put(KEYS.seen, merged.seen);
+  if (JSON.stringify(merged.night ?? null) !== JSON.stringify(before.night ?? null) && merged.night) put(KEYS.night, merged.night);
   if (JSON.stringify(merged.last) !== JSON.stringify(before.last) && merged.last) put(KEYS.last, merged.last);
   for (const d of new Set([...Object.keys(merged.done), ...Object.keys(before.done)])) {
     const now = merged.done[d] ?? [];

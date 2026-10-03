@@ -3,10 +3,11 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import { arcProgress, decimalHour, isFriday, setForHour, SKY_LABEL, type Sky } from "@/lib/sky";
 import { liveSky } from "@/lib/sky-live";
-import { prayerNow, usePrayerState } from "@/lib/prayer";
+import { usePrayerState } from "@/lib/prayer";
 import { doneKey, useDone } from "@/lib/progress";
 import { chapter, readHref } from "@/lib/quran";
 import { useQuran } from "@/lib/quran-store";
+import { WAQIAH, nightCount, nightOf } from "@/lib/quran-night";
 import { SETS } from "@/lib/entries";
 import type { TimeTag } from "@/lib/types";
 import { Check, Chevron } from "./Glyphs";
@@ -58,12 +59,13 @@ export function SkyHero({ setIds, children }: { setIds: Record<TimeTag, string[]
   const kahfAt = quran.last?.surah === 18 ? quran.last.verse : 1;
   const kahfSeen = quran.seen.keys.filter((k) => k.startsWith("18:")).length;
   const kahfDone = kahfSeen >= kahf.verses;
-  // The Waqi'ah reminder shows from Maghrib until Fajr: by the real prayer times when a place is saved, else from 18:30 to 05:00.
-  const pn = place && now && !previewing ? prayerNow(place, prefs, now) : null;
-  const afterMaghrib = previewing ? sky === "night" : pn ? pn.current.name === "Maghrib" || pn.current.name === "Isha" : !!now && (h >= 18.5 || h < 5);
-  const waqiah = chapter(56);
-  const waqiahAt = quran.last?.surah === 56 ? quran.last.verse : 1;
-  const waqiahSeen = quran.seen.keys.filter((k) => k.startsWith("56:")).length;
+  // The Waqi'ah reminder shows from Maghrib until Fajr (by the real prayer times when a place is saved, else 18:30 to 05:00)
+  // and counts only what was read in this night, so it neither resets at midnight nor carries an after-midnight reading over.
+  const tonight = now && !previewing ? nightOf(now, place, prefs) : null;
+  const afterMaghrib = previewing ? sky === "night" : tonight !== null;
+  const waqiah = chapter(WAQIAH);
+  const waqiahAt = quran.last?.surah === WAQIAH ? quran.last.verse : 1;
+  const waqiahSeen = nightCount(quran.night, tonight, WAQIAH);
   const waqiahDone = waqiahSeen >= waqiah.verses;
   const ids = setIds[set];
   const ready = !!now; // before the device clock is read the tile is neutral, so a wrong routine never flashes as complete

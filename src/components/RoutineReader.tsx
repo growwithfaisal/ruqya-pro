@@ -8,6 +8,7 @@ import { UNSOURCED_NOTE, citation } from "@/lib/entries";
 import { bismillah, chapter, loadSurah, readHref, tajweedForEntry, type Verse } from "@/lib/quran";
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { doneKey, useDone } from "@/lib/progress";
+import { useSwipeAnywhere } from "@/lib/swipe";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { CitationBadge } from "./CitationBadge";
 import { Coloured } from "./Coloured";
@@ -157,6 +158,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
   const noArabic = !!e?.unsourced && lines.length === 0;
   const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
   const isDone = e ? done.has(doneKey(set, e.id)) : false;
+  const swipe = useSwipeAnywhere(e ? `${e.id}:${cur?.vi ?? 0}` : "", panel !== null);
 
   if (!entries.length || !cur || !e) return <p className="mt-24 text-center text-ink-soft">Nothing in this routine yet.</p>;
 
@@ -165,7 +167,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
   const showBismillah = !!verse && verse.n === 1 && !!ch?.bismillahPre;
 
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl flex-col px-4 pb-36 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
+    <div onPointerDown={swipe.onPointerDown} className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl touch-pan-y flex-col px-4 pb-36 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
       <p className="text-center text-small text-ink-soft tabular short:col-span-2" aria-live="polite">
         {title} · {left === 0 ? "all recited today" : `${left} left`}
       </p>
@@ -186,7 +188,10 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
             animate="center"
             exit="exit"
             transition={spring}
+            data-swipe-card
             drag="x"
+            dragControls={swipe.controls}
+            dragListener={false}
             dragDirectionLock
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.6}
@@ -238,7 +243,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
       </div>
 
       <div className="mt-6 text-center short:mt-1 short:max-h-[calc(100dvh-6.5rem)] short:overflow-y-auto">
-        {e.repeat && <p className="mb-3"><span className="rounded-full border border-line px-3.5 py-1.5 text-small">{e.repeat}</span></p>}
+        {e.repeat && <CountLabel what={e.countParts?.what ?? e.repeat} note={e.countParts?.note ?? null} />}
         {e.unsourced && <p className="mx-auto mb-3 max-w-[52ch] text-small">{UNSOURCED_NOTE}</p>}
         {q.prefs.translit && !noArabic && (
           verse
@@ -264,7 +269,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
         </p>
       )}
 
-      <div className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:pb-2 short:pt-1" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
+      <div data-noswipe className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:pb-2 short:pt-1" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
         <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
           <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
             <Chevron className="rotate-180" size={24} />
@@ -308,5 +313,18 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
         <TranslitGuideRow />
       </Sheet>
     </div>
+  );
+}
+
+/**
+ * How many times to recite: the count, then its source or "Suggested" in a quieter line. One box that wraps as a whole,
+ * so a long count ("Bismillah three times, then the dua of refuge seven times") never breaks into two half-pills.
+ */
+function CountLabel({ what, note }: { what: string; note: string | null }) {
+  return (
+    <p className="mx-auto mb-4 flex w-fit max-w-[min(100%,32ch)] flex-col items-center gap-0.5 rounded-[20px] border border-line px-4 py-2 text-center leading-snug text-balance">
+      <span className="text-small font-semibold">{what}</span>
+      {note && <span className="text-meta text-ink-soft">{note}</span>}
+    </p>
   );
 }

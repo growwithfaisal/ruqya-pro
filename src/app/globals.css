@@ -396,7 +396,8 @@ body {
 [data-sky="dusk"] .tab-on .tab-icon, [data-sky="night"] .tab-on .tab-icon { color: var(--ink); background: color-mix(in oklch, var(--accent) 30%, transparent); }
 @media (max-width: 1023.98px) {
   html.has-tabbar body { padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom)); }
-  html.has-tabbar footer, html.rp-immersive footer { display: none; }
+  /* Only the site footer: the readers' cards have their own footer (share, source, reading settings) that must stay. */
+  html.has-tabbar .site-footer, html.rp-immersive .site-footer { display: none; }
 }
 @media (max-height: 500px) and (orientation: landscape) {
   :root { --tab-h: 2.75rem; }

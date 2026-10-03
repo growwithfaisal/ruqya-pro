@@ -1,13 +1,15 @@
 "use client";
 import { useCallback, useMemo, useSyncExternalStore } from "react";
 import { DATA_VERSION, QURAN_CACHE, chapters } from "./quran";
+import { readInputs } from "./prayer";
+import { WAQIAH, addToNight, nightOf, type NightSeen } from "./quran-night";
 
 /**
  * Everything a reader does stays in this browser. Keys are versioned so a future format can migrate them.
  * Nothing here is ever sent anywhere.
  */
 const P = "rp:v1:quran:";
-const KEYS = ["last", "days", "seen", "marks", "offline", "prefs"] as const;
+const KEYS = ["last", "days", "seen", "marks", "offline", "prefs", "night"] as const;
 const EVENTS = ["rp-quran", "rp-progress", "storage"] as const; // rp-progress is nudged at midnight by SkyClock
 
 export const VERSES_PER_DAY = 10;
@@ -23,6 +25,8 @@ export interface QuranState {
   marks: string[];
   offline: number[];
   prefs: Prefs;
+  /** Al-Waqi'ah read tonight, kept per night (Maghrib to Fajr), not per calendar day. */
+  night: NightSeen;
   today: string;
 }
 
@@ -68,7 +72,7 @@ export function useQuran(): QuranState {
   const snap = useSyncExternalStore(subscribe, snapshot, () => "");
   return useMemo(() => {
     const parts = snap.split("\u0001");
-    const today = parts[6] || localDate();
+    const today = parts[7] || localDate();
     const seen = parse<Seen>(parts[2], { date: today, keys: [] });
     return {
       last: parse<LastRead | null>(parts[0], null),
@@ -77,6 +81,7 @@ export function useQuran(): QuranState {
       marks: parse<string[]>(parts[3], []),
       offline: savedIds(parts[4]),
       prefs: { ...DEFAULT_PREFS, ...parse<Partial<Prefs>>(parts[5], {}) },
+      night: parse<NightSeen>(parts[6], { date: "", keys: [] }),
       today,
     };
   }, [snap]);
@@ -130,6 +135,7 @@ export function markSeen(surah: number, verse: number): boolean {
   const s = state();
   const seen = s.seen.date === today ? s.seen : { date: today, keys: [] as string[] };
   const key = `${surah}:${verse}`;
+  if (surah === WAQIAH) markNight(key);
   if (seen.keys.includes(key)) return false;
   seen.keys.push(key);
   write("seen", seen);
@@ -139,6 +145,15 @@ export function markSeen(surah: number, verse: number): boolean {
     return true;
   }
   return false;
+}
+
+/** Al-Waqi'ah read between Maghrib and Fajr counts for that night, including after midnight. Outside the night it is not kept. */
+function markNight(key: string) {
+  const { place, prefs } = readInputs();
+  const night = nightOf(new Date(), place, prefs);
+  if (!night) return;
+  const next = addToNight(parse<NightSeen | null>(read("night"), null), night, key);
+  if (next) write("night", next);
 }
 
 /** How many different verses of a surah have been on screen today. */

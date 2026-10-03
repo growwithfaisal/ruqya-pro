@@ -19,15 +19,16 @@ export function CitationBadge({ entry, tone = "card" }: { entry: Entry; tone?: "
     <Dialog.Root>
       <Dialog.Trigger
         aria-label={`Source: ${citation(entry)}, graded ${gradeLabel(entry)}. Open details`}
-        className={`inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border px-3.5 text-meta transition-colors ${tone === "card" ? "border-line text-card-ink hover:bg-[color-mix(in_oklch,var(--card-ink)_8%,transparent)]" : "border-line hover:bg-[color-mix(in_oklch,var(--ink)_8%,transparent)]"}`}
+        className={`inline-flex min-h-11 min-w-0 max-w-full items-center gap-2 rounded-full border px-3.5 text-meta transition-colors ${tone === "card" ? "border-line text-card-ink hover:bg-[color-mix(in_oklch,var(--card-ink)_8%,transparent)]" : "border-line hover:bg-[color-mix(in_oklch,var(--ink)_8%,transparent)]"}`}
       >
         {entry.grade !== "Qur'an" && !entry.unsourced && (
           <>
-            <span className="font-semibold">{gradeLabel(entry)}</span>
-            <span aria-hidden className="opacity-40">|</span>
+            <span className="shrink-0 font-semibold">{gradeLabel(entry)}</span>
+            <span aria-hidden className="shrink-0 opacity-40">|</span>
           </>
         )}
-        <span className="whitespace-nowrap">{citation(entry)}</span>
+        {/* In a narrow card footer the reference gives way (with an ellipsis) before the buttons beside it do. */}
+        <span className="min-w-0 truncate">{citation(entry)}</span>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="drawer-overlay fixed inset-0 z-40 bg-black/45" />

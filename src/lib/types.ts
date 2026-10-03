@@ -43,6 +43,8 @@ export interface Entry {
   practice: string;
   /** How to say it inside a daily routine. Inside a Recitations or Self-Ruqyah list the count comes from data/library.json instead. */
   repeat: string;
+  /** Set by a curated list: the count on one line ("Three times"), and its source or "Suggested" on the next. */
+  countParts?: { what: string; note: string | null };
   source: EntrySource;
   /** Supporting citation for the practice (e.g. hadith that commends a Quranic passage). */
   support: EntrySource[];

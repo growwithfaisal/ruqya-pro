@@ -209,5 +209,19 @@ ok("routine ticks sync, and only recent days travel", () => {
   assert.ok(!w.server.text!.includes("ancient"));
 });
 
+ok("tonight's Al-Waqi'ah syncs: the same night joins up, a newer night replaces an older one", () => {
+  const w = world();
+  const phone = w.dev("phone"), laptop = w.dev("laptop");
+  phone.store.setItem(KEYS.night, JSON.stringify({ date: "2026-10-02", keys: ["56:1", "56:2"] }));
+  laptop.store.setItem(KEYS.night, JSON.stringify({ date: "2026-10-02", keys: ["56:3"] }));
+  w.sync(phone); w.sync(laptop); w.sync(phone);
+  assert.deepEqual(JSON.parse(phone.store.getItem(KEYS.night)!).keys.sort(), ["56:1", "56:2", "56:3"]);
+  laptop.store.setItem(KEYS.night, JSON.stringify({ date: "2026-10-03", keys: ["56:9"] }));
+  w.sync(laptop); w.sync(phone);
+  assert.deepEqual(JSON.parse(phone.store.getItem(KEYS.night)!), { date: "2026-10-03", keys: ["56:9"] });
+  // A copy saved before this field existed still reads, with no night.
+  assert.equal(parseSnapshot(JSON.stringify({ v: 1, days: [], marks: [], seen: null, last: null, done: {} }))!.night, null);
+});
+
 console.log(`${groups} groups passed${bad ? `, ${bad} FAILED` : ""}`);
 process.exit(bad ? 1 : 0);
