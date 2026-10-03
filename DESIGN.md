@@ -188,6 +188,7 @@ Taken from Apple's fluid-interface principles: respond on the press, follow the 
   - The press is instant and the release fades over 200ms. `EdgeWatch` adds the touchstart listener iOS Safari needs before it shows `:active`.
 - **Page turn (both readers).**
   - A swipe can start anywhere on the reading screen (`useSwipeAnywhere`). The card tracks the finger 1:1, rubber-banding (0.15) only where there is no page to turn to.
+  - Any box inside the reader that scrolls on its own (a long card's Arabic, the landscape text column) carries `touch-pan-y` itself. `touch-action` stops at the nearest scroller, so without it a phone takes a sideways swipe that starts there for the box, and the card never turns. Long adhkar such as Ayat al-Kursi hit this.
   - On release the page turns when the card, carried on by its momentum, would rest past half its width. That is Apple's projection, `v/1000 · 0.998/(1−0.998)`, snapping to the nearer page.
   - The leaving card carries on from where it was let go, at the finger's speed, on a critically damped spring (about 0.3s), until it is off its width. The next card arrives from the other side.
   - Buttons and arrow keys use the same motion. With reduced motion it is a 150ms cross-fade.

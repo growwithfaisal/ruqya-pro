@@ -225,7 +225,8 @@ export function QuranReader() {
                   </button>
                 </header>
 
-                <div className="max-h-[46dvh] overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-11.5rem)] short:py-2">
+                {/* A long verse scrolls here; it says pan-y itself so a sideways swipe on it still turns the page (see RoutineReader). */}
+                <div className="max-h-[46dvh] touch-pan-y overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-11.5rem)] short:py-2">
                   {n === 1 && c.bismillahPre && <p lang="ar" dir="rtl" className="arabic mb-2 border-b border-line pb-3 !text-[1.6rem] text-card-soft">{bismillah}</p>}
                   <p lang="ar" dir="rtl" className="arabic arabic-read !text-center">
                     {q.prefs.tajweed && v.tg ? <Coloured ar={v.ar.trim()} ranges={v.tg} lead={v.ar.length - v.ar.trimStart().length} /> : v.ar.trim()}
@@ -243,7 +244,7 @@ export function QuranReader() {
             </AnimatePresence>
           </div>
 
-          <div className="mt-6 text-center short:mt-0 short:max-h-[calc(100dvh-5.5rem)] short:overflow-y-auto">
+          <div className="mt-6 touch-pan-y text-center short:mt-0 short:max-h-[calc(100dvh-5.5rem)] short:overflow-y-auto">
             {q.prefs.translit && <p className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug"><Translit text={v.tr} marks={v.tu} silent={v.ts} /></p>}
             {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-base" : "text-reading text-ink"}`}>{v.en}</p>}
           </div>

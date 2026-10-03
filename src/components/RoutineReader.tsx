@@ -228,7 +228,9 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
               </span>
             </header>
 
-            <div className="max-h-[46dvh] overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-13rem)] short:py-2">
+            {/* A long card scrolls here on its own; touch-action stops at a scroller, so it says pan-y itself or a phone
+                takes the sideways swipe for the box and the card never turns. */}
+            <div className="max-h-[46dvh] touch-pan-y overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-13rem)] short:py-2">
               {showBismillah && <p lang="ar" dir="rtl" className="arabic mb-2 border-b border-line pb-3 !text-[1.6rem] text-card-soft">{bismillah}</p>}
               {noArabic && (
                 <p className="display py-6 text-center text-[calc(clamp(1.6rem,6vw,2.1rem)*var(--translit-scale))] leading-snug">{e.transliteration}</p>
@@ -253,7 +255,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
         </AnimatePresence>
       </div>
 
-      <div className="mt-6 text-center short:mt-1 short:max-h-[calc(100dvh-6.5rem)] short:overflow-y-auto">
+      <div className="mt-6 touch-pan-y text-center short:mt-1 short:max-h-[calc(100dvh-6.5rem)] short:overflow-y-auto">
         {e.repeat && <CountLabel what={e.countParts?.what ?? e.repeat} note={e.countParts?.note ?? null} />}
         {e.unsourced && <p className="mx-auto mb-3 max-w-[52ch] text-small">{UNSOURCED_NOTE}</p>}
         {q.prefs.translit && !noArabic && (
@@ -301,7 +303,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
               <button
                 onClick={() => { setTurn({ dir: k >= cur.entryIndex ? 1 : -1, v: 0, w: cardWidth() }); setPos({ id: x.id, vi: 0 }); setPanel(null); }}
                 aria-current={k === cur.entryIndex ? "true" : undefined}
-                className={`flex min-h-14 w-full items-center gap-3 rounded-[20px] border px-4 text-left ${k === cur.entryIndex ? "border-[var(--accent)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)]" : "border-line"}`}
+                className={`press-row flex min-h-14 w-full items-center gap-3 rounded-[20px] border px-4 text-left ${k === cur.entryIndex ? "border-[var(--accent)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)]" : "border-line"}`}
               >
                 <span className="tabular w-6 text-card-soft">{k + 1}</span>
                 <span className="display flex-1 text-[1.15rem] leading-tight">{x.title}</span>
