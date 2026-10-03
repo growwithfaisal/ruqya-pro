@@ -171,12 +171,12 @@ const OWNER_TR = {
 const OWNER_PROV = "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check";
 // Dua for Money: the owner's transliteration was of the first-person wording ("... mālee wa waladee, wa bārik lee feemā a‘taytanee"); the narrated wording shown is third person.
 // Only the four pronoun endings were changed, to match the Arabic word for word: mālee -> mālahu, waladee -> waladahu, lee -> lahu, a‘taytanee -> a‘taytahu.
-// Durood-e-Ibrahim: the owner's transliteration, from the image titled "Durood e Ibrahim" they sent on 2026-10-03, copied as printed (two lines, one per half), including "Muhammadinw".
+// Durood-e-Ibrahim: the owner's transliteration, from the image titled "Durood e Ibrahim" they sent on 2026-10-03, copied as printed (two lines, one per half), except that the stray "w" the image puts after "Muhammadin" is removed at the owner's request.
 const DUROOD_TR = [
-  "Allaahumma salli 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa sallayta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
-  "Allaahumma baarik 'alaa Muhammadinw wa 'alaa 'aali Muhammad; kamaa baarakta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
+  "Allaahumma salli 'alaa Muhammadin wa 'alaa 'aali Muhammad; kamaa sallayta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
+  "Allaahumma baarik 'alaa Muhammadin wa 'alaa 'aali Muhammad; kamaa baarakta 'alaa 'Ibraaheema wa 'alaa 'aali 'Ibraaheem, 'innaka Hameedun Majeed.",
 ].join("\n");
-const DUROOD_TR_PROV = "Supplied by the owner (image titled 'Durood e Ibrahim', 2026-10-03), spelling as printed, read by eye from the image; not from a cited repo; owner to check. The image's own Arabic and English were not used: the Arabic and English shown are the cited Bukhari text, whose wording the transliteration follows word for word";
+const DUROOD_TR_PROV = "Supplied by the owner (image titled 'Durood e Ibrahim', 2026-10-03), spelling as printed except that the stray 'w' after 'Muhammadin' was removed at the owner's request, read by eye from the image; not from a cited repo; owner to check. The image's own Arabic and English were not used: the Arabic and English shown are the cited Bukhari text, whose wording the transliteration follows word for word";
 const MONEY_TR = "Allahumma ‘akthir mālahu wa waladahu, wa bārik lahu feemā a‘taytahu.";
 const MONEY_TR_PROV = "The owner's transliteration (library brief, 2026-10-03) of the first-person wording, adapted word for word to the narrated third-person Arabic shown (mālee to mālahu, waladee to waladahu, lee to lahu, a‘taytanee to a‘taytahu); the owner's spelling style; not from a cited repo; owner to check";
 // Dua for Halal Riqz: the Arabic and English printed on the image of "Dua for Halal Money" the owner sent on 2026-10-03, read by eye at high zoom.
