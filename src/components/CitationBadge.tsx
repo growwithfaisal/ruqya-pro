@@ -21,7 +21,7 @@ export function CitationBadge({ entry, tone = "card" }: { entry: Entry; tone?: "
         aria-label={`Source: ${citation(entry)}, graded ${gradeLabel(entry)}. Open details`}
         className={`inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border px-3.5 text-meta transition-colors ${tone === "card" ? "border-line text-card-ink hover:bg-[color-mix(in_oklch,var(--card-ink)_8%,transparent)]" : "border-line hover:bg-[color-mix(in_oklch,var(--ink)_8%,transparent)]"}`}
       >
-        {entry.grade !== "Qur'an" && (
+        {entry.grade !== "Qur'an" && !entry.unsourced && (
           <>
             <span className="font-semibold">{gradeLabel(entry)}</span>
             <span aria-hidden className="opacity-40">|</span>
@@ -43,14 +43,18 @@ export function CitationBadge({ entry, tone = "card" }: { entry: Entry; tone?: "
           </div>
 
           <div className="overflow-y-auto px-6 pb-8">
-            <section aria-labelledby={`arabic-${entry.id}`}>
-              <h3 id={`arabic-${entry.id}`} className="sr-only">Arabic text</h3>
-              <div className="rounded-[20px] border border-line px-4 py-3">
-                {entry.arabic.split("\n").map((l, i) => (
-                  <p key={i} lang="ar" dir="rtl" className="arabic arabic-sm">{l.trim()}</p>
-                ))}
-              </div>
-            </section>
+            {entry.arabic.trim() ? (
+              <section aria-labelledby={`arabic-${entry.id}`}>
+                <h3 id={`arabic-${entry.id}`} className="sr-only">Arabic text</h3>
+                <div className="rounded-[20px] border border-line px-4 py-3">
+                  {entry.arabic.split("\n").map((l, i) => (
+                    <p key={i} lang="ar" dir="rtl" className="arabic arabic-sm">{l.trim()}</p>
+                  ))}
+                </div>
+              </section>
+            ) : (
+              <p className="rounded-[20px] border border-line px-4 py-3 text-small">Not from a graded hadith. Scholars mention this dua. There is no Arabic text here yet.</p>
+            )}
 
             <dl className="mt-6 grid grid-cols-[6.5rem_1fr] gap-x-4 gap-y-3 text-small">
               <dt className="text-card-soft">Grade</dt>

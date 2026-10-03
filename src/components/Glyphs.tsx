@@ -117,8 +117,23 @@ export const Horizon = ({ className, size = 24 }: P) => (
     <path d="M7 19h10" />
   </svg>
 );
+/** Provision: three layers stacked, one on another. */
+export const Layers = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M12 4l8.5 4.5L12 13 3.5 8.5z" />
+    <path d="M3.5 12.5L12 17l8.5-4.5" />
+    <path d="M3.5 16.5L12 21l8.5-4.5" />
+  </svg>
+);
+/** Calm: two slow waves. */
+export const Waves = ({ className, size = 24 }: P) => (
+  <svg {...base(size)} className={className}>
+    <path d="M3 9.5c2.5-3.5 4.5-3.5 7 0s4.5 3.5 7 0l4 0" />
+    <path d="M3 15.5c2.5-3.5 4.5-3.5 7 0s4.5 3.5 7 0l4 0" />
+  </svg>
+);
 /** One mark per need, shared by Home's topic rows and the Recitations tab. */
-export const INTENT_GLYPH = { "daily-protection": Star8, pain: Ripple, "evil-eye": Vesica, learning: Niche } as const;
+export const INTENT_GLYPH = { "daily-protection": Star8, pain: Ripple, "evil-eye": Vesica, financial: Layers, emotional: Waves } as const;
 export const Dots = ({ className, size = 24 }: P) => (
   <svg {...base(size)} className={className}>
     <circle cx="6" cy="12" r="1.3" />

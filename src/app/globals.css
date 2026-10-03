@@ -387,7 +387,8 @@ body {
 }
 .tab {
   display: grid; justify-items: center; gap: 0.15rem; min-height: var(--tab-h); padding-top: 0.45rem;
-  font-size: clamp(0.62rem, 2.9vw, 0.72rem); line-height: 1.1; white-space: nowrap; color: var(--ink-soft); text-decoration: none; background: none;
+  /* The outer min() keeps five labels inside five cells when the reader has enlarged their text. */
+  font-size: min(clamp(0.62rem, 2.9vw, 0.72rem), 3.1vw); line-height: 1.1; white-space: nowrap; color: var(--ink-soft); text-decoration: none; background: none;
 }
 .tab-icon { display: grid; place-items: center; width: 3.4rem; height: 1.9rem; border-radius: 9999px; transition: background-color 0.3s var(--ease-out), color 0.3s; }
 .tab-on { color: var(--ink); font-weight: 600; }

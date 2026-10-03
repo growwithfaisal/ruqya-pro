@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { bySlug, citation, entries } from "@/lib/entries";
+import { UNSOURCED_NOTE, bySlug, citation, entries } from "@/lib/entries";
 import { Translit } from "@/components/Translit";
 import { CitationBadge, GradeBadge } from "@/components/CitationBadge";
 import { PageShell } from "@/components/PageShell";
@@ -33,11 +33,14 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
         <CitationBadge entry={e} tone="sky" />
       </div>
 
-      <div className="mt-8 rounded-[28px] glass border border-line px-5 py-8 text-card-ink">
-        {e.arabic.split("\n").map((l, k) => (
-          <p key={k} lang="ar" dir="rtl" className="arabic">{l.trim()}</p>
-        ))}
-      </div>
+      {e.arabic.trim() && (
+        <div className="mt-8 rounded-[28px] glass border border-line px-5 py-8 text-card-ink">
+          {e.arabic.split("\n").map((l, k) => (
+            <p key={k} lang="ar" dir="rtl" className="arabic">{l.trim()}</p>
+          ))}
+        </div>
+      )}
+      {e.unsourced && <p className="mt-6 max-w-[65ch] text-lead">{UNSOURCED_NOTE}</p>}
 
       {e.transliteration && (
         <section className="mt-8">
@@ -45,10 +48,12 @@ export default async function Reader({ params }: PageProps<"/recitations/[slug]"
           <div className="mt-1 max-w-[65ch] text-[calc(1rem*var(--translit-scale))] italic leading-relaxed">{e.transliteration.split("\n").map((l, k, all) => <p key={k}>{all.length === 1 ? <Translit text={l} marks={e.tu} silent={e.ts} /> : l}</p>)}</div>
         </section>
       )}
-      <section className="mt-8">
-        <h2 className="text-small font-semibold text-ink-soft">Translation</h2>
-        <div className="mt-1 max-w-[65ch] text-lead leading-relaxed">{e.translation.split("\n").map((l, k) => <p key={k}>{l}</p>)}</div>
-      </section>
+      {e.translation && (
+        <section className="mt-8">
+          <h2 className="text-small font-semibold text-ink-soft">Translation</h2>
+          <div className="mt-1 max-w-[65ch] text-lead leading-relaxed">{e.translation.split("\n").map((l, k) => <p key={k}>{l}</p>)}</div>
+        </section>
+      )}
       {(e.practice || e.repeat) && (
         <section className="mt-8">
           <h2 className="text-small font-semibold text-ink-soft">{e.practice ? "How" : "Times"}</h2>

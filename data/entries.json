@@ -3,12 +3,7 @@
     "id": "dua-001",
     "slug": "al-fatiha",
     "collection": "core",
-    "title": "Al-Fatiha",
-    "category": [
-      "learning",
-      "pain",
-      "daily-protection"
-    ],
+    "title": "Surah Al-Fatiha",
     "times": [],
     "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ مَـٰلِكِ يَوْمِ ٱلدِّينِ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
     "transliteration": "Bismi Allahi alrrahmani alrraheemi Alhamdu lillahi rabbi alAAalameena Alrrahmani alrraheemi Maliki yawmi alddeeni Iyyaka naAAbudu waiyyaka nastaAAeenu Ihdina alssirata almustaqeema Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala alddalleena",
@@ -189,7 +184,7 @@
     },
     "takhrij_url": "https://quran.com/1/1-7",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
@@ -202,10 +197,6 @@
     "slug": "ayat-al-kursi",
     "collection": "core",
     "title": "Ayat al-Kursi",
-    "category": [
-      "daily-protection",
-      "learning"
-    ],
     "times": [
       "bedtime"
     ],
@@ -418,7 +409,7 @@
     },
     "takhrij_url": "https://quran.com/2/255",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
@@ -430,11 +421,7 @@
     "id": "dua-003",
     "slug": "last-two-ayat-al-baqarah",
     "collection": "core",
-    "title": "The last two ayat of Al-Baqarah",
-    "category": [
-      "daily-protection",
-      "learning"
-    ],
+    "title": "Surah Al-Baqarah (2:285-286)",
     "times": [
       "bedtime",
       "evening"
@@ -761,7 +748,7 @@
     },
     "takhrij_url": "https://quran.com/2/285-286",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
@@ -775,10 +762,6 @@
     "collection": "core",
     "verseByVerse": true,
     "title": "Surah Al-Mulk",
-    "category": [
-      "daily-protection",
-      "learning"
-    ],
     "times": [
       "bedtime"
     ],
@@ -1673,7 +1656,7 @@
     },
     "takhrij_url": "https://quran.com/67/1-30",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
@@ -1685,12 +1668,7 @@
     "id": "dua-004",
     "slug": "al-ikhlas",
     "collection": "core",
-    "title": "Al-Ikhlas",
-    "category": [
-      "daily-protection",
-      "pain",
-      "learning"
-    ],
+    "title": "Surah Al-Ikhlas",
     "times": [
       "morning",
       "evening",
@@ -1761,7 +1739,7 @@
     },
     "takhrij_url": "https://quran.com/112/1-4",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
@@ -1773,13 +1751,7 @@
     "id": "dua-005",
     "slug": "al-falaq",
     "collection": "core",
-    "title": "Al-Falaq",
-    "category": [
-      "daily-protection",
-      "evil-eye",
-      "pain",
-      "learning"
-    ],
+    "title": "Surah Al-Falaq",
     "times": [
       "morning",
       "evening",
@@ -1866,7 +1838,7 @@
     },
     "takhrij_url": "https://quran.com/113/1-5",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
@@ -1878,13 +1850,7 @@
     "id": "dua-006",
     "slug": "an-nas",
     "collection": "core",
-    "title": "An-Nas",
-    "category": [
-      "daily-protection",
-      "evil-eye",
-      "pain",
-      "learning"
-    ],
+    "title": "Surah An-Nas",
     "times": [
       "morning",
       "evening",
@@ -1999,7 +1965,7 @@
     },
     "takhrij_url": "https://quran.com/114/1-6",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
     },
@@ -2011,11 +1977,7 @@
     "id": "dua-007",
     "slug": "jibril-ruqyah",
     "collection": "core",
-    "title": "The Jibril ruqyah",
-    "category": [
-      "evil-eye",
-      "pain"
-    ],
+    "title": "Jibril (AS) Dua for Ruqyah",
     "times": [],
     "arabic": "بِاسْمِ اللَّهِ أَرْقِيكَ مِنْ كُلِّ شَىْءٍ يُؤْذِيكَ مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ اللَّهُ يَشْفِيكَ بِاسْمِ اللَّهِ أَرْقِيكَ",
     "transliteration": "Bismillaahi arqeeka, min kulli shay'in yu'theeka, min sharri kulli nafsin aw 'ayni haasidin, Allaahu yashfeeka, bismillaahi arqeeka.",
@@ -2048,10 +2010,7 @@
     "id": "dua-008",
     "slug": "pain-hand-on-body",
     "collection": "core",
-    "title": "For pain in the body",
-    "category": [
-      "pain"
-    ],
+    "title": "Dua for Pain",
     "times": [],
     "arabic": "بِاسْمِ اللَّهِ\nأَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ",
     "transliteration": "Bismillah\nA'udhu billahi wa qudratihi min sharri ma ajidu wa uhadhiru",
@@ -2084,11 +2043,7 @@
     "id": "dua-009",
     "slug": "seeking-refuge-for-children",
     "collection": "core",
-    "title": "Seeking refuge for children",
-    "category": [
-      "evil-eye",
-      "daily-protection"
-    ],
+    "title": "Dua for Protection of Children",
     "times": [
       "morning",
       "evening"
@@ -2131,10 +2086,7 @@
     "id": "dua-010",
     "slug": "morning-evening-protection",
     "collection": "core",
-    "title": "Morning and evening protection",
-    "category": [
-      "daily-protection"
-    ],
+    "title": "Dua for Protection From Harm",
     "times": [
       "morning",
       "evening"
@@ -2172,9 +2124,6 @@
     "slug": "before-sleep",
     "collection": "core",
     "title": "When going to bed",
-    "category": [
-      "daily-protection"
-    ],
     "times": [],
     "arabic": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
     "transliteration": "bismika allahumma amutu wa ahya",
@@ -2208,10 +2157,6 @@
     "slug": "al-kafirun-before-sleep",
     "collection": "core",
     "title": "Al-Kafirun before sleep",
-    "category": [
-      "daily-protection",
-      "learning"
-    ],
     "times": [
       "bedtime"
     ],
@@ -2308,7 +2253,7 @@
     },
     "takhrij_url": "https://sunnah.com/abudawud:5055",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "grade": "fawazahmed0/hadith-api grades on ara-abudawud"
@@ -2321,10 +2266,7 @@
     "id": "dua-013",
     "slug": "al-baqarah-1-12",
     "collection": "ayat-list",
-    "title": "Al-Baqarah 1 to 12",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Baqarah (2:1-12)",
     "times": [],
     "arabic": " الٓمٓ ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ وَٱلَّذِينَ يُؤْمِنُونَ بِمَآ أُنزِلَ إِلَيْكَ وَمَآ أُنزِلَ مِن قَبْلِكَ وَبِٱلْـَٔاخِرَةِ هُمْ يُوقِنُونَ أُو۟لَـٰٓئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ إِنَّ ٱلَّذِينَ كَفَرُوا۟ سَوَآءٌ عَلَيْهِمْ ءَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ خَتَمَ ٱللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰٓ أَبْصَـٰرِهِمْ غِشَـٰوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ وَمِنَ ٱلنَّاسِ مَن يَقُولُ ءَامَنَّا بِٱللَّهِ وَبِٱلْيَوْمِ ٱلْـَٔاخِرِ وَمَا هُم بِمُؤْمِنِينَ يُخَـٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا۟ فِى ٱلْأَرْضِ قَالُوٓا۟ إِنَّمَا نَحْنُ مُصْلِحُونَ أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
     "transliteration": "Aliflammeem Thalika alkitabu la rayba feehi hudan lilmuttaqeena Allatheena yuminoona bialghaybi wayuqeemoona alssalata wamimma razaqnahum yunfiqoona Waallatheena yuminoona bima onzila ilayka wama onzila min qablika wabialakhirati hum yooqinoona Olaika AAala hudan min rabbihim waolaika humu almuflihoona Inna allatheena kafaroo sawaon AAalayhim aanthartahum am lam tunthirhum la yuminoona Khatama Allahu AAala quloobihim waAAala samAAihim waAAala absarihim ghishawatun walahum AAathabun AAatheemun Wamina alnnasi man yaqoolu amanna biAllahi wabialyawmi alakhiri wama hum bimumineena YukhadiAAoona Allaha waallatheena amanoo wama yakhdaAAoona illa anfusahum wama yashAAuroona Fee quloobihim maradun fazadahumu Allahu maradan walahum AAathabun aleemun bima kanoo yakthiboona Waitha qeela lahum la tufsidoo fee alardi qaloo innama nahnu muslihoona Ala innahum humu almufsidoona walakin la yashAAuroona",
@@ -2665,7 +2607,7 @@
     },
     "takhrij_url": "https://quran.com/2/1-12",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
@@ -2678,10 +2620,7 @@
     "id": "dua-014",
     "slug": "al-baqarah-102",
     "collection": "ayat-list",
-    "title": "Al-Baqarah 102",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Baqarah (2:102)",
     "times": [],
     "arabic": "وَٱتَّبَعُوا۟ مَا تَتْلُوا۟ ٱلشَّيَـٰطِينُ عَلَىٰ مُلْكِ سُلَيْمَـٰنَ ۖ وَمَا كَفَرَ سُلَيْمَـٰنُ وَلَـٰكِنَّ ٱلشَّيَـٰطِينَ كَفَرُوا۟ يُعَلِّمُونَ ٱلنَّاسَ ٱلسِّحْرَ وَمَآ أُنزِلَ عَلَى ٱلْمَلَكَيْنِ بِبَابِلَ هَـٰرُوتَ وَمَـٰرُوتَ ۚ وَمَا يُعَلِّمَانِ مِنْ أَحَدٍ حَتَّىٰ يَقُولَآ إِنَّمَا نَحْنُ فِتْنَةٌ فَلَا تَكْفُرْ ۖ فَيَتَعَلَّمُونَ مِنْهُمَا مَا يُفَرِّقُونَ بِهِۦ بَيْنَ ٱلْمَرْءِ وَزَوْجِهِۦ ۚ وَمَا هُم بِضَآرِّينَ بِهِۦ مِنْ أَحَدٍ إِلَّا بِإِذْنِ ٱللَّهِ ۚ وَيَتَعَلَّمُونَ مَا يَضُرُّهُمْ وَلَا يَنفَعُهُمْ ۚ وَلَقَدْ عَلِمُوا۟ لَمَنِ ٱشْتَرَىٰهُ مَا لَهُۥ فِى ٱلْـَٔاخِرَةِ مِنْ خَلَـٰقٍ ۚ وَلَبِئْسَ مَا شَرَوْا۟ بِهِۦٓ أَنفُسَهُمْ ۚ لَوْ كَانُوا۟ يَعْلَمُونَ",
     "transliteration": "WaittabaAAoo ma tatloo alshshayateenu AAala mulki sulaymana wama kafara sulaymanu walakinna alshshayateena kafaroo yuAAallimoona alnnasa alssihra wama onzila AAala almalakayni bibabila haroota wamaroota wama yuAAallimani min ahadin hatta yaqoola innama nahnu fitnatun fala takfur fayataAAallamoona minhuma ma yufarriqoona bihi bayna almari wazawjihi wama hum bidarreena bihi min ahadin illa biithni Allahi wayataAAallamoona ma yadurruhum wala yanfaAAuhum walaqad AAalimoo lamani ishtarahu ma lahu fee alakhirati min khalaqin walabisa ma sharaw bihi anfusahum law kanoo yaAAlamoona",
@@ -2926,7 +2865,7 @@
     },
     "takhrij_url": "https://quran.com/2/102",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
@@ -2939,10 +2878,7 @@
     "id": "dua-015",
     "slug": "al-baqarah-163-164",
     "collection": "ayat-list",
-    "title": "Al-Baqarah 163 to 164",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Baqarah (2:163-164)",
     "times": [],
     "arabic": "وَإِلَـٰهُكُمْ إِلَـٰهٌ وَٰحِدٌ ۖ لَّآ إِلَـٰهَ إِلَّا هُوَ ٱلرَّحْمَـٰنُ ٱلرَّحِيمُ إِنَّ فِى خَلْقِ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ وَٱخْتِلَـٰفِ ٱلَّيْلِ وَٱلنَّهَارِ وَٱلْفُلْكِ ٱلَّتِى تَجْرِى فِى ٱلْبَحْرِ بِمَا يَنفَعُ ٱلنَّاسَ وَمَآ أَنزَلَ ٱللَّهُ مِنَ ٱلسَّمَآءِ مِن مَّآءٍ فَأَحْيَا بِهِ ٱلْأَرْضَ بَعْدَ مَوْتِهَا وَبَثَّ فِيهَا مِن كُلِّ دَآبَّةٍ وَتَصْرِيفِ ٱلرِّيَـٰحِ وَٱلسَّحَابِ ٱلْمُسَخَّرِ بَيْنَ ٱلسَّمَآءِ وَٱلْأَرْضِ لَـَٔايَـٰتٍ لِّقَوْمٍ يَعْقِلُونَ",
     "transliteration": "Wailahukum ilahun wahidun la ilaha illa huwa alrrahmanu alrraheemu Inna fee khalqi alssamawati waalardi waikhtilafi allayli waalnnahari waalfulki allatee tajree fee albahri bima yanfaAAu alnnasa wama anzala Allahu mina alssamai min main faahya bihi alarda baAAda mawtiha wabaththa feeha min kulli dabbatin watasreefi alrriyahi waalssahabi almusakhkhari bayna alssamai waalardi laayatin liqawmin yaAAqiloona",
@@ -3215,7 +3151,7 @@
     },
     "takhrij_url": "https://quran.com/2/163-164",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
@@ -3228,10 +3164,7 @@
     "id": "dua-016",
     "slug": "al-araf-54-56",
     "collection": "ayat-list",
-    "title": "Al-A'raf 54 to 56",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-A'raf (7:54-56)",
     "times": [],
     "arabic": "إِنَّ رَبَّكُمُ ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ يُغْشِى ٱلَّيْلَ ٱلنَّهَارَ يَطْلُبُهُۥ حَثِيثًا وَٱلشَّمْسَ وَٱلْقَمَرَ وَٱلنُّجُومَ مُسَخَّرَٰتٍۭ بِأَمْرِهِۦٓ ۗ أَلَا لَهُ ٱلْخَلْقُ وَٱلْأَمْرُ ۗ تَبَارَكَ ٱللَّهُ رَبُّ ٱلْعَـٰلَمِينَ ٱدْعُوا۟ رَبَّكُمْ تَضَرُّعًا وَخُفْيَةً ۚ إِنَّهُۥ لَا يُحِبُّ ٱلْمُعْتَدِينَ وَلَا تُفْسِدُوا۟ فِى ٱلْأَرْضِ بَعْدَ إِصْلَـٰحِهَا وَٱدْعُوهُ خَوْفًا وَطَمَعًا ۚ إِنَّ رَحْمَتَ ٱللَّهِ قَرِيبٌ مِّنَ ٱلْمُحْسِنِينَ",
     "transliteration": "Inna rabbakumu Allahu allathee khalaqa alssamawati waalarda fee sittati ayyamin thumma istawa AAala alAAarshi yughshee allayla alnnahara yatlubuhu hatheethan waalshshamsa waalqamara waalnnujooma musakhkharatin biamrihi ala lahu alkhalqu waalamru tabaraka Allahu rabbu alAAalameena OdAAoo rabbakum tadarruAAan wakhufyatan innahu la yuhibbu almuAAtadeena Wala tufsidoo fee alardi baAAda islahiha waodAAoohu khawfan watamaAAan inna rahmata Allahi qareebun mina almuhsineena",
@@ -3464,7 +3397,7 @@
     },
     "takhrij_url": "https://quran.com/7/54-56",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
@@ -3477,10 +3410,7 @@
     "id": "dua-017",
     "slug": "as-saffat-1-10",
     "collection": "ayat-list",
-    "title": "As-Saffat 1 to 10",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah As-Saffat (37:1-10)",
     "times": [],
     "arabic": " وَٱلصَّـٰٓفَّـٰتِ صَفًّا فَٱلزَّٰجِرَٰتِ زَجْرًا فَٱلتَّـٰلِيَـٰتِ ذِكْرًا إِنَّ إِلَـٰهَكُمْ لَوَٰحِدٌ رَّبُّ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ وَمَا بَيْنَهُمَا وَرَبُّ ٱلْمَشَـٰرِقِ إِنَّا زَيَّنَّا ٱلسَّمَآءَ ٱلدُّنْيَا بِزِينَةٍ ٱلْكَوَاكِبِ وَحِفْظًا مِّن كُلِّ شَيْطَـٰنٍ مَّارِدٍ لَّا يَسَّمَّعُونَ إِلَى ٱلْمَلَإِ ٱلْأَعْلَىٰ وَيُقْذَفُونَ مِن كُلِّ جَانِبٍ دُحُورًا ۖ وَلَهُمْ عَذَابٌ وَاصِبٌ إِلَّا مَنْ خَطِفَ ٱلْخَطْفَةَ فَأَتْبَعَهُۥ شِهَابٌ ثَاقِبٌ",
     "transliteration": "Waalssaffati saffan Faalzzajirati zajran Faalttaliyati thikran Inna ilahakum lawahidun Rabbu alssamawati waalardi wama baynahuma warabbu almashariqi Inna zayyanna alssamaa alddunya bizeenatin alkawakibi Wahifthan min kulli shaytanin maridin La yassammaAAoona ila almalai alaAAla wayuqthafoona min kulli janibin Duhooran walahum AAathabun wasibun Illa man khatifa alkhatfata faatbaAAahu shihabun thaqibun",
@@ -3749,7 +3679,7 @@
     },
     "takhrij_url": "https://quran.com/37/1-10",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
@@ -3762,10 +3692,7 @@
     "id": "dua-018",
     "slug": "al-hashr-21-24",
     "collection": "ayat-list",
-    "title": "Al-Hashr 21 to 24",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Hashr (59:21-24)",
     "times": [],
     "arabic": "لَوْ أَنزَلْنَا هَـٰذَا ٱلْقُرْءَانَ عَلَىٰ جَبَلٍ لَّرَأَيْتَهُۥ خَـٰشِعًا مُّتَصَدِّعًا مِّنْ خَشْيَةِ ٱللَّهِ ۚ وَتِلْكَ ٱلْأَمْثَـٰلُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ هُوَ ٱللَّهُ ٱلَّذِى لَآ إِلَـٰهَ إِلَّا هُوَ ۖ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ۖ هُوَ ٱلرَّحْمَـٰنُ ٱلرَّحِيمُ هُوَ ٱللَّهُ ٱلَّذِى لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْمَلِكُ ٱلْقُدُّوسُ ٱلسَّلَـٰمُ ٱلْمُؤْمِنُ ٱلْمُهَيْمِنُ ٱلْعَزِيزُ ٱلْجَبَّارُ ٱلْمُتَكَبِّرُ ۚ سُبْحَـٰنَ ٱللَّهِ عَمَّا يُشْرِكُونَ هُوَ ٱللَّهُ ٱلْخَـٰلِقُ ٱلْبَارِئُ ٱلْمُصَوِّرُ ۖ لَهُ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ ۚ يُسَبِّحُ لَهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۖ وَهُوَ ٱلْعَزِيزُ ٱلْحَكِيمُ",
     "transliteration": "Law anzalna hatha alqurana AAala jabalin laraaytahu khashiAAan mutasaddiAAan min khashyati Allahi watilka alamthalu nadribuha lilnnasi laAAallahum yatafakkaroona Huwa Allahu allathee la ilaha illa huwa AAalimu alghaybi waalshshahadati huwa alrrahmanu alrraheemu Huwa Allahu allathee la ilaha illa huwa almaliku alquddoosu alssalamu almuminu almuhayminu alAAazeezu aljabbaru almutakabbiru subhana Allahi AAamma yushrikoona Huwa Allahu alkhaliqu albario almusawwiru lahu alasmao alhusna yusabbihu lahu ma fee alssamawati waalardi wahuwa alAAazeezu alhakeemu",
@@ -4110,7 +4037,7 @@
     },
     "takhrij_url": "https://quran.com/59/21-24",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
@@ -4123,10 +4050,7 @@
     "id": "dua-019",
     "slug": "at-talaq-2-3",
     "collection": "ayat-list",
-    "title": "At-Talaq 2 to 3",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah At-Talaq (65:2-3)",
     "times": [],
     "arabic": "فَإِذَا بَلَغْنَ أَجَلَهُنَّ فَأَمْسِكُوهُنَّ بِمَعْرُوفٍ أَوْ فَارِقُوهُنَّ بِمَعْرُوفٍ وَأَشْهِدُوا۟ ذَوَىْ عَدْلٍ مِّنكُمْ وَأَقِيمُوا۟ ٱلشَّهَـٰدَةَ لِلَّهِ ۚ ذَٰلِكُمْ يُوعَظُ بِهِۦ مَن كَانَ يُؤْمِنُ بِٱللَّهِ وَٱلْيَوْمِ ٱلْـَٔاخِرِ ۚ وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ۚ وَمَن يَتَوَكَّلْ عَلَى ٱللَّهِ فَهُوَ حَسْبُهُۥٓ ۚ إِنَّ ٱللَّهَ بَـٰلِغُ أَمْرِهِۦ ۚ قَدْ جَعَلَ ٱللَّهُ لِكُلِّ شَىْءٍ قَدْرًا",
     "transliteration": "Faitha balaghna ajalahunna faamsikoohunna bimaAAroofin aw fariqoohunna bimaAAroofin waashhidoo thaway AAadlin minkum waaqeemoo alshshahadata lillahi thalikum yooAAathu bihi man kana yuminu biAllahi waalyawmi alakhiri waman yattaqi Allaha yajAAal lahu makhrajan Wayarzuqhu min haythu la yahtasibu waman yatawakkal AAala Allahi fahuwa hasbuhu inna Allaha balighu amrihi qad jaAAala Allahu likulli shayin qadran",
@@ -4287,7 +4211,7 @@
     },
     "takhrij_url": "https://quran.com/65/2-3",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: the owner's ruqyah ayat list (content/IMG_2038, IMG_2039, IMG_2040). No hadith is attached to this selection."
@@ -4300,10 +4224,7 @@
     "id": "dua-020",
     "slug": "as-saff-61-13",
     "collection": "verse",
-    "title": "As-Saff 61:13",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah As-Saff (61:13)",
     "times": [],
     "arabic": "وَأُخْرَىٰ تُحِبُّونَهَا ۖ نَصْرٌ مِّنَ ٱللَّهِ وَفَتْحٌ قَرِيبٌ ۗ وَبَشِّرِ ٱلْمُؤْمِنِينَ",
     "transliteration": "Waokhra tuhibboonaha nasrun mina Allahi wafathun qarreebun wabashshiri almumineena",
@@ -4356,7 +4277,7 @@
     },
     "takhrij_url": "https://quran.com/61/13",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4369,10 +4290,7 @@
     "id": "dua-021",
     "slug": "hud-11-57",
     "collection": "verse",
-    "title": "Hud 11:57",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Hud (11:57)",
     "times": [],
     "arabic": "فَإِن تَوَلَّوْا۟ فَقَدْ أَبْلَغْتُكُم مَّآ أُرْسِلْتُ بِهِۦٓ إِلَيْكُمْ ۚ وَيَسْتَخْلِفُ رَبِّى قَوْمًا غَيْرَكُمْ وَلَا تَضُرُّونَهُۥ شَيْـًٔا ۚ إِنَّ رَبِّى عَلَىٰ كُلِّ شَىْءٍ حَفِيظٌ",
     "transliteration": "Fain tawallaw faqad ablaghtukum ma orsiltu bihi ilaykum wayastakhlifu rabbee qawman ghayrakum wala tadurroonahu shayan inna rabbee AAala kulli shayin hafeethun",
@@ -4419,7 +4337,7 @@
     },
     "takhrij_url": "https://quran.com/11/57",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4432,10 +4350,7 @@
     "id": "dua-022",
     "slug": "al-anam-6-61",
     "collection": "verse",
-    "title": "Al-An'am 6:61",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-An'am (6:61)",
     "times": [],
     "arabic": "وَهُوَ ٱلْقَاهِرُ فَوْقَ عِبَادِهِۦ ۖ وَيُرْسِلُ عَلَيْكُمْ حَفَظَةً حَتَّىٰٓ إِذَا جَآءَ أَحَدَكُمُ ٱلْمَوْتُ تَوَفَّتْهُ رُسُلُنَا وَهُمْ لَا يُفَرِّطُونَ",
     "transliteration": "Wahuwa alqahiru fawqa AAibadihi wayursilu AAalaykum hafathatan hatta itha jaa ahadakumu almawtu tawaffathu rusuluna wahum la yufarritoona",
@@ -4512,7 +4427,7 @@
     },
     "takhrij_url": "https://quran.com/6/61",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4525,10 +4440,7 @@
     "id": "dua-023",
     "slug": "at-tariq-86-4",
     "collection": "verse",
-    "title": "At-Tariq 86:4",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah At-Tariq (86:4)",
     "times": [],
     "arabic": "إِن كُلُّ نَفْسٍ لَّمَّا عَلَيْهَا حَافِظٌ",
     "transliteration": "In kullu nafsin lamma AAalayha hafithun",
@@ -4567,7 +4479,7 @@
     },
     "takhrij_url": "https://quran.com/86/4",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4580,10 +4492,7 @@
     "id": "dua-024",
     "slug": "al-hadid-57-3",
     "collection": "verse",
-    "title": "Al-Hadid 57:3",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Hadid (57:3)",
     "times": [],
     "arabic": "هُوَ ٱلْأَوَّلُ وَٱلْـَٔاخِرُ وَٱلظَّـٰهِرُ وَٱلْبَاطِنُ ۖ وَهُوَ بِكُلِّ شَىْءٍ عَلِيمٌ",
     "transliteration": "Huwa alawwalu waalakhiru waalththahiru waalbatinu wahuwa bikulli shayin AAaleemun",
@@ -4640,7 +4549,7 @@
     },
     "takhrij_url": "https://quran.com/57/3",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4653,10 +4562,7 @@
     "id": "dua-025",
     "slug": "ash-shuara-26-80",
     "collection": "verse",
-    "title": "Ash-Shu'ara 26:80",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Ash-Shu'ara (26:80)",
     "times": [],
     "arabic": "وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ",
     "transliteration": "Waitha maridtu fahuwa yashfeeni",
@@ -4687,7 +4593,7 @@
     },
     "takhrij_url": "https://quran.com/26/80",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4700,10 +4606,7 @@
     "id": "dua-026",
     "slug": "fussilat-41-12",
     "collection": "verse",
-    "title": "Fussilat 41:12",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Fussilat (41:12)",
     "times": [],
     "arabic": "فَقَضَىٰهُنَّ سَبْعَ سَمَـٰوَاتٍ فِى يَوْمَيْنِ وَأَوْحَىٰ فِى كُلِّ سَمَآءٍ أَمْرَهَا ۚ وَزَيَّنَّا ٱلسَّمَآءَ ٱلدُّنْيَا بِمَصَـٰبِيحَ وَحِفْظًا ۚ ذَٰلِكَ تَقْدِيرُ ٱلْعَزِيزِ ٱلْعَلِيمِ",
     "transliteration": "Faqadahunna sabAAa samawatin fee yawmayni waawha fee kulli samain amraha wazayyanna alssamaa alddunya bimasabeeha wahifthan thalika taqdeeru alAAazeezi alAAaleemi",
@@ -4808,7 +4711,7 @@
     },
     "takhrij_url": "https://quran.com/41/12",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4821,10 +4724,7 @@
     "id": "dua-027",
     "slug": "an-naml-27-1",
     "collection": "verse",
-    "title": "An-Naml 27:1",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah An-Naml (27:1)",
     "times": [],
     "arabic": " طسٓ ۚ تِلْكَ ءَايَـٰتُ ٱلْقُرْءَانِ وَكِتَابٍ مُّبِينٍ",
     "transliteration": "Taseen tilka ayatu alqurani wakitabin mubeenin",
@@ -4873,7 +4773,7 @@
     },
     "takhrij_url": "https://quran.com/27/1",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4886,10 +4786,7 @@
     "id": "dua-028",
     "slug": "al-anbiya-21-69",
     "collection": "verse",
-    "title": "Al-Anbiya 21:69",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Anbiya (21:69)",
     "times": [],
     "arabic": "قُلْنَا يَـٰنَارُ كُونِى بَرْدًا وَسَلَـٰمًا عَلَىٰٓ إِبْرَٰهِيمَ",
     "transliteration": "Qulna ya naru koonee bardan wasalaman AAala ibraheema",
@@ -4936,7 +4833,7 @@
     },
     "takhrij_url": "https://quran.com/21/69",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -4949,10 +4846,7 @@
     "id": "dua-029",
     "slug": "al-araf-7-117",
     "collection": "verse",
-    "title": "Al-A'raf 7:117",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-A'raf (7:117)",
     "times": [],
     "arabic": "۞ وَأَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ أَنْ أَلْقِ عَصَاكَ ۖ فَإِذَا هِىَ تَلْقَفُ مَا يَأْفِكُونَ",
     "transliteration": "Waawhayna ila moosa an alqi AAasaka faitha hiya talqafu ma yafikoona",
@@ -5003,7 +4897,7 @@
     },
     "takhrij_url": "https://quran.com/7/117",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -5016,10 +4910,7 @@
     "id": "dua-030",
     "slug": "al-hijr-15-18",
     "collection": "verse",
-    "title": "Al-Hijr 15:18",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Hijr (15:18)",
     "times": [],
     "arabic": "إِلَّا مَنِ ٱسْتَرَقَ ٱلسَّمْعَ فَأَتْبَعَهُۥ شِهَابٌ مُّبِينٌ",
     "transliteration": "Illa mani istaraqa alssamAAa faatbaAAahu shihabun mubeenun",
@@ -5064,7 +4955,7 @@
     },
     "takhrij_url": "https://quran.com/15/18",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
       "selection": "Selection: named in the owner's dua collection (content/IMG_2010 to IMG_2036). Only the verse reference was used; the source's counts, durations and claims were not."
@@ -5075,12 +4966,9 @@
   },
   {
     "id": "dua-034",
-    "slug": "ruqyah-for-punishing-the-enemy",
+    "slug": "al-masad-111-1-5",
     "collection": "verse",
-    "title": "Ruqyah for Punishing the Enemy",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Masad (111:1-5)",
     "times": [],
     "arabic": " تَبَّتْ يَدَآ أَبِى لَهَبٍ وَتَبَّ مَآ أَغْنَىٰ عَنْهُ مَالُهُۥ وَمَا كَسَبَ سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ وَٱمْرَأَتُهُۥ حَمَّالَةَ ٱلْحَطَبِ فِى جِيدِهَا حَبْلٌ مِّن مَّسَدٍۭ",
     "transliteration": "Tabbat yada abee lahabin watabba Ma aghna AAanhu maluhu wama kasaba Sayasla naran thata lahabin Waimraatuhu hammalata alhatabi Fee jeediha hablun min masadin",
@@ -5153,8 +5041,8 @@
         119
       ]
     ],
-    "practice": "",
-    "repeat": "41 times",
+    "practice": "Recite the passage.",
+    "repeat": "",
     "source": {
       "book": "The Qur'an",
       "ref": "111:1-5",
@@ -5169,10 +5057,10 @@
     },
     "takhrij_url": "https://quran.com/111/1-5",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
-      "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2032). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
+      "selection": "Selection: named in the owner's list of ruqyah ayats (library brief of 2026-10-03). No hadith is attached to this selection. The titles and counts the earlier collection gave this passage were removed: they had no cited source."
     },
     "verified": false,
     "verified_by": "",
@@ -5180,12 +5068,9 @@
   },
   {
     "id": "dua-035",
-    "slug": "ruqyah-for-joint-magic",
+    "slug": "ali-imran-3-54",
     "collection": "verse",
-    "title": "Ruqyah for Joint Magic",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Ali 'Imran (3:54)",
     "times": [],
     "arabic": "وَمَكَرُوا۟ وَمَكَرَ ٱللَّهُ ۖ وَٱللَّهُ خَيْرُ ٱلْمَـٰكِرِينَ",
     "transliteration": "Wamakaroo wamakara Allahu waAllahu khayru almakireena",
@@ -5218,8 +5103,8 @@
         43
       ]
     ],
-    "practice": "",
-    "repeat": "41 times",
+    "practice": "Recite the passage.",
+    "repeat": "",
     "source": {
       "book": "The Qur'an",
       "ref": "3:54",
@@ -5234,10 +5119,10 @@
     },
     "takhrij_url": "https://quran.com/3/54",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
-      "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2031). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
+      "selection": "Selection: named in the owner's list of ruqyah ayats (library brief of 2026-10-03). No hadith is attached to this selection. The titles and counts the earlier collection gave this passage were removed: they had no cited source."
     },
     "verified": false,
     "verified_by": "",
@@ -5245,12 +5130,9 @@
   },
   {
     "id": "dua-036",
-    "slug": "destroy-stomach-magic",
+    "slug": "an-nisa-4-10",
     "collection": "verse",
-    "title": "Destroy Stomach Magic",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah An-Nisa (4:10)",
     "times": [],
     "arabic": "إِنَّ ٱلَّذِينَ يَأْكُلُونَ أَمْوَٰلَ ٱلْيَتَـٰمَىٰ ظُلْمًا إِنَّمَا يَأْكُلُونَ فِى بُطُونِهِمْ نَارًا ۖ وَسَيَصْلَوْنَ سَعِيرًا",
     "transliteration": "Inna allatheena yakuloona amwala alyatama thulman innama yakuloona fee butoonihim naran wasayaslawna saAAeeran",
@@ -5311,8 +5193,8 @@
         110
       ]
     ],
-    "practice": "",
-    "repeat": "101 times",
+    "practice": "Recite the passage.",
+    "repeat": "",
     "source": {
       "book": "The Qur'an",
       "ref": "4:10",
@@ -5327,73 +5209,10 @@
     },
     "takhrij_url": "https://quran.com/4/10",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
-      "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2037). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
-    },
-    "verified": false,
-    "verified_by": "",
-    "verified_on": ""
-  },
-  {
-    "id": "dua-037",
-    "slug": "ruqyah-for-body-burning",
-    "collection": "verse",
-    "title": "Ruqyah for Body Burning",
-    "category": [
-      "learning"
-    ],
-    "times": [],
-    "arabic": "قُلْنَا يَـٰنَارُ كُونِى بَرْدًا وَسَلَـٰمًا عَلَىٰٓ إِبْرَٰهِيمَ",
-    "transliteration": "Qulna ya naru koonee bardan wasalaman AAala ibraheema",
-    "translation": "We [i.e., Allāh] said, \"O fire, be coolness and safety upon Abraham.\"",
-    "tu": [
-      [
-        4,
-        5
-      ],
-      [
-        7,
-        8
-      ],
-      [
-        10,
-        11
-      ],
-      [
-        33,
-        34
-      ],
-      [
-        42,
-        43
-      ],
-      [
-        47,
-        48
-      ]
-    ],
-    "practice": "",
-    "repeat": "41 times",
-    "source": {
-      "book": "The Qur'an",
-      "ref": "21:69",
-      "chapter": "Surah Al-Anbiya"
-    },
-    "support": [],
-    "grade": "Qur'an",
-    "grader": "Preserved text (mutawatir)",
-    "exegesis": {
-      "work": "",
-      "note": ""
-    },
-    "takhrij_url": "https://quran.com/21/69",
-    "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
-      "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
-      "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2021). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
+      "selection": "Selection: named in the owner's list of ruqyah ayats (library brief of 2026-10-03). No hadith is attached to this selection. The titles and counts the earlier collection gave this passage were removed: they had no cited source."
     },
     "verified": false,
     "verified_by": "",
@@ -5401,12 +5220,9 @@
   },
   {
     "id": "dua-038",
-    "slug": "black-magic-face-ruqyah",
+    "slug": "al-qiyamah-75-22",
     "collection": "verse",
-    "title": "Black Magic Face Ruqyah",
-    "category": [
-      "learning"
-    ],
+    "title": "Surah Al-Qiyamah (75:22)",
     "times": [],
     "arabic": "وُجُوهٌ يَوْمَئِذٍ نَّاضِرَةٌ",
     "transliteration": "Wujoohun yawmaithin nadiratun",
@@ -5421,8 +5237,8 @@
         23
       ]
     ],
-    "practice": "",
-    "repeat": "11 times, with Al-Baqarah 102 (11 times)",
+    "practice": "Recite the passage.",
+    "repeat": "",
     "source": {
       "book": "The Qur'an",
       "ref": "75:22",
@@ -5437,121 +5253,10 @@
     },
     "takhrij_url": "https://quran.com/75/22",
     "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
       "translation": "translation: Saheeh International (Quran.com resource 20)",
       "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
-      "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2023). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
-    },
-    "verified": false,
-    "verified_by": "",
-    "verified_on": ""
-  },
-  {
-    "id": "dua-039",
-    "slug": "destroy-waswasah-with-ruqyah",
-    "collection": "verse",
-    "title": "Destroy Waswasah With Ruqyah",
-    "category": [
-      "learning"
-    ],
-    "times": [],
-    "arabic": "هُوَ ٱلْأَوَّلُ وَٱلْـَٔاخِرُ وَٱلظَّـٰهِرُ وَٱلْبَاطِنُ ۖ وَهُوَ بِكُلِّ شَىْءٍ عَلِيمٌ",
-    "transliteration": "Huwa alawwalu waalakhiru waalththahiru waalbatinu wahuwa bikulli shayin AAaleemun",
-    "translation": "He is the First and the Last, the Ascendant and the Intimate, and He is, of all things, Knowing.",
-    "tu": [
-      [
-        18,
-        19
-      ],
-      [
-        29,
-        34
-      ],
-      [
-        44,
-        46
-      ]
-    ],
-    "ts": [
-      [
-        5,
-        6
-      ],
-      [
-        16,
-        17
-      ],
-      [
-        27,
-        28
-      ],
-      [
-        28,
-        29
-      ],
-      [
-        41,
-        42
-      ]
-    ],
-    "practice": "",
-    "repeat": "41 times and 33 times",
-    "source": {
-      "book": "The Qur'an",
-      "ref": "57:3",
-      "chapter": "Surah Al-Hadid"
-    },
-    "support": [],
-    "grade": "Qur'an",
-    "grader": "Preserved text (mutawatir)",
-    "exegesis": {
-      "work": "",
-      "note": ""
-    },
-    "takhrij_url": "https://quran.com/57/3",
-    "provenance": {
-      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-01)",
-      "translation": "translation: Saheeh International (Quran.com resource 20)",
-      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2",
-      "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2024). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
-    },
-    "verified": false,
-    "verified_by": "",
-    "verified_on": ""
-  },
-  {
-    "id": "dua-040",
-    "slug": "ruqyah-for-black-magic",
-    "collection": "verse",
-    "title": "Ruqyah for Black Magic",
-    "category": [
-      "learning"
-    ],
-    "times": [],
-    "arabic": "اللَّهُمَّ عَافِنِي فِي بَدَنِي اللَّهُمَّ عَافِنِي فِي سَمْعِي اللَّهُمَّ عَافِنِي فِي بَصَرِي لاَ إِلَهَ إِلاَّ أَنْتَ",
-    "transliteration": "allahumma 'afini fi badani, allahumma 'afini fi sam'i, allahumma 'afini fi basari, la ilaha illa anta.",
-    "translation": "O Allah! Grant me health in my body. O Allah! Grant me good hearing. O Allah! Grant me good eyesight. There is no god but Thou",
-    "practice": "",
-    "repeat": "21 times",
-    "source": {
-      "book": "Sunan Abi Dawud",
-      "ref": "5090",
-      "chapter": "General Behavior (Kitab Al-Adab)"
-    },
-    "support": [],
-    "grade": "Hasan",
-    "grader": "Al-Albani (Hasan isnad). Disputed: Zubair Ali Zai grades it Da'if. Arna'ut not listed.",
-    "exegesis": {
-      "work": "",
-      "note": ""
-    },
-    "takhrij_url": "https://sunnah.com/abudawud:5090",
-    "provenance": {
-      "arabic": "fawazahmed0/hadith-api ara-abudawud #5090",
-      "translation": "fawazahmed0/hadith-api eng-abudawud #5090",
-      "transliteration": "fitrahive/dua-dhikr morning-dhikr (MIT), first three requests only",
-      "grade": "fawazahmed0/hadith-api grades on ara-abudawud",
-      "selection": "Selection, title and count: as given in the owner's dua collection (IMG_2017). The count has no cited source. Only the title, the verse and the count were used; the source's method text was not."
+      "selection": "Selection: named in the owner's list of ruqyah ayats (library brief of 2026-10-03). No hadith is attached to this selection. The titles and counts the earlier collection gave this passage were removed: they had no cited source."
     },
     "verified": false,
     "verified_by": "",
@@ -5562,9 +5267,6 @@
     "slug": "seeking-refuge-in-allahs-might",
     "collection": "core",
     "title": "Seeking refuge in Allah's might",
-    "category": [
-      "daily-protection"
-    ],
     "times": [],
     "arabic": "أَعُوذُ بِعِزَّتِكَ الَّذِي لاَ إِلَهَ إِلاَّ أَنْتَ، الَّذِي لاَ يَمُوتُ وَالْجِنُّ وَالإِنْسُ يَمُوتُونَ",
     "transliteration": "A'udhu bi-'izzatikal-ladhee laa ilaha illa Antal-ladhee laa yamootu, wal-jinnu wal-insu yamootoon.",
@@ -5598,10 +5300,7 @@
     "id": "dua-032",
     "slug": "dua-at-a-time-of-distress",
     "collection": "core",
-    "title": "At a time of distress",
-    "category": [
-      "learning"
-    ],
+    "title": "Dua for Extreme Distress",
     "times": [],
     "arabic": "لاَ إِلَهَ إِلاَّ اللَّهُ الْعَظِيمُ الْحَلِيمُ لاَ إِلَهَ إِلاَّ اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ لاَ إِلَهَ إِلاَّ اللَّهُ رَبُّ السَّمَوَاتِ وَرَبُّ الأَرْضِ وَرَبُّ الْعَرْشِ الْكَرِيمِ",
     "transliteration": "Laa ilaha illallahul-'Atheemul-Haleem, laa ilaha illallahu Rabbul-'Arshil-'Atheem, laa ilaha illallahu Rabbus-samaawaati wa Rabbul-ardi wa Rabbul-'Arshil-Kareem.",
@@ -5641,11 +5340,7 @@
     "id": "dua-033",
     "slug": "asking-for-wellbeing",
     "collection": "core",
-    "title": "Asking for wellbeing",
-    "category": [
-      "pain",
-      "daily-protection"
-    ],
+    "title": "Dua for Good Health",
     "times": [
       "morning",
       "evening"
@@ -5674,6 +5369,3051 @@
       "transliteration": "fitrahive/dua-dhikr morning-dhikr (MIT), first three requests only",
       "grade": "fawazahmed0/hadith-api grades on ara-abudawud",
       "selection": "Reference named in the owner's dua collection (IMG_2017); the source's counts and oil regimen were not used."
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-042",
+    "slug": "al-kahf-1-10",
+    "collection": "core",
+    "title": "Surah Al-Kahf (18:1-10)",
+    "times": [],
+    "arabic": " ٱلْحَمْدُ لِلَّهِ ٱلَّذِىٓ أَنزَلَ عَلَىٰ عَبْدِهِ ٱلْكِتَـٰبَ وَلَمْ يَجْعَل لَّهُۥ عِوَجَا ۜ قَيِّمًا لِّيُنذِرَ بَأْسًا شَدِيدًا مِّن لَّدُنْهُ وَيُبَشِّرَ ٱلْمُؤْمِنِينَ ٱلَّذِينَ يَعْمَلُونَ ٱلصَّـٰلِحَـٰتِ أَنَّ لَهُمْ أَجْرًا حَسَنًا مَّـٰكِثِينَ فِيهِ أَبَدًا وَيُنذِرَ ٱلَّذِينَ قَالُوا۟ ٱتَّخَذَ ٱللَّهُ وَلَدًا مَّا لَهُم بِهِۦ مِنْ عِلْمٍ وَلَا لِـَٔابَآئِهِمْ ۚ كَبُرَتْ كَلِمَةً تَخْرُجُ مِنْ أَفْوَٰهِهِمْ ۚ إِن يَقُولُونَ إِلَّا كَذِبًا فَلَعَلَّكَ بَـٰخِعٌ نَّفْسَكَ عَلَىٰٓ ءَاثَـٰرِهِمْ إِن لَّمْ يُؤْمِنُوا۟ بِهَـٰذَا ٱلْحَدِيثِ أَسَفًا إِنَّا جَعَلْنَا مَا عَلَى ٱلْأَرْضِ زِينَةً لَّهَا لِنَبْلُوَهُمْ أَيُّهُمْ أَحْسَنُ عَمَلًا وَإِنَّا لَجَـٰعِلُونَ مَا عَلَيْهَا صَعِيدًا جُرُزًا أَمْ حَسِبْتَ أَنَّ أَصْحَـٰبَ ٱلْكَهْفِ وَٱلرَّقِيمِ كَانُوا۟ مِنْ ءَايَـٰتِنَا عَجَبًا إِذْ أَوَى ٱلْفِتْيَةُ إِلَى ٱلْكَهْفِ فَقَالُوا۟ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",
+    "transliteration": "Alhamdu lillahi allathee anzala AAala AAabdihi alkitaba walam yajAAal lahu AAiwajan Qayyiman liyunthira basan shadeedan min ladunhu wayubashshira almumineena allatheena yaAAmaloona alssalihati anna lahum ajran hasanan Makitheena feehi abadan Wayunthira allatheena qaloo ittakhatha Allahu waladan Ma lahum bihi min AAilmin wala liabaihim kaburat kalimatan takhruju min afwahihim in yaqooloona illa kathiban FalaAAallaka bakhiAAun nafsaka AAala atharihim in lam yuminoo bihatha alhadeethi asafan Inna jaAAalna ma AAala alardi zeenatan laha linabluwahum ayyuhum ahsanu AAamalan Wainna lajaAAiloona ma AAalayha saAAeedan juruzan Am hasibta anna ashaba alkahfi waalrraqeemi kanoo min ayatina AAajaban Ith awa alfityatu ila alkahfi faqaloo rabbana atina min ladunka rahmatan wahayyi lana min amrina rashadan",
+    "translation": "[All] praise is [due] to Allāh, who has sent down upon His Servant [Muḥammad (ﷺ)] the Book and has not made therein any deviance. [He has made it] straight, to warn of severe punishment from Him and to give good tidings to the believers who do righteous deeds that they will have a good reward [i.e., Paradise]. In which they will remain forever And to warn those who say, \"Allāh has taken a son\". They have no knowledge of it, nor had their fathers. Grave is the word that comes out of their mouths; they speak not except a lie. Then perhaps you would kill yourself through grief over them, [O Muḥammad], if they do not believe in this message, [and] out of sorrow. Indeed, We have made that which is on the earth adornment for it that We may test them [as to] which of them is best in deed. And indeed, We will make that which is upon it [into] a barren ground. Or have you thought that the companions of the cave and the inscription were, among Our signs, a wonder? [Mention] when the youths retreated to the cave and said, \"Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.\"",
+    "tu": [
+      [
+        2,
+        3
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        20,
+        22
+      ],
+      [
+        36,
+        37
+      ],
+      [
+        52,
+        53
+      ],
+      [
+        71,
+        72
+      ],
+      [
+        81,
+        82
+      ],
+      [
+        98,
+        100
+      ],
+      [
+        162,
+        164
+      ],
+      [
+        183,
+        186
+      ],
+      [
+        188,
+        190
+      ],
+      [
+        210,
+        211
+      ],
+      [
+        215,
+        216
+      ],
+      [
+        219,
+        220
+      ],
+      [
+        239,
+        240
+      ],
+      [
+        247,
+        249
+      ],
+      [
+        257,
+        259
+      ],
+      [
+        265,
+        266
+      ],
+      [
+        277,
+        279
+      ],
+      [
+        284,
+        285
+      ],
+      [
+        293,
+        294
+      ],
+      [
+        297,
+        298
+      ],
+      [
+        325,
+        326
+      ],
+      [
+        329,
+        330
+      ],
+      [
+        331,
+        332
+      ],
+      [
+        371,
+        372
+      ],
+      [
+        395,
+        396
+      ],
+      [
+        399,
+        401
+      ],
+      [
+        403,
+        404
+      ],
+      [
+        420,
+        421
+      ],
+      [
+        441,
+        442
+      ],
+      [
+        443,
+        444
+      ],
+      [
+        446,
+        447
+      ],
+      [
+        471,
+        475
+      ],
+      [
+        478,
+        479
+      ],
+      [
+        491,
+        492
+      ],
+      [
+        497,
+        498
+      ],
+      [
+        506,
+        507
+      ],
+      [
+        509,
+        510
+      ],
+      [
+        515,
+        516
+      ],
+      [
+        521,
+        522
+      ],
+      [
+        534,
+        535
+      ],
+      [
+        536,
+        537
+      ],
+      [
+        560,
+        561
+      ],
+      [
+        572,
+        573
+      ],
+      [
+        580,
+        581
+      ],
+      [
+        585,
+        586
+      ],
+      [
+        596,
+        597
+      ],
+      [
+        605,
+        606
+      ],
+      [
+        607,
+        608
+      ],
+      [
+        622,
+        623
+      ],
+      [
+        628,
+        629
+      ],
+      [
+        644,
+        645
+      ],
+      [
+        670,
+        671
+      ],
+      [
+        679,
+        680
+      ],
+      [
+        681,
+        682
+      ],
+      [
+        685,
+        686
+      ],
+      [
+        693,
+        694
+      ],
+      [
+        697,
+        699
+      ],
+      [
+        702,
+        703
+      ],
+      [
+        716,
+        717
+      ],
+      [
+        729,
+        730
+      ],
+      [
+        740,
+        741
+      ],
+      [
+        742,
+        743
+      ],
+      [
+        746,
+        747
+      ],
+      [
+        780,
+        781
+      ],
+      [
+        791,
+        792
+      ],
+      [
+        799,
+        800
+      ]
+    ],
+    "ts": [
+      [
+        16,
+        17
+      ],
+      [
+        47,
+        48
+      ],
+      [
+        146,
+        147
+      ],
+      [
+        158,
+        159
+      ],
+      [
+        181,
+        182
+      ],
+      [
+        182,
+        183
+      ],
+      [
+        216,
+        217
+      ],
+      [
+        240,
+        241
+      ],
+      [
+        253,
+        254
+      ],
+      [
+        270,
+        271
+      ],
+      [
+        281,
+        282
+      ],
+      [
+        294,
+        295
+      ],
+      [
+        404,
+        405
+      ],
+      [
+        476,
+        477
+      ],
+      [
+        492,
+        493
+      ],
+      [
+        517,
+        518
+      ],
+      [
+        573,
+        574
+      ],
+      [
+        623,
+        624
+      ],
+      [
+        648,
+        649
+      ],
+      [
+        658,
+        659
+      ],
+      [
+        659,
+        660
+      ],
+      [
+        694,
+        695
+      ],
+      [
+        704,
+        705
+      ],
+      [
+        718,
+        719
+      ],
+      [
+        800,
+        801
+      ]
+    ],
+    "practice": "Recite the first ten verses.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "18:1-10",
+      "chapter": "Surah Al-Kahf"
+    },
+    "support": [
+      {
+        "book": "Sahih Muslim",
+        "ref": "809.01",
+        "chapter": "The Book of Prayer - Travellers"
+      }
+    ],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/18/1-10",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-043",
+    "slug": "ar-rahman",
+    "collection": "core",
+    "verseByVerse": true,
+    "title": "Surah Ar-Rahman",
+    "times": [],
+    "arabic": " ٱلرَّحْمَـٰنُ عَلَّمَ ٱلْقُرْءَانَ خَلَقَ ٱلْإِنسَـٰنَ عَلَّمَهُ ٱلْبَيَانَ ٱلشَّمْسُ وَٱلْقَمَرُ بِحُسْبَانٍ وَٱلنَّجْمُ وَٱلشَّجَرُ يَسْجُدَانِ وَٱلسَّمَآءَ رَفَعَهَا وَوَضَعَ ٱلْمِيزَانَ أَلَّا تَطْغَوْا۟ فِى ٱلْمِيزَانِ وَأَقِيمُوا۟ ٱلْوَزْنَ بِٱلْقِسْطِ وَلَا تُخْسِرُوا۟ ٱلْمِيزَانَ وَٱلْأَرْضَ وَضَعَهَا لِلْأَنَامِ فِيهَا فَـٰكِهَةٌ وَٱلنَّخْلُ ذَاتُ ٱلْأَكْمَامِ وَٱلْحَبُّ ذُو ٱلْعَصْفِ وَٱلرَّيْحَانُ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ خَلَقَ ٱلْإِنسَـٰنَ مِن صَلْصَـٰلٍ كَٱلْفَخَّارِ وَخَلَقَ ٱلْجَآنَّ مِن مَّارِجٍ مِّن نَّارٍ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ رَبُّ ٱلْمَشْرِقَيْنِ وَرَبُّ ٱلْمَغْرِبَيْنِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ مَرَجَ ٱلْبَحْرَيْنِ يَلْتَقِيَانِ بَيْنَهُمَا بَرْزَخٌ لَّا يَبْغِيَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ يَخْرُجُ مِنْهُمَا ٱللُّؤْلُؤُ وَٱلْمَرْجَانُ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ وَلَهُ ٱلْجَوَارِ ٱلْمُنشَـَٔاتُ فِى ٱلْبَحْرِ كَٱلْأَعْلَـٰمِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ كُلُّ مَنْ عَلَيْهَا فَانٍ وَيَبْقَىٰ وَجْهُ رَبِّكَ ذُو ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ يَسْـَٔلُهُۥ مَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۚ كُلَّ يَوْمٍ هُوَ فِى شَأْنٍ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ سَنَفْرُغُ لَكُمْ أَيُّهَ ٱلثَّقَلَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ يَـٰمَعْشَرَ ٱلْجِنِّ وَٱلْإِنسِ إِنِ ٱسْتَطَعْتُمْ أَن تَنفُذُوا۟ مِنْ أَقْطَارِ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ فَٱنفُذُوا۟ ۚ لَا تَنفُذُونَ إِلَّا بِسُلْطَـٰنٍ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ يُرْسَلُ عَلَيْكُمَا شُوَاظٌ مِّن نَّارٍ وَنُحَاسٌ فَلَا تَنتَصِرَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فَإِذَا ٱنشَقَّتِ ٱلسَّمَآءُ فَكَانَتْ وَرْدَةً كَٱلدِّهَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فَيَوْمَئِذٍ لَّا يُسْـَٔلُ عَن ذَنۢبِهِۦٓ إِنسٌ وَلَا جَآنٌّ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ يُعْرَفُ ٱلْمُجْرِمُونَ بِسِيمَـٰهُمْ فَيُؤْخَذُ بِٱلنَّوَٰصِى وَٱلْأَقْدَامِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ هَـٰذِهِۦ جَهَنَّمُ ٱلَّتِى يُكَذِّبُ بِهَا ٱلْمُجْرِمُونَ يَطُوفُونَ بَيْنَهَا وَبَيْنَ حَمِيمٍ ءَانٍ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ وَلِمَنْ خَافَ مَقَامَ رَبِّهِۦ جَنَّتَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ ذَوَاتَآ أَفْنَانٍ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فِيهِمَا عَيْنَانِ تَجْرِيَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فِيهِمَا مِن كُلِّ فَـٰكِهَةٍ زَوْجَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ مُتَّكِـِٔينَ عَلَىٰ فُرُشٍۭ بَطَآئِنُهَا مِنْ إِسْتَبْرَقٍ ۚ وَجَنَى ٱلْجَنَّتَيْنِ دَانٍ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فِيهِنَّ قَـٰصِرَٰتُ ٱلطَّرْفِ لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ كَأَنَّهُنَّ ٱلْيَاقُوتُ وَٱلْمَرْجَانُ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ هَلْ جَزَآءُ ٱلْإِحْسَـٰنِ إِلَّا ٱلْإِحْسَـٰنُ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ وَمِن دُونِهِمَا جَنَّتَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ مُدْهَآمَّتَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فِيهِمَا عَيْنَانِ نَضَّاخَتَانِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فِيهِمَا فَـٰكِهَةٌ وَنَخْلٌ وَرُمَّانٌ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ فِيهِنَّ خَيْرَٰتٌ حِسَانٌ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ حُورٌ مَّقْصُورَٰتٌ فِى ٱلْخِيَامِ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ مُتَّكِـِٔينَ عَلَىٰ رَفْرَفٍ خُضْرٍ وَعَبْقَرِىٍّ حِسَانٍ فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ تَبَـٰرَكَ ٱسْمُ رَبِّكَ ذِى ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ",
+    "transliteration": "Alrrahmanu AAallama alqurana Khalaqa alinsana AAallamahu albayana Alshshamsu waalqamaru bihusbanin Waalnnajmu waalshshajaru yasjudani Waalssamaa rafaAAaha wawadaAAa almeezana Alla tatghaw fee almeezani Waaqeemoo alwazna bialqisti wala tukhsiroo almeezana Waalarda wadaAAaha lilanami Feeha fakihatun waalnnakhlu thatu alakmami Waalhabbu thoo alAAasfi waalrrayhani Fabiayyi alai rabbikuma tukaththibani Khalaqa alinsana min salsalin kaalfakhkhari Wakhalaqa aljanna min marijin min narin Fabiayyi alai rabbikuma tukaththibani Rabbu almashriqayni warabbu almaghribayni Fabiayyi alai rabbikuma tukaththibani Maraja albahrayni yaltaqiyani Baynahuma barzakhun la yabghiyani Fabiayyi alai rabbikuma tukaththibani Yakhruju minhuma alluluo waalmarjanu Fabiayyi alai rabbikuma tukaththibani Walahu aljawari almunshaatu fee albahri kaalaAAlami Fabiayyi alai rabbikuma tukaththibani Kullu man AAalayha fanin Wayabqa wajhu rabbika thoo aljalali waalikrami Fabiayyi alai rabbikuma tukaththibani Yasaluhu man fee alssamawati waalardi kulla yawmin huwa fee shanin Fabiayyi alai rabbikuma tukaththibani Sanafrughu lakum ayyuha alththaqalani Fabiayyi alai rabbikuma tukaththibani Ya maAAshara aljinni waalinsi ini istataAAtum an tanfuthoo min aqtari alssamawati waalardi faonfuthoo la tanfuthoona illa bisultanin Fabiayyi alai rabbikuma tukaththibani Yursalu AAalaykuma shuwathun min narin wanuhasun fala tantasirani Fabiayyi alai rabbikuma tukaththibani Faitha inshaqqati alssamao fakanat wardatan kaalddihani Fabiayyi alai rabbikuma tukaththibani Fayawmaithin la yusalu AAan thanbihi insun wala jannun Fabiayyi alai rabbikuma tukaththibani YuAArafu almujrimoona biseemahum fayukhathu bialnnawasee waalaqdami Fabiayyi alai rabbikuma tukaththibani Hathihi jahannamu allatee yukaththibu biha almujrimoona Yatoofoona baynaha wabayna hameemin anin Fabiayyi alai rabbikuma tukaththibani Waliman khafa maqama rabbihi jannatani Fabiayyi alai rabbikuma tukaththibani Thawata afnanin Fabiayyi alai rabbikuma tukaththibani Feehima AAaynani tajriyani Fabiayyi alai rabbikuma tukaththibani Feehima min kulli fakihatin zawjani Fabiayyi alai rabbikuma tukaththibani Muttakieena AAala furushin batainuha min istabraqin wajana aljannatayni danin Fabiayyi alai rabbikuma tukaththibani Feehinna qasiratu alttarfi lam yatmithhunna insun qablahum wala jannun Fabiayyi alai rabbikuma tukaththibani Kaannahunna alyaqootu waalmarjanu Fabiayyi alai rabbikuma tukaththibani Hal jazao alihsani illa alihsanu Fabiayyi alai rabbikuma tukaththibani Wamin doonihima jannatani Fabiayyi alai rabbikuma tukaththibani Mudhammatani Fabiayyi alai rabbikuma tukaththibani Feehima AAaynani naddakhatani Fabiayyi alai rabbikuma tukaththibani Feehima fakihatun wanakhlun warummanun Fabiayyi alai rabbikuma tukaththibani Feehinna khayratun hisanun Fabiayyi alai rabbikuma tukaththibani Hoorun maqsooratun fee alkhiyami Fabiayyi alai rabbikuma tukaththibani Lam yatmithhunna insun qablahum wala jannun Fabiayyi alai rabbikuma tukaththibani Muttakieena AAala rafrafin khudrin waAAabqariyyin hisanin Fabiayyi alai rabbikuma tukaththibani Tabaraka ismu rabbika thee aljalali waalikrami",
+    "translation": "The Most Merciful Taught the Qur’ān, Created man, [And] taught him eloquence. The sun and the moon [move] by precise calculation, And the stars and trees prostrate. And the heaven He raised and imposed the balance That you not transgress within the balance. And establish weight in justice and do not make deficient the balance. And the earth He laid [out] for the creatures. Therein is fruit and palm trees having sheaths [of dates] And grain having husks and scented plants. So which of the favors of your Lord would you deny? He created man from clay like [that of] pottery. And He created the jinn from a smokeless flame of fire. So which of the favors of your Lord would you deny? [He is] Lord of the two sunrises and Lord of the two sunsets. So which of the favors of your Lord would you deny? He released the two seas, meeting [one another]; Between them is a barrier so neither of them transgresses. So which of the favors of your Lord would you deny? From both of them emerge pearl and coral. So which of the favors of your Lord would you deny? And to Him belong the ships [with sails] elevated in the sea like mountains. So which of the favors of your Lord would you deny? Everyone upon it [i.e., the earth] will perish, And there will remain the Face of your Lord, Owner of Majesty and Honor. So which of the favors of your Lord would you deny? Whoever is within the heavens and earth asks Him; every day He is in [i.e., bringing about] a matter. So which of the favors of your Lord would you deny? We will attend to you, O prominent beings. So which of the favors of your Lord would you deny? O company of jinn and mankind, if you are able to pass beyond the regions of the heavens and the earth, then pass. You will not pass except by authority [from Allāh]. So which of the favors of your Lord would you deny? There will be sent upon you a flame of fire and smoke, and you will not defend yourselves. So which of the favors of your Lord would you deny? And when the heaven is split open and becomes rose-colored like oil - So which of the favors of your Lord would you deny? - Then on that Day none will be asked about his sin among men or jinn. So which of the favors of your Lord would you deny? The criminals will be known by their marks, and they will be seized by the forelocks and the feet. So which of the favors of your Lord would you deny? This is Hell, which the criminals deny. They will circulate between it and scalding water, heated [to the utmost degree]. So which of the favors of your Lord would you deny? But for he who has feared the position of his Lord are two gardens - So which of the favors of your Lord would you deny? - Having [spreading] branches. So which of the favors of your Lord would you deny? In both of them are two springs, flowing. So which of the favors of your Lord would you deny? In both of them are of every fruit, two kinds. So which of the favors of your Lord would you deny? [They are] reclining on beds whose linings are of silk brocade, and the fruit of the two gardens is hanging low. So which of the favors of your Lord would you deny? In them are women limiting [their] glances, untouched before them by man or jinnī - So which of the favors of your Lord would you deny? - As if they were rubies and coral. So which of the favors of your Lord would you deny? Is the reward for good [anything] but good? So which of the favors of your Lord would you deny? And below them both [in excellence] are two [other] gardens - So which of the favors of your Lord would you deny? - Dark green [in color]. So which of the favors of your Lord would you deny? In both of them are two springs, spouting. So which of the favors of your Lord would you deny? In both of them are fruit and palm trees and pomegranates. So which of the favors of your Lord would you deny? In them are good and beautiful women - So which of the favors of your Lord would you deny? - Fair ones reserved in pavilions - So which of the favors of your Lord would you deny? - Untouched before them by man or jinnī - So which of the favors of your Lord would you deny? - Reclining on green cushions and beautiful fine carpets. So which of the favors of your Lord would you deny? Blessed is the name of your Lord, Owner of Majesty and Honor.",
+    "tu": [
+      [
+        5,
+        6
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        25,
+        26
+      ],
+      [
+        42,
+        43
+      ],
+      [
+        62,
+        63
+      ],
+      [
+        90,
+        91
+      ],
+      [
+        94,
+        95
+      ],
+      [
+        130,
+        131
+      ],
+      [
+        142,
+        143
+      ],
+      [
+        153,
+        154
+      ],
+      [
+        159,
+        160
+      ],
+      [
+        171,
+        172
+      ],
+      [
+        178,
+        179
+      ],
+      [
+        182,
+        183
+      ],
+      [
+        198,
+        199
+      ],
+      [
+        227,
+        228
+      ],
+      [
+        233,
+        234
+      ],
+      [
+        251,
+        252
+      ],
+      [
+        261,
+        262
+      ],
+      [
+        266,
+        267
+      ],
+      [
+        272,
+        273
+      ],
+      [
+        279,
+        280
+      ],
+      [
+        287,
+        288
+      ],
+      [
+        290,
+        291
+      ],
+      [
+        311,
+        314
+      ],
+      [
+        322,
+        323
+      ],
+      [
+        330,
+        331
+      ],
+      [
+        336,
+        338
+      ],
+      [
+        346,
+        347
+      ],
+      [
+        358,
+        359
+      ],
+      [
+        372,
+        373
+      ],
+      [
+        374,
+        375
+      ],
+      [
+        385,
+        386
+      ],
+      [
+        391,
+        395
+      ],
+      [
+        397,
+        398
+      ],
+      [
+        414,
+        415
+      ],
+      [
+        422,
+        423
+      ],
+      [
+        425,
+        427
+      ],
+      [
+        441,
+        442
+      ],
+      [
+        458,
+        459
+      ],
+      [
+        468,
+        469
+      ],
+      [
+        480,
+        481
+      ],
+      [
+        494,
+        495
+      ],
+      [
+        496,
+        497
+      ],
+      [
+        507,
+        508
+      ],
+      [
+        513,
+        517
+      ],
+      [
+        519,
+        520
+      ],
+      [
+        574,
+        575
+      ],
+      [
+        576,
+        577
+      ],
+      [
+        587,
+        588
+      ],
+      [
+        593,
+        597
+      ],
+      [
+        599,
+        600
+      ],
+      [
+        614,
+        615
+      ],
+      [
+        629,
+        630
+      ],
+      [
+        641,
+        642
+      ],
+      [
+        654,
+        655
+      ],
+      [
+        663,
+        664
+      ],
+      [
+        676,
+        677
+      ],
+      [
+        678,
+        679
+      ],
+      [
+        689,
+        690
+      ],
+      [
+        695,
+        699
+      ],
+      [
+        701,
+        702
+      ],
+      [
+        720,
+        721
+      ],
+      [
+        738,
+        739
+      ],
+      [
+        751,
+        752
+      ],
+      [
+        753,
+        754
+      ],
+      [
+        764,
+        765
+      ],
+      [
+        770,
+        774
+      ],
+      [
+        776,
+        777
+      ],
+      [
+        792,
+        793
+      ],
+      [
+        804,
+        805
+      ],
+      [
+        816,
+        817
+      ],
+      [
+        828,
+        829
+      ],
+      [
+        841,
+        842
+      ],
+      [
+        843,
+        844
+      ],
+      [
+        854,
+        855
+      ],
+      [
+        860,
+        864
+      ],
+      [
+        866,
+        867
+      ],
+      [
+        887,
+        888
+      ],
+      [
+        890,
+        891
+      ],
+      [
+        901,
+        902
+      ],
+      [
+        917,
+        919
+      ],
+      [
+        927,
+        928
+      ],
+      [
+        938,
+        939
+      ],
+      [
+        951,
+        952
+      ],
+      [
+        953,
+        954
+      ],
+      [
+        964,
+        965
+      ],
+      [
+        970,
+        974
+      ],
+      [
+        976,
+        977
+      ],
+      [
+        1003,
+        1004
+      ],
+      [
+        1005,
+        1006
+      ],
+      [
+        1015,
+        1016
+      ],
+      [
+        1056,
+        1057
+      ],
+      [
+        1058,
+        1059
+      ],
+      [
+        1069,
+        1070
+      ],
+      [
+        1075,
+        1079
+      ],
+      [
+        1081,
+        1082
+      ],
+      [
+        1119,
+        1120
+      ],
+      [
+        1132,
+        1133
+      ],
+      [
+        1134,
+        1135
+      ],
+      [
+        1145,
+        1146
+      ],
+      [
+        1151,
+        1155
+      ],
+      [
+        1157,
+        1158
+      ],
+      [
+        1162,
+        1163
+      ],
+      [
+        1199,
+        1200
+      ],
+      [
+        1215,
+        1217
+      ],
+      [
+        1226,
+        1228
+      ],
+      [
+        1237,
+        1238
+      ],
+      [
+        1239,
+        1240
+      ],
+      [
+        1249,
+        1250
+      ],
+      [
+        1258,
+        1260
+      ],
+      [
+        1264,
+        1265
+      ],
+      [
+        1271,
+        1273
+      ],
+      [
+        1281,
+        1282
+      ],
+      [
+        1288,
+        1290
+      ],
+      [
+        1303,
+        1304
+      ],
+      [
+        1305,
+        1306
+      ],
+      [
+        1316,
+        1317
+      ],
+      [
+        1322,
+        1326
+      ],
+      [
+        1328,
+        1329
+      ],
+      [
+        1349,
+        1350
+      ],
+      [
+        1355,
+        1358
+      ],
+      [
+        1366,
+        1367
+      ],
+      [
+        1375,
+        1377
+      ],
+      [
+        1384,
+        1385
+      ],
+      [
+        1391,
+        1392
+      ],
+      [
+        1394,
+        1395
+      ],
+      [
+        1407,
+        1408
+      ],
+      [
+        1409,
+        1410
+      ],
+      [
+        1420,
+        1421
+      ],
+      [
+        1426,
+        1430
+      ],
+      [
+        1432,
+        1433
+      ],
+      [
+        1439,
+        1442
+      ],
+      [
+        1460,
+        1461
+      ],
+      [
+        1466,
+        1467
+      ],
+      [
+        1488,
+        1489
+      ],
+      [
+        1501,
+        1502
+      ],
+      [
+        1503,
+        1504
+      ],
+      [
+        1514,
+        1515
+      ],
+      [
+        1520,
+        1524
+      ],
+      [
+        1526,
+        1527
+      ],
+      [
+        1538,
+        1540
+      ],
+      [
+        1544,
+        1545
+      ],
+      [
+        1558,
+        1560
+      ],
+      [
+        1576,
+        1577
+      ],
+      [
+        1579,
+        1580
+      ],
+      [
+        1594,
+        1595
+      ],
+      [
+        1596,
+        1597
+      ],
+      [
+        1607,
+        1608
+      ],
+      [
+        1613,
+        1617
+      ],
+      [
+        1619,
+        1620
+      ],
+      [
+        1651,
+        1652
+      ],
+      [
+        1663,
+        1665
+      ],
+      [
+        1675,
+        1677
+      ],
+      [
+        1687,
+        1688
+      ],
+      [
+        1700,
+        1701
+      ],
+      [
+        1702,
+        1703
+      ],
+      [
+        1713,
+        1714
+      ],
+      [
+        1719,
+        1723
+      ],
+      [
+        1725,
+        1726
+      ],
+      [
+        1730,
+        1733
+      ],
+      [
+        1759,
+        1763
+      ],
+      [
+        1770,
+        1771
+      ],
+      [
+        1787,
+        1788
+      ],
+      [
+        1802,
+        1803
+      ],
+      [
+        1812,
+        1813
+      ],
+      [
+        1821,
+        1822
+      ],
+      [
+        1835,
+        1836
+      ],
+      [
+        1837,
+        1838
+      ],
+      [
+        1848,
+        1849
+      ],
+      [
+        1854,
+        1858
+      ],
+      [
+        1860,
+        1861
+      ],
+      [
+        1874,
+        1875
+      ],
+      [
+        1881,
+        1882
+      ],
+      [
+        1899,
+        1900
+      ],
+      [
+        1912,
+        1913
+      ],
+      [
+        1914,
+        1915
+      ],
+      [
+        1925,
+        1926
+      ],
+      [
+        1931,
+        1935
+      ],
+      [
+        1937,
+        1938
+      ],
+      [
+        1941,
+        1943
+      ],
+      [
+        1945,
+        1946
+      ],
+      [
+        1947,
+        1948
+      ],
+      [
+        1952,
+        1953
+      ],
+      [
+        1966,
+        1967
+      ],
+      [
+        1968,
+        1969
+      ],
+      [
+        1979,
+        1980
+      ],
+      [
+        1985,
+        1989
+      ],
+      [
+        1991,
+        1992
+      ],
+      [
+        2001,
+        2002
+      ],
+      [
+        2008,
+        2009
+      ],
+      [
+        2018,
+        2019
+      ],
+      [
+        2031,
+        2032
+      ],
+      [
+        2033,
+        2034
+      ],
+      [
+        2044,
+        2045
+      ],
+      [
+        2050,
+        2054
+      ],
+      [
+        2056,
+        2057
+      ],
+      [
+        2066,
+        2067
+      ],
+      [
+        2079,
+        2080
+      ],
+      [
+        2092,
+        2093
+      ],
+      [
+        2105,
+        2106
+      ],
+      [
+        2107,
+        2108
+      ],
+      [
+        2118,
+        2119
+      ],
+      [
+        2124,
+        2128
+      ],
+      [
+        2130,
+        2131
+      ],
+      [
+        2150,
+        2151
+      ],
+      [
+        2163,
+        2165
+      ],
+      [
+        2169,
+        2170
+      ],
+      [
+        2191,
+        2192
+      ],
+      [
+        2207,
+        2208
+      ],
+      [
+        2221,
+        2222
+      ],
+      [
+        2223,
+        2224
+      ],
+      [
+        2234,
+        2235
+      ],
+      [
+        2240,
+        2244
+      ],
+      [
+        2246,
+        2247
+      ],
+      [
+        2260,
+        2262
+      ],
+      [
+        2264,
+        2265
+      ],
+      [
+        2270,
+        2272
+      ],
+      [
+        2283,
+        2284
+      ],
+      [
+        2312,
+        2313
+      ],
+      [
+        2315,
+        2316
+      ],
+      [
+        2330,
+        2331
+      ],
+      [
+        2332,
+        2333
+      ],
+      [
+        2343,
+        2344
+      ],
+      [
+        2349,
+        2353
+      ],
+      [
+        2355,
+        2356
+      ],
+      [
+        2374,
+        2375
+      ],
+      [
+        2389,
+        2390
+      ],
+      [
+        2402,
+        2403
+      ],
+      [
+        2404,
+        2405
+      ],
+      [
+        2415,
+        2416
+      ],
+      [
+        2421,
+        2425
+      ],
+      [
+        2427,
+        2428
+      ],
+      [
+        2438,
+        2439
+      ],
+      [
+        2444,
+        2445
+      ],
+      [
+        2446,
+        2447
+      ],
+      [
+        2453,
+        2454
+      ],
+      [
+        2458,
+        2459
+      ],
+      [
+        2460,
+        2461
+      ],
+      [
+        2473,
+        2474
+      ],
+      [
+        2475,
+        2476
+      ],
+      [
+        2486,
+        2487
+      ],
+      [
+        2492,
+        2496
+      ],
+      [
+        2498,
+        2499
+      ],
+      [
+        2516,
+        2517
+      ],
+      [
+        2524,
+        2525
+      ],
+      [
+        2537,
+        2538
+      ],
+      [
+        2539,
+        2540
+      ],
+      [
+        2550,
+        2551
+      ],
+      [
+        2556,
+        2560
+      ],
+      [
+        2562,
+        2563
+      ],
+      [
+        2570,
+        2571
+      ],
+      [
+        2575,
+        2576
+      ],
+      [
+        2588,
+        2589
+      ],
+      [
+        2590,
+        2591
+      ],
+      [
+        2601,
+        2602
+      ],
+      [
+        2607,
+        2611
+      ],
+      [
+        2613,
+        2614
+      ],
+      [
+        2623,
+        2624
+      ],
+      [
+        2630,
+        2631
+      ],
+      [
+        2636,
+        2639
+      ],
+      [
+        2643,
+        2644
+      ],
+      [
+        2656,
+        2657
+      ],
+      [
+        2658,
+        2659
+      ],
+      [
+        2669,
+        2670
+      ],
+      [
+        2675,
+        2679
+      ],
+      [
+        2681,
+        2682
+      ],
+      [
+        2691,
+        2692
+      ],
+      [
+        2694,
+        2695
+      ],
+      [
+        2719,
+        2720
+      ],
+      [
+        2733,
+        2734
+      ],
+      [
+        2735,
+        2736
+      ],
+      [
+        2746,
+        2747
+      ],
+      [
+        2752,
+        2756
+      ],
+      [
+        2758,
+        2759
+      ],
+      [
+        2776,
+        2777
+      ],
+      [
+        2781,
+        2782
+      ],
+      [
+        2784,
+        2785
+      ],
+      [
+        2798,
+        2799
+      ],
+      [
+        2800,
+        2801
+      ],
+      [
+        2811,
+        2812
+      ],
+      [
+        2817,
+        2821
+      ],
+      [
+        2823,
+        2824
+      ],
+      [
+        2827,
+        2828
+      ],
+      [
+        2837,
+        2838
+      ],
+      [
+        2841,
+        2842
+      ],
+      [
+        2856,
+        2857
+      ],
+      [
+        2869,
+        2870
+      ],
+      [
+        2871,
+        2872
+      ],
+      [
+        2882,
+        2883
+      ],
+      [
+        2888,
+        2892
+      ],
+      [
+        2894,
+        2895
+      ],
+      [
+        2904,
+        2905
+      ],
+      [
+        2933,
+        2934
+      ],
+      [
+        2936,
+        2937
+      ],
+      [
+        2951,
+        2952
+      ],
+      [
+        2953,
+        2954
+      ],
+      [
+        2964,
+        2965
+      ],
+      [
+        2970,
+        2974
+      ],
+      [
+        2976,
+        2977
+      ],
+      [
+        2996,
+        2997
+      ],
+      [
+        3010,
+        3011
+      ],
+      [
+        3030,
+        3031
+      ],
+      [
+        3033,
+        3034
+      ],
+      [
+        3047,
+        3048
+      ],
+      [
+        3049,
+        3050
+      ],
+      [
+        3060,
+        3061
+      ],
+      [
+        3066,
+        3070
+      ],
+      [
+        3072,
+        3073
+      ],
+      [
+        3079,
+        3080
+      ],
+      [
+        3098,
+        3100
+      ],
+      [
+        3108,
+        3109
+      ],
+      [
+        3119,
+        3120
+      ]
+    ],
+    "ts": [
+      [
+        1,
+        2
+      ],
+      [
+        20,
+        21
+      ],
+      [
+        37,
+        38
+      ],
+      [
+        57,
+        58
+      ],
+      [
+        67,
+        68
+      ],
+      [
+        79,
+        80
+      ],
+      [
+        101,
+        102
+      ],
+      [
+        102,
+        103
+      ],
+      [
+        112,
+        113
+      ],
+      [
+        113,
+        114
+      ],
+      [
+        136,
+        137
+      ],
+      [
+        137,
+        138
+      ],
+      [
+        165,
+        166
+      ],
+      [
+        192,
+        193
+      ],
+      [
+        212,
+        213
+      ],
+      [
+        222,
+        223
+      ],
+      [
+        245,
+        246
+      ],
+      [
+        257,
+        258
+      ],
+      [
+        301,
+        302
+      ],
+      [
+        302,
+        303
+      ],
+      [
+        317,
+        318
+      ],
+      [
+        328,
+        329
+      ],
+      [
+        341,
+        342
+      ],
+      [
+        353,
+        354
+      ],
+      [
+        409,
+        410
+      ],
+      [
+        433,
+        434
+      ],
+      [
+        455,
+        456
+      ],
+      [
+        529,
+        530
+      ],
+      [
+        551,
+        552
+      ],
+      [
+        610,
+        611
+      ],
+      [
+        722,
+        723
+      ],
+      [
+        732,
+        733
+      ],
+      [
+        787,
+        788
+      ],
+      [
+        796,
+        797
+      ],
+      [
+        812,
+        813
+      ],
+      [
+        822,
+        823
+      ],
+      [
+        922,
+        923
+      ],
+      [
+        933,
+        934
+      ],
+      [
+        997,
+        998
+      ],
+      [
+        998,
+        999
+      ],
+      [
+        1011,
+        1012
+      ],
+      [
+        1109,
+        1110
+      ],
+      [
+        1110,
+        1111
+      ],
+      [
+        1174,
+        1175
+      ],
+      [
+        1184,
+        1185
+      ],
+      [
+        1195,
+        1196
+      ],
+      [
+        1231,
+        1232
+      ],
+      [
+        1232,
+        1233
+      ],
+      [
+        1245,
+        1246
+      ],
+      [
+        1254,
+        1255
+      ],
+      [
+        1443,
+        1444
+      ],
+      [
+        1454,
+        1455
+      ],
+      [
+        1455,
+        1456
+      ],
+      [
+        1482,
+        1483
+      ],
+      [
+        1483,
+        1484
+      ],
+      [
+        1632,
+        1633
+      ],
+      [
+        1669,
+        1670
+      ],
+      [
+        1670,
+        1671
+      ],
+      [
+        1682,
+        1683
+      ],
+      [
+        1747,
+        1748
+      ],
+      [
+        1772,
+        1773
+      ],
+      [
+        2193,
+        2194
+      ],
+      [
+        2268,
+        2269
+      ],
+      [
+        2269,
+        2270
+      ],
+      [
+        2371,
+        2372
+      ],
+      [
+        2383,
+        2384
+      ],
+      [
+        2441,
+        2442
+      ],
+      [
+        2455,
+        2456
+      ],
+      [
+        2850,
+        2851
+      ],
+      [
+        3085,
+        3086
+      ],
+      [
+        3103,
+        3104
+      ],
+      [
+        3114,
+        3115
+      ]
+    ],
+    "practice": "Recite the surah.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "55:1-78",
+      "chapter": "Surah Ar-Rahman"
+    },
+    "support": [],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/55/1-78",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-044",
+    "slug": "al-anbiya-21-83",
+    "collection": "core",
+    "title": "Surah Al-Anbiya (21:83)",
+    "times": [],
+    "arabic": "۞ وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ",
+    "transliteration": "Waayyooba ith nada rabbahu annee massaniya alddurru waanta arhamu alrrahimeena",
+    "translation": "And [mention] Job, when he called to his Lord, \"Indeed, adversity has touched me, and You are the most merciful of the merciful.\"",
+    "tu": [
+      [
+        11,
+        13
+      ],
+      [
+        15,
+        16
+      ],
+      [
+        17,
+        18
+      ],
+      [
+        45,
+        47
+      ],
+      [
+        61,
+        62
+      ],
+      [
+        70,
+        72
+      ]
+    ],
+    "ts": [
+      [
+        43,
+        44
+      ],
+      [
+        44,
+        45
+      ],
+      [
+        66,
+        67
+      ],
+      [
+        67,
+        68
+      ]
+    ],
+    "practice": "The call of the Prophet Ayyub (Job) when he was afflicted.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "21:83",
+      "chapter": "Surah Al-Anbiya"
+    },
+    "support": [],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/21/83",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-045",
+    "slug": "al-muminun-23-115-118",
+    "collection": "core",
+    "title": "Surah Al-Mu'minun (23:115-118)",
+    "times": [],
+    "arabic": "أَفَحَسِبْتُمْ أَنَّمَا خَلَقْنَـٰكُمْ عَبَثًا وَأَنَّكُمْ إِلَيْنَا لَا تُرْجَعُونَ فَتَعَـٰلَى ٱللَّهُ ٱلْمَلِكُ ٱلْحَقُّ ۖ لَآ إِلَـٰهَ إِلَّا هُوَ رَبُّ ٱلْعَرْشِ ٱلْكَرِيمِ وَمَن يَدْعُ مَعَ ٱللَّهِ إِلَـٰهًا ءَاخَرَ لَا بُرْهَـٰنَ لَهُۥ بِهِۦ فَإِنَّمَا حِسَابُهُۥ عِندَ رَبِّهِۦٓ ۚ إِنَّهُۥ لَا يُفْلِحُ ٱلْكَـٰفِرُونَ وَقُل رَّبِّ ٱغْفِرْ وَٱرْحَمْ وَأَنتَ خَيْرُ ٱلرَّٰحِمِينَ",
+    "transliteration": "Afahasibtum annama khalaqnakum AAabathan waannakum ilayna la turjaAAoona FataAAala Allahu almaliku alhaqqu la ilaha illa huwa rabbu alAAarshi alkareemi Waman yadAAu maAAa Allahi ilahan akhara la burhana lahu bihi fainnama hisabuhu AAinda rabbihi innahu la yuflihu alkafiroona Waqul rabbi ighfir wairham waanta khayru alrrahimeena",
+    "translation": "Then did you think that We created you uselessly and that to Us you would not be returned?\" So exalted is Allāh, the Sovereign, the Truth; there is no deity except Him, Lord of the Noble Throne. And whoever invokes besides Allāh another deity for which he has no proof - then his account is only with his Lord. Indeed, the disbelievers will not succeed. And, [O Muḥammad], say, \"My Lord, forgive and have mercy, and You are the best of the merciful.\"",
+    "tu": [
+      [
+        3,
+        4
+      ],
+      [
+        17,
+        18
+      ],
+      [
+        26,
+        27
+      ],
+      [
+        56,
+        57
+      ],
+      [
+        59,
+        60
+      ],
+      [
+        79,
+        80
+      ],
+      [
+        81,
+        82
+      ],
+      [
+        86,
+        87
+      ],
+      [
+        101,
+        102
+      ],
+      [
+        108,
+        109
+      ],
+      [
+        112,
+        113
+      ],
+      [
+        119,
+        120
+      ],
+      [
+        174,
+        175
+      ],
+      [
+        180,
+        181
+      ],
+      [
+        185,
+        186
+      ],
+      [
+        193,
+        194
+      ],
+      [
+        199,
+        200
+      ],
+      [
+        220,
+        221
+      ],
+      [
+        222,
+        223
+      ],
+      [
+        225,
+        226
+      ],
+      [
+        254,
+        255
+      ],
+      [
+        261,
+        262
+      ],
+      [
+        267,
+        268
+      ],
+      [
+        299,
+        300
+      ],
+      [
+        321,
+        323
+      ]
+    ],
+    "ts": [
+      [
+        83,
+        84
+      ],
+      [
+        90,
+        91
+      ],
+      [
+        99,
+        100
+      ],
+      [
+        132,
+        133
+      ],
+      [
+        142,
+        143
+      ],
+      [
+        171,
+        172
+      ],
+      [
+        264,
+        265
+      ],
+      [
+        288,
+        289
+      ],
+      [
+        297,
+        298
+      ],
+      [
+        317,
+        318
+      ],
+      [
+        318,
+        319
+      ]
+    ],
+    "practice": "Recite the passage.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "23:115-118",
+      "chapter": "Surah Al-Mu'minun"
+    },
+    "support": [],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/23/115-118",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-046",
+    "slug": "suleiman-dua-for-wealth",
+    "collection": "core",
+    "title": "Suleiman (AS) Dua for Wealth",
+    "times": [],
+    "arabic": "قَالَ رَبِّ ٱغْفِرْ لِى وَهَبْ لِى مُلْكًا لَّا يَنۢبَغِى لِأَحَدٍ مِّنۢ بَعْدِىٓ ۖ إِنَّكَ أَنتَ ٱلْوَهَّابُ",
+    "transliteration": "Qala rabbi ighfir lee wahab lee mulkan la yanbaghee liahadin min baAAdee innaka anta alwahhabu",
+    "translation": "He said, \"My Lord, forgive me and grant me a kingdom such as will not belong to anyone after me. Indeed, You are the Bestower.\"",
+    "tu": [
+      [
+        1,
+        2
+      ],
+      [
+        40,
+        41
+      ],
+      [
+        55,
+        56
+      ],
+      [
+        91,
+        92
+      ]
+    ],
+    "ts": [
+      [
+        11,
+        12
+      ],
+      [
+        85,
+        86
+      ]
+    ],
+    "practice": "The dua of the Prophet Sulayman.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "38:35",
+      "chapter": "Surah Sad"
+    },
+    "support": [],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/38/35",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-047",
+    "slug": "yunus-dua-for-distress",
+    "collection": "core",
+    "title": "Yunus (AS) Dua for Distress",
+    "times": [],
+    "arabic": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَـٰضِبًا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ فَنَادَىٰ فِى ٱلظُّلُمَـٰتِ أَن لَّآ إِلَـٰهَ إِلَّآ أَنتَ سُبْحَـٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّـٰلِمِينَ",
+    "transliteration": "Watha alnnooni ith thahaba mughadiban fathanna an lan naqdira AAalayhi fanada fee alththulumati an la ilaha illa anta subhanaka innee kuntu mina alththalimeena",
+    "translation": "And [mention] the man of the fish [i.e., Jonah], when he went off in anger and thought that We would not decree [anything] upon him. And he called out within the darknesses, \"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.\"",
+    "tu": [
+      [
+        2,
+        5
+      ],
+      [
+        16,
+        18
+      ],
+      [
+        31,
+        33
+      ],
+      [
+        40,
+        42
+      ],
+      [
+        74,
+        75
+      ],
+      [
+        76,
+        77
+      ],
+      [
+        84,
+        88
+      ],
+      [
+        92,
+        93
+      ],
+      [
+        100,
+        101
+      ],
+      [
+        104,
+        105
+      ],
+      [
+        111,
+        112
+      ],
+      [
+        121,
+        123
+      ],
+      [
+        147,
+        152
+      ]
+    ],
+    "ts": [
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        82,
+        83
+      ],
+      [
+        83,
+        84
+      ],
+      [
+        145,
+        146
+      ],
+      [
+        146,
+        147
+      ]
+    ],
+    "practice": "The call of the Prophet Yunus (Jonah) from the darkness.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "21:87",
+      "chapter": "Surah Al-Anbiya"
+    },
+    "support": [],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/21/87",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-048",
+    "slug": "trust-and-letting-go-hasbiya-allah",
+    "collection": "core",
+    "title": "Statement of Trust and Letting Go (1 of 2)",
+    "times": [],
+    "arabic": "فَإِن تَوَلَّوْا۟ فَقُلْ حَسْبِىَ ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ ٱلْعَرْشِ ٱلْعَظِيمِ",
+    "transliteration": "Fain tawallaw faqul hasbiya Allahu la ilaha illa huwa AAalayhi tawakkaltu wahuwa rabbu alAAarshi alAAatheemi",
+    "translation": "But if they turn away, [O Muḥammad], say, \"Sufficient for me is Allāh; there is no deity except Him. On Him I have relied, and He is the Lord of the Great Throne.\"",
+    "tu": [
+      [
+        20,
+        21
+      ],
+      [
+        31,
+        32
+      ],
+      [
+        36,
+        37
+      ],
+      [
+        40,
+        41
+      ],
+      [
+        47,
+        48
+      ],
+      [
+        102,
+        104
+      ]
+    ],
+    "ts": [
+      [
+        28,
+        29
+      ],
+      [
+        87,
+        88
+      ],
+      [
+        97,
+        98
+      ]
+    ],
+    "practice": "Say it as a statement of reliance on Allah.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "9:129",
+      "chapter": "Surah At-Tawbah"
+    },
+    "support": [],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/9/129",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-049",
+    "slug": "trust-and-letting-go-hasbunallah",
+    "collection": "core",
+    "title": "Statement of Trust and Letting Go (2 of 2)",
+    "times": [],
+    "arabic": "ٱلَّذِينَ قَالَ لَهُمُ ٱلنَّاسُ إِنَّ ٱلنَّاسَ قَدْ جَمَعُوا۟ لَكُمْ فَٱخْشَوْهُمْ فَزَادَهُمْ إِيمَـٰنًا وَقَالُوا۟ حَسْبُنَا ٱللَّهُ وَنِعْمَ ٱلْوَكِيلُ",
+    "transliteration": "Allatheena qala lahumu alnnasu inna alnnasa qad jamaAAoo lakum faikhshawhum fazadahum eemanan waqaloo hasbuna Allahu waniAAma alwakeelu",
+    "translation": "Those to whom people [i.e., hypocrites] said, \"Indeed, the people have gathered against you, so fear them.\" But it [merely] increased them in faith, and they said, \"Sufficient for us is Allāh, and [He is] the best Disposer of affairs.\"",
+    "tu": [
+      [
+        4,
+        6
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        27,
+        28
+      ],
+      [
+        40,
+        41
+      ],
+      [
+        79,
+        80
+      ],
+      [
+        89,
+        90
+      ],
+      [
+        97,
+        98
+      ],
+      [
+        102,
+        103
+      ],
+      [
+        108,
+        109
+      ],
+      [
+        113,
+        114
+      ]
+    ],
+    "ts": [
+      [
+        23,
+        24
+      ],
+      [
+        24,
+        25
+      ],
+      [
+        36,
+        37
+      ],
+      [
+        37,
+        38
+      ],
+      [
+        65,
+        66
+      ],
+      [
+        110,
+        111
+      ],
+      [
+        126,
+        127
+      ]
+    ],
+    "practice": "Say it as a statement of reliance on Allah.",
+    "repeat": "",
+    "source": {
+      "book": "The Qur'an",
+      "ref": "3:173",
+      "chapter": "Surah Ali 'Imran"
+    },
+    "support": [],
+    "grade": "Qur'an",
+    "grader": "Preserved text (mutawatir)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://quran.com/3/173",
+    "provenance": {
+      "arabic": "Arabic: Quran.com API v4 text_uthmani (retrieved 2026-10-03)",
+      "translation": "translation: Saheeh International (Quran.com resource 20)",
+      "transliteration": "transliteration: Tanzil en.transliteration via risan/quran-json 3.1.2"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-050",
+    "slug": "protection-from-evil",
+    "collection": "core",
+    "title": "Dua for Protection From Evil",
+    "times": [],
+    "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+    "transliteration": "A’ūdhu bi kalimāti-llāhit-tāmmāti min sharri mā khalaq.",
+    "translation": "I seek refuge in the Perfect Word of Allah from the evil of that He created",
+    "practice": "Khawla bint Hakim reported that the Prophet said to say this on stopping at a place.",
+    "repeat": "",
+    "source": {
+      "book": "Sahih Muslim",
+      "ref": "2709",
+      "chapter": "The Book Pertaining to the Remembrance of Allah, Supplication, Repentance and Seeking Forgiveness "
+    },
+    "support": [
+      {
+        "book": "Sunan Abi Dawud",
+        "ref": "3898",
+        "chapter": "Medicine (Kitab Al-Tibb)"
+      },
+      {
+        "book": "Jami' at-Tirmidhi",
+        "ref": "3437",
+        "chapter": "Chapters on Supplication"
+      }
+    ],
+    "grade": "Sahih",
+    "grader": "Sahih Muslim (Sahihayn criterion); Abu Dawud 3898 and Tirmidhi 3437: Al-Albani (Sahih)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/muslim:2709",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-muslim #6880 = Muslim 2709",
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "translation": "fawazahmed0/hadith-api eng-muslim #6880",
+      "grade": "fawazahmed0/hadith-api grades on ara-abudawud and ara-tirmidhi"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-051",
+    "slug": "dua-for-evil-eye",
+    "collection": "core",
+    "title": "Dua for Evil Eye",
+    "times": [],
+    "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ، وَمِنْ كُلِّ عَيْنٍ لاَمَّةٍ",
+    "transliteration": "A’ūdhu bi-kalimāt-illāhi t-tāmmāti min kulli shayṭānin wa-hāmmattin, wa-min kulli ‘aynin lāmmah.",
+    "translation": "O Allah! I seek Refuge with Your Perfect Words from every devil and from poisonous pests and from every evil, harmful, envious eye",
+    "practice": "Ibn Abbas reported that the Prophet said Ibrahim used to seek refuge with these words for Isma'il and Ishaq.",
+    "repeat": "",
+    "source": {
+      "book": "Sahih al-Bukhari",
+      "ref": "3371",
+      "chapter": "Prophets"
+    },
+    "support": [
+      {
+        "book": "Sunan Ibn Majah",
+        "ref": "3525",
+        "chapter": "Chapters on Medicine"
+      }
+    ],
+    "grade": "Sahih",
+    "grader": "Sahih al-Bukhari (Sahihayn criterion); Ibn Majah 3525: Al-Albani, Arna'ut (Sahih)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/bukhari:3371",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-bukhari #3371",
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "translation": "fawazahmed0/hadith-api eng-bukhari #3371",
+      "grade": "fawazahmed0/hadith-api grades on ara-ibnmajah"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-052",
+    "slug": "visiting-the-sick",
+    "collection": "core",
+    "title": "Dua for Visiting a Sick Person",
+    "times": [],
+    "arabic": "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ",
+    "transliteration": "As'alullāha ‘l-`Aẓīma Rabba ‘l-`Arshil-`Aẓīmi an yashfiyak.",
+    "translation": "I ask Allah, the Mighty, the Lord of the mighty Throne, to cure you",
+    "practice": "Ibn Abbas reported that the Prophet said to say this with a sick person whose time has not come.",
+    "repeat": "",
+    "source": {
+      "book": "Sunan Abi Dawud",
+      "ref": "3106",
+      "chapter": "Funerals (Kitab Al-Jana'iz)"
+    },
+    "support": [
+      {
+        "book": "Jami' at-Tirmidhi",
+        "ref": "2083",
+        "chapter": "Chapters on Medicine"
+      }
+    ],
+    "grade": "Sahih",
+    "grader": "Al-Albani (Sahih); Muhammad Muhyi Al-Din Abdul Hamid (Sahih); Zubair Ali Zai (Isnaad Hasan). Tirmidhi 2083: Al-Albani (Sahih)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/abudawud:3106",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-abudawud #3106",
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "translation": "fawazahmed0/hadith-api eng-abudawud #3106",
+      "grade": "fawazahmed0/hadith-api grades on ara-abudawud"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-053",
+    "slug": "dua-for-healing",
+    "collection": "core",
+    "title": "Dua for Healing",
+    "times": [],
+    "arabic": "اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَاسَ، اشْفِهِ وَأَنْتَ الشَّافِي، لاَ شِفَاءَ إِلاَّ شِفَاؤُكَ، شِفَاءً لاَ يُغَادِرُ سَقَمًا",
+    "transliteration": "Allah humma Rabban-naas, adhhibil-ba’s, washfi antash-Shaafi laa shifaa’a illaa shifaa’uka shifaa’an laa yughaadiru saqamaa.",
+    "translation": "O Allah, the Lord of the people! Remove the trouble and heal the patient, for You are the Healer. No healing is of any avail but Yours; healing that will leave behind no ailment",
+    "practice": "Aisha reported that the Prophet passed his right hand over the sick and said this.",
+    "repeat": "",
+    "source": {
+      "book": "Sahih al-Bukhari",
+      "ref": "5743",
+      "chapter": "Medicine"
+    },
+    "support": [],
+    "grade": "Sahih",
+    "grader": "Sahih al-Bukhari (Sahihayn criterion); Albani/Arna'ut cross-check pending",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/bukhari:5743",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-bukhari #5743",
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "translation": "fawazahmed0/hadith-api eng-bukhari #5743"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-054",
+    "slug": "dua-for-money",
+    "collection": "core",
+    "title": "Dua for Money",
+    "times": [],
+    "arabic": "اللَّهُمَّ أَكْثِرْ مَالَهُ وَوَلَدَهُ، وَبَارِكْ لَهُ فِيمَا أَعْطَيْتَهُ",
+    "transliteration": "",
+    "translation": "O Allah! increase his wealth and offspring, and bless (for him) what ever you give him",
+    "practice": "The Prophet's dua for Anas ibn Malik, as Umm Sulaym asked. Many readers say it for themselves.",
+    "repeat": "",
+    "source": {
+      "book": "Sahih al-Bukhari",
+      "ref": "6334",
+      "chapter": "Invocations"
+    },
+    "support": [
+      {
+        "book": "Jami' at-Tirmidhi",
+        "ref": "3829",
+        "chapter": "Chapters on Virtues"
+      }
+    ],
+    "grade": "Sahih",
+    "grader": "Sahih al-Bukhari (Sahihayn criterion); Tirmidhi 3829: Al-Albani (Sahih)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/bukhari:6334",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-bukhari #6334 (third person, for Anas)",
+      "translation": "fawazahmed0/hadith-api eng-bukhari #6334",
+      "grade": "fawazahmed0/hadith-api grades on ara-tirmidhi",
+      "selection": "The owner's list gave a first-person wording; the narrated third-person wording is shown, as the owner decided."
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-055",
+    "slug": "dua-to-remove-mountains-of-debt",
+    "collection": "core",
+    "title": "Dua to Remove Mountains of Debt",
+    "times": [],
+    "arabic": "اللَّهُمَّ اكْفِنِي بِحَلاَلِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ",
+    "transliteration": "Allahumma akfini bihalalika an haramika wa agnini bifadlika amman siwak.",
+    "translation": "O Allah, suffice me with Your lawful against Your prohibited, and make me independent of all those besides You",
+    "practice": "Ali reported that the Prophet taught these words to a man struggling with what he owed.",
+    "repeat": "",
+    "source": {
+      "book": "Jami' at-Tirmidhi",
+      "ref": "3563",
+      "chapter": "Chapters on Supplication"
+    },
+    "support": [],
+    "grade": "Hasan",
+    "grader": "Ahmad Muhammad Shakir (Hasan); Al-Albani (Hasan); Bashar Awad Maarouf (Hasan); Zubair Ali Zai (Hasan)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/tirmidhi:3563",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-tirmidhi #3563",
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "translation": "fawazahmed0/hadith-api eng-tirmidhi #3563",
+      "grade": "fawazahmed0/hadith-api grades on ara-tirmidhi"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-056",
+    "slug": "protection-from-debt-and-anxiety",
+    "collection": "core",
+    "title": "Dua for Protection from Debt and Anxiety",
+    "times": [],
+    "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْجُبْنِ وَالْبُخْلِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ",
+    "transliteration": "Allahumma innee a’uzubika min alhammi wal huzni wal ajzi wal kasli wal bukhli wal jubni wa dala’id dayni wa galabatir rijaal.",
+    "translation": "O Allah! I seek refuge with You from worry and grief, from incapacity and laziness, from cowardice and miserliness, from being heavily in debt and from being overpowered by (other) men",
+    "practice": "Anas reported that the Prophet used to say this.",
+    "repeat": "",
+    "source": {
+      "book": "Sahih al-Bukhari",
+      "ref": "6369",
+      "chapter": "Invocations"
+    },
+    "support": [],
+    "grade": "Sahih",
+    "grader": "Sahih al-Bukhari (Sahihayn criterion); Albani/Arna'ut cross-check pending",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/bukhari:6369",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-bukhari #6369",
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "translation": "fawazahmed0/hadith-api eng-bukhari #6369"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-057",
+    "slug": "dua-for-worry",
+    "collection": "core",
+    "title": "Prophet (SAW) Dua for Worry",
+    "times": [],
+    "arabic": "يَا حَيُّ يَا قَيُّوْمُ بِرَحْمَتِكَ أَسْتَغِيْثُ، وَأَصْلِحْ لِيْ شَأْنِيْ كُلَّهُ وَلاَ تَكِلْنِيْ إِلَى نَفْسِيْ طَرْفَةَ عَيْنٍ أَبَدًا",
+    "transliteration": "Yā Ḥayyu yā Qayyūm, bi-raḥmatika astaghīth, aṣliḥ lī sha’nī kullah, wa lā takilnī ilā nafsī ṭarfata ʿayn.",
+    "translation": "O Ever-Living, O Self-Sustaining, by Your mercy I seek help, rectify all my affairs and do not leave me to myself even for the blink of an eye.",
+    "practice": "Anas reported that the Prophet said this whenever a matter distressed him.",
+    "repeat": "",
+    "source": {
+      "book": "An-Nasa'i, 'Amal al-Yawm wal-Layla",
+      "ref": "575",
+      "chapter": ""
+    },
+    "support": [
+      {
+        "book": "Jami' at-Tirmidhi",
+        "ref": "3524",
+        "chapter": "Chapters on Supplication"
+      },
+      {
+        "book": "Al-Hakim, Al-Mustadrak",
+        "ref": "1/545",
+        "chapter": ""
+      }
+    ],
+    "grade": "Hasan",
+    "grader": "As noted by fitrahive/dua-dhikr (As-Sahihah no. 227: hasan). Tirmidhi 3524, first request only: Al-Albani (Hasan); Zubair Ali Zai (Hasan)",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/tirmidhi:3524",
+    "provenance": {
+      "arabic": "fitrahive/dua-dhikr morning-dhikr (MIT), 'Asking Allah for Guidance'",
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "translation": "fitrahive/dua-dhikr morning-dhikr (MIT)",
+      "grade": "fitrahive/dua-dhikr source note: HR. an-Nasa'i in 'Amalul Yaum wal Lailah No. 575, and al-Hakim 1/545, Sahih at-Targhib wat Tarhib 1/417 No. 661, As-Sahihah No. 227, hasan"
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-058",
+    "slug": "durood-ibrahim",
+    "collection": "core",
+    "title": "Durood-e-Ibrahim",
+    "times": [],
+    "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ، وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "transliteration": "",
+    "translation": "O Allah! Send Your Mercy on Muhammad and on the family of Muhammad, as You sent Your Mercy on Abraham and on the family of Abraham, for You are the Most Praise-worthy, the Most Glorious. O Allah! Send Your Blessings on Muhammad and the family of Muhammad, as You sent your Blessings on Abraham and on the family of Abraham, for You are the Most Praise-worthy, the Most Glorious",
+    "practice": "The words the Prophet taught for sending blessings on him.",
+    "repeat": "",
+    "source": {
+      "book": "Sahih al-Bukhari",
+      "ref": "3370",
+      "chapter": "Prophets"
+    },
+    "support": [],
+    "grade": "Sahih",
+    "grader": "Sahih al-Bukhari (Sahihayn criterion); Albani/Arna'ut cross-check pending",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "https://sunnah.com/bukhari:3370",
+    "provenance": {
+      "arabic": "fawazahmed0/hadith-api ara-bukhari #3370",
+      "translation": "fawazahmed0/hadith-api eng-bukhari #3370",
+      "selection": "Named as 'Durood e Ibrahim' in the owner's Preparation list."
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-059",
+    "slug": "dua-for-halal-riqz",
+    "collection": "core",
+    "title": "Dua for Halal Riqz",
+    "unsourced": true,
+    "times": [],
+    "arabic": "",
+    "transliteration": "Ya Razzaqu urzuqni halalan tayyiba.",
+    "translation": "",
+    "practice": "",
+    "repeat": "",
+    "source": {
+      "book": "Mentioned by scholars",
+      "ref": "",
+      "chapter": ""
+    },
+    "support": [],
+    "grade": "",
+    "grader": "",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "",
+    "provenance": {
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no Arabic and no graded source."
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-060",
+    "slug": "dua-for-blessings-in-provision",
+    "collection": "core",
+    "title": "Dua for Blessings in Provision",
+    "unsourced": true,
+    "times": [],
+    "arabic": "",
+    "transliteration": "Allahummaghfir li dhanbi, wa wassi' li fi dari, wa barik li fi rizqi.",
+    "translation": "",
+    "practice": "",
+    "repeat": "",
+    "source": {
+      "book": "Mentioned by scholars",
+      "ref": "",
+      "chapter": ""
+    },
+    "support": [],
+    "grade": "",
+    "grader": "",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "",
+    "provenance": {
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no Arabic and no graded source."
+    },
+    "verified": false,
+    "verified_by": "",
+    "verified_on": ""
+  },
+  {
+    "id": "dua-061",
+    "slug": "dua-for-depression",
+    "collection": "core",
+    "title": "Dua for Depression",
+    "unsourced": true,
+    "times": [],
+    "arabic": "",
+    "transliteration": "Allahumma Akhrijnee min adhulumaati ilaa annur.",
+    "translation": "",
+    "practice": "",
+    "repeat": "",
+    "source": {
+      "book": "Mentioned by scholars",
+      "ref": "",
+      "chapter": ""
+    },
+    "support": [],
+    "grade": "",
+    "grader": "",
+    "exegesis": {
+      "work": "",
+      "note": ""
+    },
+    "takhrij_url": "",
+    "provenance": {
+      "transliteration": "Supplied by the owner (library brief, 2026-10-03), spelling as typed; not from a cited repo; owner to check",
+      "selection": "Kept at the owner's request. Searched for Arabic in the pinned hadith dataset (Bukhari, Muslim, Abu Dawud, Tirmidhi, Ibn Majah, Nasa'i, Malik, Nawawi, Qudsi), fitrahive/dua-dhikr and a Hisn al-Muslim dataset: not found, so there is no Arabic and no graded source."
     },
     "verified": false,
     "verified_by": "",

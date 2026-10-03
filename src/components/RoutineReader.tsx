@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import type { Entry } from "@/lib/types";
-import { citation } from "@/lib/entries";
+import { UNSOURCED_NOTE, citation } from "@/lib/entries";
 import { bismillah, chapter, loadSurah, readHref, tajweedForEntry, type Verse } from "@/lib/quran";
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { doneKey, useDone } from "@/lib/progress";
@@ -152,7 +152,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
     else if (info.offset.x > SWIPE || info.velocity.x > 500) go(-1);
   };
 
-  const lines = useMemo(() => (cur?.verse ? [cur.verse.ar] : e ? e.arabic.split("\n") : []), [e, cur?.verse]);
+  const lines = useMemo(() => (cur?.verse ? [cur.verse.ar] : e ? e.arabic.split("\n").filter((l) => l.trim()) : []), [e, cur?.verse]);
   const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
   const isDone = e ? done.has(doneKey(set, e.id)) : false;
 
@@ -212,6 +212,9 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
             <div className="max-h-[46dvh] overflow-y-auto px-5 py-5 short:max-h-[calc(100dvh-13rem)] short:py-2">
               {showBismillah && <p lang="ar" dir="rtl" className="arabic mb-2 border-b border-line pb-3 !text-[1.6rem] text-card-soft">{bismillah}</p>}
+              {e.unsourced && (
+                <p className="display py-6 text-center text-[calc(clamp(1.6rem,6vw,2.1rem)*var(--translit-scale))] leading-snug">{e.transliteration}</p>
+              )}
               {lines.map((l, k) => (
                 <p key={k} lang="ar" dir="rtl" className="arabic arabic-read !text-center">
                   {lines.length === 1 && q.prefs.tajweed && (verse?.tg ?? tg)
@@ -234,7 +237,8 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
       <div className="mt-6 text-center short:mt-1 short:max-h-[calc(100dvh-6.5rem)] short:overflow-y-auto">
         {e.repeat && <p className="mb-3"><span className="rounded-full border border-line px-3.5 py-1.5 text-small">{e.repeat}</span></p>}
-        {q.prefs.translit && (
+        {e.unsourced && <p className="mx-auto max-w-[52ch] text-small">{UNSOURCED_NOTE}</p>}
+        {q.prefs.translit && !e.unsourced && (
           verse
             ? <p className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug"><Translit text={verse.tr} marks={verse.tu} silent={verse.ts} /></p>
             : e.transliteration

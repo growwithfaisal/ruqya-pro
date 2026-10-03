@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { CategoryList } from "@/components/CategoryList";
 import { RoutineReader } from "@/components/RoutineReader";
 import { INTENTS, SETS, deckEntries } from "@/lib/entries";
+import { categoryEntries } from "@/lib/library";
 import type { Intent, TimeTag } from "@/lib/types";
 import { PageShell } from "@/components/PageShell";
 
@@ -30,7 +31,7 @@ export default async function Recitations({ searchParams }: PageProps<"/recitati
   if (cat) {
     return (
       <Suspense>
-        <RoutineReader set={cat.id} title={cat.label} entries={deckEntries.filter((e) => e.category.includes(cat.id))} exit="/recitations" />
+        <RoutineReader set={cat.id} title={cat.label} entries={categoryEntries(cat.id)} exit="/recitations" />
       </Suspense>
     );
   }
@@ -40,7 +41,7 @@ export default async function Recitations({ searchParams }: PageProps<"/recitati
       <h1 className="t-h1">Recitations</h1>
       <p className="mt-2 max-w-[52ch] text-ink-soft">Choose what you need. Each opens one recitation at a time, with its source, and remembers what you have recited today.</p>
       <div className="mt-6">
-        <CategoryList ids={Object.fromEntries(INTENTS.map((i) => [i.id, deckEntries.filter((e) => e.category.includes(i.id)).map((e) => e.id)])) as Record<Intent, string[]>} />
+        <CategoryList ids={Object.fromEntries(INTENTS.map((i) => [i.id, categoryEntries(i.id).map((e) => e.id)])) as Record<Intent, string[]>} />
       </div>
     </PageShell>
   );

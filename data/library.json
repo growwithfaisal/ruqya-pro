@@ -1,0 +1,392 @@
+{
+  "version": 1,
+  "categories": {
+    "daily-protection": [
+      {
+        "id": "dua-001"
+      },
+      {
+        "id": "dua-002"
+      },
+      {
+        "id": "dua-004",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-005",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-006",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-042"
+      },
+      {
+        "id": "dua-010",
+        "count": {
+          "times": 3,
+          "basis": "Tirmidhi 3388"
+        }
+      },
+      {
+        "id": "dua-050",
+        "count": {
+          "times": 3,
+          "basis": "Tirmidhi 3604"
+        }
+      }
+    ],
+    "pain": [
+      {
+        "id": "dua-001",
+        "count": {
+          "times": 7,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-008",
+        "count": {
+          "text": "Bismillah three times, then the dua of refuge seven times",
+          "basis": "Muslim 2202"
+        }
+      },
+      {
+        "id": "dua-052",
+        "count": {
+          "times": 7,
+          "basis": "Abu Dawud 3106"
+        }
+      },
+      {
+        "id": "dua-053"
+      },
+      {
+        "id": "dua-044"
+      },
+      {
+        "id": "dua-043"
+      }
+    ],
+    "evil-eye": [
+      {
+        "id": "dua-004",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-005",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-006",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-001"
+      },
+      {
+        "id": "dua-002"
+      },
+      {
+        "id": "dua-010",
+        "count": {
+          "times": 3,
+          "basis": "Tirmidhi 3388"
+        }
+      },
+      {
+        "id": "dua-050",
+        "count": {
+          "times": 3,
+          "basis": "Tirmidhi 3604"
+        }
+      },
+      {
+        "id": "dua-051",
+        "count": {
+          "times": 3,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-009"
+      }
+    ],
+    "financial": [
+      {
+        "id": "dua-019"
+      },
+      {
+        "id": "dua-045"
+      },
+      {
+        "id": "dua-054"
+      },
+      {
+        "id": "dua-059"
+      },
+      {
+        "id": "dua-055"
+      },
+      {
+        "id": "dua-060"
+      },
+      {
+        "id": "dua-056"
+      },
+      {
+        "id": "dua-046"
+      }
+    ],
+    "emotional": [
+      {
+        "id": "dua-057"
+      },
+      {
+        "id": "dua-047"
+      },
+      {
+        "id": "dua-056",
+        "title": "Dua for Anxiety"
+      },
+      {
+        "id": "dua-061"
+      },
+      {
+        "id": "dua-032"
+      },
+      {
+        "id": "dua-048",
+        "count": {
+          "times": 7,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-049",
+        "count": {
+          "times": 7,
+          "basis": null
+        }
+      }
+    ]
+  },
+  "selfRuqyah": {
+    "preparation": [
+      {
+        "text": "Make wudu."
+      },
+      {
+        "text": "Make your intention sincerely for Allah.",
+        "source": {
+          "label": "Sahih al-Bukhari 1",
+          "grade": "Sahih",
+          "href": "https://sunnah.com/bukhari:1"
+        }
+      },
+      {
+        "text": "Turn to Allah in sincere repentance.",
+        "source": {
+          "label": "Qur'an 66:8",
+          "href": "/quran/read?s=66&v=8"
+        }
+      },
+      {
+        "text": "Remove idols and amulets from your home and from your body.",
+        "source": {
+          "label": "Sunan Abi Dawud 3883",
+          "grade": "Sahih",
+          "href": "https://sunnah.com/abudawud:3883"
+        }
+      },
+      {
+        "text": "Send blessings on the Prophet, with Durood-e-Ibrahim.",
+        "entryId": "dua-058"
+      }
+    ],
+    "ayat": [
+      {
+        "id": "dua-004",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-005",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-006",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5082"
+        }
+      },
+      {
+        "id": "dua-001",
+        "count": {
+          "times": 3,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-002",
+        "count": {
+          "times": 3,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-013"
+      },
+      {
+        "id": "dua-014"
+      },
+      {
+        "id": "dua-015"
+      },
+      {
+        "id": "dua-003",
+        "count": {
+          "times": 3,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-035"
+      },
+      {
+        "id": "dua-036"
+      },
+      {
+        "id": "dua-022"
+      },
+      {
+        "id": "dua-016"
+      },
+      {
+        "id": "dua-029"
+      },
+      {
+        "id": "dua-021"
+      },
+      {
+        "id": "dua-030"
+      },
+      {
+        "id": "dua-028"
+      },
+      {
+        "id": "dua-025"
+      },
+      {
+        "id": "dua-027"
+      },
+      {
+        "id": "dua-017"
+      },
+      {
+        "id": "dua-026"
+      },
+      {
+        "id": "dua-024"
+      },
+      {
+        "id": "dua-018"
+      },
+      {
+        "id": "dua-020"
+      },
+      {
+        "id": "dua-019"
+      },
+      {
+        "id": "dua-038"
+      },
+      {
+        "id": "dua-023"
+      },
+      {
+        "id": "dua-034"
+      }
+    ],
+    "duas": [
+      {
+        "id": "dua-010",
+        "count": {
+          "times": 3,
+          "basis": "Tirmidhi 3388"
+        }
+      },
+      {
+        "id": "dua-050",
+        "count": {
+          "times": 3,
+          "basis": "Tirmidhi 3604"
+        }
+      },
+      {
+        "id": "dua-051",
+        "count": {
+          "times": 3,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-009",
+        "count": {
+          "times": 3,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-007",
+        "count": {
+          "times": 3,
+          "basis": null
+        }
+      },
+      {
+        "id": "dua-008",
+        "count": {
+          "text": "Bismillah three times, then the dua of refuge seven times",
+          "basis": "Muslim 2202"
+        }
+      },
+      {
+        "id": "dua-053"
+      },
+      {
+        "id": "dua-033",
+        "count": {
+          "times": 3,
+          "basis": "Abu Dawud 5090"
+        }
+      }
+    ]
+  }
+}

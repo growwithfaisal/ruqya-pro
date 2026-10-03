@@ -133,7 +133,17 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 ## Components
 
 ### Recitations tab
-- The tab is the four needs as outlined 20px-radius rows (glyph, label, blurb, then "13 recitations", "3 of 13 recited today" or an accent "All 13 recited today" chip, chevron). Tapping a row opens the category in the one-card reader (`RoutineReader`), exactly like the morning, evening and bedtime adhkar, with its own progress for the day; I'm Done returns to the tab. There are no pill tabs, search box or flat list here; individual recitation pages remain for Search, Sources and "Read in full".
+- The tab is the five needs as outlined 20px-radius rows (glyph, label, blurb, then "13 recitations", "3 of 13 recited today" or an accent "All 13 recited today" chip, chevron). Each need has its own abstract line glyph, none a figure or a crescent: a star, concentric ripples, two overlapping rings, stacked layers (Financial Blockages) and a wave (Emotional Reset). Tapping a row opens the category in the one-card reader (`RoutineReader`), exactly like the morning, evening and bedtime adhkar, with its own progress for the day; I'm Done returns to the tab. There are no pill tabs, search box or flat list here; individual recitation pages remain for Search, Sources and "Read in full".
+
+### Self-Ruqyah page
+- Four ruled sections on the sky, no boxes, in this order: Preparation, How it was done, Ruqyah Ayats, Ruqyah Duas. Each has a display-face heading and one plain line.
+- **Preparation** (`Preparation`) is a numbered ruled list: the numeral in the accent display face, one instruction in body size, and under it, only where a source exists, an underlined link to the book (sunnah.com, or the Qur'an reader) followed by the grade. The Durood step carries its own expandable row so its Arabic can be read in place.
+- **How it was done** (`MethodReports`) shows the first report as a glass card with a heading and the narration clamped to about four lines (92px) under a soft fade into the card colour; a quiet pill button below reads "Show more" with a chevron. It animates the card open to the full quote and reveals the second report in the same motion (height measured from the content, a grid-rows reveal for the second report, which is `inert` while closed). The button toggles `aria-expanded`/`aria-controls`, reads "Show less" with the chevron turned, is a 44px target and is operable by keyboard. Under reduced motion the change is instant.
+- **Ruqyah Ayats / Duas** are ruled lists of `EntryDisclosure` rows (title in the display face; under it the citation, then the count chip). Opening a row shows Arabic, transliteration, translation, the practice line and the citation.
+
+### Count label and unsourced label
+- The count sits in the meta line as plain text, never a coloured badge: "Three times · Tirmidhi 3388" where a hadith gives the number, "Suggested: seven times" where it does not. In the one-card reader it is a hairline chip under the Arabic with the same wording.
+- A dua with no graded source has no Arabic block. The transliteration takes the display face, and one muted line beneath reads "Not from a graded hadith. Scholars mention this dua." The citation badge and the Sources page say "No graded source"; the drawer explains in a sentence instead of showing an empty Arabic section.
 
 ### Citation badge and drawer
 - Pill with grade and reference. Opens a bottom sheet on mobile and a 30rem right panel from 768px: Arabic, grade, grader, book, reference, chapter, exegetical note, link to `/sources#id`.
