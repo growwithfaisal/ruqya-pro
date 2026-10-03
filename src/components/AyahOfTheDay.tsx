@@ -55,7 +55,7 @@ export function AyahOfTheDay() {
 
         <Link
           href={readHref(pick.surah, pick.verse)}
-          className="group mt-4 flex min-h-14 items-center justify-between rounded-full border border-line px-5 no-underline"
+          className="press-row group mt-4 flex min-h-14 items-center justify-between rounded-full border border-line px-5 no-underline"
         >
           <span>Read {c.name} from this verse</span>
           <Chevron className="text-ink-soft transition-transform duration-300 group-hover:translate-x-1" />

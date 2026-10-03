@@ -44,7 +44,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
         <button
           onClick={() => setPick(c)}
           aria-label={`${c.name}, ${c.verses} verses. Choose where to start`}
-          className="flex min-h-[4.5rem] min-w-0 flex-1 flex-wrap items-center gap-x-3 px-4 py-3 text-left"
+          className="press-row flex min-h-[4.5rem] min-w-0 flex-1 flex-wrap items-center gap-x-3 rounded-l-[20px] px-4 py-3 text-left"
         >
           <span className="grid min-w-0 flex-[1_1_8rem] [overflow-wrap:anywhere]">
             <span className="display text-title leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
@@ -84,7 +84,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
             role="tab"
             aria-selected={tab === t}
             onClick={() => setTab(t)}
-            className={`min-h-11 flex-1 rounded-full text-base font-semibold transition-colors ${tab === t ? "bg-accent text-accent-ink" : ""}`}
+            className={`press-icon min-h-11 flex-1 rounded-full text-base font-semibold transition-colors ${tab === t ? "bg-accent text-accent-ink" : ""}`}
           >
             {t === "juz" ? "Juz" : t === "chapter" ? "Chapter" : `Bookmarks${q.marks.length ? ` (${q.marks.length})` : ""}`}
           </button>
@@ -115,7 +115,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
           {juz.map((j) => (
             <li key={j.n} className="rounded-[20px] border border-line">
               <details className="group">
-                <summary className="flex min-h-[4.5rem] cursor-pointer list-none items-center gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden">
+                <summary className="press-row flex min-h-[4.5rem] cursor-pointer list-none items-center gap-3 rounded-[20px] px-4 py-3 [&::-webkit-details-marker]:hidden">
                   <span className="grid flex-1">
                     <span className="display text-title leading-tight">Juz {j.n}</span>
                     <span className="text-meta text-ink-soft">{juzSpan(j)}</span>
@@ -125,7 +125,7 @@ export function ChapterList({ onPick }: { onPick?: () => void }) {
                 <ul className="grid gap-1 px-2 pb-3">
                   {j.ranges.map((r) => (
                     <li key={r.surah}>
-                      <Link href={readHref(r.surah, r.from)} onClick={onPick} className="flex min-h-11 items-center justify-between rounded-full px-3 no-underline hover:bg-[color-mix(in_oklch,var(--ink)_8%,transparent)]">
+                      <Link href={readHref(r.surah, r.from)} onClick={onPick} className="press-row flex min-h-11 items-center justify-between rounded-full px-3 no-underline hover:bg-[color-mix(in_oklch,var(--ink)_8%,transparent)]">
                         <span>{chapter(r.surah).name}</span>
                         <span className="text-meta text-ink-soft tabular">verses {r.from}{r.to > r.from ? `–${r.to}` : ""}</span>
                       </Link>
@@ -177,7 +177,7 @@ function Bookmarks({ onPick }: { onPick?: () => void }) {
         const verse = text[s]?.[v - 1];
         return (
           <li key={key} className="flex items-stretch rounded-[20px] border border-line">
-            <Link href={readHref(s, v)} onClick={onPick} className="grid min-h-[4.5rem] flex-1 gap-1 px-4 py-3 no-underline">
+            <Link href={readHref(s, v)} onClick={onPick} className="press-row grid min-h-[4.5rem] flex-1 gap-1 rounded-l-[20px] px-4 py-3 no-underline">
               <span className="display text-title leading-tight">{chapter(s).name} <span className="tabular text-ink-soft">{s}:{v}</span></span>
               {verse ? (
                 <>

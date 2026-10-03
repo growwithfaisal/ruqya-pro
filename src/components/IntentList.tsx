@@ -16,7 +16,7 @@ export function IntentList() {
               <li key={it.id} className="rise border-b border-line" style={{ ["--i" as string]: i + 2 }}>
                 <Link
                   href={`/recitations?intent=${it.id}`}
-                  className="group flex min-h-[5.25rem] items-center gap-4 py-4 no-underline transition-colors"
+                  className="press-row group -mx-3 flex min-h-[5.25rem] items-center gap-4 rounded-2xl px-3 py-4 no-underline"
                 >
                   <Glyph className="shrink-0 text-accent" size={30} />
                   <span className="grid min-w-0 flex-1">

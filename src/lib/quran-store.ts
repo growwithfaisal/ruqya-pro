@@ -3,6 +3,7 @@ import { useCallback, useMemo, useSyncExternalStore } from "react";
 import { DATA_VERSION, QURAN_CACHE, chapters } from "./quran";
 import { readInputs } from "./prayer";
 import { WAQIAH, addToNight, nightOf, type NightSeen } from "./quran-night";
+import { haptic } from "./haptics";
 
 /**
  * Everything a reader does stays in this browser. Keys are versioned so a future format can migrate them.
@@ -141,7 +142,7 @@ export function markSeen(surah: number, verse: number): boolean {
   write("seen", seen);
   if (seen.keys.length >= VERSES_PER_DAY && !s.days.includes(today)) {
     write("days", [...s.days, today].sort());
-    try { navigator.vibrate?.(14); } catch {}
+    haptic(14);
     return true;
   }
   return false;

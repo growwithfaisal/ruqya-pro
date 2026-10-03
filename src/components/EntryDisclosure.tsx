@@ -9,7 +9,7 @@ import { Chevron } from "./Glyphs";
 export function EntryDisclosure({ entry }: { entry: Entry }) {
   return (
     <details id={entry.slug} className="group border-b border-line">
-      <summary className="flex min-h-[4rem] cursor-pointer list-none items-center gap-3 py-3 [&::-webkit-details-marker]:hidden">
+      <summary className="press-row -mx-3 flex min-h-[4rem] cursor-pointer list-none items-center gap-3 rounded-2xl px-3 py-3 [&::-webkit-details-marker]:hidden">
         <span className="grid flex-1">
           <span className="display text-title leading-tight">{entry.title}</span>
           <span className="text-meta text-ink-soft">{[surahName(entry), citation(entry), entry.repeat].filter(Boolean).join(" · ")}</span>

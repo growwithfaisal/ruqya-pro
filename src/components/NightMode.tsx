@@ -11,7 +11,7 @@ export function NightButton() {
       onClick={() => setNight(!night)}
       aria-pressed={night}
       aria-label="Night mode"
-      className={`grid min-h-[44px] min-w-[44px] shrink-0 place-items-center rounded-full border transition-colors duration-300 ${
+      className={`press-icon grid min-h-[44px] min-w-[44px] shrink-0 place-items-center rounded-full border transition-colors duration-300 ${
         night ? "border-transparent bg-[color-mix(in_oklch,var(--accent)_26%,transparent)] text-accent" : "border-line"
       }`}
     >

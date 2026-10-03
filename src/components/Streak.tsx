@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
 import { motion, useReducedMotion } from "framer-motion";
 import { MONTH_GOAL, addDays, bestStreak, currentStreak, daysInMonth, localDate, useQuran, weekOf } from "@/lib/quran-store";
 import { Book, Calendar, Check, Chevron } from "./Glyphs";
+import { Sheet } from "./Sheet";
 
 const LETTERS = ["M", "T", "W", "T", "F", "S", "S"];
 const longDay = (iso: string) => new Date(iso + "T12:00").toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
@@ -81,66 +81,57 @@ function CalendarSheet() {
   const isNow = ym === q.today.slice(0, 7);
 
   return (
-    <Dialog.Root open={open} onOpenChange={(o) => { setOpen(o); if (o) setYm(localDate().slice(0, 7)); }}>
-      <Dialog.Trigger aria-label="Open the reading calendar" className="grid min-h-14 min-w-14 place-items-center">
+    <>
+      <button
+        type="button"
+        onClick={() => { setYm(localDate().slice(0, 7)); setOpen(true); }}
+        aria-haspopup="dialog"
+        aria-label="Open the reading calendar"
+        className="press-row grid min-h-14 min-w-14 place-items-center"
+      >
         <Calendar size={26} />
-      </Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Overlay className="drawer-overlay fixed inset-0 z-40 bg-black/45" />
-        <Dialog.Content className="drawer-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col glass-strong rounded-t-[28px] border border-line text-card-ink shadow-[0_-16px_48px_-16px_rgb(0_0_0/0.4)] md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[26rem] md:rounded-l-[28px] md:rounded-tr-none">
-          <div className="flex items-start justify-between gap-4 px-6 pb-2 pt-6">
-            <div>
-              <Dialog.Title className="display text-h3 leading-tight">Your reading days</Dialog.Title>
-              <Dialog.Description className="mt-1 text-small text-card-soft">
-                A day counts after 10 verses. Kept on this device only.
-              </Dialog.Description>
-            </div>
-            <Dialog.Close className="btn btn-sm btn-secondary shrink-0">Close</Dialog.Close>
-          </div>
+      </button>
+      <Sheet open={open} onOpenChange={setOpen} title="Your reading days" description="A day counts after 10 verses. Kept on this device only.">
+        <div className="mt-3 flex items-center justify-between">
+          <button onClick={() => shift(-1)} aria-label="Previous month" className="press-icon grid min-h-11 min-w-11 place-items-center rounded-full border border-line"><Chevron className="rotate-180" /></button>
+          <p className="display text-title">{title}</p>
+          <button onClick={() => shift(1)} disabled={isNow} aria-label="Next month" className="press-icon grid min-h-11 min-w-11 place-items-center rounded-full border border-line disabled:opacity-30"><Chevron /></button>
+        </div>
 
-          <div className="overflow-y-auto px-6 pb-8">
-            <div className="mt-3 flex items-center justify-between">
-              <button onClick={() => shift(-1)} aria-label="Previous month" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line"><Chevron className="rotate-180" /></button>
-              <p className="display text-title">{title}</p>
-              <button onClick={() => shift(1)} disabled={isNow} aria-label="Next month" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line disabled:opacity-30"><Chevron /></button>
-            </div>
+        <div className="mt-4 grid grid-cols-7 gap-y-1.5 text-center" role="grid" aria-label={title}>
+          {LETTERS.map((l, i) => <span key={i} className="pb-1 text-meta text-card-soft" aria-hidden>{l}</span>)}
+          {Array.from({ length: lead }, (_, i) => <span key={"e" + i} />)}
+          {Array.from({ length: count }, (_, i) => {
+            const d = `${ym}-${String(i + 1).padStart(2, "0")}`;
+            const read = days.has(d);
+            return (
+              <span
+                key={d}
+                role="gridcell"
+                aria-label={`${longDay(d)}${read ? ", read" : ""}`}
+                className={`mx-auto grid size-10 place-items-center rounded-full text-small tabular ${
+                  read ? "bg-accent font-semibold text-accent-ink" : d > q.today ? "text-card-soft" : ""
+                } ${d === q.today ? "ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--card)]" : ""}`}
+              >
+                {i + 1}
+              </span>
+            );
+          })}
+        </div>
 
-            <div className="mt-4 grid grid-cols-7 gap-y-1.5 text-center" role="grid" aria-label={title}>
-              {LETTERS.map((l, i) => <span key={i} className="pb-1 text-meta text-card-soft" aria-hidden>{l}</span>)}
-              {Array.from({ length: lead }, (_, i) => <span key={"e" + i} />)}
-              {Array.from({ length: count }, (_, i) => {
-                const d = `${ym}-${String(i + 1).padStart(2, "0")}`;
-                const read = days.has(d);
-                return (
-                  <span
-                    key={d}
-                    role="gridcell"
-                    aria-label={`${longDay(d)}${read ? ", read" : ""}`}
-                    className={`mx-auto grid size-10 place-items-center rounded-full text-small tabular ${
-                      read ? "bg-accent font-semibold text-accent-ink" : d > q.today ? "text-card-soft" : ""
-                    } ${d === q.today ? "ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--card)]" : ""}`}
-                  >
-                    {i + 1}
-                  </span>
-                );
-              })}
+        <dl className="mt-6 grid grid-cols-3 gap-3 border-t border-line pt-5 text-center">
+          {[
+            [currentStreak(q.days, q.today), "Day streak"],
+            [bestStreak(q.days), "Best streak"],
+            [daysInMonth(q.days, q.today.slice(0, 7)), "This month"],
+          ].map(([n, label]) => (
+            <div key={label as string}>
+              <dd className="display tabular text-[1.8rem] leading-none">{n}</dd>
+              <dt className="mt-1 text-meta text-card-soft">{label}</dt>
             </div>
-
-            <dl className="mt-6 grid grid-cols-3 gap-3 border-t border-line pt-5 text-center">
-              {[
-                [currentStreak(q.days, q.today), "Day streak"],
-                [bestStreak(q.days), "Best streak"],
-                [daysInMonth(q.days, q.today.slice(0, 7)), "This month"],
-              ].map(([n, label]) => (
-                <div key={label as string}>
-                  <dd className="display tabular text-[1.8rem] leading-none">{n}</dd>
-                  <dt className="mt-1 text-meta text-card-soft">{label}</dt>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+          ))}
+        </dl>
+      </Sheet>
+    </>
   );
 }

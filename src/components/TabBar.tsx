@@ -65,7 +65,7 @@ export function TabBar() {
               href={n.href}
               onClick={() => setMore(false)}
               aria-current={isActive(path, n.href) ? "page" : undefined}
-              className="flex min-h-14 items-center justify-between border-t border-line text-lead no-underline"
+              className="press-row -mx-3 flex min-h-14 items-center justify-between rounded-2xl border-t border-line px-3 text-lead no-underline"
             >
               {n.label}
               <Chevron className="text-card-soft" />

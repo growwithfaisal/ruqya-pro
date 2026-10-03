@@ -6,6 +6,7 @@ import { SkyBackdrop } from "@/components/SkyBackdrop";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PwaRegister } from "@/components/PwaRegister";
+import { EdgeWatch } from "@/components/EdgeWatch";
 import { SkyClock } from "@/components/SkyClock";
 import { TabBar } from "@/components/TabBar";
 import { OfflineSync } from "@/components/OfflineSync";
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <Suspense fallback={null}><TabBar /></Suspense>
         <PwaRegister />
+        <EdgeWatch />
         <SkyClock />
         <OfflineSync />
         <ReminderSync />

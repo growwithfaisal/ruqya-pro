@@ -87,7 +87,7 @@ export function SkyHero({ setIds, children }: { setIds: Record<TimeTag, string[]
             <path d={`M${P0[0]} ${P0[1]} Q${C[0]} ${C[1]} ${P2[0]} ${P2[1]}`} fill="none" stroke="var(--line)" strokeWidth="1.5" strokeDasharray="2 7" strokeLinecap="round" />
             <line x1="8" y1="142" x2="392" y2="142" stroke="var(--line)" strokeWidth="1" />
             {now && (
-              <g style={{ transform: `translate(${x}px, ${y}px)`, transition: "transform 1.2s cubic-bezier(0.16,1,0.3,1)" }}>
+              <g className="motion-glide" style={{ transform: `translate(${x}px, ${y}px)`, transition: "transform 1.2s cubic-bezier(0.16,1,0.3,1)" }}>
                 <circle r={body === "sun" ? 56 : 44} fill="url(#orbglow)" />
                 <circle r={body === "sun" ? 17 : 14} fill="var(--orb)" />
               </g>
@@ -101,7 +101,7 @@ export function SkyHero({ setIds, children }: { setIds: Record<TimeTag, string[]
         </div>
 
         <div className="pb-1 md:col-start-2 md:row-span-2 md:row-start-1 short:col-start-2 short:row-span-2 short:row-start-1">
-          <h1 id="hero-line" className="display text-[clamp(2.1rem,7vw,3.6rem)] leading-[1.06] compact:text-[clamp(1.9rem,6.4vw,3.6rem)] md:text-[clamp(2.4rem,5.4vw,3.6rem)] short:text-[1.9rem]">{now ? LINE[sky] : LINE.day}</h1>
+          <h1 id="hero-line" className="t-hero compact:text-[clamp(1.9rem,6.4vw,3.6rem)] md:text-[clamp(2.4rem,5.4vw,3.6rem)] short:text-[1.9rem]">{now ? LINE[sky] : LINE.day}</h1>
           <Link
             href={`/recitations?set=${set}`}
             className="cta cta-solid group mt-6 compact:mt-4"
@@ -177,6 +177,7 @@ function Ring({ count, total }: { count: number; total: number }) {
         strokeDasharray={CIRC}
         strokeDashoffset={CIRC * (1 - (total ? Math.min(1, count / total) : 0))}
         transform="rotate(-90 30 30)"
+        className="motion-glide"
         style={{ transition: "stroke-dashoffset 0.9s cubic-bezier(0.16,1,0.3,1)" }}
       />
       <text x="30" y="35" textAnchor="middle" fontSize={total > 20 ? 13 : 15} fontWeight="600" fill="currentColor" className="tabular">{count}/{total}</text>

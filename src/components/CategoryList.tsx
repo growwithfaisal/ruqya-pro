@@ -20,7 +20,7 @@ export function CategoryList({ ids: byCategory }: { ids: Record<Intent, string[]
         const complete = ids.length > 0 && got >= ids.length;
         return (
           <li key={it.id} className="cv-auto rounded-[20px] border border-line">
-            <Link href={`/recitations?intent=${it.id}`} className="group flex min-h-[5.25rem] items-center gap-4 px-4 py-3 no-underline">
+            <Link href={`/recitations?intent=${it.id}`} className="press-row group flex min-h-[5.25rem] items-center gap-4 rounded-[20px] px-4 py-3 no-underline">
               <Glyph className="shrink-0 text-accent" size={30} />
               <span className="grid min-w-0 flex-1 gap-0.5 [overflow-wrap:anywhere]">
                 <span className="display text-title leading-tight">{it.label}</span>

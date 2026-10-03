@@ -6,10 +6,11 @@ import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-
 import { TAJWEED, bismillah, chapter, juzOf, loadSurah, readHref, safeSurah, safeVerse, surahUrl, type Verse } from "@/lib/quran";
 import { markSeen, seenCount, setLast, setPrefs, toggleMark, useOffline, useQuran } from "@/lib/quran-store";
 import { isFriday } from "@/lib/sky";
-import { useSwipeAnywhere } from "@/lib/swipe";
+import { NO_TURN, turnFrom, turnTransition, turnVariants, useSwipeAnywhere, type Turn } from "@/lib/swipe";
+import { haptic } from "@/lib/haptics";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { ChapterList } from "./ChapterList";
-import { Bookmark, Chevron, CloudCheck, CloudDown, Search } from "./Glyphs";
+import { Bookmark, Chevron, Close, CloudCheck, CloudDown, Search } from "./Glyphs";
 import { Coloured } from "./Coloured";
 import { Translit } from "./Translit";
 import { Sheet } from "./Sheet";
@@ -17,7 +18,6 @@ import { TranslitGuideRow } from "./TranslitGuide";
 import { VerseSheet } from "./VerseSheet";
 
 type Panel = null | "surah" | "verse" | "settings";
-const SWIPE = 80;
 
 /** One verse at a time. The plain Arabic is always what is shown; tajweed colours are painted over its letters. */
 export function QuranReader() {
@@ -32,7 +32,9 @@ export function QuranReader() {
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [n, setN] = useState(() => safeVerse(surah, params.get("v")));
-  const [dir, setDir] = useState(1);
+  const [turn, setTurn] = useState<Turn>(NO_TURN);
+  const wrap = useRef<HTMLDivElement>(null);
+  const cardWidth = () => wrap.current?.offsetWidth || NO_TURN.w;
   const [panel, setPanel] = useState<Panel>(null);
   const [note, setNote] = useState("");
   const dragged = useRef(false);
@@ -77,13 +79,13 @@ export function QuranReader() {
   };
 
   const go = useCallback(
-    (d: 1 | -1) => {
+    (d: 1 | -1, v = 0) => {
       if (d === 1) {
         const msg = markRead(surah, n);
         if (msg) flash(msg);
       }
       const next = n + d;
-      setDir(d);
+      setTurn({ dir: d, v, w: cardWidth() });
       if (next >= 1 && next <= c.verses) setN(next);
       else if (d > 0 && surah < 114) router.push(readHref(surah + 1));
       else if (d < 0 && surah > 1) router.push(readHref(surah - 1, chapter(surah - 1).verses));
@@ -93,7 +95,7 @@ export function QuranReader() {
 
   const jump = useCallback((to: number) => {
     setPanel(null);
-    setDir(to >= n ? 1 : -1);
+    setTurn({ dir: to >= n ? 1 : -1, v: 0, w: cardWidth() });
     setN(to);
   }, [n]);
 
@@ -124,8 +126,12 @@ export function QuranReader() {
 
   const onDragEnd = (_: unknown, info: PanInfo) => {
     setTimeout(() => (dragged.current = false), 0);
-    if (info.offset.x < -SWIPE || info.velocity.x < -500) go(1);
-    else if (info.offset.x > SWIPE || info.velocity.x > 500) go(-1);
+    // Where the flick would carry the card decides, not a fixed distance: a short quick flick turns the page, a slow
+    // drag that stops short springs back. The leaving card then carries on at the finger's speed.
+    const t = turnFrom(info.offset.x, info.velocity.x, cardWidth());
+    if (!t) return;
+    haptic();
+    go(t, info.velocity.x);
   };
 
   const marks = useMemo(() => new Set(q.marks), [q.marks]);
@@ -133,7 +139,6 @@ export function QuranReader() {
   const v = verses?.[n - 1];
   const marked = marks.has(`${surah}:${n}`);
   const left = c.verses - n;
-  const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
   const swipe = useSwipeAnywhere(`${surah}:${n}`, panel !== null);
 
   return (
@@ -162,41 +167,44 @@ export function QuranReader() {
 
       {verses && v && (
         <>
-          <p className="text-center text-small text-ink-soft tabular short:hidden" aria-live="polite">
-            Juz {juzOf(surah, n)} · {left === 0 ? "last verse" : `${left} ${left === 1 ? "verse" : "verses"} left`}
-          </p>
+          {/* A quiet way out that marks nothing as read (I'm Done counts the verse on screen). */}
+          <div className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center short:hidden">
+            <button onClick={() => router.push("/quran")} aria-label="Close the reader" className="press-icon -ml-1.5 grid size-11 place-items-center rounded-full text-ink-soft">
+              <Close size={20} />
+            </button>
+            <p className="text-center text-small text-ink-soft tabular" aria-live="polite">
+              Juz {juzOf(surah, n)} · {left === 0 ? "last verse" : `${left} ${left === 1 ? "verse" : "verses"} left`}
+            </p>
+            <span aria-hidden />
+          </div>
 
-          <div className="relative mt-3 short:mt-0">
-            <AnimatePresence initial={false} custom={dir} mode="popLayout">
+          <div ref={wrap} className="relative mt-3 short:mt-0">
+            <AnimatePresence initial={false} custom={turn} mode="popLayout">
               <motion.section
                 key={`${surah}:${n}`}
-                custom={dir}
+                custom={turn}
                 aria-label={`${c.name} verse ${n} of ${c.verses}`}
                 className="touch-pan-y glass rounded-[28px] border border-line text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]"
-                variants={{
-                  enter: (d: number) => ({ x: reduce ? 0 : d * 70, opacity: 0 }),
-                  center: { x: 0, opacity: 1 },
-                  exit: (d: number) => ({ x: reduce ? 0 : d * -90, opacity: 0, transition: { duration: reduce ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] } }),
-                }}
+                variants={turnVariants(!!reduce)}
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={spring}
+                transition={turnTransition(!!reduce)}
                 data-swipe-card
                 drag="x"
                 dragControls={swipe.controls}
                 dragListener={false}
                 dragDirectionLock
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.6}
+                dragElastic={{ left: n === c.verses && surah === 114 ? 0.15 : 1, right: n === 1 && surah === 1 ? 0.15 : 1 }}
                 onDragStart={() => (dragged.current = true)}
                 onDragEnd={onDragEnd}
               >
                 <header className="grid grid-cols-[3rem_1fr_3rem] items-center gap-2 px-3 pt-4">
-                  <button onClick={() => setPanel("surah")} aria-label="Choose a surah" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line">
+                  <button onClick={() => setPanel("surah")} aria-label="Choose a surah" className="press-icon grid min-h-11 min-w-11 place-items-center rounded-full border border-line">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden><path d="M4 7h16M4 12h16M4 17h10" /></svg>
                   </button>
-                  <button onClick={() => setPanel("verse")} aria-label={`Verse ${n} of ${c.verses}. Choose a verse`} className="min-h-12 rounded-[20px] text-center">
+                  <button onClick={() => setPanel("verse")} aria-label={`Verse ${n} of ${c.verses}. Choose a verse`} className="press-row min-h-12 rounded-[20px] text-center">
                     <span className="display block text-title leading-tight"><span className="tabular">{c.id}.</span> {c.name}</span>
                     <span className="block text-small text-card-soft tabular">{n}/{c.verses}</span>
                   </button>
@@ -204,7 +212,7 @@ export function QuranReader() {
                     onClick={() => toggleMark(surah, n)}
                     aria-pressed={marked}
                     aria-label={marked ? `Remove bookmark from verse ${n}` : `Bookmark verse ${n}`}
-                    className={`grid min-h-11 min-w-11 place-items-center rounded-full ${marked ? "text-accent" : "text-card-soft"}`}
+                    className={`press-icon grid min-h-11 min-w-11 place-items-center rounded-full ${marked ? "text-accent" : "text-card-soft"}`}
                   >
                     <Bookmark size={24} filled={marked} />
                   </button>
@@ -218,11 +226,11 @@ export function QuranReader() {
                 </div>
 
                 <footer className="flex items-center justify-between px-3 pb-3">
-                  <button onClick={share} aria-label={`Share verse ${n}`} className="grid min-h-11 min-w-11 place-items-center rounded-full bg-accent text-accent-ink">
+                  <button onClick={share} aria-label={`Share verse ${n}`} className="press-icon grid min-h-11 min-w-11 place-items-center rounded-full bg-accent text-accent-ink">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M14 5l6 6-6 6M20 11H9a5 5 0 0 0-5 5v2" /></svg>
                   </button>
                   <span className="text-meta text-card-soft">{seen.has(`${surah}:${n}`) ? "Read today" : ""}</span>
-                  <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-lead">Aa</button>
+                  <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="press-icon grid min-h-11 min-w-11 place-items-center rounded-full border border-line text-lead">Aa</button>
                 </footer>
               </motion.section>
             </AnimatePresence>
@@ -230,7 +238,7 @@ export function QuranReader() {
 
           <div className="mt-6 text-center short:mt-0 short:max-h-[calc(100dvh-5.5rem)] short:overflow-y-auto">
             {q.prefs.translit && <p className="text-[calc(clamp(1.25rem,4.6vw,1.55rem)*var(--translit-scale))] leading-snug"><Translit text={v.tr} marks={v.tu} silent={v.ts} /></p>}
-            {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-base" : "text-[1.2rem] text-ink"}`}>{v.en}</p>}
+            {q.prefs.translation && <p className={`mx-auto max-w-[60ch] leading-relaxed text-ink-soft ${q.prefs.translit ? "mt-4 text-base" : "text-reading text-ink"}`}>{v.en}</p>}
           </div>
         </>
       )}
@@ -245,11 +253,11 @@ export function QuranReader() {
       {verses && (
         <div data-noswipe className="sticky bottom-0 z-20 mt-auto -mx-4 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:fixed short:inset-x-0 short:mx-0 short:pb-2 short:pt-1 md:-mx-8 md:px-8" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
           <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
-            <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
+            <button onClick={() => go(-1)} disabled={n === 1 && surah === 1} aria-label="Previous verse" className="press-icon grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
               <Chevron className="rotate-180" size={24} />
             </button>
             <button onClick={done} className="btn btn-primary px-0 short:!min-h-11">I&apos;m Done</button>
-            <button onClick={() => go(1)} disabled={n === c.verses && surah === 114} aria-label="Next verse" className="grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
+            <button onClick={() => go(1)} disabled={n === c.verses && surah === 114} aria-label="Next verse" className="press-icon grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
               <Chevron size={24} />
             </button>
           </div>

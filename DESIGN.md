@@ -23,8 +23,8 @@ typography:
     fontFamily: "Hedvig Letters Serif, Georgia, serif"
     fontSize: "clamp(2.1rem, 7vw, 3.6rem)"
     fontWeight: 400
-    lineHeight: 1.06
-    letterSpacing: "-0.015em"
+    lineHeight: 1.04
+    letterSpacing: "-0.025em"
   body:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
     fontSize: "1rem"
@@ -103,12 +103,23 @@ Committed, drenched-by-sky: the page ground is the palette. Each sky defines `--
 **Character:** a warm humanist serif for the few sentences that carry the mood, a plain grotesque for reading, and a calligraphic naskh for sacred text.
 
 ### Hierarchy
-- **Display** (400, clamp(2.1rem, 7vw, 3.6rem), 1.06): the hour's line on Home.
-- **Page title `.t-h1`** (400, clamp(2rem, 6vw, 3rem), 1.2): the title of every page.
-- **Section lead `.t-h2-lead`** (400, clamp(1.8rem, 5vw, 2.5rem), 1.2): the moments on Home (topics, Ayah of the day).
-- **Section title `.t-h2`** (400, clamp(1.6rem, 4.5vw, 2.1rem), 1.2): sections inside a page.
-- **Card heading `text-h3`** (400, 1.5rem) and **row title `text-title`** (400, 1.3rem): cards, rows, sheets.
-- **Lead `text-lead`** (1.1rem), **Body** (400, 1rem, 1.6, capped near 65ch), **Small `text-small`** (0.95rem), **Meta `text-meta`** (0.9rem). Buttons use 1.05rem; the tab bar labels use 0.72rem. Nothing else is a size.
+Every size carries its own leading and tracking, set by hand the way Apple sets type: large text closes up (tighter leading, negative tracking), small text opens a little (looser leading, slight positive tracking). Sizes stay in rem, so enlarged text scales the whole layout.
+
+| Role | Class | Size | Leading | Tracking |
+|---|---|---|---|---|
+| The hour's line on Home | `.t-hero` | clamp(2.1rem, 7vw, 3.6rem) | 1.04 | −0.025em |
+| Page title | `.t-h1` | clamp(2rem, 6vw, 3rem) | 1.08 | −0.02em |
+| Home moments (topics, Ayah of the day) | `.t-h2-lead` | clamp(1.8rem, 5vw, 2.5rem) | 1.12 | −0.017em |
+| Section title | `.t-h2` | clamp(1.6rem, 4.5vw, 2.1rem) | 1.12 | −0.017em |
+| Card or sheet heading | `text-h3` | 1.5rem | 1.2 | −0.012em |
+| Row title | `text-title` | 1.3rem | 1.25 | −0.01em |
+| Reading text (translation alone, Ayah card) | `text-reading` | 1.2rem | 1.55 | 0 |
+| Lead | `text-lead` | 1.1rem | 1.5 | 0 |
+| Body | (none) | 1rem | 1.6, about 65ch | 0 |
+| Small | `text-small` | 0.95rem | 1.5 | +0.005em |
+| Meta | `text-meta` | 0.875rem | 1.45 | +0.01em |
+
+`.display` (the serif) defaults to 1.15 and −0.01em; a size class beside it brings its own pair. Buttons use 1.05rem; the tab bar labels use 0.72rem. Nothing else is a size.
 - **Arabic** (400, 1.9rem at scale 1, 2.15): centred, RTL, `lang="ar"`.
 
 ### Named Rules
@@ -146,7 +157,7 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 - A dua with no graded source and no Arabic has no Arabic block. The transliteration takes the display face, and one muted line beneath reads "Not from a graded hadith. Scholars mention this dua." If the owner supplied Arabic (Halal Riqz), it is laid out like any other dua (Arabic in the card, transliteration and English beneath) with the same muted line. The citation badge and the Sources page say "No graded source"; the drawer explains in a sentence instead of showing an empty Arabic section, or repeats the line beneath the Arabic when there is one.
 
 ### Citation badge and drawer
-- Pill with grade and reference. Opens a bottom sheet on mobile and a 30rem right panel from 768px: Arabic, grade, grader, book, reference, chapter, exegetical note, link to `/sources#id`.
+- Pill with grade and reference. Opens the shared sheet (below): Arabic, grade, grader, book, reference, chapter, exegetical note, link to `/sources#id`.
 
 ### Streak pill, week row, calendar
 - **Pill:** hairline capsule, 56px tall; calendar button, then an accent book badge and the month count in the display face (`4/30`), with the current streak beside it. The count springs once when it changes (skipped under reduced motion).
@@ -165,6 +176,35 @@ The signature silhouette is the arch niche: `border-radius: 50% 50% 28px 28px / 
 
 ### Primary action
 - Full-width accent block with a progress ring ("3 of 12 adhkar today").
+
+## Motion and touch
+
+Taken from Apple's fluid-interface principles: respond on the press, follow the finger 1:1, let go with momentum, never lock the reader out of a moving thing.
+
+- **Press feedback.** Everything tappable answers the instant a finger lands, not when it lifts.
+  - Rows (`.press-row`) take an 8% ink tint like a list cell. Hairline rows reach 12px past the text with a 16px radius.
+  - Icon buttons and chips (`.press-icon`) tint and give to 94%. Filled ones dim instead.
+  - Tab icons compress. `.btn` and `.cta` scale to 98%.
+  - The press is instant and the release fades over 200ms. `EdgeWatch` adds the touchstart listener iOS Safari needs before it shows `:active`.
+- **Page turn (both readers).**
+  - A swipe can start anywhere on the reading screen (`useSwipeAnywhere`). The card tracks the finger 1:1, rubber-banding (0.15) only where there is no page to turn to.
+  - On release the page turns when the card, carried on by its momentum, would rest past half its width. That is Apple's projection, `v/1000 · 0.998/(1−0.998)`, snapping to the nearer page.
+  - The leaving card carries on from where it was let go, at the finger's speed, on a critically damped spring (about 0.3s), until it is off its width. The next card arrives from the other side.
+  - Buttons and arrow keys use the same motion. With reduced motion it is a 150ms cross-fade.
+- **Sheets (`Sheet`).** One component for every slide-over: More, Reading, Choose a surah, Select verse, the card list, the source drawer, the reading calendar, the prayer times and the transliteration guide.
+  - It is a bottom sheet with a grabber on phones, and a 28rem right panel from 768px.
+  - The grabber and title strip pick it up: down (or right) follows the finger and dims the scrim to match, the other way meets soft resistance. Letting go closes it past half its size (with momentum), or springs it back.
+  - It opens and closes on a spring with a touch of give (bounce 0.15, about 0.32s) and can be caught while it opens. The scroll inside stays its own.
+  - Close, Escape and the scrim still work. Radix keeps focus inside. Reduced motion fades.
+- **Haptics** (`src/lib/haptics.ts`) fire only on the moments that matter: a page turned by a swipe, a card ticked, the day's goal, a sheet let go, a long press.
+  - Android vibrates. iPhone Safari 18 gets the system tap through a hidden native switch toggled in the same gesture.
+  - Nothing depends on the tap; every moment is also shown.
+- **Scroll-edge chrome.** The header and tab bar sit on the sky with no line at rest. Their hairline fades in only while content passes under them (`data-scrolled`, `data-more-below` on `<html>`). The tab bar is 86% opaque so lists do not show through its labels.
+- **A way out of the readers.** A 44px close (×) sits left of the "Juz N · X left" line. It leaves without marking anything read: to the Qur'an page, or to where the routine was opened from.
+- **Accessibility settings.**
+  - **Reduce Motion:** fades instead of slides, no press scale (tints stay), no gliding orb or ring.
+  - **Reduce Transparency:** every glass surface becomes solid, including the source list and the tab bar.
+  - **Increase Contrast:** solid surfaces, firmer hairlines (45% ink), secondary text close to the main ink, a 3px focus ring, and the bar dividers always shown.
 
 ## Do's and Don'ts
 

@@ -22,7 +22,7 @@ export function Header() {
     <header className="app-header glass-bar sticky top-0 z-30 border-b border-line short:static">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-1.5 px-4 py-3 short:py-1.5 md:px-8">
         {standalone && path !== "/" && (
-          <button onClick={() => router.back()} aria-label="Back" className="-ml-2 mr-1 grid min-h-11 min-w-11 place-items-center rounded-full">
+          <button onClick={() => router.back()} aria-label="Back" className="press-icon -ml-2 mr-1 grid min-h-11 min-w-11 place-items-center rounded-full">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 5l-7 7 7 7" /></svg>
           </button>
         )}
@@ -31,7 +31,7 @@ export function Header() {
           <span className="display truncate text-title leading-none">RuqyaPro</span>
         </Link>
 
-        <Link href="/search" aria-label="Search" aria-current={path.startsWith("/search") ? "page" : undefined} className="grid min-h-[44px] min-w-[44px] shrink-0 place-items-center rounded-full border border-line lg:hidden">
+        <Link href="/search" aria-label="Search" aria-current={path.startsWith("/search") ? "page" : undefined} className="press-icon grid min-h-[44px] min-w-[44px] shrink-0 place-items-center rounded-full border border-line lg:hidden">
           <Search size={20} />
         </Link>
 
@@ -41,7 +41,7 @@ export function Header() {
               key={n.href}
               href={n.href}
               aria-current={active(n.href) ? "page" : undefined}
-              className={`whitespace-nowrap rounded-full px-3.5 py-2 text-small no-underline transition-colors ${active(n.href) ? "bg-ink text-[var(--sky-bottom)]" : "hover:bg-[color-mix(in_oklch,var(--ink)_10%,transparent)]"}`}
+              className={`press-row whitespace-nowrap rounded-full px-3.5 py-2 text-small no-underline transition-colors ${active(n.href) ? "bg-ink text-[var(--sky-bottom)]" : "hover:bg-[color-mix(in_oklch,var(--ink)_10%,transparent)]"}`}
             >
               {n.label}
             </Link>

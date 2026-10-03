@@ -65,6 +65,9 @@ export const ArrowUp = ({ className, size = 24 }: P) => (
 export const Chevron = ({ className, size = 20 }: P) => (
   <svg {...base(size)} className={className}><path d="M9 5l7 7-7 7" /></svg>
 );
+export const Close = ({ className, size = 20 }: P) => (
+  <svg {...base(size)} className={className}><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" /></svg>
+);
 export const Check = ({ className, size = 20 }: P) => (
   <svg {...base(size)} className={className}><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
 );

@@ -8,17 +8,17 @@ import { UNSOURCED_NOTE, citation } from "@/lib/entries";
 import { bismillah, chapter, loadSurah, readHref, tajweedForEntry, type Verse } from "@/lib/quran";
 import { setPrefs, useQuran } from "@/lib/quran-store";
 import { doneKey, useDone } from "@/lib/progress";
-import { useSwipeAnywhere } from "@/lib/swipe";
+import { NO_TURN, turnFrom, turnTransition, turnVariants, useSwipeAnywhere, type Turn } from "@/lib/swipe";
+import { haptic } from "@/lib/haptics";
 import { ArabicSizeControl } from "./ArabicSizeControl";
 import { CitationBadge } from "./CitationBadge";
 import { Coloured } from "./Coloured";
 import { Translit } from "./Translit";
-import { Check, Chevron } from "./Glyphs";
+import { Check, Chevron, Close } from "./Glyphs";
 import { Sheet } from "./Sheet";
 import { TranslitGuideRow } from "./TranslitGuide";
 
 type Panel = null | "list" | "settings";
-const SWIPE = 80;
 
 /** One screen of the routine: a whole card, or a single verse of a card that is read verse by verse (Surah Al-Mulk). */
 interface Step {
@@ -91,7 +91,9 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, done, entries, set]);
 
-  const [dir, setDir] = useState(1);
+  const [turn, setTurn] = useState<Turn>(NO_TURN);
+  const wrap = useRef<HTMLDivElement>(null);
+  const cardWidth = () => wrap.current?.offsetWidth || NO_TURN.w;
   const [panel, setPanel] = useState<Panel>(null);
   const [note, setNote] = useState("");
   const [tg, setTg] = useState<[number, number, number][] | null>(null);
@@ -113,8 +115,8 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
   const finishedCard = !!cur && (!cur.verse || (cur.vi ?? 0) >= (cur.vCount ?? 1) - 1);
 
   const go = useCallback(
-    (d: 1 | -1) => {
-      setDir(d);
+    (d: 1 | -1, v = 0) => {
+      setTurn({ dir: d, v, w: cardWidth() });
       // Moving on from a finished card marks it recited, so finishing a routine needs no extra tap.
       if (d === 1 && finishedCard && cur) markDone(doneKey(set, cur.entry.id));
       const k = Math.max(0, Math.min(steps.length - 1, i + d));
@@ -149,14 +151,16 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
   const onDragEnd = (_: unknown, info: PanInfo) => {
     setTimeout(() => (dragged.current = false), 0);
-    if (info.offset.x < -SWIPE || info.velocity.x < -500) go(1);
-    else if (info.offset.x > SWIPE || info.velocity.x > 500) go(-1);
+    // Where the flick would carry the card decides (see turnFrom); the leaving card carries on at the finger's speed.
+    const t = turnFrom(info.offset.x, info.velocity.x, cardWidth());
+    if (!t) return;
+    haptic();
+    go(t, info.velocity.x);
   };
 
   const lines = useMemo(() => (cur?.verse ? [cur.verse.ar] : e ? e.arabic.split("\n").filter((l) => l.trim()) : []), [e, cur?.verse]);
   // A dua with no graded source shows its transliteration in the card where it has no Arabic at all.
   const noArabic = !!e?.unsourced && lines.length === 0;
-  const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
   const isDone = e ? done.has(doneKey(set, e.id)) : false;
   const swipe = useSwipeAnywhere(e ? `${e.id}:${cur?.vi ?? 0}` : "", panel !== null);
 
@@ -168,41 +172,44 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
   return (
     <div onPointerDown={swipe.onPointerDown} className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl touch-pan-y flex-col px-4 pb-36 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">
-      <p className="text-center text-small text-ink-soft tabular short:col-span-2" aria-live="polite">
-        {title} · {left === 0 ? "all recited today" : `${left} left`}
-      </p>
+      {/* A quiet way out that ticks nothing (I'm Done recites the card on screen when it is finished). */}
+      <div className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center short:col-span-2">
+        <button onClick={() => router.push(exit)} aria-label="Close the reader" className="press-icon -ml-1.5 grid size-11 place-items-center rounded-full text-ink-soft">
+          <Close size={20} />
+        </button>
+        <p className="text-center text-small text-ink-soft tabular" aria-live="polite">
+          {title} · {left === 0 ? "all recited today" : `${left} left`}
+        </p>
+        <span aria-hidden />
+      </div>
 
-      <div className="relative mt-3 short:mt-1">
-        <AnimatePresence initial={false} custom={dir} mode="popLayout">
+      <div ref={wrap} className="relative mt-3 short:mt-1">
+        <AnimatePresence initial={false} custom={turn} mode="popLayout">
           <motion.section
             key={`${e.id}:${cur.vi ?? 0}`}
-            custom={dir}
+            custom={turn}
             aria-label={`${e.title}, card ${cur.entryIndex + 1} of ${entries.length}${verse ? `, verse ${(cur.vi ?? 0) + 1} of ${cur.vCount}` : ""}`}
             className="touch-pan-y glass rounded-[28px] border border-line text-card-ink shadow-[0_24px_48px_-24px_rgb(0_0_0/0.35)]"
-            variants={{
-              enter: (d: number) => ({ x: reduce ? 0 : d * 70, opacity: 0 }),
-              center: { x: 0, opacity: 1 },
-              exit: (d: number) => ({ x: reduce ? 0 : d * -90, opacity: 0, transition: { duration: reduce ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] } }),
-            }}
+            variants={turnVariants(!!reduce)}
             initial="enter"
             animate="center"
             exit="exit"
-            transition={spring}
+            transition={turnTransition(!!reduce)}
             data-swipe-card
             drag="x"
             dragControls={swipe.controls}
             dragListener={false}
             dragDirectionLock
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.6}
+            dragElastic={{ left: i === steps.length - 1 ? 0.15 : 1, right: i === 0 ? 0.15 : 1 }}
             onDragStart={() => (dragged.current = true)}
             onDragEnd={onDragEnd}
           >
             <header className="grid grid-cols-[3rem_1fr_3rem] items-center gap-2 px-3 pt-4">
-              <button onClick={() => setPanel("list")} aria-label="See all cards in this routine" className="grid min-h-11 min-w-11 place-items-center rounded-full border border-line">
+              <button onClick={() => setPanel("list")} aria-label="See all cards in this routine" className="press-icon grid min-h-11 min-w-11 place-items-center rounded-full border border-line">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden><path d="M4 7h16M4 12h16M4 17h10" /></svg>
               </button>
-              <button onClick={() => setPanel("list")} aria-label={`Card ${cur.entryIndex + 1} of ${entries.length}. See all cards`} className="min-h-12 rounded-[20px] text-center">
+              <button onClick={() => setPanel("list")} aria-label={`Card ${cur.entryIndex + 1} of ${entries.length}. See all cards`} className="press-row min-h-12 rounded-[20px] text-center">
                 <span className="display block text-title leading-tight">{e.title}</span>
                 <span className="block text-small text-card-soft tabular">
                   {verse ? `Verse ${(cur.vi ?? 0) + 1}/${cur.vCount}` : `${cur.entryIndex + 1}/${entries.length}`}
@@ -232,11 +239,11 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
             </div>
 
             <footer className="flex items-center justify-between gap-2 px-3 pb-3">
-              <button onClick={share} aria-label={`Share ${e.title}`} className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full bg-accent text-accent-ink">
+              <button onClick={share} aria-label={`Share ${e.title}`} className="press-icon grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full bg-accent text-accent-ink">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M14 5l6 6-6 6M20 11H9a5 5 0 0 0-5 5v2" /></svg>
               </button>
               <CitationBadge entry={e} />
-              <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full border border-line text-lead">Aa</button>
+              <button onClick={() => setPanel("settings")} aria-label="Reading settings" className="press-icon grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full border border-line text-lead">Aa</button>
             </footer>
           </motion.section>
         </AnimatePresence>
@@ -253,7 +260,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
               : <p className="text-small text-[var(--draft)]">Transliteration pending a cited source.</p>
         )}
         {q.prefs.translation && (
-          <div className={`mx-auto max-w-[60ch] leading-relaxed ${q.prefs.translit ? "mt-4 text-base text-ink-soft" : "text-[1.2rem]"}`}>
+          <div className={`mx-auto max-w-[60ch] leading-relaxed ${q.prefs.translit ? "mt-4 text-base text-ink-soft" : "text-reading"}`}>
             {(verse ? [verse.en] : e.translation.split("\n")).map((l, k) => <p key={k}>{l}</p>)}
           </div>
         )}
@@ -271,11 +278,11 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
       <div data-noswipe className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:pb-2 short:pt-1" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
         <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
-          <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
+          <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="press-icon grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
             <Chevron className="rotate-180" size={24} />
           </button>
           <button onClick={finish} className="btn btn-primary px-0 short:!min-h-11">I&apos;m Done</button>
-          <button onClick={() => go(1)} disabled={i === steps.length - 1} aria-label={verse ? "Next verse" : "Next card"} className="grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
+          <button onClick={() => go(1)} disabled={i === steps.length - 1} aria-label={verse ? "Next verse" : "Next card"} className="press-icon grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
             <Chevron size={24} />
           </button>
         </div>
@@ -286,7 +293,7 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
           {entries.map((x, k) => (
             <li key={x.id}>
               <button
-                onClick={() => { setDir(k >= cur.entryIndex ? 1 : -1); setPos({ id: x.id, vi: 0 }); setPanel(null); }}
+                onClick={() => { setTurn({ dir: k >= cur.entryIndex ? 1 : -1, v: 0, w: cardWidth() }); setPos({ id: x.id, vi: 0 }); setPanel(null); }}
                 aria-current={k === cur.entryIndex ? "true" : undefined}
                 className={`flex min-h-14 w-full items-center gap-3 rounded-[20px] border px-4 text-left ${k === cur.entryIndex ? "border-[var(--accent)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)]" : "border-line"}`}
               >

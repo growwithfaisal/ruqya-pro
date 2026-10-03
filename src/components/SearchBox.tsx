@@ -34,7 +34,7 @@ export function SearchBox({ entries }: { entries: Entry[] }) {
       <ul className="mt-6 border-t border-line" aria-live="polite">
         {results.map((e) => (
           <li key={e.id} className="border-b border-line">
-            <Link href={`/recitations/${e.slug}`} className="group flex min-h-[4.5rem] items-center gap-3 py-3 no-underline">
+            <Link href={`/recitations/${e.slug}`} className="press-row group -mx-3 flex min-h-[4.5rem] items-center gap-3 rounded-2xl px-3 py-3 no-underline">
               <span className="grid flex-1">
                 <span className="display text-title leading-tight">{e.title}</span>
                 <span className="text-meta text-ink-soft">{citation(e)}</span>

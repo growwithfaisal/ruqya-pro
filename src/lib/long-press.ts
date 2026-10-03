@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
+import { haptic } from "./haptics";
 
 /**
  * A press held for `ms` without moving more than `slop` px. Spread `bind` on the element; `pressing` is true while the
@@ -25,7 +26,7 @@ export function useLongPress(onLongPress: () => void, { ms = 450, slop = 10 } = 
 
   const open = useCallback(() => {
     fired.current = true;
-    try { navigator.vibrate?.(12); } catch {}
+    haptic(12);
     callback.current();
   }, []);
 

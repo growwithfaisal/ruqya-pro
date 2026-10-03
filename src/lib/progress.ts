@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useSyncExternalStore } from "react";
+import { haptic } from "./haptics";
 
 const EVENT = "rp-progress";
 const LEGACY = "rp:done:";
@@ -63,7 +64,7 @@ export function useDone() {
     if (cur.has(id)) cur.delete(id);
     else {
       cur.add(id);
-      try { navigator.vibrate?.(12); } catch {}
+      haptic(12);
     }
     write([...cur]);
   }, []);
@@ -72,7 +73,7 @@ export function useDone() {
     const cur = new Set<string>(JSON.parse(read()));
     if (cur.has(id)) return;
     cur.add(id);
-    try { navigator.vibrate?.(12); } catch {}
+    haptic(12);
     write([...cur]);
   }, []);
   const clear = useCallback((ids: string[]) => {

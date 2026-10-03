@@ -67,7 +67,7 @@ export function PrayerTimes() {
           {/* Held down anywhere on the card opens the day's times; the "All times" button is the same thing for taps, keys and screen readers. */}
           <div
             {...press.bind}
-            className={`${card} select-none transition-transform duration-200 [-webkit-touch-callout:none] ${press.pressing ? "scale-[0.985]" : ""}`}
+            className={`${card} select-none transition-transform duration-200 motion-reduce:transition-none [-webkit-touch-callout:none] ${press.pressing ? "scale-[0.985] motion-reduce:scale-100" : ""}`}
             style={skin}
           >
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
