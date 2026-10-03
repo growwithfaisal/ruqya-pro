@@ -128,10 +128,13 @@ export function QuranReader() {
     setTimeout(() => (dragged.current = false), 0);
     // Where the flick would carry the card decides, not a fixed distance: a short quick flick turns the page, a slow
     // drag that stops short springs back. The leaving card then carries on at the finger's speed.
-    const t = turnFrom(info.offset.x, info.velocity.x, cardWidth());
+    // The decision was taken at the finger's release (swipe.release), where iPhone allows the haptic; framer reports
+    // the drag's end a frame later. A drag the tracker did not see (none expected) decides here instead.
+    const d = swipe.release();
+    const t = d === undefined ? turnFrom(info.offset.x, info.velocity.x, cardWidth()) : d?.dir ?? 0;
     if (!t) return;
-    haptic();
-    go(t, info.velocity.x);
+    if (d === undefined) haptic();
+    go(t, d?.v ?? info.velocity.x);
   };
 
   const marks = useMemo(() => new Set(q.marks), [q.marks]);
@@ -139,7 +142,10 @@ export function QuranReader() {
   const v = verses?.[n - 1];
   const marked = marks.has(`${surah}:${n}`);
   const left = c.verses - n;
-  const swipe = useSwipeAnywhere(`${surah}:${n}`, panel !== null);
+  const swipe = useSwipeAnywhere(`${surah}:${n}`, panel !== null, {
+    width: cardWidth,
+    canTurn: (d) => (d === 1 ? !(n === c.verses && surah === 114) : !(n === 1 && surah === 1)),
+  });
 
   return (
     <div onPointerDown={swipe.onPointerDown} className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-2xl touch-pan-y flex-col px-4 pb-4 pt-5 short:grid short:min-h-0 short:max-w-none short:grid-cols-2 short:content-start short:gap-x-5 short:pb-20 short:pt-2 md:px-8 md:pt-8">

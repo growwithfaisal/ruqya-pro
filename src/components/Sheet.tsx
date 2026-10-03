@@ -2,7 +2,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimatePresence, DragControls, animate, motion, useMotionValue, useReducedMotion, type PanInfo, type Variants } from "framer-motion";
 import { useEffect, useMemo, useRef, useState, type PointerEvent, type ReactNode } from "react";
-import { project } from "@/lib/swipe";
+import { project, trackRelease } from "@/lib/swipe";
 import { haptic } from "@/lib/haptics";
 
 /** Opening and closing: a spring with a touch of give (damping about 0.85), quick to settle. */
@@ -55,15 +55,26 @@ export function Sheet({
   const travelOf = (info: PanInfo) => (wide ? info.offset.x : info.offset.y);
   const speedOf = (info: PanInfo) => (wide ? info.velocity.x : info.velocity.y);
 
+  // Close or spring back is decided inside the finger's release, where iPhone allows the haptic (framer reports the
+  // drag's end a frame later); onDragEnd then acts on it.
+  const decided = useRef<{ close: boolean; v: number } | null>(null);
   const grab = (e: PointerEvent<HTMLDivElement>) => {
     if (reduce || (e.target instanceof Element && e.target.closest("button, a, input, select, textarea"))) return;
     controls.start(e);
+    decided.current = null;
+    trackRelease(e.nativeEvent, ({ dx, dy, vx, vy }) => {
+      const travel = wide ? dx : dy;
+      const v = wide ? vx : vy;
+      decided.current = { close: travel + project(v) > size() * CLOSE_AT, v };
+      if (decided.current.close) haptic();
+    });
   };
   const onDrag = (_: unknown, info: PanInfo) => dim.set(1 - Math.min(1, Math.max(0, travelOf(info)) / size()));
   const onDragEnd = (_: unknown, info: PanInfo) => {
-    if (travelOf(info) + project(speedOf(info)) > size() * CLOSE_AT) {
-      haptic();
-      setExit({ v: speedOf(info) });
+    const d = decided.current ?? { close: travelOf(info) + project(speedOf(info)) > size() * CLOSE_AT, v: speedOf(info) };
+    decided.current = null;
+    if (d.close) {
+      setExit({ v: d.v });
       onOpenChange(false);
     } else {
       animate(dim, 1, { duration: 0.25 });

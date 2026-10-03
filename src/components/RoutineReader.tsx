@@ -152,17 +152,20 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
   const onDragEnd = (_: unknown, info: PanInfo) => {
     setTimeout(() => (dragged.current = false), 0);
     // Where the flick would carry the card decides (see turnFrom); the leaving card carries on at the finger's speed.
-    const t = turnFrom(info.offset.x, info.velocity.x, cardWidth());
+    // Decided at the finger's release (swipe.release), where iPhone allows the haptic; see QuranReader.
+    const d = swipe.release();
+    const t = d === undefined ? turnFrom(info.offset.x, info.velocity.x, cardWidth()) : d?.dir ?? 0;
     if (!t) return;
-    haptic();
-    go(t, info.velocity.x);
+    if (d === undefined) haptic();
+    go(t, d?.v ?? info.velocity.x);
   };
 
   const lines = useMemo(() => (cur?.verse ? [cur.verse.ar] : e ? e.arabic.split("\n").filter((l) => l.trim()) : []), [e, cur?.verse]);
   // A dua with no graded source shows its transliteration in the card where it has no Arabic at all.
   const noArabic = !!e?.unsourced && lines.length === 0;
   const isDone = e ? done.has(doneKey(set, e.id)) : false;
-  const swipe = useSwipeAnywhere(e ? `${e.id}:${cur?.vi ?? 0}` : "", panel !== null);
+  // A swipe on past the last card still recites it (go clamps there), so only "previous" can be out of reach.
+  const swipe = useSwipeAnywhere(e ? `${e.id}:${cur?.vi ?? 0}` : "", panel !== null, { width: cardWidth, canTurn: (d) => d === 1 || i > 0 });
 
   if (!entries.length || !cur || !e) return <p className="mt-24 text-center text-ink-soft">Nothing in this routine yet.</p>;
 

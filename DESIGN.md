@@ -197,7 +197,8 @@ Taken from Apple's fluid-interface principles: respond on the press, follow the 
   - It opens and closes on a spring with a touch of give (bounce 0.15, about 0.32s) and can be caught while it opens. The scroll inside stays its own.
   - Close, Escape and the scrim still work. Radix keeps focus inside. Reduced motion fades.
 - **Haptics** (`src/lib/haptics.ts`) fire only on the moments that matter: a page turned by a swipe, a card ticked, the day's goal, a sheet let go, a long press.
-  - Android vibrates. iPhone Safari 18 gets the system tap through a hidden native switch toggled in the same gesture.
+  - Android vibrates. iPhone Safari 18 gets the system tap through a hidden native switch, created, clicked and removed in the same gesture.
+  - iPhone only plays it inside the touch event itself. framer reports a drag's end a frame later, so swipes and sheet drags decide at the finger's release (`trackRelease` in `src/lib/swipe.ts`) and tap there. The long press, which fires from a timer, stays silent on iPhone.
   - Nothing depends on the tap; every moment is also shown.
 - **Scroll-edge chrome.** The header and tab bar sit on the sky with no line at rest. Their hairline fades in only while content passes under them (`data-scrolled`, `data-more-below` on `<html>`). The tab bar is 86% opaque so lists do not show through its labels.
 - **A way out of the readers.** A 44px close (×) sits left of the "Juz N · X left" line. It leaves without marking anything read: to the Qur'an page, or to where the routine was opened from.

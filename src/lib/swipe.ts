@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, type PointerEvent } from "react";
+import { useMemo, useRef, type PointerEvent } from "react";
+import { haptic } from "./haptics";
 import { DragControls, type Transition, type Variants } from "framer-motion";
 
 /** Where a press never starts a swipe: anything the reader taps or types into. */
@@ -14,10 +15,16 @@ const CONTROLS = "button, a, input, textarea, select, label, summary, [role=slid
  * `data-swipe-card` on the card. The card tracks the finger 1:1 (dragElastic 1) and only resists, rubber-band style,
  * where there is no page to turn to.
  */
-export function useSwipeAnywhere(cardKey: string, blocked: boolean) {
+export function useSwipeAnywhere(
+  cardKey: string,
+  blocked: boolean,
+  { width, canTurn }: { width: () => number; canTurn: (dir: 1 | -1) => boolean },
+) {
   // cardKey is the dependency on purpose: each card gets its own controls.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const controls = useMemo(() => new DragControls(), [cardKey]);
+  // The page-turn decision, made inside the pointerup (where iPhone allows the haptic) and used by the card's drag end.
+  const decided = useRef<{ dir: 1 | -1; v: number } | null | undefined>(undefined);
   const onPointerDown = (ev: PointerEvent<HTMLElement>) => {
     if (blocked || !ev.isPrimary || (ev.pointerType === "mouse" && ev.button !== 0)) return;
     const t = ev.target;
@@ -26,8 +33,57 @@ export function useSwipeAnywhere(cardKey: string, blocked: boolean) {
     // With a mouse, a drag outside the card selects text (the arrow keys turn the page); a finger or pen swipes anywhere.
     if (ev.pointerType === "mouse" && !t.closest("[data-swipe-card]")) return;
     controls.start(ev);
+    decided.current = undefined;
+    trackRelease(ev.nativeEvent, ({ dx, vx }) => {
+      const dir = turnFrom(dx, vx, width());
+      decided.current = dir && canTurn(dir) ? { dir, v: vx } : null;
+      if (decided.current) haptic();
+    });
   };
-  return { controls, onPointerDown };
+  /** For the card's onDragEnd: the decision taken at release (null: spring back), or undefined if none was tracked. */
+  const release = () => {
+    const d = decided.current;
+    decided.current = undefined;
+    return d;
+  };
+  return { controls, onPointerDown, release };
+}
+
+export interface Release { dx: number; dy: number; vx: number; vy: number }
+
+/**
+ * Follows one press until the finger lifts and reports how far it went and how fast it was moving (px/s, over the last
+ * 100ms, as framer measures it) from inside the pointerup itself. framer tells the drag's end a frame later, which is
+ * too late for iPhone's haptic. A cancelled press (the page scrolled instead) reports nothing.
+ */
+export function trackRelease(start: globalThis.PointerEvent, onRelease: (r: Release) => void) {
+  const id = start.pointerId;
+  const hist = [{ x: start.clientX, y: start.clientY, t: performance.now() }];
+  const move = (e: globalThis.PointerEvent) => { if (e.pointerId === id) hist.push({ x: e.clientX, y: e.clientY, t: performance.now() }); };
+  const stop = () => {
+    window.removeEventListener("pointermove", move, true);
+    window.removeEventListener("pointerup", end, true);
+    window.removeEventListener("pointercancel", end, true);
+  };
+  function end(e: globalThis.PointerEvent) {
+    if (e.pointerId !== id) return;
+    stop();
+    if (e.type === "pointercancel") return;
+    hist.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+    const last = hist[hist.length - 1];
+    let from = hist[0];
+    for (let i = hist.length - 1; i >= 0; i--) { from = hist[i]; if (last.t - hist[i].t > 100) break; }
+    const dt = (last.t - from.t) / 1000;
+    onRelease({
+      dx: last.x - hist[0].x,
+      dy: last.y - hist[0].y,
+      vx: dt > 0 ? (last.x - from.x) / dt : 0,
+      vy: dt > 0 ? (last.y - from.y) / dt : 0,
+    });
+  }
+  window.addEventListener("pointermove", move, true);
+  window.addEventListener("pointerup", end, true);
+  window.addEventListener("pointercancel", end, true);
 }
 
 /**
