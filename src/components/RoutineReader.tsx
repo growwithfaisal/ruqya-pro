@@ -16,6 +16,7 @@ import { Coloured } from "./Coloured";
 import { Translit } from "./Translit";
 import { Check, Chevron, Close } from "./Glyphs";
 import { Sheet } from "./Sheet";
+import { HapticSwitch } from "./HapticSwitch";
 import { TranslitGuideRow } from "./TranslitGuide";
 
 type Panel = null | "list" | "settings";
@@ -281,12 +282,14 @@ export function RoutineReader({ set, title, entries, exit = "/" }: { set: string
 
       <div data-noswipe className="fixed inset-x-0 bottom-0 z-20 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 short:pb-2 short:pt-1" style={{ background: "linear-gradient(180deg, transparent, var(--sky-bottom) 40%)" }}>
         <div className="mx-auto grid max-w-2xl grid-cols-[1fr_1.7fr_1fr] gap-3">
-          <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="press-icon grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
+          <button onClick={() => go(-1)} disabled={i === 0} aria-label={verse ? "Previous verse" : "Previous card"} className="press-icon relative grid min-h-14 short:min-h-11 place-items-center glass-chip rounded-full border border-line text-card-ink disabled:opacity-40">
             <Chevron className="rotate-180" size={24} />
+            <HapticSwitch disabled={i === 0} />
           </button>
-          <button onClick={finish} className="btn btn-primary px-0 short:!min-h-11">I&apos;m Done</button>
-          <button onClick={() => go(1)} disabled={i === steps.length - 1} aria-label={verse ? "Next verse" : "Next card"} className="press-icon grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
+          <button onClick={finish} className="btn btn-primary relative px-0 short:!min-h-11">I&apos;m Done<HapticSwitch /></button>
+          <button onClick={() => go(1)} disabled={i === steps.length - 1} aria-label={verse ? "Next verse" : "Next card"} className="press-icon relative grid min-h-14 short:min-h-11 place-items-center rounded-full bg-ink text-[var(--sky-bottom)] disabled:opacity-40">
             <Chevron size={24} />
+            <HapticSwitch disabled={i === steps.length - 1} />
           </button>
         </div>
       </div>
